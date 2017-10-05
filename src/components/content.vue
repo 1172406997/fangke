@@ -513,7 +513,7 @@ $(document).ready(function(){
     			white-space:nowrap;
     			line-height: 14px;
     }
-    .water .waterfot .footer{`
+    .water .waterfot .footer{
     	    line-height: 12px;
     			font-size: 12px;
     			color: #b2c0c8;
