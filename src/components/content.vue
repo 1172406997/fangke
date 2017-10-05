@@ -308,11 +308,8 @@ $(document).ready(function(){
         }  
         .pic{  
         		position: relative;
-            /*padding: 10px;*/  
             border:1px solid #CCC;  
-            /*border-radius: 5px;*/  
             box-shadow: 0 0 5px #ccc;  
-            margin-bottom:20px;
         }  
         .modal{
         	position:absolute;
@@ -333,9 +330,17 @@ $(document).ready(function(){
     .box .footer{
     	margin:10px;
     }
+    .borderbox{
+    	position: absolute;
+	    width: calc(100% - 44px);
+	    height: 100%;
+	    cursor: pointer;
+	    display: flex;
+	    align-items: center;
+	}
     .box .footer .thumb img{
-    	width: 80px;
-    	height: 80px;
+    	width: 32px;
+    	height: 32px;
     	border-radius: 50%;
     }
     /*頭部*/
@@ -346,8 +351,6 @@ $(document).ready(function(){
     	overflow: hidden;
     }
 		.layout-content{
-			/*overflow: hidden;*/
-    	/*overflow-y: scroll;*/
 			min-height:900px;
 		}
     .layout-content .left {
