@@ -29,14 +29,21 @@
 						 			</div>
 						 			<div class="footer">
 						 				<div class="borderbox">
+						 					
 							 				<span class="thumb">
 							 					<img src="../assets/logo.png"/>
 							 				</span>
-							 				
+							 				<div style="width: 15px;"></div>
+							 				<div class="box-txt">
+							 					<p>用户名</p>
+							 					<div style="height: 5px;"></div>
+							 					<p>介绍</p>
+							 				</div>
+							 				<ul>
+						 						<li><Icon type="heart"></Icon></li>
+						 					</ul>
 						 				</div>
-						 				<ul>
-						 					<li></li>
-						 				</ul>
+						 				
 						 			</div>
 						 		</div>
 						 		<div class="box">
@@ -297,7 +304,44 @@ $(document).ready(function(){
         #main{  
             position: relative;  
         }  
-        .box{  
+        .pic{  
+        		position: relative;
+            border:1px solid #CCC;  
+            box-shadow: 0 0 5px #ccc;  
+            margin: 0;
+            padding: 0;
+        }  
+        .modal{
+        	position:absolute;
+        	top:0;
+        	left:0;
+        	bottom:0;
+        	right:0;
+        	/*background-color: rgba(0,0,0,.3);*/
+        }
+        .pic img{  
+            width: 100%;  
+            height: auto;  
+            margin: 0;
+            padding: 0;
+        }  
+      .box:hover{
+    	box-shadow: 0px 0px 7px rgba(6,31,50,.24);
+    	-webkit-box-shadow:0px 0px 7px rgba(6,31,50,.24);
+    }
+    .box .footer{
+    	margin:10px 0 0px 0px;
+    	/*padding: 10px;*/
+    }
+    .borderbox{
+    	/*position: absolute;*/
+	    /*width: calc(100% - 44px);*/
+	    height: 100%;
+	    cursor: pointer;
+	    display: flex;
+	    align-items: center;
+	}
+	.box{  
             padding: 10px;  
             float: left;  
             width: 30%;
@@ -306,43 +350,61 @@ $(document).ready(function(){
             border-radius: 2px;  
             box-shadow: 0 0 5px #ccc;
         }  
-        .pic{  
-        		position: relative;
-            border:1px solid #CCC;  
-            box-shadow: 0 0 5px #ccc;  
-        }  
-        .modal{
-        	position:absolute;
-        	top:0;
-        	left:0;
-        	bottom:0;
-        	right:0;
-        	background-color: rgba(0,0,0,.7);
-        }
-        .pic img{  
-            width: 100%;  
-            height: auto;  
-        }  
-      .box:hover{
-    	box-shadow: 0px 0px 7px rgba(6,31,50,.24);
-    	-webkit-box-shadow:0px 0px 7px rgba(6,31,50,.24);
-    }
-    .box .footer{
-    	margin:10px;
-    }
-    .borderbox{
-    	position: absolute;
-	    width: calc(100% - 44px);
-	    height: 100%;
-	    cursor: pointer;
-	    display: flex;
-	    align-items: center;
-	}
-    .box .footer .thumb img{
-    	width: 32px;
-    	height: 32px;
-    	border-radius: 50%;
-    }
+  .box-txt {
+  	width: calc(100% - 20px);
+  	/*width: 100%;*/
+  	font-size: 14px;
+  	color: #3b454c;
+  	white-space: nowrap;
+  	font-size: 14px;
+    color: #3b454c;
+    white-space: nowrap;
+  }
+  
+  .box-txt>div {
+  	display: flex;
+  	align-items: center;
+  	margin-bottom: 5px;
+  
+  }
+  .box-txt p:first-of-type{
+        overflow: hidden;
+    height: 16px;
+    line-height: 16px;
+    text-overflow: ellipsis;
+  }
+  .box-txt p:last-of-type{
+  	line-height: 12px;
+    font-size: 12px;
+    color: #b2c0c8;
+  }
+  
+  .box .footer .thumb img {
+  	width: 32px;
+  	height: 32px;
+  	border-radius: 50%;
+  }
+  
+  .box .footer ul {
+  	display: block;
+  	width: 100%;
+    height: 100%;
+  }
+  
+  .box .footer ul li:first-child {
+  	cursor: pointer;
+  	font-size: 24px;
+  	position: relative;
+    top: 50%;
+    vertical-align: top;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: #add8e6;
+    display: inline-block;
+    min-width: 20px;
+    height: 20px;
+    float: right;
+  }
     /*頭部*/
      main{
     	width: 100%;

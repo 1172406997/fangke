@@ -101,7 +101,7 @@
                 			</div>
                 		</div>
                 		<div class="my" v-show="name==3" >
-                			<canvasmy></canvasmy>
+                			<canvasmy @imgurl="getChildImg"></canvasmy>
                 		</div>
                 		<div class="puzz" v-show="name==4">
                 			<brand></brand>
@@ -158,6 +158,8 @@ import brandcli from "../components/pages/BrandClick"
 	                name:2,
 	                item:{},
 	                flag:true,
+	                childUrl:'',
+	                Canvas:'',
 	            }
 	        },
 	         computed: {
@@ -172,17 +174,13 @@ import brandcli from "../components/pages/BrandClick"
 	        	this.getsearch();
 	        },
 	        mounted(){
-						var staticCanvas = new fabric.StaticCanvas('parent');
-						console.log(fabric);
-						staticCanvas.add(
-						  new fabric.Rect({
-						    width: 100, height: 50,
-						    left: 100, top: 100,
-						    fill: 'yellow',
-						    angle: 30
-						  }));
+						this.getCanvas();
 	        },
 	        methods:{
+	        	getCanvas(){
+	        		var staticCanvas = new fabric.Canvas('parent');
+	        		this.Canvas = staticCanvas;
+	        	},
 	        	add:function(){
 	        		var oParent = document.getElementById('#parent');
 	        		consol.log(1);
@@ -211,27 +209,6 @@ import brandcli from "../components/pages/BrandClick"
 				  		},function(err){
 				  			console.log(err);
 				  		});
-//							this.$http.jsonp('http://api.xinciji.com?service=Material.GetAllMaterial',
-//							{
-//								params:{
-//									'signature': sha,'timestamp':timestamp,'nonce':nonce,'user_id':user_id,'token':token}
-//								},)
-//							.then(
-//								function(res){
-//				//					var a = res;
-//									this.$set(this, 'item', res.data);
-//									this.item = res.body.data.list;
-//				//					this.bigs = res.bodyText.data.list;
-//				//					this.newslist = response.body.newslist
-//									console.log("item:"+this.item);
-//									console.log(res)
-//				//					alert()
-//				//					return res;
-//									},
-//									function(err){
-//										console.log("err");
-//									}
-//							)
 				  	},
 				  	search:function(keyword){
 				  		this.flag=false;
@@ -255,29 +232,18 @@ import brandcli from "../components/pages/BrandClick"
 				  		},function(err){
 				  			console.log(err);
 				  		});
-//							this.$http.jsonp('http://api.xinciji.com?service=Material.GetMaterialByKeyWord',
-//							{
-//								params:{
-//									'signature': sha,'timestamp':timestamp,'nonce':nonce,'user_id':user_id,'token':token,'keyword':keyword}
-//								},)
-//							.then(
-//								function(res){
-//				//					var a = res;
-//				//					this.$set(this, 'searchi', res.body.data.list);
-//									this.searchi = res.body.data.list;
-//				//					this.bigs = res.bodyText.data.list;
-//				//					this.newslist = response.body.newslist
-//									console.log("search:"+this.searchi);
-//									console.log(res);
-//				//					return res;
-//									},
-//									function(err){
-//										console.log("err");
-//									}
-//							)
 				  	},
 				  	forname(name){
 				  		this.name = name;
+				  	},
+				  	getChildImg(url){
+				  		this.childUrl = url
+				  		var self = this;
+				  		fabric.Image.fromURL(url, function(oImg) {
+							  // scale image down, and flip it, before adding it onto canvas
+							  oImg.scale(0.5).set('flipX', true);
+							  self.Canvas.add(oImg);
+							});
 				  	}
 	  		},
 	  		

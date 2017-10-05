@@ -9,14 +9,32 @@
     <div class="content_con2">
 			<h2>单品</h2>
 			<div>
-				<Col span="6" style="background-color: #fff;position:relative;" class="con2">
+				<!--<Col span="6" style="background-color: #fff;position:relative;" class="con2">
 				<img src="../../assets/logo.png" alt="" />
 				<p>一只一只</p>
 				</Col>
 				<Col span="6" v-for="(itemd , index) in searchi" style="background-color: #fff;position:relative;" class="con2">
 				<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
 				<p>一只一只</p>
-				</Col>
+				</Col>-->
+				 <div class="dan" v-for="(item ,index) in getlikeitem" @click="modalS()" ref="abc"  >
+						      <div class="img">
+						      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
+						      	<div class="modal" ></div>
+						      	<div class="icon"  @click="addCanvas(item.filename)">
+						      	<Tooltip content="添加" placement="bottom">
+							      	<Icon type="android-exit"></Icon>
+						        </Tooltip>
+						      	</div>
+						      </div>
+						      <div class="nam">
+						      	{{item.name}}
+						      </div>
+						      <div class="price" >
+						      	￥{{item.price}}
+						      </div>
+
+						    </div>
 			</div>
 		</div>
 	</div>
@@ -28,7 +46,7 @@ export default {
   name: 'login',
   data () {
     return {
-				
+				getlikeitem:'',
     }
   },
   created:function(){
@@ -58,6 +76,10 @@ export default {
   		},function(err){
   			console.log(err);
   		});
+		},
+		addCanvas(url){
+			var imgurl = "http://www.shatuhome.com/material/"+url
+			this.$emit("imgurl",imgurl)
 		},
   }
 }
@@ -92,4 +114,69 @@ export default {
 			color: #000;
 			z-index: 10;
 		}
+		.dan{
+    	width: 203px;
+    	height: 227px;
+    	padding: 12px 12px 0px;
+    	background-color: #fff;
+    	border-radius: 5px;
+    	position: relative;
+    	margin: 10px;
+    	cursor:pointer;
+    	float: left;
+    	overflow: hidden;
+    }
+    .dan:hover{
+        box-shadow: 0 4px 12px rgba(6,31,50,.24);
+   	 		-webkit-box-shadow: 0 4px 12px rgba(6,31,50,.24);
+    }
+    .img{
+    	position: relative;
+    	width: 179px;
+    	height: 179px;
+    }
+    .img>img{
+    	width: 100%;
+    	height: 100%;
+    }
+    .modal{
+    	position: absolute;
+    	width: 100%;
+    	height: 100%;
+    	left:0;
+    	top: 0;
+    	display: none;
+    	border-radius: 2px;
+    	background-color: rgba(0,0,0,0.1);
+    }
+    .icon{
+    	width: 40px;
+    	height: 40px;
+    	text-align: center;
+    	line-height: 40px;
+    	font-size: 20px;
+    	color: #7E8E98;
+    	background-color: #fff;
+    	border-radius: 5px;
+    	position: absolute;
+    	top:10px;
+    	right:10px;
+    	display: none;
+    	cursor: pointer;
+    }
+    .nam{
+    	width: 100%;
+    	line-height: 36px;
+    }
+    .price{
+    	width: 100%;
+    	display: none;
+    	line-height: 36px;
+    }
+    .icon:hover{
+    	color: #3B454C;
+    }
+    .ivu-menu-light{
+    	z-index: -0;	
+    }	
 </style>	
