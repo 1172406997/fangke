@@ -118,20 +118,11 @@
                 <div class="layout-content" style="padding-right:10px">
                 	<div class="layout-content-style " >
                 		<div class="layout-content-main">
-                			<div class="parent">
-                				<canvas class="one box" id="parent">
-                					<!--<div class="div1" onmousemove="posMove(this.className)"></div>-->
-													<!--<canvas class="div1"  onmousemove="posMove(this.className)"></canvas>-->
-												</canvas>
-													<!--<div class="postText">
-														  移动的距离Top：<span id="posTop"></span>Left:<span id="posLeft"></span>
-													</div>-->
-													<!--<div class="two">
-                					
-                					</div>
-                					<div class="three">
-                					
-                					</div>-->
+                			<div class="box">
+                				
+                			</div>
+                			<div class="parent"style="width: 320px;height: 720px;">
+                				<canvas class="one box" id="parent" style="width: 320px;height：720px"></canvas>
                 				</div>
                 				
                 			</div>
@@ -183,7 +174,6 @@ import brandcli from "../components/pages/BrandClick"
 	        	},
 	        	add:function(){
 	        		var oParent = document.getElementById('#parent');
-	        		consol.log(1);
 					   	var additem='<div class="div1" onmousemove="posMove(this.className)"></div>';
 					   	oParent.append(additem); 
 	        	},
@@ -240,7 +230,6 @@ import brandcli from "../components/pages/BrandClick"
 				  		this.childUrl = url
 				  		var self = this;
 				  		fabric.Image.fromURL(url, function(oImg) {
-							  // scale image down, and flip it, before adding it onto canvas
 							  oImg.scale(0.5).set('flipX', true);
 							  self.Canvas.add(oImg);
 							});
@@ -398,6 +387,8 @@ import brandcli from "../components/pages/BrandClick"
 		}
 		#parent{
 			position: relative;
+			width: 300px;
+			height: 500px;
 		}
 		.parent{
 			display: flex;

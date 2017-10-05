@@ -349,29 +349,30 @@ export default {
 //                  var oImg=document.createElement('img');  
 //                  oImg.src="img/"+dataInt.data[i].src;  
 //                  oPic.appendChild(oImg);  
-										var box = `'<div class="box" >'+
-										'<div class="boxcon" >'+
-						 					'<div class="pic">'+
-						 				'<img src="../../dist/static/img/1.d80e543.png"/>'+
-						 				'<div class="modal"></div>'+
-						 			'</div>'+
-						 			'<div class="footer">'+
-						 				'<div class="borderbox">'+
-							 				'<span class="thumb">'+
-							 					'<img src="../assets/logo.png"/>'+
-							 				'</span>'+
-							 				'<div style="width: 15px;"></div>'+
-							 				'<div class="box-txt">'+
-							 					'<p>用户名</p>'+
-							 					'<div style="height: 5px;"></div>'+
-							 					'<p>介绍</p>'+
-							 				'</div>'+
-							 				'<ul>'+
-						 						'<li><Icon type="heart"></Icon></li>'+
-						 					'</ul>'+
-						 				'</div>'+
-						 				'</div>'+
-						 			'</div>'`
+										var box = `'<div class="box" >'
+										+'<div class="boxcon">'
+						 					+'<div class="pic">'
+						 				+'<img src="../../dist/static/img/1.d80e543.png"/>'
+						 				+'<div class="modal"></div>'
+						 			+'</div>'
+						 			+'<div class="footer">'
+						 				+'<div class="borderbox">'
+							 				+'<span class="thumb">'
+							 					+'<img src="../assets/logo.png"/>'
+							 				+'</span>'
+							 				+'<div style="width: 15px;"></div>'
+							 				+'<div class="box-txt">'
+							 					+'<p>用户名</p>'
+							 					+'<div style="height: 5px;"></div>'
+							 					+'<p>介绍</p>'
+							 				+'</div>'
+							 				+'<ul>'
+						 						+'<li><Icon type="heart"></Icon></li>'
+						 					+'</ul>'
+						 				+'</div>'
+						 				+'</div>'
+						 			+'</div>'`
+						 			$("#main").append(box);
                 }  
                 self.waterfall('main','box');  
             }  
@@ -513,8 +514,8 @@ $(document).ready(function(){
     }
     
     .boxcon:hover {
-    	box-shadow: 0px 0px 7px rgba(6, 31, 50, .24);
-    	-webkit-box-shadow: 0px 0px 7px rgba(6, 31, 50, .24);
+    	box-shadow: 0px 0px 10px rgba(6, 31, 50, .24);
+    	-webkit-box-shadow: 0px 0px 10px rgba(6, 31, 50, .24);
     }
     
     .boxcon .footer {
@@ -535,7 +536,7 @@ $(document).ready(function(){
     	cursor: pointer;
     	/*margin: 15px 0 0 15px;*/
     	border-radius: 2px;
-    	box-shadow: 0 0 5px #ccc;
+    	box-shadow: 0 0 5px rgba(6, 31, 50, .24);
     }
   .box-txt {
   	width: calc(100% - 20px);
