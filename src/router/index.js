@@ -13,7 +13,6 @@ import canvas from '@/components/canvas'
 
 
 Vue.use(Router)
-
 export default new Router({
   routes: [
     {

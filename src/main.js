@@ -10,6 +10,7 @@ import 'iview/dist/styles/iview.css';    // 使用 CSS
 import '../src/assets/item-factory.js';
 import '../src/assets/style.css';
 import 'font-awesome/css/font-awesome.css'
+import 'fabric/dist/fabric.js'
 import { jsonpRequest } from "@/util/jsonp_request.js"
 import { Encrypt } from "@/util/encrypt.js"
 import VueResource from 'vue-resource';
@@ -21,7 +22,6 @@ Vue.use(VueRouter);
 Vue.use(iView);
 
 Vue.config.productionTip = false
-//Vue.prototype.axios = axios;
 Vue.prototype.jsonpRequest = jsonpRequest;
 Vue.prototype.Encrypt = Encrypt;
 

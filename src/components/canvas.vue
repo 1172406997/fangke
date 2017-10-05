@@ -119,10 +119,10 @@
                 	<div class="layout-content-style " >
                 		<div class="layout-content-main">
                 			<div class="parent">
-                				<div class="one box" id="parent">
+                				<canvas class="one box" id="parent">
                 					<!--<div class="div1" onmousemove="posMove(this.className)"></div>-->
 													<!--<canvas class="div1"  onmousemove="posMove(this.className)"></canvas>-->
-												</div>
+												</canvas>
 													<!--<div class="postText">
 														  移动的距离Top：<span id="posTop"></span>Left:<span id="posLeft"></span>
 													</div>-->
@@ -170,6 +170,17 @@ import brandcli from "../components/pages/BrandClick"
   				},
 	        created:function(){
 	        	this.getsearch();
+	        },
+	        mounted(){
+						var staticCanvas = new fabric.StaticCanvas('parent');
+						console.log(fabric);
+						staticCanvas.add(
+						  new fabric.Rect({
+						    width: 100, height: 50,
+						    left: 100, top: 100,
+						    fill: 'yellow',
+						    angle: 30
+						  }));
 	        },
 	        methods:{
 	        	add:function(){
