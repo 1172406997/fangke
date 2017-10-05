@@ -1,0 +1,22 @@
+diff a/src/components/canvas.vue b/src/components/canvas.vue	(rejected hunks)
+@@ -211,17 +211,20 @@
+  						this.getCanvas();
+  	        },
+  	        methods:{
++ 	        	test(){
++ 	        		alert(1111);
++ 	        	},
+  	        	getCanvas(){
+ +	        		var self = this
+  	        		var staticCanvas = new fabric.Canvas('parent');
+ -	        		this.Canvas = staticCanvas;
+ +	        		self.Canvas = staticCanvas;
+ +	        		self.Canvas.setWidth(800);
+ +	        		self.Canvas.setHeight(800);
+ +	        		self.Canvas.on('object:selected', function(opt){
+ +	        			self.selectItem = opt
+ +	        		});
+ +	        		
+  	        	},
+  	        	add:function(){
+  	        		var oParent = document.getElementById('#parent');

@@ -118,6 +118,7 @@
                 <div class="layout-content" style="padding:0px">
                 	<div class="layout-content-style " >
                 		<div class="menubox">
+<<<<<<< HEAD
                 				<Tooltip content="裁剪" placement="bottom">
 							      	<Icon type="crop"></Icon>
 								</Tooltip>
@@ -150,12 +151,22 @@
 							      	<Icon type="trash-b"></Icon>
 						        </Tooltip>
 						        
+=======
+                				<Tooltip content="复制" @click.native="" placement="bottom">
+									      	<Icon type="archive" @click.native="test"></Icon>
+								        </Tooltip>
+								        	<Tooltip content="复制" placement="bottom">
+									      	<Icon type="archive" ></Icon>
+								        </Tooltip>
+								        <Tooltip content="关闭" style="float: right;color: #ccc;" placement="bottom">
+									      	<Icon type="close-round"></Icon>
+								        </Tooltip>
+>>>>>>> no message
                 		</div>
                 		<div class="layout-content-main">
-                			<div class="parent"style="width: 320px;height: 720px;">
-                				<canvas class="one box" id="parent" style="width: 320px;height：720px"></canvas>
-                				</div>
-                				
+	                			<div class="parent"style="width: 320px;height: 720px;">
+	                				<canvas class="one box" id="parent" style="width: 320px;height：720px"></canvas>
+	                			</div>
                 			</div>
                 	</div>
                 </div>
@@ -200,6 +211,9 @@ import brandcli from "../components/pages/BrandClick"
 						this.getCanvas();
 	        },
 	        methods:{
+	        	test(){
+	        		alert(1111);
+	        	},
 	        	getCanvas(){
 	        		var self = this
 	        		var staticCanvas = new fabric.Canvas('parent');
@@ -544,5 +558,6 @@ import brandcli from "../components/pages/BrandClick"
 			.menubox .ivu-icon{
 				margin-left: 10px;
 				cursor: pointer;
+				/*margin-left: 10px;*/
 			}    
 </style>	
