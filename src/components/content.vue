@@ -18,6 +18,7 @@
 						 <div class="body layout-content" style="">
 						 	<div id="main">
 						 		<div class="box" >
+						 			<div class="boxcon">
 						 			<div class="pic">
 						 				<img src="../../dist/static/img/1.d80e543.png"/>
 						 				<!--<div class="icon">
@@ -43,93 +44,160 @@
 						 						<li><Icon type="heart"></Icon></li>
 						 					</ul>
 						 				</div>
-						 				
 						 			</div>
 						 		</div>
-						 		<div class="box">
+						 		</div>
+						 		<div class="box" >
+						 			<div class="boxcon">
 						 			<div class="pic">
 						 				<img src="../../dist/static/img/1.d80e543.png"/>
+						 				<!--<div class="icon">
+						      	<Tooltip content="收藏" placement="bottom">
+							      	<Icon type="archive"></Icon>
+						        </Tooltip>
+						      	</div>-->
+						 				<div class="modal"></div>
+						 			</div>
+						 			<div class="footer">
+						 				<div class="borderbox">
+						 					
+							 				<span class="thumb">
+							 					<img src="../assets/logo.png"/>
+							 				</span>
+							 				<div style="width: 15px;"></div>
+							 				<div class="box-txt">
+							 					<p>用户名</p>
+							 					<div style="height: 5px;"></div>
+							 					<p>介绍</p>
+							 				</div>
+							 				<ul>
+						 						<li><Icon type="heart"></Icon></li>
+						 					</ul>
+						 				</div>
 						 			</div>
 						 		</div>
-						 		<div class="box">
+						 		</div>
+						 		<div class="box" >
+						 			<div class="boxcon">
 						 			<div class="pic">
 						 				<img src="../../dist/static/img/1.d80e543.png"/>
+						 				<!--<div class="icon">
+						      	<Tooltip content="收藏" placement="bottom">
+							      	<Icon type="archive"></Icon>
+						        </Tooltip>
+						      	</div>-->
+						 				<div class="modal"></div>
+						 			</div>
+						 			<div class="footer">
+						 				<div class="borderbox">
+						 					
+							 				<span class="thumb">
+							 					<img src="../assets/logo.png"/>
+							 				</span>
+							 				<div style="width: 15px;"></div>
+							 				<div class="box-txt">
+							 					<p>用户名</p>
+							 					<div style="height: 5px;"></div>
+							 					<p>介绍</p>
+							 				</div>
+							 				<ul>
+						 						<li><Icon type="heart"></Icon></li>
+						 					</ul>
+						 				</div>
 						 			</div>
 						 		</div>
-						 		<div class="box">
+						 		</div>
+						 		<div class="box" >
+						 			<div class="boxcon">
 						 			<div class="pic">
 						 				<img src="../../dist/static/img/1.d80e543.png"/>
+						 				<!--<div class="icon">
+						      	<Tooltip content="收藏" placement="bottom">
+							      	<Icon type="archive"></Icon>
+						        </Tooltip>
+						      	</div>-->
+						 				<div class="modal"></div>
+						 			</div>
+						 			<div class="footer">
+						 				<div class="borderbox">
+						 					
+							 				<span class="thumb">
+							 					<img src="../assets/logo.png"/>
+							 				</span>
+							 				<div style="width: 15px;"></div>
+							 				<div class="box-txt">
+							 					<p>用户名</p>
+							 					<div style="height: 5px;"></div>
+							 					<p>介绍</p>
+							 				</div>
+							 				<ul>
+						 						<li><Icon type="heart"></Icon></li>
+						 					</ul>
+						 				</div>
 						 			</div>
 						 		</div>
-						 		<div class="box">
+						 		</div>
+						 		<div class="box" >
+						 			<div class="boxcon">
 						 			<div class="pic">
 						 				<img src="../../dist/static/img/1.d80e543.png"/>
+						 				<!--<div class="icon">
+						      	<Tooltip content="收藏" placement="bottom">
+							      	<Icon type="archive"></Icon>
+						        </Tooltip>
+						      	</div>-->
+						 				<div class="modal"></div>
+						 			</div>
+						 			<div class="footer">
+						 				<div class="borderbox">
+						 					
+							 				<span class="thumb">
+							 					<img src="../assets/logo.png"/>
+							 				</span>
+							 				<div style="width: 15px;"></div>
+							 				<div class="box-txt">
+							 					<p>用户名</p>
+							 					<div style="height: 5px;"></div>
+							 					<p>介绍</p>
+							 				</div>
+							 				<ul>
+						 						<li><Icon type="heart"></Icon></li>
+						 					</ul>
+						 				</div>
 						 			</div>
 						 		</div>
-						 		<div class="box">
+						 		</div>
+						 		<div class="box" >
+						 			<div class="boxcon">
 						 			<div class="pic">
 						 				<img src="../../dist/static/img/1.d80e543.png"/>
+						 				<!--<div class="icon">
+						      	<Tooltip content="收藏" placement="bottom">
+							      	<Icon type="archive"></Icon>
+						        </Tooltip>
+						      	</div>-->
+						 				<div class="modal"></div>
 						 			</div>
+						 			<div class="footer">
+						 				<div class="borderbox">
+						 					
+							 				<span class="thumb">
+							 					<img src="../assets/logo.png"/>
+							 				</span>
+							 				<div style="width: 15px;"></div>
+							 				<div class="box-txt">
+							 					<p>用户名</p>
+							 					<div style="height: 5px;"></div>
+							 					<p>介绍</p>
+							 				</div>
+							 				<ul>
+						 						<li><Icon type="heart"></Icon></li>
+						 					</ul>
+						 				</div>
+						 			</div>
+						 		</div>
 						 		</div>
 						 	</div>
-						 	<!--<div class="water">-->
-							   		<!--<img src="../img/1.png" alt="" />
-							   		<div class="waterfot">
-							   			<img src="../img/2.png" alt="" style="float:left;"/><div class="text" style="float:left;">
-							   				<span class="title">我叫大白</span><br/>
-							   				<span class="footer">幾隻點贊</span>
-							   			</div>
-							   			<div class="icon">
-							   				<Icon type="ios-heart-outline" v-if=""></Icon>
-							   			</div>
-							   		</div>
-							   </div>-->
-							<!--<waterfall 
-							  :watch="bigs"
-							  :line-gap="280"
-							  :min-line-gap="200"
-							  :max-line-gap="220"
-							   >
-								精彩马上出现
-						   <div class="water">
-							   		<img src="../img/1.png" alt="" />
-							   		<div class="waterfot">
-							   			<img src="../img/2.png" alt="" style="float:left;"/><div class="text" style="float:left;">
-							   				<span class="title">我叫大白</span><br/>
-							   				<span class="footer">幾隻點贊</span>
-							   			</div>
-							   			<div class="icon">
-							   				<Icon type="ios-heart-outline" v-if=""></Icon>
-							   			</div>
-							   		</div>
-							   </div>
-							   
-						  <waterfall-slot
-						    v-for="(item ,index) in bigs"
-						    width="280"
-						    height="280"
-						    :key="item.production.id"
-						  >
-							   <div class="water">
-							   		<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb" alt="" />
-							   		<div @click="modal()">{{item.production.thumb}}</div>
-							   		<div class="waterfot">
-							   			<img v-bind:src="'http://www.shatuhome.com/avatar/'+item.production.avatar==''?'../img/2.png':item.production.avatar" alt="" style="float:left;"  />
-							   			<div class="text" style="float:left;">
-							   				<span class="title">{{item.production.name}}</span><br/>
-							   				<span class="title">{{item.production.id}}-{{index}}</span><br/>
-							   				<span class="footer">点击查看点赞人数</span>
-							   			</div>
-							   			<div class="icon" @click="enshrine(item.production.id)">
-							   				<Icon type="ios-heart-outline" v-if="defaul" ></Icon>
-							   			</div>
-							   			<div class="icon" @click="unenshrine()">
-							   				<Icon type="ios-heart-outline" v-if="!defaul" style="color: red;" @click="this.defaul=true"></Icon>
-							   			</div>
-							   		</div>
-							   </div>
-						  </waterfall-slot>
-						</waterfall>-->
 						</div>
 					</div>
 					<div class="modal" v-show="this.modal=='modal'"></div>
@@ -164,9 +232,12 @@ export default {
 	  		this.falls();
 	},
 	mounted:function(){
-	 window.onscroll=function(){this.menu};
-   window.addEventListener("scroll", this.menu);
-   console.log(window.addEventListener);
+//	 window.onscroll=function(){this.menu};
+// window.addEventListener("scroll", this.menu);
+// window.onload=function(){ 
+    this.Load();
+// }
+  
 },
 	methods:{
 		//瀑布流获取作品信息
@@ -192,7 +263,6 @@ export default {
 		},
 		//滚动监听事件
 		menu:function(){
-			console.log(1);
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop|| window.pageY0ffset
         if (scrollTop + window.innerHeight >= document.body.clientHeight) {
           this.index = this.index++;
@@ -259,6 +329,108 @@ export default {
 			console.log("modal");
 //			$(".modal").
 		},
+		//瀑布流相关事件
+		Load(){
+			var self = this;
+        self.waterfall('main','box');  
+        var dataInt={"data":[{"src":'1.png'},{"src":'2.png'},{"src":'3.jpg'},{"src":'4.jpg'}]}  
+        //滚动添加  
+        window.onscroll=function(){  
+            if(self.checkScrollSlide()){  
+                var oParent=document.getElementById('main')  
+                //将数据库渲染到当前页面的尾部  
+                for(var i=0;i<dataInt.data.length;i++){  
+//                  var oBox=document.createElement('div');  
+//                  oBox.className='box';  
+//                  oParent.appendChild(oBox);  
+//                  var oPic=document.createElement('div');  
+//                  oPic.className='pic';  
+//                  oBox.appendChild(oPic);  
+//                  var oImg=document.createElement('img');  
+//                  oImg.src="img/"+dataInt.data[i].src;  
+//                  oPic.appendChild(oImg);  
+										var box = `'<div class="box" >'+
+										'<div class="boxcon" >'+
+						 					'<div class="pic">'+
+						 				'<img src="../../dist/static/img/1.d80e543.png"/>'+
+						 				'<div class="modal"></div>'+
+						 			'</div>'+
+						 			'<div class="footer">'+
+						 				'<div class="borderbox">'+
+							 				'<span class="thumb">'+
+							 					'<img src="../assets/logo.png"/>'+
+							 				'</span>'+
+							 				'<div style="width: 15px;"></div>'+
+							 				'<div class="box-txt">'+
+							 					'<p>用户名</p>'+
+							 					'<div style="height: 5px;"></div>'+
+							 					'<p>介绍</p>'+
+							 				'</div>'+
+							 				'<ul>'+
+						 						'<li><Icon type="heart"></Icon></li>'+
+						 					'</ul>'+
+						 				'</div>'+
+						 				'</div>'+
+						 			'</div>'`
+                }  
+                self.waterfall('main','box');  
+            }  
+        }  
+		},
+		waterfall(parent,box){  
+			var self = this;
+        //将main下的所有class为box的元素取出来  
+        var oParent=document.getElementById(parent);  
+        var oBoxs=self.getByClass(oParent,box);  
+        //计算整个页面的显示雷氏（页面/box的宽）  
+        var oBoxW=oBoxs[0].offsetWidth;  
+				var winW = oParent.offsetWidth;
+        var cols=Math.floor(winW/oBoxW);  
+        //console.log(cols);  
+        //设置main的宽  
+//      oParent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto';         
+        var hArr=[];//存放每一列高度  
+        for(var i=0;i<oBoxs.length;i++){  
+            if(i<cols){  
+                hArr.push(oBoxs[i].offsetHeight);  
+            }  
+            else{  
+                var minH=Math.min.apply(null,hArr);  
+                var index=self.getMinhIndex(hArr,minH);  
+                oBoxs[i].style.position="absolute";  
+                oBoxs[i].style.top=minH+'px';  
+                oBoxs[i].style.left=oBoxW*index+'px';  
+                hArr[index]+=oBoxs[i].offsetHeight;  
+            }  
+        }  
+    },
+    getByClass(parent,clsName){  
+        var boxArr=new Array(),//用来存储获取到的所有class为Box的元素  
+            oElements=parent.getElementsByTagName('*');  
+        for(var i=0;i<oElements.length;i++){  
+            if (oElements[i].className==clsName) {  
+                boxArr.push(oElements[i]);  
+            }  
+        }  
+        return boxArr;  
+    },
+    getMinhIndex(arr,val){  
+        for(var i in arr){  
+            if(arr[i]==val){  
+                return i;  
+            }  
+        }  
+  
+    },
+		checkScrollSlide(){
+				var self = this;
+				var oParent=document.getElementById('main');  
+        var oBoxs=self.getByClass(oParent,'box');  
+        var lastBoxH=oBoxs[oBoxs.length-1].offsetTop + Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);  
+        var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;  
+        var height=document.body.clientHeight || document.documentElement.clientHeight;  
+        return (lastBoxH<scrollTop+height)?true:false;  
+		},
 	}
 }
 $(document).ready(function(){
@@ -274,6 +446,7 @@ $(document).ready(function(){
 			$(this).children(".nam").show();
 			$(this).children(".price").hide();
     });
+    
 });
 
 </script>
@@ -292,64 +465,78 @@ $(document).ready(function(){
 	    font-size: 32px;
 	    line-height: 32px;
     }
-    .header .sub_title{
+    .header .sub_title {
     	padding-top: 20px;
-	    font-size: 14px;
-	    line-height: 14px;
+    	font-size: 14px;
+    	line-height: 14px;
     }
-     .body{  
-        overflow: scroll;  
-        height: 1000px;  
-    }  
-        #main{  
-            position: relative;  
-        }  
-        .pic{  
-        		position: relative;
-            border:1px solid #CCC;  
-            box-shadow: 0 0 5px #ccc;  
-            margin: 0;
-            padding: 0;
-        }  
-        .modal{
-        	position:absolute;
-        	top:0;
-        	left:0;
-        	bottom:0;
-        	right:0;
-        	/*background-color: rgba(0,0,0,.3);*/
-        }
-        .pic img{  
-            width: 100%;  
-            height: auto;  
-            margin: 0;
-            padding: 0;
-        }  
-      .box:hover{
-    	box-shadow: 0px 0px 7px rgba(6,31,50,.24);
-    	-webkit-box-shadow:0px 0px 7px rgba(6,31,50,.24);
+    
+    .body {
+    	overflow: auto;
+    	height: 1000px;
+    	margin: 0;
+    	padding: 0;
     }
-    .box .footer{
-    	margin:10px 0 0px 0px;
-    	/*padding: 10px;*/
+    
+    #main {
+    	width: 100%;
+    	position: relative;
     }
-    .borderbox{
+    
+    .box{
+    	padding:10px;
+    	width: 30%;
+    	float: left;
+    }
+    .pic {
+    	position: relative;
+    	border: 1px solid #CCC;
+    	box-shadow: 0 0 5px #ccc;
+    	margin: 0;
+    	padding: 0;
+    }
+    
+    .modal {
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    	bottom: 0;
+    	right: 0;
+    	/*background-color: rgba(0,0,0,.3);*/
+    }
+    
+    .pic img {
+    	width: 100%;
+    	height: auto;
+    	margin: 0;
+    	padding: 0;
+    }
+    
+    .boxcon:hover {
+    	box-shadow: 0px 0px 7px rgba(6, 31, 50, .24);
+    	-webkit-box-shadow: 0px 0px 7px rgba(6, 31, 50, .24);
+    }
+    
+    .boxcon .footer {
+    	margin: 10px 0 0px 0px;
+    /*padding: 10px;*/
+    }
+    .borderbox {
     	/*position: absolute;*/
-	    /*width: calc(100% - 44px);*/
-	    height: 100%;
-	    cursor: pointer;
-	    display: flex;
-	    align-items: center;
-	}
-	.box{  
-            padding: 10px;  
-            float: left;  
-            width: 30%;
-            cursor: pointer;
-            margin:15px 0 0 15px;
-            border-radius: 2px;  
-            box-shadow: 0 0 5px #ccc;
-        }  
+    	/*width: calc(100% - 44px);*/
+    	
+    	height: 100%;
+    	cursor: pointer;
+    	display: flex;
+    	align-items: center;
+    }
+    .boxcon {
+    	padding: 10px;
+    	cursor: pointer;
+    	/*margin: 15px 0 0 15px;*/
+    	border-radius: 2px;
+    	box-shadow: 0 0 5px #ccc;
+    }
   .box-txt {
   	width: calc(100% - 20px);
   	/*width: 100%;*/
@@ -379,19 +566,19 @@ $(document).ready(function(){
     color: #b2c0c8;
   }
   
-  .box .footer .thumb img {
+  .boxcon .footer .thumb img {
   	width: 32px;
   	height: 32px;
   	border-radius: 50%;
   }
   
-  .box .footer ul {
+  .boxcon .footer ul {
   	display: block;
   	width: 100%;
     height: 100%;
   }
   
-  .box .footer ul li:first-child {
+  .boxcon .footer ul li:first-child {
   	cursor: pointer;
   	font-size: 24px;
   	position: relative;
