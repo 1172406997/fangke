@@ -25,7 +25,45 @@
         </Menu>
 				<main>
 					<div class="layout-content">
-						<!--<router-view></router-view>-->
+						<div  class="left" style="width: 100%;">
+						<!--瀑布流開始-->
+						 <div class="body layout-content" style="">
+						 	<div id="main">
+						 		<div class="box" >
+						 			<div class="boxcon">
+						 			<div class="pic">
+						 				<img src="../img/1.png"/>
+						 				<!--<div class="icon">
+						      	<Tooltip content="收藏" placement="bottom">
+							      	<Icon type="archive"></Icon>
+						        </Tooltip>
+						      	</div>-->
+						 				<div class="modal"></div>
+						 			</div>
+						 			<div class="footer">
+						 				<div class="borderbox">
+						 					
+							 				<span class="thumb">
+							 					<img src="../assets/logo.png"/>
+							 				</span>
+							 				<div style="width: 15px;"></div>
+							 				<div class="box-txt">
+							 					<p>用户名</p>
+							 					<div style="height: 5px;"></div>
+							 					<p>介绍</p>
+							 				</div>
+							 				<ul>
+						 						<li><Icon type="heart"></Icon></li>
+						 					</ul>
+						 				</div>
+						 			</div>
+						 		</div>
+						 		</div>
+						 	</div>
+						</div>
+					</div>
+					<div class="modal" v-show="this.modal=='modal'"></div>
+					 <Back-top></Back-top>
 					</div>
 				</main>
 	</div>
@@ -141,4 +179,260 @@ export default {
     .ivu-menu-light{
     	z-index: -0;	
     }	
+    .header header{
+    	width: 100%;
+    	height: 180px;
+    	background: #293036;
+    	text-align: center;
+    	color:#fff;
+    }
+    .header .title{
+    	padding-top: 48px;
+	    font-size: 32px;
+	    line-height: 32px;
+    }
+    .header .sub_title {
+    	padding-top: 20px;
+    	font-size: 14px;
+    	line-height: 14px;
+    }
+    
+    .body {
+    	overflow: auto;
+    	height: 1000px;
+    	margin: 0;
+    	padding: 0;
+    }
+    
+    #main {
+    	width: 100%;
+    	position: relative;
+    }
+    
+    .box{
+    	padding:10px;
+    	width: 30%;
+    	float: left;
+    }
+    .pic {
+    	position: relative;
+    	border: 1px solid #CCC;
+    	box-shadow: 0 0 5px #ccc;
+    	margin: 0;
+    	padding: 0;
+    }
+    
+    .modal {
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    	bottom: 0;
+    	right: 0;
+    	/*background-color: rgba(0,0,0,.3);*/
+    }
+    
+    .pic img {
+    	width: 100%;
+    	height: auto;
+    	margin: 0;
+    	padding: 0;
+    }
+    
+    .boxcon:hover {
+    	box-shadow: 0px 0px 10px rgba(6, 31, 50, .24);
+    	-webkit-box-shadow: 0px 0px 10px rgba(6, 31, 50, .24);
+    }
+    
+    .boxcon .footer {
+    	margin: 10px 0 0px 0px;
+    /*padding: 10px;*/
+    }
+    .borderbox {
+    	/*position: absolute;*/
+    	/*width: calc(100% - 44px);*/
+    	
+    	height: 100%;
+    	cursor: pointer;
+    	display: flex;
+    	align-items: center;
+    }
+    .boxcon {
+    	padding: 10px;
+    	cursor: pointer;
+    	/*margin: 15px 0 0 15px;*/
+    	border-radius: 2px;
+    	box-shadow: 0 0 5px rgba(6, 31, 50, .24);
+    }
+  .box-txt {
+  	width: calc(100% - 20px);
+  	/*width: 100%;*/
+  	font-size: 14px;
+  	color: #3b454c;
+  	white-space: nowrap;
+  	font-size: 14px;
+    color: #3b454c;
+    white-space: nowrap;
+  }
+  
+  .box-txt>div {
+  	display: flex;
+  	align-items: center;
+  	margin-bottom: 5px;
+  
+  }
+  .box-txt p:first-of-type{
+        overflow: hidden;
+    height: 16px;
+    line-height: 16px;
+    text-overflow: ellipsis;
+  }
+  .box-txt p:last-of-type{
+  	line-height: 12px;
+    font-size: 12px;
+    color: #b2c0c8;
+  }
+  
+  .boxcon .footer .thumb img {
+  	width: 32px;
+  	height: 32px;
+  	border-radius: 50%;
+  }
+  
+  .boxcon .footer ul {
+  	display: block;
+  	width: 100%;
+    height: 100%;
+  }
+  
+  .boxcon .footer ul li:first-child {
+  	cursor: pointer;
+  	font-size: 24px;
+  	position: relative;
+    top: 50%;
+    vertical-align: top;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    /*background: #add8e6;*/
+    display: inline-block;
+    min-width: 20px;
+    height: 20px;
+    float: right;
+  }
+  
+    /*頭部*/
+     main{
+    	width: 100%;
+    	padding:0 60px ;
+    	background:#F2F2F4;
+    	overflow: hidden;
+    }
+		.layout-content{
+			min-height:900px;
+		}
+    .layout-content .left {
+    	float: left;
+    	margin-bottom: 10px;
+    }
+    .layout-content .right{
+    	float: left;
+    	overflow: hidden;
+    	margin-bottom: 10px;
+    }
+    .layout-content .left_title{
+    	font-size: 24px;
+    	color: #7e8e98;
+    	line-height: 72px;
+    	
+    }
+    .layout-content .right_title{
+    	font-size: 24px;
+    	color: #7e8e98;
+    	line-height: 72px;
+    	
+    }
+    .layout-content .right_title span{
+    	font-size: 12px;float:right;cursor: pointer;
+    }
+    .layout-content .right_title span:hover{
+    	color:#3C464D ;
+    }
+    /*//瀑布流*/
+    .vue-waterfall-slot{
+     	border:5px solid #F2F2F4;
+    }
+     .left .water{
+
+    	padding: 18px 18px 0px 18px ;
+    	width: 30%;
+    	margin: 0;
+    	/*border: 1px solid #;*/
+    	box-shadow: 0px 1px 4px rgba(6,31,50,.12);
+    	background-color: #fff;
+    	cursor: pointer;
+    }
+    .water:hover{
+    	box-shadow: 0px 12px 12px rgba(6,31,50,.24);
+    	-webkit-box-shadow:0px 12px 12px rgba(6,31,50,.24);
+    }
+    .water>img{
+    	width: 100%;
+    	margin: 0;
+    	padding: 0;
+    }
+    .water .text {
+    	line-height: 16px;
+    }
+    .water .waterfot{
+    	width: 100%;
+    	height: 56px;
+    	display: flex;
+    	align-items: center;
+    	position: relative;
+    }
+    .waterfot>img{
+    	width: 40px;
+    	height: 40px;
+    	margin-right: 10px;
+    	border-radius: 50%;
+    	border: none;
+    }
+    .water .waterfot .icon {
+    	/*align-self: stretch;*/
+    	position: absolute;
+    	top:30px;
+    	right: 30px;
+    	font-size:18px;
+    	line-height: 0px;
+    	/*margin-bottom: 50%;*/
+    }
+    .water .waterfot .title{
+    	    font-size: 14px;
+    			color: #3b454c;
+    			white-space:nowrap;
+    			line-height: 14px;
+    }
+    .water .waterfot .footer{`
+    	    line-height: 12px;
+    			font-size: 12px;
+    			color: #b2c0c8;
+    }
+    /*.modal{
+    	position: absolute;
+    	top:40px;
+    	left:0px;
+    	right:0px;
+    	bottom:0px;
+    	z-index: 5;
+    	background-color: rgba(0,0,0,0.7);
+    }*/
+    /*end*/
+    .layout-copy{
+    	text-align: center;
+    }
+    .ivu-menu-light{
+    	z-index: -0;	
+    }	
+    .ivu-icon{
+    	color: #999;
+    }
 </style>	

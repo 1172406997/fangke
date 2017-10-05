@@ -29,6 +29,12 @@
 							<span class="layout-text ">我的拼图</span>
 						</Menu-item>
 					</router-link>
+					<router-link to="/myCollect">
+						<Menu-item name="4">
+							<Icon type="heart"  size="18"></Icon>
+							<span class="layout-text ">我的单品</span>
+						</Menu-item>
+					</router-link>
 					<div style="float: right; ">
 						<!--<i-button type="text" class="bottom " style="float: left; ">
 							<Poptip title="提示标题 " content="提示内容 " placement="bottom">

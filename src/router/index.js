@@ -7,6 +7,7 @@ import search from '@/components/search'
 import puzzle from '@/components/puzzle'
 import my from '@/components/my'
 import all from '@/components/all'
+import myCollect from '@/components/myCollect'
 //import project from '@/components/project'
 //import puzzleson from '@/components/puzzleson'
 import canvas from '@/components/canvas'
@@ -30,6 +31,7 @@ export default new Router({
 	            ]
             },
             { path: '/content', component: content},
+            { path: '/myCollect', component: myCollect},
         ]
     },
     {
