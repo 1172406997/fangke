@@ -115,12 +115,17 @@
                 		</div>
                 	</div>
                 </div>
-                <div class="layout-content" style="padding-right:10px">
+                <div class="layout-content" style="padding:0px">
                 	<div class="layout-content-style " >
+                		<div class="menubox">
+                				<Tooltip content="复制" placement="bottom">
+									      	<Icon type="archive" ></Icon>
+								        </Tooltip>
+								        <Tooltip content="关闭" style="float: right;color: #ccc;" placement="bottom">
+									      	<Icon type="close-round"></Icon>
+								        </Tooltip>
+                		</div>
                 		<div class="layout-content-main">
-                			<div class="box">
-                				
-                			</div>
                 			<div class="parent"style="width: 320px;height: 720px;">
                 				<canvas class="one box" id="parent" style="width: 320px;height：720px"></canvas>
                 				</div>
@@ -488,4 +493,17 @@ import brandcli from "../components/pages/BrandClick"
         .box .bl {
             cursor: nesw-resize;
         } 
+			.menubox{
+				width: 100%;
+				box-shadow: 0 0 5px #ccc;
+				height: 42px;
+				float: left;
+				margin-bottom: 20px;
+				line-height: 42px;
+				padding:0 20px 0 10px;
+				font-size: 24px;
+			}    
+			.menubox .ivu-icon{
+				cursor: pointer;
+			}    
 </style>	
