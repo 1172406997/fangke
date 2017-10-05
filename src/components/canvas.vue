@@ -118,12 +118,38 @@
                 <div class="layout-content" style="padding:0px">
                 	<div class="layout-content-style " >
                 		<div class="menubox">
-                				<Tooltip content="复制" placement="bottom">
-									      	<Icon type="archive" ></Icon>
-								        </Tooltip>
-								        <Tooltip content="关闭" style="float: right;color: #ccc;" placement="bottom">
-									      	<Icon type="close-round"></Icon>
-								        </Tooltip>
+                				<Tooltip content="裁剪" placement="bottom">
+							      	<Icon type="crop"></Icon>
+								</Tooltip>
+								<Tooltip content="变形" placement="bottom">
+								<Icon type="android-map"></Icon>
+								</Tooltip>
+								<Tooltip content="抠图" placement="bottom">
+							      	<Icon type="wand"></Icon>
+								</Tooltip>
+								<Tooltip content="锁定" placement="bottom">
+							      	<Icon type="locked"></Icon>
+								</Tooltip>
+								<Tooltip content="镜像" placement="bottom">
+								<Icon type="arrow-swap"></Icon>
+								</Tooltip>
+								<Tooltip content="复制" placement="bottom">
+							      	<Icon type="images"></Icon>
+								</Tooltip>
+								<Tooltip content="滤镜" placement="bottom">
+									<Icon type="ios-settings-strong"></Icon>
+								</Tooltip>
+								<Tooltip content="上下层级" placement="bottom">
+									<Icon type="navicon-round"></Icon>
+								</Tooltip>
+								
+						        <Tooltip content="关闭" style="float: right;color: #ccc;" placement="bottom">
+							      	<Icon type="close-round"></Icon>
+						        </Tooltip>
+						        <Tooltip content="删除" style="float: right;color: #ccc;" @click.native="elemRemove"  placement="bottom">
+							      	<Icon type="trash-b"></Icon>
+						        </Tooltip>
+						        
                 		</div>
                 		<div class="layout-content-main">
                 			<div class="parent"style="width: 320px;height: 720px;">
@@ -156,6 +182,7 @@ import brandcli from "../components/pages/BrandClick"
 	                flag:true,
 	                childUrl:'',
 	                Canvas:'',
+	                selectItem:"",
 	            }
 	        },
 	         computed: {
@@ -174,16 +201,27 @@ import brandcli from "../components/pages/BrandClick"
 	        },
 	        methods:{
 	        	getCanvas(){
+	        		var self = this
 	        		var staticCanvas = new fabric.Canvas('parent');
-	        		this.Canvas = staticCanvas;
+	        		self.Canvas = staticCanvas;
+	        		self.Canvas.setWidth(800);
+	        		self.Canvas.setHeight(800);
+	        		self.Canvas.on('object:selected', function(opt){
+	        			self.selectItem = opt
+	        		});
+	        		
 	        	},
 	        	add:function(){
 	        		var oParent = document.getElementById('#parent');
 					   	var additem='<div class="div1" onmousemove="posMove(this.className)"></div>';
 					   	oParent.append(additem); 
 	        	},
+	        	elemRemove:function(){
+	        		var self = this
+	        		self.Canvas.remove(self.selectItem.target);
+	        	},
 	        	getsearch:function() {
-							var self = this;
+						var self = this;
 				  		var str = this.Encrypt();
 				  		var user_id = localStorage.getItem("user_id"); 
 				  		var token = localStorage.getItem("token"); 
@@ -504,6 +542,7 @@ import brandcli from "../components/pages/BrandClick"
 				font-size: 24px;
 			}    
 			.menubox .ivu-icon{
+				margin-left: 10px;
 				cursor: pointer;
 			}    
 </style>	
