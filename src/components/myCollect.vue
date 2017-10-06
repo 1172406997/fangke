@@ -31,9 +31,9 @@
 						      <div class="img">
 						      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
 						      	<div class="modal" @click="modalS(item)"></div>
-						      	<div class="icon"  @click="StoreLike(item.id)">
-						      	<Tooltip content="收藏" placement="bottom">
-							      	<Icon type="archive" ></Icon>
+						      	<div class="icon"  @click="DelLike(item.like)">
+						      	<Tooltip content="删除" placement="bottom">
+							      	<Icon type="trash-a"></Icon>
 						        </Tooltip>
 						      	</div>
 						      </div>
@@ -86,7 +86,7 @@ import modals from "../components/pages/Single"
 					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
 				}
 			};
-  		this.jsonpRequest(this,"Material.GetAllMaterial",params,function(res){
+  		this.jsonpRequest(this,"Like.GetLike",params,function(res){
   					if(res){
 								self.$set(self, 'getlikeitem', res.body.data.list);
 								self.getlikeitem = res.body.data.list;
@@ -99,20 +99,20 @@ import modals from "../components/pages/Single"
   			console.log(err);
   		});
 		},
-		StoreLike:function(material_id) {
+		DelLike:function(like_id) {
 			var self = this;
 			var str = this.Encrypt();
 			var user_id = localStorage.getItem("user_id"); 
   		var token = localStorage.getItem("token"); 
 			var params = {
 				params:{
-					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'material_id':material_id
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'like_id':like_id
 				}
 			};
-			this.jsonpRequest(this,"Like.StoreLike",params,function(res){
+			this.jsonpRequest(this,"Like.DeleteLike",params,function(res){
   					if(res){
 								console.log(res);
-								console.log("getlike:"+this.getlikeitem);
+								self.getlike();
   					}
   		},function(err){
   			console.log(err);

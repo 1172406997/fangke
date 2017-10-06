@@ -33,11 +33,30 @@
 						 			<div class="boxcon">
 						 			<div class="pic">
 						 				<img src="../img/1.png"/>
-						 				<!--<div class="icon">
-						      	<Tooltip content="收藏" placement="bottom">
-							      	<Icon type="archive"></Icon>
-						        </Tooltip>
-						      	</div>-->
+						 				<div class="icon myedit">
+							      	<Tooltip content="编辑" placement="bottom">
+								      	<Icon type="compose"></Icon>
+							        </Tooltip>
+						      	</div>
+						      	<div class="icon del">
+							      	<Tooltip content="删除" placement="bottom">
+								      	<Icon type="trash-b"></Icon>
+							        </Tooltip>
+						      	</div>
+						      	<Dropdown trigger="click">	
+						      	<div class="icon menu">
+							      	<Tooltip content="菜单" placement="bottom">
+								      	<Icon type="android-more-vertical"></Icon>
+							        </Tooltip>
+						      	</div>
+							      	<DropdownMenu slot="list">
+							            <DropdownItem>驴打滚</DropdownItem>
+							            <DropdownItem>炸酱面</DropdownItem>
+							            <DropdownItem>豆汁儿</DropdownItem>
+							            <DropdownItem>冰糖葫芦</DropdownItem>
+							            <DropdownItem>北京烤鸭</DropdownItem>
+							        </DropdownMenu>
+						      	</Dropdown>
 						 				<div class="modal"></div>
 						 			</div>
 						 			<div class="footer">
@@ -229,7 +248,7 @@ export default {
     	left: 0;
     	bottom: 0;
     	right: 0;
-    	/*background-color: rgba(0,0,0,.3);*/
+    	background-color: rgba(0,0,0,.3);
     }
     
     .pic img {
@@ -357,76 +376,45 @@ export default {
     .layout-content .right_title span:hover{
     	color:#3C464D ;
     }
-    /*//瀑布流*/
-    .vue-waterfall-slot{
-     	border:5px solid #F2F2F4;
-    }
-     .left .water{
-
-    	padding: 18px 18px 0px 18px ;
-    	width: 30%;
-    	margin: 0;
-    	/*border: 1px solid #;*/
-    	box-shadow: 0px 1px 4px rgba(6,31,50,.12);
+    /*瀑布流*/
+   .pic .icon{
+	   	width: 40px;
+	    height: 40px;
+    	text-align: center;
+    	line-height: 40px;
+    	font-size: 20px;
     	background-color: #fff;
-    	cursor: pointer;
-    }
-    .water:hover{
-    	box-shadow: 0px 12px 12px rgba(6,31,50,.24);
-    	-webkit-box-shadow:0px 12px 12px rgba(6,31,50,.24);
-    }
-    .water>img{
-    	width: 100%;
-    	margin: 0;
-    	padding: 0;
-    }
-    .water .text {
-    	line-height: 16px;
-    }
-    .water .waterfot{
-    	width: 100%;
-    	height: 56px;
-    	display: flex;
-    	align-items: center;
-    	position: relative;
-    }
-    .waterfot>img{
-    	width: 40px;
-    	height: 40px;
-    	margin-right: 10px;
-    	border-radius: 50%;
-    	border: none;
-    }
-    .water .waterfot .icon {
-    	/*align-self: stretch;*/
-    	position: absolute;
-    	top:30px;
-    	right: 30px;
-    	font-size:18px;
-    	line-height: 0px;
-    	/*margin-bottom: 50%;*/
-    }
-    .water .waterfot .title{
-    	    font-size: 14px;
-    			color: #3b454c;
-    			white-space:nowrap;
-    			line-height: 14px;
-    }
-    .water .waterfot .footer{`
-    	    line-height: 12px;
-    			font-size: 12px;
-    			color: #b2c0c8;
-    }
-    /*.modal{
-    	position: absolute;
-    	top:40px;
-    	left:0px;
-    	right:0px;
-    	bottom:0px;
+    	/*right:10px;*/
     	z-index: 5;
-    	background-color: rgba(0,0,0,0.7);
-    }*/
-    /*end*/
+    	border-radius: 5px;
+    	color: #7E8E98;
+    	/*display: none;*/
+    	cursor: pointer;
+   }
+   .pic div.myedit{
+   	position: absolute;
+   		top:10px;
+   		left:10px;
+   		color: #fff;
+   		background-color:#72c043;
+   }
+    .pic div.myedit .ivu-icon{
+    	color: #fff;
+    }
+   .pic div.myedit:hover{
+   		background-color:#5c9a37;
+   }
+   .pic .ivu-dropdown{
+   	    position: absolute;
+		    right:10px;
+		    z-index: 10;
+   }
+   .pic div.del{
+   	position: absolute;
+   	top:10px;
+   	right: 60px;
+   	color: #696969;
+   }
     .layout-copy{
     	text-align: center;
     }

@@ -21,35 +21,34 @@
 						<div class="content_con"  v-if="flag" v-show="this.fenlei=='fenlei'">
 							<h2>分类标签</h2>
 							<Row >
-								<div v-on:click="getclassify()">
+								<!--<div v-on:click="getclassify()">
 								<Col span="4"  class="classify" v-on:click="getclassify()">
 					        	<p>椅子</p>
 					        	<img src="../assets/img/yizi.png" style="" alt="" />
 					       </Col>
-					       </div>
-					        <Col span="4" class="classify" v-for="(itemd , index) in item" v-on:click="getclassify(item.id)">
-					        	<p>{{<div class="content_con"  v-if="flag" v-show="this.fenlei=='fenlei'">
-												<h2>分类标签</h2>
-												<Row >
-													<div v-on:click="getclassify()">
-													<Col span="4"  class="classify" v-on:click="getclassify()">
-										        	<p>椅子</p>
-										        	<img src="../assets/img/yizi.png" style="" alt="" />
-										       </Col>
-										       </div>
-										        <Col span="4" class="classify" v-for="(itemd , index) in item" v-on:click="getclassify(item.id)">
-										        	<p>{{itemd.name}}</p>
-										        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
-										        </Col>
-										    </Row>
-											</div>itemd.name}}</p>
+					       </div>-->
+					        <Col span="4" class="classify" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
+										<p>{{itemd.name}}</p>
 					        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 					        </Col>
 					    </Row>
 						</div>
 						<div class="content_con2" v-if="!flag">
-							<h2>更多分类</h2>
-							
+							<div>
+							<h2>更多分类 <p style="float: right;cursor: pointer;" @click="flag=true">返回</p></h2>
+								<Row >
+									<div v-on:click="getclassify()">
+									<!--<Col span="4"  class="classify" v-on:click="getclassify()">
+						        	<p>椅子</p>
+						        	<img src="../assets/img/yizi.png" style="" alt="" />
+						       </Col>-->
+						       </div>
+						        <Col span="4" class="classify" v-for="(itemd , index) in secClass" @click.native="getSecList(itemd.pid)">
+											<p>{{itemd.name}}</p>
+						        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+						        </Col>
+						    </Row>
+						  </div>
 							<h2>搜索结果</h2>
 							<div >
 								<!--<Col span="3" style="background-color: #fff;position:relative;" class="con2" >
@@ -59,13 +58,23 @@
 					        		<Icon type="ios-star" class="show" @click="collectid()"></Icon>
 					        	</div>
 					       </Col>-->
-					       <Col span="4" v-for="(itemd , index) in searchi" style="background-color: #fff;position:relative;" class="con2" >
-					        	<img :src="itemd.path" alt="" />
-					        	<p>一只一只</p>
-					        	<div class="hover">
-					        		<Icon type="ios-star" class="show" @click="collectid()"></Icon>
-					        	</div>
-					       </Col>
+						       <div class="dan">
+							      <div class="img">
+							      	<img src="../assets/img/meijian.png" alt="" />
+							      	<div class="modal" style="display: none;"></div>
+							        <div class="icon">
+							      	<Tooltip content="收藏" placement="bottom">
+								      	<Icon type="archive" @click="StoreLike()"></Icon>
+							        </Tooltip>
+							      	</div>
+							      </div>
+							      <div class="nam">
+							      	我叫小明
+							      </div>
+							      <div class="price" style="display: none;">
+							      	圆圆圆
+							      </div>
+							    </div>
 							</div>
 						</div>
 						<!--<div v-for="item in item">
@@ -94,6 +103,8 @@ export default {
        flag:true,
        //显示隐藏
        fenlei:'fenlei',
+       //二级分类
+       secClass:'',
     }
   },
   created:function(){
@@ -142,6 +153,25 @@ export default {
   			console.log(err);
   		});
   	},
+  	StoreLike:function(material_id) {
+			var self = this;
+			var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id"); 
+  		var token = localStorage.getItem("token"); 
+			var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'material_id':material_id
+				}
+			};
+			this.jsonpRequest(this,"Like.StoreLike",params,function(res){
+  					if(res){
+								console.log(res);
+								console.log("getlike:"+this.getlikeitem);
+  					}
+  		},function(err){
+  			console.log(err);
+  		});
+		},
   	getclassify:function(id){
   		this.flag=false;
 			var str = this.Encrypt();
@@ -154,7 +184,8 @@ export default {
 			};
 			this.jsonpRequest(this,"Type.GetTypeByPid",params,function(res){
   					if(res){
-//						this.searchi = res.body.data.list;
+							this.secClass = res.body.data.list;
+							console.log("secClass1111111111111111111111111111111111");
 							console.log(res);
   					}
   		},function(err){
@@ -318,6 +349,71 @@ export default {
 			border-radius: 2px;
 			z-index: 0;
 			bottom: 0px;
+    }
+    .ivu-menu-light{
+    	z-index: -0;	
+    }	
+    .dan{
+    	width: 203px;
+    	height: 227px;
+    	padding: 12px 12px 0px;
+    	background-color: #fff;
+    	border-radius: 5px;
+    	position: relative;
+    	margin: 10px;
+    	cursor:pointer;
+    	float: left;
+    	overflow: hidden;
+    }
+    .dan:hover{
+        box-shadow: 0 4px 12px rgba(6,31,50,.24);
+   	 		-webkit-box-shadow: 0 4px 12px rgba(6,31,50,.24);
+    }
+    .img{
+    	position: relative;
+    	width: 179px;
+    	height: 179px;
+    }
+    .img>img{
+    	width: 100%;
+    	height: 100%;
+    }
+    .modal{
+    	position: absolute;
+    	width: 100%;
+    	height: 100%;
+    	left:0;
+    	top: 0;
+    	display: none;
+    	border-radius: 2px;
+    	background-color: rgba(0,0,0,0.1);
+    }
+    .icon{
+    	width: 40px;
+    	height: 40px;
+    	text-align: center;
+    	line-height: 40px;
+    	font-size: 20px;
+    	color: #7E8E98;
+    	background-color: #fff;
+    	border-radius: 5px;
+    	position: absolute;
+    	top:10px;
+    	right:10px;
+    	display: none;
+    	cursor: pointer;
+    }
+    .nam{
+    	width: 100%;
+    	line-height: 36px;
+    }
+    .price{
+    	width: 100%;
+    	display: none;
+    	line-height: 36px;
+    }
+    .icon:hover{
+    	color: #3B454C;
     }
     .ivu-menu-light{
     	z-index: -0;	
