@@ -105,7 +105,7 @@ import modals from "../components/pages/Single"
   		var token = localStorage.getItem("token"); 
 			var params = {
 				params:{
-					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'material_id':material_id
 				}
 			};
 			this.jsonpRequest(this,"Like.StoreLike",params,function(res){

@@ -3,7 +3,7 @@
      <p><span  v-on:click="modalH()"><Icon type="close-round" color="#fff" size="20" class="ico"></Icon></span></p>
      <div class="mine">
      	<Row>
-        	<Col span="16" class="dada">
+        	<Col span="14" class="dada">
         		<div class="left">
         			<div class="left_con">
 					 	<Carousel v-model="value1" height="200">
@@ -78,8 +78,15 @@
             	
             }
         },
+        created(){
+        	
+        },
+        mounted(){
+//      	document.documentElement.style.overflow = "hidden";
+        },
         methods:{
 			modalH:function(){
+				document.documentElement.style.overflow = "scroll";
 				this.$emit('modal',this.modal);
 			},
         },
@@ -89,10 +96,10 @@
 
 <style scoped>
   .container {
-  	position:absolute;
+  	position:fixed;
   	left: 5px;
   	right: 5px;
-  	top:50px;
+  	top:47px;
   	min-width: 1268px;
   	width: 99.4%;
   	z-index: 20px;
@@ -125,7 +132,7 @@
   }
   
   .mine{
-  	padding: 0 48px;
+  	padding:0px 48px 20px 48px;
   }
   .left{
   	width: 100%;
@@ -137,7 +144,7 @@
   }
   .left_con{
   	margin: 12px;
-  	min-height: 568px;
+  	height: 480px;
   	display: flex;
   	justify-content: center;
 	align-items: center;
@@ -163,11 +170,11 @@
     align-items: center;
   }
   .right{
-  	width: 100%;*/
+  	width: 100%;
+  	height: 504px;
   	border-top-right-radius: 12px;
   	border-bottom-right-radius: 12px;
   	float: left;
-  	min-height: 592px;
   	overflow: hidden;
   	background-color: #fff;
   }
@@ -261,6 +268,7 @@
   }
   .endLine span {
     width: 40%;
+    text-align: center;
   }
   .endLine:after,.endLine:before {
     content: '';
