@@ -261,12 +261,16 @@ export default {
     },
 		checkScrollSlide(){
 				var self = this;
+				 if(this.$route.path=='/content'){
 				var oParent=document.getElementById('main');  
         var oBoxs=self.getByClass(oParent,'box');  
         var lastBoxH=oBoxs[oBoxs.length-1].offsetTop + Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);  
         var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;  
         var height=document.body.clientHeight || document.documentElement.clientHeight;  
         return (lastBoxH<scrollTop+height)?true:false;  
+       }else{
+       		return
+       }
 		},
 	}
 }

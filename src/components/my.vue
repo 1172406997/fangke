@@ -10,7 +10,7 @@
         </Menu>
 				<main>
 					<div class="layout-content">
-						    <div class="dan" @click="modalS()">
+						    <!--<div class="dan" @click="modalS()">
 						      <div class="img">
 						      	<img src="../assets/img/meijian.png" alt="" />
 						      	<div class="modal" style="display: none;"></div>
@@ -26,11 +26,11 @@
 						      <div class="price" style="display: none;">
 						      	圆圆圆
 						      </div>
-						    </div>
+						    </div>-->
 							  <div class="dan" v-for="(item ,index) in getlikeitem" ref="abc"  >
 						      <div class="img">
 						      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
-						      	<div class="modal" @click="modalS()"></div>
+						      	<div class="modal" @click="modalS(item)"></div>
 						      	<div class="icon"  @click="StoreLike(item.id)">
 						      	<Tooltip content="收藏" placement="bottom">
 							      	<Icon type="archive" ></Icon>
@@ -47,7 +47,7 @@
 						    </div>
 					</div>
 				</main>
-				<modals v-show="this.modal=='modal'" @toson=''  @modal="getsonitem()"></modals>
+				<modals v-if="this.modal=='modal'" :toson='toson'  @modal="getsonitem()"></modals>
 		</div>
 </template>
 
@@ -62,6 +62,7 @@ import modals from "../components/pages/Single"
        select3: 'day',
        getlikeitem: '',
        modal:'',
+       toson:'',
     }
   },
   created:function(){
@@ -118,7 +119,8 @@ import modals from "../components/pages/Single"
   		});
 			},
 		//enshrine end
-			modalS:function(){
+			modalS:function(item){
+				this.toson = item;
 				this.modal="modal";
 			},
 			getsonitem:function(msg){

@@ -28,7 +28,7 @@
 					       </Col>
 					       </div>
 					        <Col span="4" class="classify" v-for="(itemd , index) in item" v-on:click="getclassify()">
-					        	<p>{{itemd.name}}-{{index}}</p>
+					        	<p>{{itemd.name}}-{{item}}</p>
 					        	<img :src="'http://www.shatuhome.com/material/'+itemd.filename" style="" alt="" />
 					        </Col>
 					    </Row>
@@ -40,14 +40,14 @@
 					        	<img src="../assets/logo.png" alt="" />
 					        	<p>一只一只</p>
 					        	<div class="hover">
-					        		<Icon type="ios-star" class="show" @click="collect()"></Icon>
+					        		<Icon type="ios-star" class="show" @click="collectid()"></Icon>
 					        	</div>
 					       </Col>-->
 					       <Col span="4" v-for="(itemd , index) in searchi" style="background-color: #fff;position:relative;" class="con2" >
 					        	<img :src="itemd.path" alt="" />
 					        	<p>一只一只</p>
 					        	<div class="hover">
-					        		<Icon type="ios-star" class="show" @click="collect()"></Icon>
+					        		<Icon type="ios-star" class="show" @click="collectid()"></Icon>
 					        	</div>
 					       </Col>
 							</div>
@@ -77,8 +77,6 @@ export default {
        //搜索关键字
        flag:true,
        //显示隐藏
-       collect:'',
-       //收藏
        fenlei:'fenlei',
     }
   },
@@ -135,7 +133,7 @@ export default {
 		var hover = document.getElemntsByClassName("hover");
 		alert(hover);
   	},
-  	collect:function(){
+  	collectid:function(){
   		var self = this;
   		var str = this.Encrypt();
   		var user_id = localStorage.getItem("user_id"); 

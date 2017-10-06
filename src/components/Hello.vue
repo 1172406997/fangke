@@ -3,7 +3,7 @@
 		<Affix v-bind:class="{ active: isActive }">
 			<div class="demo-affix">
 			<Menu mode="horizontal" theme="dark" active-name="1" class="top">
-				<div class="layout-logo"></div>
+				<!--<div class="layout-logo"></div>-->
 				<div class="layout-nav">
 					<router-link to="/">
 						<Menu-item name="1">

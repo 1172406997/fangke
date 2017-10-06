@@ -76,7 +76,8 @@ export default {
   data () {
     return {
 			 value13: '',
-       select3: 'day'
+       select3: 'day',
+       modal:'',
     }
   },
   methods:{
