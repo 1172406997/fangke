@@ -121,19 +121,20 @@
                 				<Tooltip content="裁剪" placement="bottom">
 							      	<Icon type="crop"></Icon>
 								</Tooltip>
-								<Tooltip content="变形" placement="bottom">
+								<Tooltip content="变形"@click.native="twistImg" placement="bottom">
 								<Icon type="android-map"></Icon>
 								</Tooltip>
 								<Tooltip content="抠图" placement="bottom">
 							      	<Icon type="wand"></Icon>
 								</Tooltip>
-								<Tooltip content="锁定" placement="bottom">
-							      	<Icon type="locked"></Icon>
+								<Tooltip content="锁定" @click.native="lockImg" placement="bottom">
+							      	<Icon type="locked" v-show='imgLock'></Icon>
+							      	<Icon type="unlocked" v-show='!imgLock'></Icon>
 								</Tooltip>
-								<Tooltip content="镜像" placement="bottom">
+								<Tooltip content="镜像" @click.native="flippHor" placement="bottom">
 								<Icon type="arrow-swap"></Icon>
 								</Tooltip>
-								<Tooltip content="复制" placement="bottom">
+								<Tooltip content="复制" @click.native="copyImg" placement="bottom">
 							      	<Icon type="images"></Icon>
 								</Tooltip>
 								<Tooltip content="滤镜" placement="bottom">
@@ -183,6 +184,7 @@ import brandcli from "../components/pages/BrandClick"
 	                childUrl:'',
 	                Canvas:'',
 	                selectItem:"",
+	                imgLock:true,
 	            }
 	        },
 	         computed: {
@@ -217,9 +219,40 @@ import brandcli from "../components/pages/BrandClick"
 					   	oParent.append(additem); 
 	        	},
 	        	elemRemove:function(){
-	        		var self = this
+	        		var self = this;
 	        		self.Canvas.remove(self.selectItem.target);
 	        	},
+	        	//水平翻转
+	        	flippHor:function(){
+	        	 	var self = this;
+	        	 	console.log(this.selectItem)
+	        		self.selectItem.target.flipX = true;
+	        		//hasControls 
+	        		self.Canvas.renderAll();
+	        	},
+	        	//lock and unlock
+	        	lockImg:function(){
+	        	 	var self = this;
+	        	 	self.imgLock = !self.imgLock;
+	        		self.selectItem.target.selectable = self.imgLock;
+	        		self.Canvas.renderAll();
+	        	},
+	        	twistImg:function(){
+	        	 	var self = this;
+	        	 	console.log(self.selectItem.target.aCoords.bl)
+	        		self.Canvas.renderAll();
+	        	},
+	        	//copy
+	        	copyImg:function(){
+	        	 	var self = this;
+	        	 	self.selectItem.target.clone(
+	        	 		function(oImg){
+	        	 			self.Canvas.add(oImg);
+	        	 		}
+	        	 	)
+	        		self.Canvas.renderAll();
+	        	},
+	        	
 	        	getsearch:function() {
 						var self = this;
 				  		var str = this.Encrypt();
