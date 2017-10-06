@@ -9,7 +9,7 @@
 					 	<Carousel v-model="value1"  style="width: 500px;" height="400">
 					        <Carousel-item>
 					            <div class="demo-carousel">
-					            	<img :src="'http://www.shatuhome.com/material/'+parSon.filename" alt="" />
+					            	<img src="../../img/1.png" alt="" />
 					            </div>
 					        </Carousel-item>
 					        <!--<Carousel-item>

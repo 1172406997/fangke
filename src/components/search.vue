@@ -27,13 +27,29 @@
 					        	<img src="../assets/img/yizi.png" style="" alt="" />
 					       </Col>
 					       </div>
-					        <Col span="4" class="classify" v-for="(itemd , index) in item" v-on:click="getclassify()">
-					        	<p>{{itemd.name}}-{{item}}</p>
-					        	<img :src="'http://www.shatuhome.com/material/'+itemd.filename" style="" alt="" />
+					        <Col span="4" class="classify" v-for="(itemd , index) in item" v-on:click="getclassify(item.id)">
+					        	<p>{{<div class="content_con"  v-if="flag" v-show="this.fenlei=='fenlei'">
+												<h2>分类标签</h2>
+												<Row >
+													<div v-on:click="getclassify()">
+													<Col span="4"  class="classify" v-on:click="getclassify()">
+										        	<p>椅子</p>
+										        	<img src="../assets/img/yizi.png" style="" alt="" />
+										       </Col>
+										       </div>
+										        <Col span="4" class="classify" v-for="(itemd , index) in item" v-on:click="getclassify(item.id)">
+										        	<p>{{itemd.name}}</p>
+										        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+										        </Col>
+										    </Row>
+											</div>itemd.name}}</p>
+					        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 					        </Col>
 					    </Row>
 						</div>
 						<div class="content_con2" v-if="!flag">
+							<h2>更多分类</h2>
+							
 							<h2>搜索结果</h2>
 							<div >
 								<!--<Col span="3" style="background-color: #fff;position:relative;" class="con2" >
@@ -93,7 +109,7 @@ export default {
 					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
 				}
 			};
-			this.jsonpRequest(this,"Material.GetAllMaterial",params,function(res){
+			this.jsonpRequest(this,"Type.GetAllType",params,function(res){
   					if(res){
 								this.$set(this, 'item', res.data);
 								this.item = res.body.data.list;
@@ -126,8 +142,24 @@ export default {
   			console.log(err);
   		});
   	},
-  	getclassify:function(){
-  		console.log("1");
+  	getclassify:function(id){
+  		this.flag=false;
+			var str = this.Encrypt();
+  		var user_id = localStorage.getItem("user_id"); 
+  		var token = localStorage.getItem("token"); 
+  		var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"pid":id
+				}
+			};
+			this.jsonpRequest(this,"Type.GetTypeByPid",params,function(res){
+  					if(res){
+//						this.searchi = res.body.data.list;
+							console.log(res);
+  					}
+  		},function(err){
+  			console.log(err);
+  		});
   	},
   	over:function(el){
 		var hover = document.getElemntsByClassName("hover");
@@ -207,8 +239,10 @@ export default {
 			display: inline;
 			/*width: auto;*/
 			/*height: 17px;*/
-			top: 5px;
-			left: 5px;
+			top: 10px;
+			left: 10px;
+			font-size: 16px;
+			z-index: 1;
 		}
 		.layout-content{
 			position: relative;
@@ -230,6 +264,7 @@ export default {
 		.classify{
 			background-color: #fff;
 			position:relative;
+			height: 124px;
 			margin: 5px;
 			cursor: pointer;
 			border-radius: 2px;
@@ -277,9 +312,12 @@ export default {
 		}
     .classify>img{
     	position:absolute;
-    	width: 70%;
-			right: 5px;
-			bottom: 5px;
+    	width: 100%;
+    	height: 100%;
+			right: 0px;
+			border-radius: 2px;
+			z-index: 0;
+			bottom: 0px;
     }
     .ivu-menu-light{
     	z-index: -0;	

@@ -28,7 +28,7 @@
 						      </div>
 						    </div>-->
 							  <div class="dan" v-for="(item ,index) in getlikeitem" ref="abc"  >
-						      <div class="img">
+						      <div class="img" @click="addClick(item.id)">
 						      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
 						      	<div class="modal" @click="modalS(item)"></div>
 						      	<div class="icon"  @click="StoreLike(item.id)">
@@ -94,6 +94,24 @@ import modals from "../components/pages/Single"
 								console.log(res);
 								console.log("getlike:"+self.getlikeitem);
 								console.log("toson111111111111111111")
+  					}
+  		},function(err){
+  			console.log(err);
+  		});
+		},
+		addClick(material_id){
+			var self = this;
+  		var str = this.Encrypt();
+  		var user_id = localStorage.getItem("user_id"); 
+  		var token = localStorage.getItem("token"); 
+  		var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'material_id':material_id
+				}
+			};
+  		this.jsonpRequest(this,"Like.Click",params,function(res){
+  					if(res){
+								console.log(res);
   					}
   		},function(err){
   			console.log(err);
