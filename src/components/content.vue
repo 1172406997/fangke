@@ -72,6 +72,7 @@ export default {
 			 bigs:[],
 			 index:0,
 			 defaul:true,
+			 path:'',
     }
   },
   components: {
@@ -82,15 +83,12 @@ export default {
 	  		this.falls();
 	},
 	mounted:function(){
-//	 window.onscroll=function(){this.menu};
-// window.addEventListener("scroll", this.menu);
-// window.onload=function(){ 
-    this.Load();
-// }
-  
+		this.path = this.$route.path;
+		if(this.$route.path == '/content'){
+			this.Load();
+		}
 },
 	methods:{
-		//瀑布流获取作品信息
 		falls:function(){
 			var self = this;
   		var str = this.Encrypt();
@@ -184,7 +182,8 @@ export default {
 			var self = this;
         self.waterfall('main','box');  
         var dataInt={"data":[{"src":'1.png'},{"src":'2.png'},{"src":'3.jpg'},{"src":'4.jpg'}]}  
-        //滚动添加  
+        //滚动添加  \n）-【‘
+        if(this.$route.path=='/content'){
         window.onscroll=function(){  
             if(self.checkScrollSlide()){  
                 var oParent=document.getElementById('main')  
@@ -205,6 +204,9 @@ export default {
                 self.waterfall('main','box');  
             }  
         }  
+        }else{
+        	return;
+        }
 		},
 		waterfall(parent,box){  
 			var self = this;
@@ -234,14 +236,20 @@ export default {
         }  
     },
     getByClass(parent,clsName){  
-        var boxArr=new Array(),//用来存储获取到的所有class为Box的元素  
-            oElements=parent.getElementsByTagName('*');  
-        for(var i=0;i<oElements.length;i++){  
-            if (oElements[i].className==clsName) {  
-                boxArr.push(oElements[i]);  
-            }  
-        }  
-        return boxArr;  
+    	if(this.$route.path == '/content'){
+    		 var boxArr=new Array(),//用来存储获取到的所有class为Box的元素  
+        	oElements=parent.getElementsByTagName('*'); 
+        	console.log("boxarr")
+	        for(var i=0;i<oElements.length;i++){  
+	            if (oElements[i].className==clsName) {  
+	                boxArr.push(oElements[i]);  
+	            }  
+	        }  
+	        return boxArr;  
+    	}else{
+    		return;
+    	}
+       
     },
     getMinhIndex(arr,val){  
         for(var i in arr){  

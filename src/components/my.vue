@@ -27,10 +27,10 @@
 						      	圆圆圆
 						      </div>
 						    </div>
-							  <div class="dan" v-for="(item ,index) in getlikeitem" @click="modalS()" ref="abc"  >
+							  <div class="dan" v-for="(item ,index) in getlikeitem" ref="abc"  >
 						      <div class="img">
 						      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
-						      	<div class="modal" ></div>
+						      	<div class="modal" @click="modalS()"></div>
 						      	<div class="icon"  @click="StoreLike(item.id)">
 						      	<Tooltip content="收藏" placement="bottom">
 							      	<Icon type="archive" ></Icon>
@@ -47,7 +47,7 @@
 						    </div>
 					</div>
 				</main>
-				<modals v-show="this.modal=='modal'" @modal="getsonitem()"></modals>
+				<modals v-show="this.modal=='modal'" @toson=''  @modal="getsonitem()"></modals>
 		</div>
 </template>
 
@@ -71,7 +71,7 @@ import modals from "../components/pages/Single"
 	
   },
   components:{
-  	modals,
+  	modals
   },
   methods:{
   	//获取所有单品
@@ -89,15 +89,20 @@ import modals from "../components/pages/Single"
   					if(res){
 								self.$set(self, 'getlikeitem', res.body.data.list);
 								self.getlikeitem = res.body.data.list;
+								console.log("toson111111111111111111")
 								console.log(res);
 								console.log("getlike:"+self.getlikeitem);
+								console.log("toson111111111111111111")
   					}
   		},function(err){
   			console.log(err);
   		});
 		},
 		StoreLike:function(material_id) {
+			var self = this;
 			var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id"); 
+  		var token = localStorage.getItem("token"); 
 			var params = {
 				params:{
 					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
