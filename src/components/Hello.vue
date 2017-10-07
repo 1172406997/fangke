@@ -51,21 +51,21 @@
 							</Poptip>
 						</i-button>-->
 						<i-button type="text" class="bottom " style="float: left; ">
-							<Poptip title="提示标题 " content="提示内容 " placement="bottom">
-								<Button type="primary" shape="circle" icon="plus-round" class="bottom">
+							<!--<Poptip title="提示标题 " content="提示内容 " placement="bottom">-->
+								<Button type="primary" shape="circle" icon="plus-round" @click="routerTo('/canvas')" class="bottom">
 									&nbsp;&nbsp;&nbsp;&nbsp;創建&nbsp;&nbsp;&nbsp;&nbsp;
 								</Button>
-								<div class="api creat" slot="content">
+								<!--<div class="api creat" slot="content">
 									<div class="top">
 										<Icon type="android-create" size="34"></Icon><br/>
 										創作拼圖
 									</div>
-									<!--<div class="bottom">
+									<div class="bottom">
 										<Icon type="android-upload" size="34" ></Icon><br/>
 										上傳單品
-									</div>-->
+									</div>
 								</div>
-							</Poptip>
+							</Poptip>-->
 						</i-button>
 						<!--<i-button type="text" class="bottom " style="float: left; ">
 							<Poptip title="提示标题 " content="提示内容 " placement="bottom-end">
@@ -79,8 +79,8 @@
 							</Poptip>
 						</i-button>-->
 						<i-button type="text" class="bottom" style="float: left;">
-							<Poptip title="提示标题 " content="提示内容 " placement="bottom-end">
-								<Icon type="android-mail" size="28"> </Icon>
+							<Poptip title="你好 " content="提示内容 " placement="bottom-end">
+								<Icon type="person" size="28"></Icon>
 								<div class="api" slot="content">
 									退出登录
 								</div>
@@ -102,6 +102,11 @@ export default {
 			isActive:false,
 		}
 	},
+	methods:{
+		routerTo(url){
+			this.$router.push({path: url});
+		}
+	}
     
 }
 </script>

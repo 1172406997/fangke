@@ -54,6 +54,7 @@
 										        <span slot="close">私有</span>
 										    	</i-switch>
 												</a>
+												<a href="#" style="margin-top: 20px;">保存</a>
 											</div>
 										</div>
 										</div>
@@ -73,28 +74,32 @@
 										    	<div class="content_con"  v-if="flag">
 										    	<p>分类标签</p>
 														<Row ><!-- -->
-															<Col span="6" style="background-color: #fff;position:relative;margin: 5px;cursor: pointer;" @click="getclassify(itemd.name)" class="classify con2">
-												        	<p>椅子</p>
-												        	<img src="../assets/img/yizi.png" alt="" />
-												        </Col>
-												        <Col span="6" v-for="(itemd , index) in item" style="background-color: #fff;position:relative;margin: 5px;cursor: pointer;" @click="getclassify(itemd.name)" class="classify">
-												        	<p>{{itemd.name}}-{{index}}</p>
-												        	<img :src="'http://www.shatuhome.com/material/'+itemd.filename" alt="" />
-												        </Col>
+															<div class="conlist_show">
+																<div class="conlist_con">
+																	<div class="conlist_content">
+																		<Col span="11" class="classify" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
+																		<p>{{itemd.name}}</p>
+													        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+													        	</Col>
+																	</div>
+											         </div>
+															</div>
 												   </Row>
 													</div>
 													<!--搜索结果列表-->
 													<div class="content_con2" v-if="!flag">
 														<h2>搜索结果</h2>
-														<div >
-															<Col span="6" style="background-color: #fff;position:relative;" class="con2" >
-												        	<img src="../assets/logo.png" alt="" />
-												        	<p>一只一只</p>
-												       </Col>
-												       <Col span="6" v-for="(itemd , index) in searchi" style="background-color: #fff;position:relative;" class="con2" >
-												        	<img :src="itemd.path" alt="" />
-												        	<p>一只一只</p>
-												       </Col>
+														<div class="conlist_show">
+															<div class="conlist_con">
+																<Col span="6" style="background-color: #fff;position:relative;" class="con2" >
+													        	<img src="../assets/logo.png" alt="" />
+													        	<p>一只一只</p>
+													       </Col>
+													       <Col span="6" v-for="(itemd , index) in searchi" style="background-color: #fff;position:relative;" class="con2" >
+													        	<img :src="itemd.path" alt="" />
+													        	<p>一只一只</p>
+													       </Col>
+												       </div>
 														</div>
 													</div>												
 										    </div>
@@ -137,12 +142,31 @@
 								<Tooltip content="复制" @click.native="copyImg" placement="bottom">
 							      	<Icon type="images"></Icon>
 								</Tooltip>
-								<Tooltip content="滤镜" placement="bottom">
-									<Icon type="ios-settings-strong"></Icon>
-								</Tooltip>
-								<Tooltip content="上下层级" placement="bottom">
-									<Icon type="navicon-round"></Icon>
-								</Tooltip>
+								 <Poptip title="" content="" placement="bottom-end">
+		               <Tooltip content="滤镜" placement="bottom">
+											<Icon type="ios-settings-strong"></Icon>
+										</Tooltip>
+										<div slot="content" style="width: 180px;">
+											颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000" /><br/><br/>
+											亮度：<Slider class="slid" v-model="light" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+											对比度：<Slider class="slid" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+											饱和度：<Slider class="slid" v-model="saturability" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+											清晰度：<Slider class="slid" v-model="definition" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+											透明度：<Slider class="slid" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+										</div>
+		            </Poptip>
+								<Dropdown trigger="click">	
+							      	<Tooltip content="上下层级" placement="bottom">
+												<Icon type="navicon-round"></Icon>
+											</Tooltip>
+							      	<DropdownMenu slot="list">
+							            <DropdownItem>上移一层</DropdownItem>
+							            <DropdownItem>下移一层</DropdownItem>
+							            <DropdownItem>置顶</DropdownItem>
+							            <DropdownItem>置底</DropdownItem>
+							        </DropdownMenu>
+						      	</Dropdown>
+								
 								
 						        <Tooltip content="关闭" style="float: right;color: #ccc;" placement="bottom">
 							      	<Icon type="close-round"></Icon>
@@ -184,6 +208,12 @@ import brandcli from "../components/pages/BrandClick"
 	                Canvas:'',
 	                selectItem:"",
 	                imgLock:true,
+	                light:50,
+	                contrast:50,
+	                saturability:50,
+	                definition:50,
+	                lucency:50,
+	                color:'',
 	            }
 	        },
 	         computed: {
@@ -256,8 +286,7 @@ import brandcli from "../components/pages/BrandClick"
 	        	},
 	        	
 	        	getsearch:function() {
-						var self = this;
-				  		var str = this.Encrypt();
+							var str = this.Encrypt();
 				  		var user_id = localStorage.getItem("user_id"); 
 				  		var token = localStorage.getItem("token"); 
 				  		var params = {
@@ -265,14 +294,12 @@ import brandcli from "../components/pages/BrandClick"
 									'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
 								}
 							};
-							this.jsonpRequest(this,"Material.GetAllMaterial",params,function(res){
+							this.jsonpRequest(this,"Type.GetAllType",params,function(res){
 				  					if(res){
-				  						self.$set(self, 'item', res.body.data.list);
-											self.item = res.body.data.list;
-											console.log("item:"+self.item);
-											console.log(1111111111111111111111)
-											console.log(res)
-											console.log(1111111111111111111111)
+												this.$set(this, 'item', res.data);
+												this.item = res.body.data.list;
+												console.log("item:"+this.item);
+												console.log(res)
 				  					}
 				  		},function(err){
 				  			console.log(err);
@@ -580,5 +607,180 @@ import brandcli from "../components/pages/BrandClick"
 				margin-left: 10px;
 				cursor: pointer;
 				/*margin-left: 10px;*/
-			}    
+			} 
+			
+			
+			/*search 样式*/
+			
+		.classify>p{
+			position:absolute;
+			display: inline;
+			/*width: auto;*/
+			/*height: 17px;*/
+			top: 10px;
+			left: 10px;
+			font-size: 16px;
+			z-index: 1;
+		}
+		.layout-content{
+			position: relative;
+		}
+		.layz{
+			position: absolute;
+			top:0px;
+			left:50%;
+			display: none;
+		}
+		.con-content2{
+			padding: 0 24px;
+		}
+		.con2{
+			text-align: center;
+			line-height:none;
+			cursor: pointer;
+		}
+		.classify{
+			background-color: #fff;
+			position:relative;
+			height: 112px;
+			margin: 5px;
+			cursor: pointer;
+			border-radius: 2px;
+		}
+		.classify:hover{
+			box-shadow: 2px 2px 5px #888888;;
+		}
+		.con2>img{
+			max-width: 90%;
+			max-height: 90%;
+		}
+		.con2>p{
+			padding:5px 14px;
+			font-size: 0.3em;
+			margin: 0;
+			width: 90%;
+			/*height: 10%;*/
+			line-height: 16px;
+			/*margin-bottom: 15px;*/
+			text-align: left;
+			color: #000;
+			z-index: 10;
+		}
+		.con2 .show{
+			display: block;
+			position: absolute;
+			top:10px;
+			font-size: 1.5em;
+			right:10px;
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			background-color: #fff;
+			z-index: 2;
+		}
+		.con2 .hover{
+			position: absolute;
+			left: 0;
+			top:0;
+			width: 100%;
+			height: 100%;
+			display: none;
+			/*margin: 0 auto;*/
+			background-color: rgba(0,0,0,.1);
+		}
+    .classify>img{
+    	position:absolute;
+    	width: 100%;
+    	height: 100%;
+			right: 0px;
+			border-radius: 2px;
+			z-index: 0;
+			bottom: 0px;
+    }
+    .ivu-menu-light{
+    	z-index: -0;	
+    }	
+    .dan{
+    	width: 203px;
+    	height: 227px;
+    	padding: 12px 12px 0px;
+    	background-color: #fff;
+    	border-radius: 5px;
+    	position: relative;
+    	margin: 10px;
+    	cursor:pointer;
+    	float: left;
+    	overflow: hidden;
+    }
+    .dan:hover{
+        box-shadow: 0 4px 12px rgba(6,31,50,.24);
+   	 		-webkit-box-shadow: 0 4px 12px rgba(6,31,50,.24);
+    }
+    .img{
+    	position: relative;
+    	width: 179px;
+    	height: 179px;
+    }
+    .img>img{
+    	width: 100%;
+    	height: 100%;
+    }
+    .modal{
+    	position: absolute;
+    	width: 100%;
+    	height: 100%;
+    	left:0;
+    	top: 0;
+    	display: none;
+    	border-radius: 2px;
+    	background-color: rgba(0,0,0,0.1);
+    }
+    .icon{
+    	width: 40px;
+    	height: 40px;
+    	text-align: center;
+    	line-height: 40px;
+    	font-size: 20px;
+    	color: #7E8E98;
+    	background-color: #fff;
+    	border-radius: 5px;
+    	position: absolute;
+    	top:10px;
+    	right:10px;
+    	display: none;
+    	cursor: pointer;
+    }
+    .nam{
+    	width: 100%;
+    	line-height: 36px;
+    }
+    .price{
+    	width: 100%;
+    	display: none;
+    	line-height: 36px;
+    }
+    .icon:hover{
+    	color: #3B454C;
+    }
+    .ivu-menu-light{
+    	z-index: -0;	
+    }	   
+    
+    /*滚动显示样式*/
+   .conlist_show{
+   		width: 100%;
+   		overflow: hidden;
+   		height: 732px;
+   }
+   .conlist_con{
+   	width:calc(100% + 20px);
+   	height: 570px;
+   	overflow-x: hidden;
+   	overflow-y: scroll;
+   }
+   
+   /*滑动框样式*/
+  .slid .ivu-slider-wrap{
+  	margin-top:7px;
+  }
 </style>	

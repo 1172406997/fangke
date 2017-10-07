@@ -1,6 +1,6 @@
 <template>
   <div class="canvasmy">
-  	<Menu mode="horizontal" :theme="theme1" active-name="15" style="background-color: #353F48;">
+  	<Menu mode="horizontal" :theme="light" active-name="15" style="background-color: #353F48;">
         <Menu-item name="15">
             <!--<Icon type="ios-paper"></Icon>-->
                         全部
@@ -17,24 +17,27 @@
 				<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
 				<p>一只一只</p>
 				</Col>-->
-				 <div class="dan" v-for="(item ,index) in getlikeitem" @click="modalS()" ref="abc"  >
-						      <div class="img">
-						      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
-						      	<div class="modal" ></div>
-						      	<div class="icon"  @click="addCanvas(item.filename)">
-						      	<Tooltip content="添加" placement="bottom">
-							      	<Icon type="android-exit"></Icon>
-						        </Tooltip>
-						      	</div>
-						      </div>
-						      <div class="nam">
-						      	{{item.name}}
-						      </div>
-						      <div class="price" >
-						      	￥{{item.price}}
-						      </div>
-
-						    </div>
+				<div class="conlist_show">
+					<div class="conlist_con">
+						 <div class="dan" v-for="(item ,index) in getlikeitem" @click="modalS()" ref="abc"  >
+								      <div class="img">
+								      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
+								      	<div class="modal" ></div>
+								      	<div class="icon"  @click="addCanvas(item.filename)">
+								      	<Tooltip content="添加" placement="bottom">
+									      	<Icon type="android-exit"></Icon>
+								        </Tooltip>
+								      	</div>
+								      </div>
+								      <div class="nam">
+								      	{{item.name}}
+								      </div>
+								      <div class="price" >
+								      	￥{{item.price}}
+								      </div>
+								</div>
+						</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -43,7 +46,7 @@
 <script>
 
 export default {
-  name: 'login',
+  name: 'canvasmy',
   data () {
     return {
 				getlikeitem:'',
@@ -122,6 +125,7 @@ export default {
     	border-radius: 5px;
     	position: relative;
     	margin: 10px;
+    	margin-left: 60px;
     	cursor:pointer;
     	float: left;
     	overflow: hidden;
@@ -179,4 +183,17 @@ export default {
     .ivu-menu-light{
     	z-index: -0;	
     }	
+    /*滚动显示样式*/
+   .conlist_show{
+   		width: 100%;
+   		overflow: hidden;
+   		height: 732px;
+   		padding-top: 20px;
+   }
+   .conlist_con{
+   	width:calc(100% + 20px);
+   	height: 570px;
+   	overflow-x: hidden;
+   	overflow-y: scroll;
+   }
 </style>	

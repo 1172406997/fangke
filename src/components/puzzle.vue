@@ -252,6 +252,7 @@ $(document).ready(function(){
     	bottom: 0;
     	right: 0;
     	background-color: rgba(0,0,0,.3);
+    	display: none;
     }
     
     .pic img {
@@ -396,8 +397,9 @@ $(document).ready(function(){
     	z-index: 5;
     	border-radius: 5px;
     	color: #7E8E98;
-    	/*display: none;*/
+    	display: none;
     	cursor: pointer;
+    	color: #999;
    }
    .pic div.myedit{
    	position: absolute;
@@ -408,6 +410,9 @@ $(document).ready(function(){
    }
     .pic div.myedit .ivu-icon{
     	color: #fff;
+    }
+    .pic div.menu:hover{
+    	color: #3B454C;
     }
    .pic div.myedit:hover{
    		background-color:#5c9a37;
@@ -424,13 +429,16 @@ $(document).ready(function(){
    	right: 60px;
    	color: #696969;
    }
+   .pic div.del:hover{
+   	color: #3B454C;
+   }
     .layout-copy{
     	text-align: center;
     }
     .ivu-menu-light{
     	z-index: -0;	
     }	
-    .ivu-icon{
+    /*.ivu-icon{
     	color: #999;
-    }
+    }*/
 </style>	

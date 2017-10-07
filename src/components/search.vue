@@ -260,11 +260,7 @@ export default {
 		main h2{
 			line-height: 48px;
 		}
-		.classify{
-    /*content: '';*/
-    /*display: block;*/
-    height:90px;
-		}
+		
 		.classify>p{
 			position:absolute;
 			display: inline;
