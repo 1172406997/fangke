@@ -50,11 +50,11 @@
 							        </Tooltip>
 						      	</div>
 							      	<DropdownMenu slot="list">
-							            <!--<DropdownItem>查看</DropdownItem>-->
-							            <DropdownItem @click="topdf(id)">导出为pdf</DropdownItem>
-							            <DropdownItem>设置为公开不公开</DropdownItem>
-							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
-							            <DropdownItem>北京烤鸭</DropdownItem>-->
+							            <DropdownItem>驴打滚</DropdownItem>
+							            <DropdownItem>炸酱面</DropdownItem>
+							            <DropdownItem>豆汁儿</DropdownItem>
+							            <DropdownItem>冰糖葫芦</DropdownItem>
+							            <DropdownItem>北京烤鸭</DropdownItem>
 							        </DropdownMenu>
 						      	</Dropdown>
 						 				<div class="modal"></div>
