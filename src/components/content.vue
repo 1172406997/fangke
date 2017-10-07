@@ -62,8 +62,8 @@
 
 <script scoped>
 
-import Waterfall from 'vue-waterfall/lib/waterfall'
-import WaterfallSlot from 'vue-waterfall/lib/waterfall-slot'
+//import Waterfall from 'vue-waterfall/lib/waterfall'
+//import WaterfallSlot from 'vue-waterfall/lib/waterfall-slot'
 
 export default {
   name: 'content',
@@ -75,10 +75,7 @@ export default {
 			 path:'',
     }
   },
-  components: {
-    Waterfall,
-    WaterfallSlot
-  },
+  components: {},
   created:function(){
 	  		this.falls();
 	},
