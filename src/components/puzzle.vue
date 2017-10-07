@@ -50,11 +50,11 @@
 							        </Tooltip>
 						      	</div>
 							      	<DropdownMenu slot="list">
-							            <DropdownItem>驴打滚</DropdownItem>
-							            <DropdownItem>炸酱面</DropdownItem>
-							            <DropdownItem>豆汁儿</DropdownItem>
-							            <DropdownItem>冰糖葫芦</DropdownItem>
-							            <DropdownItem>北京烤鸭</DropdownItem>
+							            <!--<DropdownItem>查看</DropdownItem>-->
+							            <DropdownItem @click="topdf(id)">导出为pdf</DropdownItem>
+							            <DropdownItem>设置为公开不公开</DropdownItem>
+							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
+							            <DropdownItem>北京烤鸭</DropdownItem>-->
 							        </DropdownMenu>
 						      	</Dropdown>
 						 				<div class="modal"></div>
@@ -119,23 +119,25 @@ export default {
   		},function(err){
   			console.log(err);
   		});
-//			this.$http.jsonp('http://api.xinciji.com?service=Production.GetProductionByUserId',
-//			{
-//				params:{
-//					'signature': sha,'timestamp':timestamp,'nonce':nonce,'user_id':user_id,'token':token}
-//				},)
-//			.then(
-//				function(res){
-//					console.log(res)
-//					},
-//					function(err){
-//						console.log("err");
-//					}
-//			)
+  	},
+  	topdf(){
+  		window.location.href=""; 
   	},
   	
   },
  }
+
+
+$(document).ready(function(){
+	$(document).on("mouseover",".box",function(){ 
+			$(this).find(".modal").show();
+			$(this).find(".icon").show();
+	});
+    $(document).on("mouseout",".box",function(){
+			$(this).find(".modal").hide();
+			$(this).find(".icon").hide();
+    });
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -240,6 +242,7 @@ export default {
     	box-shadow: 0 0 5px #ccc;
     	margin: 0;
     	padding: 0;
+    	cursor: pointer;
     }
     
     .modal {
@@ -272,13 +275,12 @@ export default {
     	/*width: calc(100% - 44px);*/
     	
     	height: 100%;
-    	cursor: pointer;
     	display: flex;
     	align-items: center;
     }
     .boxcon {
     	padding: 10px;
-    	cursor: pointer;
+    	/*cursor: pointer;*/
     	/*margin: 15px 0 0 15px;*/
     	border-radius: 2px;
     	box-shadow: 0 0 5px rgba(6, 31, 50, .24);
@@ -301,7 +303,7 @@ export default {
   
   }
   .box-txt p:first-of-type{
-        overflow: hidden;
+    overflow: hidden;
     height: 16px;
     line-height: 16px;
     text-overflow: ellipsis;
@@ -337,6 +339,12 @@ export default {
     min-width: 20px;
     height: 20px;
     float: right;
+  }
+  .box-txt .ivu-icon{
+  	cursor: pointer;
+  }
+  .box-txt .ivu-icon:hover{
+  	color: red;
   }
   
     /*頭部*/
@@ -406,6 +414,7 @@ export default {
    }
    .pic .ivu-dropdown{
    	    position: absolute;
+   	    top:10px;
 		    right:10px;
 		    z-index: 10;
    }
