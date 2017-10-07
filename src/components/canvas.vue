@@ -41,10 +41,10 @@
                 <!--<div class="layout-header">-->
                     <div class="layout-ceiling">
 										<div class="layout-ceiling-main">
-											<a href="#">清空</a> |
-											<!--<a href="#">上传</a> |-->
+											<a href="#">保存</a> |
 											<!--<a href="#">下载高清大图</a> |-->
-											<a href="#">服务大厅</a>
+											<a href="#">服务大厅</a>   |
+											<a href="#">清空</a>
 											<div class="right" style="margin-right: 20px;">
 												<a href="#" class="left">片羽时光</a> 
 												<a href="#" class="left">列表详情</a> 
@@ -54,7 +54,6 @@
 										        <span slot="close">私有</span>
 										    	</i-switch>
 												</a>
-												<a href="#" style="margin-top: 20px;">保存</a>
 											</div>
 										</div>
 										</div>
