@@ -9,7 +9,6 @@
         				<img src="../../assets/img/meijian.png" alt="" />
         			</div>
         		</div>
-        		
         	</Col>
        		<Col span="8">
        			<div class="right">

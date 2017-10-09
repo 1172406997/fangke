@@ -41,7 +41,7 @@
                 <!--<div class="layout-header">-->
                     <div class="layout-ceiling">
 										<div class="layout-ceiling-main">
-											<a href="#">保存</a> |
+											<a href="javascript:;" @click="writeName">保存</a> |
 											<!--<a href="#">下载高清大图</a> |-->
 											<a href="#">服务大厅</a>   |
 											<a href="#">清空</a>
@@ -49,7 +49,7 @@
 												<a href="#" class="left">片羽时光</a> 
 												<a href="#" class="left">列表详情</a> 
 												<a href="javascript:;" class="left">
-													<i-switch size="large" style="position: relative;bottom: 2;">
+													<i-switch size="large" v-model="state" @click.native="changState(state)" style="position: relative;bottom: 2;">
 										        <span slot="open">公开</span>
 										        <span slot="close">私有</span>
 										    	</i-switch>
@@ -105,17 +105,16 @@
                 			</div>
                 		</div>
                 		<div class="my" v-show="name==3" >
-                			<canvasmy @imgurl="getChildImg"></canvasmy>
+                			<canvasmy @imgdata="getChildImg"></canvasmy>
                 		</div>
                 		<div class="puzz" v-show="name==4">
                 			<brand></brand>
                 		</div>
                 		<div class="effect" v-show="name==5">
-                			<div>effect</div>
-                			<brandcli></brandcli>
+                			<effect></effect>
                 		</div>
                 		<div class="detail" v-show="name==6">
-                			<div>detail</div>
+                			<detail></detail>
                 		</div>
                 	</div>
                 </div>
@@ -165,8 +164,6 @@
 							            <DropdownItem>置底</DropdownItem>
 							        </DropdownMenu>
 						      	</Dropdown>
-								
-								
 						        <Tooltip content="关闭" style="float: right;color: #ccc;" placement="bottom">
 							      	<Icon type="close-round"></Icon>
 						        </Tooltip>
@@ -191,7 +188,8 @@
 <script>
 import canvasmy from "../components/pages/canvasmy.vue"
 import brand from "../components/pages/Brand"
-import brandcli from "../components/pages/BrandClick" 
+import effect from "../components/pages/effect" 
+import detail from "../components/pages/detail" 
 
 	export default {
 	   data() {
@@ -213,6 +211,13 @@ import brandcli from "../components/pages/BrandClick"
 	                definition:50,
 	                lucency:50,
 	                color:'',
+	                value:'',
+	                data:'',
+	                status:0,
+	                item:'',
+	                thumb:"",
+	                state:false,
+	                idData:[],
 	            }
 	        },
 	         computed: {
@@ -220,8 +225,11 @@ import brandcli from "../components/pages/BrandClick"
 	                return this.spanLeft === 2 ? 14 : 24;
 	            },
 	        },
+	        watch:{
+	        	'idData'(val,Val1){},
+	        },
 	        components: {
-  					canvasmy,brand,
+  					canvasmy,brand,effect,detail
   				},
 	        created:function(){
 	        	this.getsearch();
@@ -230,10 +238,68 @@ import brandcli from "../components/pages/BrandClick"
 						this.getCanvas();
 	        },
 	        methods:{
-	        	test(){
-	        		alert(1111);
+	        	writeName(){
+	        		this.$Modal.confirm({
+                    render: (h) => {
+                        return h('Input', {
+                            props: {
+                                value: this.value,
+                                autofocus: true,
+                                placeholder: '请输入作品名称'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.value = val;
+                                }
+                            },
+                            
+                        })
+                    },
+                    onOk:()=>{
+                    	if(this.value==''){
+                    		this.$Message.warning('名称不能为空');
+                    	}else{
+                    		this.saveCanvas();
+                    	}
+                    },
+                    onCancel: () => {
+				                console.log(data);
+				                console.log(11111111111111111);
+				                this.$Message.info('取消保存');
+				            },
+                })
 	        	},
-	        	getCanvas(){
+	        	saveCanvas(){
+	        		var data = this.Canvas.toJSON();
+	        		var svg = this.Canvas.toSVG();
+	        		var str = this.Encrypt();
+	        		var items = [];
+				  		var user_id = localStorage.getItem("user_id"); 
+				  		var token = localStorage.getItem("token"); 
+				  		var params = {
+								params:{
+									'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'name':this.value,'data':data,'thumb':svg,'items':items,
+								}
+							};
+							this.jsonpRequest(this,"Production.StoreProduction",params,function(res){
+				  					if(res){
+												this.$set(this, 'item', res.data);
+												this.item = res.body.data.list;
+												console.log("item:"+this.item);
+												console.log(res)
+				  					}
+				  		},function(err){
+				  			console.log(err);
+				  		});
+	        	},
+	        	changState(state){
+	        		if(state){
+	        			this.status = 1;
+	        		}else{
+	        			this.status = 0;
+	        		}
+	        	},
+ 	        	getCanvas(){
 	        		var self = this
 	        		var staticCanvas = new fabric.Canvas('parent');
 	        		self.Canvas = staticCanvas;
@@ -330,12 +396,14 @@ import brandcli from "../components/pages/BrandClick"
 				  	forname(name){
 				  		this.name = name;
 				  	},
-				  	getChildImg(url){
-				  		this.childUrl = url
+				  	getChildImg(item){
+				  		this.childUrl = item.url;
 				  		var self = this;
-				  		fabric.Image.fromURL(url, function(oImg) {
+				  		this.idData.push(item.id);
+				  		fabric.Image.fromURL(item.url, function(oImg) {
 							  oImg.scale(0.5).set('flipX', true);
 							  self.Canvas.add(oImg);
+							  console.log(oImg);
 							});
 				  	}
 	  		},

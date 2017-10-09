@@ -23,7 +23,7 @@
 								      <div class="img">
 								      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
 								      	<div class="modal" ></div>
-								      	<div class="icon"  @click="addCanvas(item.filename)">
+								      	<div class="icon"  @click="addCanvas(item.filename,item.id)">
 								      	<Tooltip content="添加" placement="bottom">
 									      	<Icon type="android-exit"></Icon>
 								        </Tooltip>
@@ -80,9 +80,9 @@ export default {
   			console.log(err);
   		});
 		},
-		addCanvas(url){
+		addCanvas(url,id){
 			var imgurl = "http://www.shatuhome.com/material/"+url
-			this.$emit("imgurl",imgurl)
+			this.$emit("imgdata",{url:imgurl,id:id})
 		},
   }
 }
