@@ -57,7 +57,7 @@
 							            <DropdownItem>北京烤鸭</DropdownItem>-->
 							        </DropdownMenu>
 						      	</Dropdown>
-						 				<div class="modal"></div>
+						 				<div class="modal" @click="modalS()"></div>
 						 			</div>
 						 			<div class="footer">
 						 				<div class="borderbox">
@@ -81,9 +81,10 @@
 						 	</div>
 						</div>
 					</div>
-					<div class="modal" v-show="this.modal=='modal'"></div>
+					<div class="modal"  ></div>
 					 <Back-top></Back-top>
 					</div>
+          <modals v-if="this.modal=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
 				</main>
 	</div>
 </template>
@@ -97,9 +98,14 @@
     return {
 			 value13: '',
        select3: 'day',
+       getlikeitem: '',
        modal:'',
+       toson:'',
     }
   },
+    components:{
+      modals,
+    },
   methods:{
   	//获取作品信息
   	GetProductionByUserId:function (){
@@ -124,7 +130,13 @@
   	topdf(){
   		window.location.href="";
   	},
-
+    modalS:function(){
+//      this.toson = item;
+      this.modal="modal";
+    },
+    getsonitem:function(msg){
+      this.modal=msg;
+    },
   },
  }
 

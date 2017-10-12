@@ -5,10 +5,10 @@
 			<Menu mode="horizontal" theme="dark" active-name="1" class="top">
 				<!--<div class="layout-logo"></div>-->
 				<div class="layout-nav">
-          <router-link to="/puzzle">
+          <router-link to="/">
             <Menu-item name="1">
               <Icon type="ios-analytics " size="18 "></Icon>
-              <span class="layout-text ">我的拼图</span>
+              <span class="layout-text ">成品预览</span>
             </Menu-item>
           </router-link>
 					<!--<router-link to="/">-->

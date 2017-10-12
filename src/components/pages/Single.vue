@@ -1,5 +1,5 @@
 <template>
-   <div class="container">
+   <div class="container modals">
      <p><span  v-on:click="modalH()"><Icon type="close-round" color="#fff" size="20" class="ico"></Icon></span></p>
      <div class="mine">
      	<Row>
@@ -23,32 +23,32 @@
 					        <Carousel-item>
 					            <div class="demo-carousel">4</div>
 					        </Carousel-item>-->
-					    </Carousel> 				
+					    </Carousel>
         			</div>
         		</div>
-        		
+
         	</Col>
        		<Col span="8">
        			<div class="right">
         			<div class="rightt">
-        				<h1>{{parSon.name}}</h1>
-        				<p>#{{parSon.style}}</p>
-        				<!--<Button type="success" icon="edit" long class="btn">再创作</Button>-->
-        				<Button type="primary"@click="StoreLike(parSon.id)" icon="android-add-circle" long class="btn">添加为收藏</Button>
+        				<h1>姓名</h1>
+        				<p>#风格</p>
+        				<Button type="success" icon="edit" long class="btn">再创作</Button>
+        				<Button type="primary"  icon="android-add-circle" long class="btn">保存为模板</Button>
         			</div>
         			<div class="rightc">
-        				<!--<p>作者</p>-->
+        				<p>作者</p>
         				<div class="thrmb">
         					<img src="../../assets/img/meijian.png" alt="" />
         					<div class="info">
         						<span>尺寸</span>
-        						<p>{{parSon.size}}</p>
+        						<p>110*120*130</p>
         					</div>
         				</div>
         			</div>
         			<div class="rightb">
         				<!--<p>{{parSon.like}}人赞了</p>-->
-        				<!--<div class="zan">
+        				<div class="zan">
         					<Tooltip content="收藏" placement="bottom">
         					<span><img src="../../assets/img/yizi.png" alt="" /></span>
         					</Tooltip>
@@ -58,7 +58,7 @@
         					<Tooltip content="收藏" placement="bottom">
         					<span><img src="../../assets/img/yizi.png" alt="" /></span>
         					</Tooltip>
-        				</div>-->
+        				</div>
         			</div>
         		</div>
        		</Col>
@@ -72,7 +72,7 @@
 
 <script>
     export default {
-        name: '',
+        name: 'modals',
         data () {
             return {
             	modal:'',
@@ -82,12 +82,12 @@
         },
         props:['toson'],
         created(){
-        	this.parSon = this.toson;
-        	console.log(this.parSon);
+//        	this.parSon = this.toson;
+//        	console.log(this.parSon);
         },
         mounted(){
-        	this.parSon = this.toson;
-        	console.log(this.parSon);
+//        	this.parSon = this.toson;
+//        	console.log(this.parSon);
         },
         methods:{
 			modalH:function(){
@@ -96,8 +96,8 @@
 			StoreLike:function(material_id) {
 			var self = this;
 			var str = this.Encrypt();
-			var user_id = localStorage.getItem("user_id"); 
-		  		var token = localStorage.getItem("token"); 
+			var user_id = localStorage.getItem("user_id");
+		  		var token = localStorage.getItem("token");
 					var params = {
 						params:{
 							'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'material_id':material_id
@@ -113,7 +113,7 @@
 		  		});
 			},
         },
-        
+
     }
 </script>
 
@@ -128,7 +128,7 @@
   	z-index: 20px;
     background-color:rgba(53,63,72,0.7);
     padding: 0 12px 0;
-    
+
   }
   .container>p {
     height: 48px;
@@ -150,7 +150,7 @@
   	height: 30px;
     line-height: 30px;
   }
-  
+
   .mine{
   	padding:0px 48px 20px 48px;
   }
@@ -201,7 +201,7 @@
   }
   .right .rightt{
   	width: 296px;
-  	height: 160px;
+  	height: 220px;
   	padding: 22px 12px 18px;
   }
   .rightt h1{
@@ -215,7 +215,7 @@
   .rightt p{
   	margin-top: 8px;
   }
-  
+
   .rightt .btn{
   	margin-top:16px ;
   	height: 40px;

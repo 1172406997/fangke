@@ -15,7 +15,7 @@
 						</Input>
 					</div>
 				</header>
-				<main>	
+				<main>
 					<div class="layout-content">
 						<Spin size="large" class="layz"></Spin>
 						<div class="content_con"  v-if="flag" v-show="this.fenlei=='fenlei'">
@@ -38,13 +38,13 @@
 							<h2>更多分类 <p style="float: right;cursor: pointer;" @click="flag=true">返回</p></h2>
 								<Row >
 									<div v-on:click="getclassify()">
-									<!--<Col span="4"  class="classify" v-on:click="getclassify()">
-						        	<p>椅子</p>
+									<Col span="4"  class="classify" v-on:click="getclassify()">
+						        	<!--<p>椅子</p>-->
 						        	<img src="../assets/img/yizi.png" style="" alt="" />
-						       </Col>-->
+						       </Col>
 						       </div>
 						        <Col span="4" class="classify" v-for="(itemd , index) in secClass" @click.native="getSecList(itemd.pid)">
-											<p>{{itemd.name}}</p>
+											<!--<p>{{itemd.name}}</p>-->
 						        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 						        </Col>
 						    </Row>
@@ -78,7 +78,7 @@
 							</div>
 						</div>
 						<!--<div v-for="item in item">
-							
+
 						</div>-->
 					</div>
 				</main>
@@ -113,8 +113,8 @@ export default {
   methods:{
   	getsearch:function() {
   		var str = this.Encrypt();
-  		var user_id = localStorage.getItem("user_id"); 
-  		var token = localStorage.getItem("token"); 
+  		var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
   		var params = {
 				params:{
 					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
@@ -134,8 +134,8 @@ export default {
   	search:function(res){
   		this.flag=false;
 			var str = this.Encrypt();
-  		var user_id = localStorage.getItem("user_id"); 
-  		var token = localStorage.getItem("token"); 
+  		var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
   		var params = {
 				params:{
 					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"keyword":res
@@ -156,8 +156,8 @@ export default {
   	StoreLike:function(material_id) {
 			var self = this;
 			var str = this.Encrypt();
-			var user_id = localStorage.getItem("user_id"); 
-  		var token = localStorage.getItem("token"); 
+			var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
 			var params = {
 				params:{
 					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'material_id':material_id
@@ -175,8 +175,8 @@ export default {
   	getclassify:function(id){
   		this.flag=false;
 			var str = this.Encrypt();
-  		var user_id = localStorage.getItem("user_id"); 
-  		var token = localStorage.getItem("token"); 
+  		var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
   		var params = {
 				params:{
 					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"pid":id
@@ -199,8 +199,8 @@ export default {
   	collectid:function(){
   		var self = this;
   		var str = this.Encrypt();
-  		var user_id = localStorage.getItem("user_id"); 
-  		var token = localStorage.getItem("token"); 
+  		var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
   		var params = {
 				params:{
 					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'keyword':this.keyword
@@ -260,7 +260,7 @@ export default {
 		main h2{
 			line-height: 48px;
 		}
-		
+
 		.classify>p{
 			position:absolute;
 			display: inline;
@@ -347,8 +347,8 @@ export default {
 			bottom: 0px;
     }
     .ivu-menu-light{
-    	z-index: -0;	
-    }	
+    	z-index: -0;
+    }
     .dan{
     	width: 203px;
     	height: 227px;
@@ -412,6 +412,6 @@ export default {
     	color: #3B454C;
     }
     .ivu-menu-light{
-    	z-index: -0;	
-    }	
-</style>	
+    	z-index: -0;
+    }
+</style>
