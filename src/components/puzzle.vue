@@ -43,7 +43,7 @@
 								      	<Icon type="trash-b"></Icon>
 							        </Tooltip>
 						      	</div>
-						      	<Dropdown trigger="click">	
+						      	<Dropdown trigger="click">
 						      	<div class="icon menu">
 							      	<Tooltip content="菜单" placement="bottom">
 								      	<Icon type="android-more-vertical"></Icon>
@@ -61,7 +61,7 @@
 						 			</div>
 						 			<div class="footer">
 						 				<div class="borderbox">
-						 					
+
 							 				<span class="thumb">
 							 					<img src="../assets/logo.png"/>
 							 				</span>
@@ -89,8 +89,9 @@
 </template>
 
 <script>
+  import modals from "../components/pages/Single"
 
-export default {
+  export default {
   name: 'content',
   data () {
     return {
@@ -121,15 +122,15 @@ export default {
   		});
   	},
   	topdf(){
-  		window.location.href=""; 
+  		window.location.href="";
   	},
-  	
+
   },
  }
 
 
 $(document).ready(function(){
-	$(document).on("mouseover",".box",function(){ 
+	$(document).on("mouseover",".box",function(){
 			$(this).find(".modal").show();
 			$(this).find(".icon").show();
 	});
@@ -199,8 +200,8 @@ $(document).ready(function(){
 			overflow: hidden;
 		}
     .ivu-menu-light{
-    	z-index: -0;	
-    }	
+    	z-index: -0;
+    }
     .header header{
     	width: 100%;
     	height: 180px;
@@ -218,19 +219,19 @@ $(document).ready(function(){
     	font-size: 14px;
     	line-height: 14px;
     }
-    
+
     .body {
     	overflow: auto;
     	height: 1000px;
     	margin: 0;
     	padding: 0;
     }
-    
+
     #main {
     	width: 100%;
     	position: relative;
     }
-    
+
     .box{
     	padding:10px;
     	width: 30%;
@@ -244,7 +245,7 @@ $(document).ready(function(){
     	padding: 0;
     	cursor: pointer;
     }
-    
+
     .modal {
     	position: absolute;
     	top: 0;
@@ -254,19 +255,19 @@ $(document).ready(function(){
     	background-color: rgba(0,0,0,.3);
     	display: none;
     }
-    
+
     .pic img {
     	width: 100%;
     	height: auto;
     	margin: 0;
     	padding: 0;
     }
-    
+
     .boxcon:hover {
     	box-shadow: 0px 0px 10px rgba(6, 31, 50, .24);
     	-webkit-box-shadow: 0px 0px 10px rgba(6, 31, 50, .24);
     }
-    
+
     .boxcon .footer {
     	margin: 10px 0 0px 0px;
     /*padding: 10px;*/
@@ -274,7 +275,7 @@ $(document).ready(function(){
     .borderbox {
     	/*position: absolute;*/
     	/*width: calc(100% - 44px);*/
-    	
+
     	height: 100%;
     	display: flex;
     	align-items: center;
@@ -296,12 +297,12 @@ $(document).ready(function(){
     color: #3b454c;
     white-space: nowrap;
   }
-  
+
   .box-txt>div {
   	display: flex;
   	align-items: center;
   	margin-bottom: 5px;
-  
+
   }
   .box-txt p:first-of-type{
     overflow: hidden;
@@ -314,19 +315,19 @@ $(document).ready(function(){
     font-size: 12px;
     color: #b2c0c8;
   }
-  
+
   .boxcon .footer .thumb img {
   	width: 32px;
   	height: 32px;
   	border-radius: 50%;
   }
-  
+
   .boxcon .footer ul {
   	display: block;
   	width: 100%;
     height: 100%;
   }
-  
+
   .boxcon .footer ul li:first-child {
   	cursor: pointer;
   	font-size: 24px;
@@ -347,7 +348,7 @@ $(document).ready(function(){
   .box-txt .ivu-icon:hover{
   	color: red;
   }
-  
+
     /*頭部*/
      main{
     	width: 100%;
@@ -371,13 +372,13 @@ $(document).ready(function(){
     	font-size: 24px;
     	color: #7e8e98;
     	line-height: 72px;
-    	
+
     }
     .layout-content .right_title{
     	font-size: 24px;
     	color: #7e8e98;
     	line-height: 72px;
-    	
+
     }
     .layout-content .right_title span{
     	font-size: 12px;float:right;cursor: pointer;
@@ -436,9 +437,9 @@ $(document).ready(function(){
     	text-align: center;
     }
     .ivu-menu-light{
-    	z-index: -0;	
-    }	
+    	z-index: -0;
+    }
     /*.ivu-icon{
     	color: #999;
     }*/
-</style>	
+</style>

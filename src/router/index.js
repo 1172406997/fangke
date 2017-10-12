@@ -21,9 +21,9 @@ export default new Router({
       name: 'Hello',
       component: Hello,
       children: [
-            { path: '/', component: my},
+            // { path: '/', component: my},
             { path: '/search', component: search},
-            { path: '/puzzle', component: puzzle,
+            { path: '/', component: puzzle,
 	            children:[
 	            	{path: '/', component: all},
 //	            	{path: '/project', component: project},
@@ -40,6 +40,6 @@ export default new Router({
       component: Login
     },
     { path: '/canvas', component: canvas, meta:{isActive:true}},
-    
+
   ]
 })

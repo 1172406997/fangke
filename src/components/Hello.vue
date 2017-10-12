@@ -5,12 +5,18 @@
 			<Menu mode="horizontal" theme="dark" active-name="1" class="top">
 				<!--<div class="layout-logo"></div>-->
 				<div class="layout-nav">
-					<router-link to="/">
-						<Menu-item name="1">
-							<Icon type="ios-navigate" size="18"></Icon>
-							<span class="layout-text">單品展示</span>
-						</Menu-item>
-					</router-link>
+          <router-link to="/puzzle">
+            <Menu-item name="1">
+              <Icon type="ios-analytics " size="18 "></Icon>
+              <span class="layout-text ">我的拼图</span>
+            </Menu-item>
+          </router-link>
+					<!--<router-link to="/">-->
+						<!--<Menu-item name="1">-->
+							<!--<Icon type="ios-navigate" size="18"></Icon>-->
+							<!--<span class="layout-text">單品展示</span>-->
+						<!--</Menu-item>-->
+					<!--</router-link>-->
 					<router-link to="/search">
 						<Menu-item name="2">
 							<Icon type="ios-search" size="18"></Icon>
@@ -21,12 +27,6 @@
 						<Menu-item name="3">
 							<Icon type="ios-keypad" size="18"></Icon>
 							<span class="layout-text ">拼圖</span>
-						</Menu-item>
-					</router-link>
-					<router-link to="/puzzle">
-						<Menu-item name="4">
-							<Icon type="ios-analytics " size="18 "></Icon>
-							<span class="layout-text ">我的拼图</span>
 						</Menu-item>
 					</router-link>
 					<router-link to="/myCollect">
@@ -107,7 +107,7 @@ export default {
 			this.$router.push({path: url});
 		}
 	}
-    
+
 }
 </script>
 
@@ -177,7 +177,7 @@ export default {
         padding: 10px 0 10px;
         color: #9ea7b4;
     }
-    
+
     .myintro{
     	width: 208px;
     	box-sizing: border-box;
@@ -224,6 +224,6 @@ export default {
     	text-align: center;
     }
    	.ivu-menu-light{
-    	z-index: -0;	
-    }	
+    	z-index: -0;
+    }
 </style>
