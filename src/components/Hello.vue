@@ -7,10 +7,11 @@
 				<div class="layout-nav">
           <router-link to="/">
             <Menu-item name="1">
-              <Icon type="ios-analytics " size="18 "></Icon>
+              <Icon type="ios-keypad" size="18"></Icon>
               <span class="layout-text ">成品预览</span>
             </Menu-item>
           </router-link>
+
 					<!--<router-link to="/">-->
 						<!--<Menu-item name="1">-->
 							<!--<Icon type="ios-navigate" size="18"></Icon>-->
@@ -23,12 +24,12 @@
 							<span class="layout-text">我的搜索</span>
 						</Menu-item>
 					</router-link>
-					<router-link to="/content">
-						<Menu-item name="3">
-							<Icon type="ios-keypad" size="18"></Icon>
-							<span class="layout-text ">拼圖</span>
-						</Menu-item>
-					</router-link>
+          <router-link to="/puzzle">
+            <Menu-item name="3">
+              <Icon type="ios-analytics " size="18 "></Icon>
+              <span class="layout-text ">我的拼图</span>
+            </Menu-item>
+          </router-link>
 					<router-link to="/myCollect">
 						<Menu-item name="4">
 							<Icon type="heart"  size="18"></Icon>

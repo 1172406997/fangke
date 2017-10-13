@@ -11,7 +11,7 @@ import myCollect from '@/components/myCollect'
 //import project from '@/components/project'
 //import puzzleson from '@/components/puzzleson'
 import canvas from '@/components/canvas'
-
+import Clip from '@/components/Clip'
 
 Vue.use(Router)
 export default new Router({
@@ -23,15 +23,16 @@ export default new Router({
       children: [
             // { path: '/', component: my},
             { path: '/search', component: search},
-            { path: '/', component: puzzle,
+            { path: '/puzzle', component: puzzle,
 	            children:[
 	            	{path: '/', component: all},
 //	            	{path: '/project', component: project},
 //	            	{path: '/puzzleson', component: puzzleson},
 	            ]
             },
-            { path: '/content', component: content},
+            { path: '/', component: content},
             { path: '/myCollect', component: myCollect},
+            { path: '/Clip', component: Clip},
         ]
     },
     {

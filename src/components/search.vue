@@ -28,7 +28,7 @@
 					       </Col>
 					       </div>-->
 					        <Col span="4" class="classify" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
-										<p>{{itemd.name}}</p>
+										<!--<p>{{itemd.name}}</p>-->
 					        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 					        </Col>
 					    </Row>
@@ -38,10 +38,10 @@
 							<h2>更多分类 <p style="float: right;cursor: pointer;" @click="flag=true">返回</p></h2>
 								<Row >
 									<div v-on:click="getclassify()">
-									<Col span="4"  class="classify" v-on:click="getclassify()">
+									<!--<Col span="4"  class="classify" v-on:click="getclassify()">-->
 						        	<!--<p>椅子</p>-->
-						        	<img src="../assets/img/yizi.png" style="" alt="" />
-						       </Col>
+						        	<!--<img src="../assets/img/yizi.png" style="" alt="" />-->
+						       <!--</Col>-->
 						       </div>
 						        <Col span="4" class="classify" v-for="(itemd , index) in secClass" @click.native="getSecList(itemd.pid)">
 											<!--<p>{{itemd.name}}</p>-->
