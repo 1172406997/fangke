@@ -47,7 +47,7 @@
 											<a href="#">清空</a>
 											<div class="right" style="margin-right: 20px;">
 												<!--<a href="#" class="left">片羽时光</a> -->
-												<!--<a href="#" class="left">列表详情</a> -->
+												<!--<a href="#" class="left">显示菜单</a>-->
 												<a href="javascript:;" class="left">
 													<i-switch size="large" v-model="state" @click.native="changState(state)" style="position: relative;bottom: 2;">
 										        <span slot="open">公开</span>
@@ -161,7 +161,7 @@
 							            <DropdownItem>置底</DropdownItem>
 							        </DropdownMenu>
 						      	</Dropdown>
-						        <Tooltip content="关闭" style="float: right;color: #ccc;" placement="bottom">
+						        <Tooltip content="关闭" @click.native="closeNone" style="float: right;color: #ccc;" placement="bottom">
 							      	<Icon type="close-round"></Icon>
 						        </Tooltip>
 						        <Tooltip content="删除" style="float: right;color: #ccc;" @click.native="elemRemove"  placement="bottom">
@@ -304,6 +304,7 @@ import detail from "../components/pages/detail"
 	        		self.Canvas.setHeight(800);
 	        		self.Canvas.on('object:selected', function(opt){
 	        			self.selectItem = opt
+                $(".menubox").css("display","block");
 	        		});
 
 	        	},
@@ -497,7 +498,10 @@ import detail from "../components/pages/detail"
 							  self.Canvas.add(oImg);
 							  console.log(oImg);
 							});
-				  	}
+				  	},
+            closeNone(){
+              $(".menubox").css("display","none");
+            }
 	  		},
 
 	 }

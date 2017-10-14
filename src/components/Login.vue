@@ -39,7 +39,7 @@ export default {
       clickr:true,
       show:false,
       flag:false,
-      
+
     }
   },
   methods:{
@@ -48,7 +48,6 @@ export default {
   			this.clickr=false;
   		}else{
   			this.clickr=true;
-  			
   		}
   	},
   	getitem:function(){
@@ -65,10 +64,10 @@ export default {
   						self.flag=true;
 							var locsl = {};
 							locsl = res.data.data.info;
-							localStorage.setItem("user_id", locsl.user_id); 
+							localStorage.setItem("user_id", locsl.user_id);
 							localStorage.setItem("token", locsl.token);
   					}else{
-  						alert("用户名或者密码有误，请重新检查输入！")
+              this.$Message.error('用户名或者密码有误，请重新检查输入！');
   					}
   		},function(err){
   			console.log(err);
@@ -126,4 +125,4 @@ export default {
 			transform: translateY(-250px);
 		}
 	}
-</style>	
+</style>
