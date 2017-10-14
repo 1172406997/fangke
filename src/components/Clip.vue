@@ -1,7 +1,7 @@
 <template>
 
 	<div class="layout-l" >
-    <canvas id="c"></canvas>
+    <canvas id="c" style="position: relative;left:10px;right:30px;"></canvas>
     <!--<img src="../../dist/instatic/img/1.d80e543.png" id="taget"/>-->
     </div>
 </template>

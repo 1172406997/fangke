@@ -46,8 +46,8 @@
 											<a href="#">服务大厅</a>   |
 											<a href="#">清空</a>
 											<div class="right" style="margin-right: 20px;">
-												<a href="#" class="left">片羽时光</a> 
-												<a href="#" class="left">列表详情</a> 
+												<!--<a href="#" class="left">片羽时光</a> -->
+												<!--<a href="#" class="left">列表详情</a> -->
 												<a href="javascript:;" class="left">
 													<i-switch size="large" v-model="state" @click.native="changState(state)" style="position: relative;bottom: 2;">
 										        <span slot="open">公开</span>
@@ -100,7 +100,7 @@
 													       </Col>
 												       </div>
 														</div>
-													</div>												
+													</div>
 										    </div>
                 			</div>
                 		</div>
@@ -121,14 +121,11 @@
                 <div class="layout-content" style="padding:0px">
                 	<div class="layout-content-style " >
                 		<div class="menubox">
-                				<Tooltip content="裁剪" placement="bottom">
+                      <Tooltip content="裁剪" @click.native="Clip"  placement="bottom">
 							      	<Icon type="crop"></Icon>
 								</Tooltip>
 								<Tooltip content="变形"@click.native="twistImg" placement="bottom">
 								<Icon type="android-map"></Icon>
-								</Tooltip>
-								<Tooltip content="抠图" placement="bottom">
-							      	<Icon type="wand"></Icon>
 								</Tooltip>
 								<Tooltip content="锁定" @click.native="lockImg" placement="bottom">
 							      	<Icon type="locked" v-show='imgLock'></Icon>
@@ -153,7 +150,7 @@
 											透明度：<Slider class="slid" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 										</div>
 		            </Poptip>
-								<Dropdown trigger="click">	
+								<Dropdown trigger="click">
 							      	<Tooltip content="上下层级" placement="bottom">
 												<Icon type="navicon-round"></Icon>
 											</Tooltip>
@@ -170,7 +167,7 @@
 						        <Tooltip content="删除" style="float: right;color: #ccc;" @click.native="elemRemove"  placement="bottom">
 							      	<Icon type="trash-b"></Icon>
 						        </Tooltip>
-						        
+
                 		</div>
                 		<div class="layout-content-main">
 	                			<div class="parent"style="width: 320px;height: 720px;">
@@ -181,15 +178,15 @@
                 </div>
             </i-col>
         </Row>
-        
+
 		</div>
 </template>
 
 <script>
 import canvasmy from "../components/pages/canvasmy.vue"
 import brand from "../components/pages/Brand"
-import effect from "../components/pages/effect" 
-import detail from "../components/pages/detail" 
+import effect from "../components/pages/effect"
+import detail from "../components/pages/detail"
 
 	export default {
 	   data() {
@@ -252,7 +249,7 @@ import detail from "../components/pages/detail"
                                     this.value = val;
                                 }
                             },
-                            
+
                         })
                     },
                     onOk:()=>{
@@ -274,8 +271,8 @@ import detail from "../components/pages/detail"
 	        		var svg = this.Canvas.toSVG();
 	        		var str = this.Encrypt();
 	        		var items = [];
-				  		var user_id = localStorage.getItem("user_id"); 
-				  		var token = localStorage.getItem("token"); 
+				  		var user_id = localStorage.getItem("user_id");
+				  		var token = localStorage.getItem("token");
 				  		var params = {
 								params:{
 									'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'name':this.value,'data':data,'thumb':svg,'items':items,
@@ -308,12 +305,12 @@ import detail from "../components/pages/detail"
 	        		self.Canvas.on('object:selected', function(opt){
 	        			self.selectItem = opt
 	        		});
-	        		
+
 	        	},
 	        	add:function(){
 	        		var oParent = document.getElementById('#parent');
 					   	var additem='<div class="div1" onmousemove="posMove(this.className)"></div>';
-					   	oParent.append(additem); 
+					   	oParent.append(additem);
 	        	},
 	        	elemRemove:function(){
 	        		var self = this;
@@ -324,7 +321,7 @@ import detail from "../components/pages/detail"
 	        	 	var self = this;
 	        	 	console.log(this.selectItem)
 	        		self.selectItem.target.flipX = true;
-	        		//hasControls 
+	        		//hasControls
 	        		self.Canvas.renderAll();
 	        	},
 	        	//lock and unlock
@@ -349,11 +346,11 @@ import detail from "../components/pages/detail"
 	        	 	)
 	        		self.Canvas.renderAll();
 	        	},
-	        	
+
 	        	getsearch:function() {
 							var str = this.Encrypt();
-				  		var user_id = localStorage.getItem("user_id"); 
-				  		var token = localStorage.getItem("token"); 
+				  		var user_id = localStorage.getItem("user_id");
+				  		var token = localStorage.getItem("token");
 				  		var params = {
 								params:{
 									'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
@@ -370,12 +367,24 @@ import detail from "../components/pages/detail"
 				  			console.log(err);
 				  		});
 				  	},
+            Clip(){
+	        	  alert(111111111111111111111);
+              alert($('.parent'))
+              var newdom = $("<canvas id='clip' style='z-index: 50'></canvas>");
+	        	  $('.parent').append(newdom);
+              var clip = new fabric.Canvas("clip",{
+                backgroundColor: 'rgba(127,255,170,0.2)',
+                  width: 500,
+                  height: 400,
+              });
+
+            },
 				  	search:function(keyword){
 				  		this.flag=false;
 								//		var self = this;
 				  		var str = this.Encrypt();
-				  		var user_id = localStorage.getItem("user_id"); 
-				  		var token = localStorage.getItem("token"); 
+				  		var user_id = localStorage.getItem("user_id");
+				  		var token = localStorage.getItem("token");
 				  		var params = {
 								params:{
 									'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'keyword':keyword
@@ -407,7 +416,7 @@ import detail from "../components/pages/detail"
 							});
 				  	}
 	  		},
-	  		
+
 	 }
 
 </script>
@@ -428,7 +437,7 @@ import detail from "../components/pages/detail"
         overflow: hidden;
     }
     .ivu-menu-light{
-    	z-index: -0;	
+    	z-index: -0;
     }
     .layout-ceiling{
         background: #293036;
@@ -469,7 +478,7 @@ import detail from "../components/pages/detail"
     .layout-content-style{
     	width: 100%;
       min-height: 700px;
-			background-color: #fff;    	
+			background-color: #fff;
     }
     .layout-content-main{
         padding: 10px;
@@ -563,6 +572,7 @@ import detail from "../components/pages/detail"
 			height: 500px;
 		}
 		.parent{
+      position: relative;
 			display: flex;
 			justify-content: center;
 		}
@@ -580,7 +590,7 @@ import detail from "../components/pages/detail"
 			position: absolute;
 			/*cursor: nwse-resize;*/
 			cursor: pointer;
-		} 
+		}
 		/*//改变大小*/
 		.box .t,
         .box .b,
@@ -594,34 +604,34 @@ import detail from "../components/pages/detail"
         .box .r {
             /*width: 2px;*/
             height: 100%;
-            border:1px dashed #666; 
+            border:1px dashed #666;
             cursor: col-resize;
         }
- 
+
         .box .t,
         .box .b {
             width: 100%;
             /*height: 2px;*/
-            border:1px dashed #666; 
+            border:1px dashed #666;
             cursor: row-resize;
         }
- 
+
         .box .t {
             top: 0;
         }
- 
+
         .box .b {
             bottom: 0;
         }
- 
+
         .box .l {
             left: 0;
         }
- 
+
         .box .r {
             right: 0;
         }
- 
+
         /*四角*/
         .box .tl,
         .box .bl,
@@ -635,31 +645,31 @@ import detail from "../components/pages/detail"
             z-index: 2;
             cursor: nwse-resize
         }
- 
+
         .box .tl,
         .box .bl {
             left: -5px;
         }
- 
+
         .box .tr,
         .box .br {
             right: -5px;
         }
- 
+
         .box .br,
         .box .bl {
             bottom: -5px;
         }
- 
+
         .box .tl,
         .box .tr {
             top: -5px;
         }
- 
+
         .box .tr,
         .box .bl {
             cursor: nesw-resize;
-        } 
+        }
 			.menubox{
 				width: 100%;
 				box-shadow: 0 0 5px #ccc;
@@ -669,16 +679,16 @@ import detail from "../components/pages/detail"
 				line-height: 42px;
 				padding:0 20px 0 10px;
 				font-size: 24px;
-			}    
+			}
 			.menubox .ivu-icon{
 				margin-left: 10px;
 				cursor: pointer;
 				/*margin-left: 10px;*/
-			} 
-			
-			
+			}
+
+
 			/*search 样式*/
-			
+
 		.classify>p{
 			position:absolute;
 			display: inline;
@@ -765,8 +775,8 @@ import detail from "../components/pages/detail"
 			bottom: 0px;
     }
     .ivu-menu-light{
-    	z-index: -0;	
-    }	
+    	z-index: -0;
+    }
     .dan{
     	width: 203px;
     	height: 227px;
@@ -830,9 +840,9 @@ import detail from "../components/pages/detail"
     	color: #3B454C;
     }
     .ivu-menu-light{
-    	z-index: -0;	
-    }	   
-    
+    	z-index: -0;
+    }
+
     /*滚动显示样式*/
    .conlist_show{
    		width: 100%;
@@ -845,9 +855,20 @@ import detail from "../components/pages/detail"
    	overflow-x: hidden;
    	overflow-y: scroll;
    }
-   
+
    /*滑动框样式*/
   .slid .ivu-slider-wrap{
   	margin-top:7px;
   }
-</style>	
+
+  /*clip*/
+  #clip{
+    position: absolute;
+  }
+  .canvas-container{
+    poaition: absolute;
+    left:0;
+    top:0;
+  }
+</style>
+
