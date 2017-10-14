@@ -42,15 +42,27 @@ export default {
 
     }
   },
+  mounted(){
+    this.isLogin();
+  },
   methods:{
-  	changes:function(res){
+  	changes(res){
   		if(this.clickr==true){
   			this.clickr=false;
   		}else{
   			this.clickr=true;
   		}
   	},
-  	getitem:function(){
+    isLogin(){
+      var userId = localStorage.getItem("user_id")
+      var token = localStorage.getItem("token")
+      if(userId!="null"&&token!="null"){
+        this.flag=true;
+      }else{
+         this.flag=false;
+       }
+    },
+  	getitem(){
   		var self = this;
   		var str = this.Encrypt();
   		var params = {
