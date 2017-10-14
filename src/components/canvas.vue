@@ -368,15 +368,97 @@ import detail from "../components/pages/detail"
 				  		});
 				  	},
             Clip(){
-	        	  alert(111111111111111111111);
-              alert($('.parent'))
-              var newdom = $("<canvas id='clip' style='z-index: 50'></canvas>");
-	        	  $('.parent').append(newdom);
-              var clip = new fabric.Canvas("clip",{
-                backgroundColor: 'rgba(127,255,170,0.2)',
-                  width: 500,
-                  height: 400,
-              });
+              var self =this;
+              var startPoint = new fabric.Point();
+              var endPoint = new fabric.Point();
+	        	  if(!self.Canvas.getActiveObject()){
+                return;
+              }
+              var beforeImg = self.Canvas.getActiveObject();
+	        	  if($("#clip").length>0){
+                console.log($("#clip"));
+                return;
+              }else{
+                self.Canvas.setWidth(0);
+                self.Canvas.setHeight(0);
+                var newdom = $("<canvas id='clip' style='z-index: 50'></canvas>");
+                $('.parent').append(newdom);
+                var clip = new fabric.Canvas("clip",{
+                  backgroundColor: 'rgba(0,0,0,0.2)',
+                  width: beforeImg.getWidth(),
+                  height: beforeImg.getHeight(),
+                });
+                var getPoint = clip.getPointer();
+                console.log(getPoint);
+                clip.add(beforeImg);
+                beforeImg.evented = false;
+                beforeImg.lockMovementX = true;
+                beforeImg.lockMovementY = true;
+                beforeImg.lockRotation = true;
+                beforeImg.lockScalingX = true;
+                beforeImg.lockScalingY = true;
+                beforeImg.lockUniScaling = true;
+                beforeImg.hasControls = false;
+                beforeImg.hasBorders = false;
+                clip.defaultCursor = 'crosshair';
+                var rect = new fabric.Rect({
+                  width: 0,
+                  height: 0,
+                  left: 0,
+                  top: 0,
+                  fill: 'rgba(0,0,0,0.1)',
+                });
+                clip.on('mouse:down', function(options){
+                  var getPoint = clip.getPointer(options.e);
+                  console.log(getPoint);
+                  startPoint = getPoint;
+                  console.log('startPoint'+parseInt(startPoint.x));
+                  console.log('startPoint'+parseInt(startPoint.y));
+                });
+                clip.on('mouse:up', function(options){
+                  var getPoint = clip.getPointer(options.e);
+                  console.log(getPoint);
+                  endPoint = getPoint;
+                  console.log('end'+parseInt(endPoint.x));
+                  console.log('end'+parseInt(endPoint.x));
+                  var _width = parseInt(endPoint.x) - parseInt(startPoint.x);
+                  var _height = parseInt(endPoint.y) - parseInt(startPoint.y);
+                  clip.add(rect);
+                  rect.set({
+                    width: _width,
+                    height: _height,
+                    left: parseInt(startPoint.x),
+                    top: parseInt(startPoint.y),
+                    fill: 'rgba(0,0,0,0.1)',
+                  });
+                  console.log(beforeImg.getWidth());
+                  console.log(beforeImg.getHeight());
+                  console.log(parseInt(startPoint.x)*2-(beforeImg.getWidth()/2));
+                  console.log(parseInt(startPoint.y)*2-(beforeImg.getHeight()/2));
+
+//                  beforeImg.scale(0.5).set('flipX', true);
+                  beforeImg.set({
+//                      left: 0,
+//                      top: 0,
+                    //width:_width,
+                    //height:_height,
+                    //裁剪，原位置在中心，要定位在左上
+                    clipTo: function (ctx) {
+                      ctx.rect((parseInt(startPoint.x)-(beforeImg.getWidth()/2))*2, (parseInt(startPoint.y)-(beforeImg.getHeight()/2))*2,
+                        _width*2, _height*2);
+                    }
+                  });
+//                var url = "http://mpic.tiankong.com/12a/792/12a792475085025e5ac22b594710ee3b/640.jpg@300h";
+//                fabric.Image.fromURL(url, function(oImg) {
+//                  oImg.set('width', 500);
+//                  oImg.set('height', 400);oImg.selectable = false;
+//
+//                  clip.add(oImg);
+//
+//                  });
+                })
+              }
+
 
             },
 				  	search:function(keyword){
@@ -411,6 +493,7 @@ import detail from "../components/pages/detail"
 				  		this.idData.push(item.id);
 				  		fabric.Image.fromURL(item.url, function(oImg) {
 							  oImg.scale(0.5).set('flipX', true);
+							  oImg.imgId = item.id;
 							  self.Canvas.add(oImg);
 							  console.log(oImg);
 							});

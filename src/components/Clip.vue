@@ -24,7 +24,8 @@ export default {
       width: 500,
       height: 400,
     });
-    fabric.Image.fromURL("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507817322315&di=947aa54914cd1aa8d140d091b5e66e56&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fa6efce1b9d16fdfab6fb9f8bbe8f8c5494ee7b3b.jpg", function(oImg) {
+    var url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507817322315&di=947aa54914cd1aa8d140d091b5e66e56&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fa6efce1b9d16fdfab6fb9f8bbe8f8c5494ee7b3b.jpg";
+    fabric.Image.fromURL(url, function(oImg) {
 
       oImg.set('width', 500);
       oImg.set('height', 400);
