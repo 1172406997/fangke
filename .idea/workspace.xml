@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="3499ef08-a396-4128-9a97-7aaf7b6b15d2" name="Default" comment="" />
-=======
-    <list default="true" id="3499ef08-a396-4128-9a97-7aaf7b6b15d2" name="Default" comment="">
+    <list default="true" id="37191a7a-7764-44db-bbfb-3af1b94710e8" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/instatic/fabric.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/instatic/fabric.require.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/assets/fabric.require.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/demo/DarkroomMe.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/demo/build/darkroom.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/demo/build/darkroom.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/demo/css/page.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/demo/images/batcat.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/demo/images/domokun-big.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/demo/images/domokun.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/demo/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/demo/vendor/fabric.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/css/_layout.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/css/_toolbar.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/css/darkroom.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/icons/close.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/icons/crop.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/icons/done.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/icons/redo.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/icons/rotate-left.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/icons/rotate-right.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/icons/save.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/icons/undo.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/js/core/bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/js/core/darkroom.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/js/core/plugin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/js/core/transformation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/js/core/ui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/js/core/utils.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/js/plugins/darkroom.crop.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/js/plugins/darkroom.history.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/js/plugins/darkroom.rotate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/darkroom/lib/js/plugins/darkroom.save.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/canvas.vue" afterPath="$PROJECT_DIR$/src/components/canvas.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
     </list>
->>>>>>> 4fce5082c80784bf1e14dc7e765406c88b8f14e7
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -20,38 +50,59 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-<<<<<<< HEAD
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-=======
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
+      <file leaf-file-name="toLogin.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/util/toLogin.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="canvas.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/canvas.vue">
->>>>>>> 4fce5082c80784bf1e14dc7e765406c88b8f14e7
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="331" column="0" lean-forward="true" selection-start-line="331" selection-start-column="0" selection-end-line="331" selection-end-column="0" />
+            <state relative-caret-position="6">
+              <caret line="444" column="33" lean-forward="true" selection-start-line="444" selection-start-column="33" selection-end-line="444" selection-end-column="33" />
+              <folding>
+                <element signature="n#style#0;n#input#0;n#div#0;n#Poptip#0;n#div#0;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#Slider#0;n#div#0;n#Poptip#0;n#div#0;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <marker date="1508085328348" expanded="true" signature="20275:20286" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fabric.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/instatic/fabric.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="22477" column="2" lean-forward="false" selection-start-line="22477" selection-start-column="2" selection-end-line="22477" selection-end-column="2" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#502#556#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/darkroom/demo/index.html">
+        <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="26" column="24" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="darkroom.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/darkroom/lib/js/core/darkroom.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="274" column="63" lean-forward="true" selection-start-line="274" selection-start-column="63" selection-end-line="274" selection-end-column="63" />
+            <state relative-caret-position="506">
+              <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -61,11 +112,22 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fabric.ca</find>
-      <find>getCanvas</find>
-      <find>parent</find>
-      <find>cuti</find>
+      <find>chrome.exe --allow-file-access-from-files --user-data-dir=&quot;C:/Chrome dev session&quot; --disable-web-security</find>
+      <find>getWidth</find>
+      <find>getwidth</find>
+      <find>beforeImg.getHeight()</find>
+      <find>100</find>
+      <find>min</find>
+      <find>slider</find>
+      <find>brightnessFilter</find>
+      <find>LastLayer</find>
+      <find>blur</find>
     </findStrings>
+    <replaceStrings>
+      <replace>getwidth</replace>
+      <replace>getWidth</replace>
+      <replace>beforeImg.height</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,9 +135,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/assets/canvas.js" />
-        <option value="$PROJECT_DIR$/src/darkroom/demo/index.html" />
+        <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/components/canvas.vue" />
       </list>
     </option>
@@ -91,12 +151,12 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1" />
-    <option name="width" value="1386" />
-    <option name="height" value="788" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1346" />
+    <option name="height" value="688" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -112,11 +172,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-<<<<<<< HEAD
-=======
       <pane id="Scratches" />
-      <pane id="Scope" />
->>>>>>> 4fce5082c80784bf1e14dc7e765406c88b8f14e7
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -127,31 +183,25 @@
             <path>
               <item name="source" type="b2602c69:ProjectViewProjectNode" />
               <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="instatic" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="source" type="b2602c69:ProjectViewProjectNode" />
               <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-<<<<<<< HEAD
-      <pane id="Scratches" />
       <pane id="Scope" />
-=======
->>>>>>> 4fce5082c80784bf1e14dc7e765406c88b8f14e7
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_interpreter_path" value="C:/Program Files (x86)/nodejs/node" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="SearchEverywhereHistoryKey" value="index&#9;FILE&#9;file://D:/source/src/darkroom/demo/index.html&#10;canvas.vue&#9;FILE&#9;file://D:/source/src/components/canvas.vue&#10;canvas.js&#9;FILE&#9;file://D:/source/src/assets/canvas.js&#10;canv&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="canvas.vue&#9;FILE&#9;file://D:/source/src/components/canvas.vue" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -173,56 +223,37 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3499ef08-a396-4128-9a97-7aaf7b6b15d2" name="Default" comment="" />
-      <created>1507133173126</created>
+      <changelist id="37191a7a-7764-44db-bbfb-3af1b94710e8" name="Default" comment="" />
+      <created>1508081541819</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1507133173126</updated>
-      <workItem from="1507133248274" duration="1149000" />
-<<<<<<< HEAD
-      <workItem from="1507559835801" duration="238000" />
-=======
-      <workItem from="1507556165415" duration="734000" />
-      <workItem from="1507557162301" duration="1476000" />
-      <workItem from="1507558893103" duration="481000" />
->>>>>>> 4fce5082c80784bf1e14dc7e765406c88b8f14e7
+      <updated>1508081541819</updated>
+      <workItem from="1508081545902" duration="3829000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< HEAD
-    <option name="totallyTimeSpent" value="1387000" />
-=======
-    <option name="totallyTimeSpent" value="3840000" />
->>>>>>> 4fce5082c80784bf1e14dc7e765406c88b8f14e7
+    <option name="totallyTimeSpent" value="3829000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25297618" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-=======
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
->>>>>>> 4fce5082c80784bf1e14dc7e765406c88b8f14e7
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-=======
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
->>>>>>> 4fce5082c80784bf1e14dc7e765406c88b8f14e7
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -233,114 +264,79 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main.js</url>
+          <line>13</line>
+          <properties />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/components/canvas.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/darkroom/demo/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="26" column="24" lean-forward="true" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/darkroom/lib/js/core/darkroom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5610">
-          <caret line="255" column="61" lean-forward="true" selection-start-line="255" selection-start-column="61" selection-end-line="255" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-=======
-        <state relative-caret-position="22">
->>>>>>> 4fce5082c80784bf1e14dc7e765406c88b8f14e7
-          <caret line="1" column="13" lean-forward="false" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/fabric.require.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="186">
+          <caret line="3494" column="8" lean-forward="false" selection-start-line="3494" selection-start-column="8" selection-end-line="3494" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/canvas.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12144">
-          <caret line="61" column="17" lean-forward="false" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
+        <state relative-caret-position="194">
+          <caret line="1" column="20379" lean-forward="false" selection-start-line="1" selection-start-column="20379" selection-end-line="1" selection-end-column="20379" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#502#556#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
+    <entry file="file://$PROJECT_DIR$/instatic/fabric.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/instatic/fabric.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="8738" column="61" lean-forward="false" selection-start-line="8738" selection-start-column="49" selection-end-line="8738" selection-end-column="61" />
+        <state relative-caret-position="54">
+          <caret line="22477" column="2" lean-forward="false" selection-start-line="22477" selection-start-column="2" selection-end-line="22477" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/darkroom/demo/index.html">
+    <entry file="file://$PROJECT_DIR$/src/util/toLogin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="26" column="24" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/darkroom/lib/js/core/darkroom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="274" column="63" lean-forward="true" selection-start-line="274" selection-start-column="63" selection-end-line="274" selection-end-column="63" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/canvas.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="331" column="0" lean-forward="true" selection-start-line="331" selection-start-column="0" selection-end-line="331" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="6">
+          <caret line="444" column="33" lean-forward="true" selection-start-line="444" selection-start-column="33" selection-end-line="444" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#div#0;n#Poptip#0;n#div#0;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#Slider#0;n#div#0;n#Poptip#0;n#div#0;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <marker date="1508085328348" expanded="true" signature="20275:20286" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
