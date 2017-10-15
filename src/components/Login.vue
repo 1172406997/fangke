@@ -54,8 +54,8 @@ export default {
   		}
   	},
     isLogin(){
-      var userId = localStorage.getItem("user_id")
-      var token = localStorage.getItem("token")
+      var userId = localStorage.getItem("user_id");
+      var token = localStorage.getItem("token");
       if(userId!="null"&&token!="null"){
         this.flag=true;
       }else{

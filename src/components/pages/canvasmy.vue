@@ -19,7 +19,7 @@
 				</Col>-->
 				<div class="conlist_show">
 					<div class="conlist_con">
-						 <div class="dan" v-for="(item ,index) in getlikeitem" @click="modalS()" ref="abc"  >
+						 <div class="dan" v-for="(item ,index) in getlikeitem" ref="abc"  >
 								      <div class="img">
 								      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
 								      	<div class="modal" ></div>

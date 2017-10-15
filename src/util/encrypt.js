@@ -1,4 +1,4 @@
-import "./sha1.js"
+import  "./sha1.js"
 export const Encrypt = function(){
 	var token="TONG";
 			// 时间戳
@@ -9,7 +9,7 @@ export const Encrypt = function(){
 	var array = [token, timestamp, nonce];
 	var str = array.sort().join(',').replace(/,/g, '');
 	//sha1加密
-console.log(hex_sha1(str));
+  console.log(hex_sha1(str));
 	var sha = hex_sha1(str); //hex_sha1函数可能需要引⼊外部库
 	//				alert(sha)
 	var strin = {"sha":sha,"nonce":nonce,"timestamp":timestamp}

@@ -53,7 +53,7 @@
 					<div class="modal" v-show="this.modal=='modal'"></div>
 					 <Back-top></Back-top>
 				</div>
-          <modals v-if="this.modal=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
+        <modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
 				<div class="layout-copy">
 					2011-2017 &copy; TalkingData
 				</div>
@@ -73,7 +73,7 @@ export default {
 			 defaul:true,
 			 path:'',
         getlikeitem: '',
-        modal:'',
+        modalz:'',
         toson:'',
     }
   },
@@ -275,10 +275,10 @@ export default {
 		},
     modalS:function(){
 //      this.toson = item;
-      this.modal="modal";
+      this.modalz="modal";
     },
     getsonitem:function(msg){
-      this.modal=msg;
+      this.modalz=msg;
     },
 	}
 }

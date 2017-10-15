@@ -19,13 +19,13 @@ import login from './components/Login';
 				components:{ login },
 				props:{
 				},
-				
+
 			}
 </script>
 
 <style>
 #app{
-		
+
 	}
 	html,body{
 		height:auto;

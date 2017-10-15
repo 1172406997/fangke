@@ -43,8 +43,8 @@
 										<div class="layout-ceiling-main">
 											<a href="javascript:;" @click="writeName">保存</a> |
 											<!--<a href="#">下载高清大图</a> |-->
-											<a href="#">服务大厅</a>   |
-											<a href="#">清空</a>
+											<!--<a href="#">服务大厅</a>   | -->
+											<a href="javascript:;" @click="Clear">清空</a>
 											<div class="right" style="margin-right: 20px;">
 												<!--<a href="#" class="left">片羽时光</a> -->
 												<!--<a href="#" class="left">显示菜单</a>-->
@@ -108,7 +108,7 @@
                 			<canvasmy @imgdata="getChildImg"></canvasmy>
                 		</div>
                 		<div class="puzz" v-show="name==4">
-                			<brand></brand>
+                			<!--<brand></brand>-->
                 		</div>
                 		<div class="effect" v-show="name==5">
                 			<effect></effect>
@@ -120,55 +120,62 @@
                 </div>
                 <div class="layout-content" style="padding:0px">
                 	<div class="layout-content-style " >
-                		<div class="menubox">
-                      <Tooltip content="裁剪" @click.native="Clip"  placement="bottom">
-							      	<Icon type="crop"></Icon>
-								</Tooltip>
-								<Tooltip content="变形"@click.native="twistImg" placement="bottom">
-								<Icon type="android-map"></Icon>
-								</Tooltip>
-								<Tooltip content="锁定" @click.native="lockImg" placement="bottom">
-							      	<Icon type="locked" v-show='imgLock'></Icon>
-							      	<Icon type="unlocked" v-show='!imgLock'></Icon>
-								</Tooltip>
-								<Tooltip content="镜像" @click.native="flippHor" placement="bottom">
-								<Icon type="arrow-swap"></Icon>
-								</Tooltip>
-								<Tooltip content="复制" @click.native="copyImg" placement="bottom">
-							      	<Icon type="images"></Icon>
-								</Tooltip>
-								 <Poptip title="" content="" placement="bottom-end">
-		               <Tooltip content="滤镜" placement="bottom">
-											<Icon type="ios-settings-strong"></Icon>
-										</Tooltip>
-										<div slot="content" style="width: 180px;">
-											颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000" /><br/><br/>
-											亮度：<Slider class="slid" v-model="light" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-											对比度：<Slider class="slid" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-											饱和度：<Slider class="slid" v-model="saturability" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-											清晰度：<Slider class="slid" v-model="definition" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-											透明度：<Slider class="slid" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-										</div>
+                	<div class="menubox" v-if="menu_1==1">
+                      	<Tooltip content="裁剪" @click.native="Clip"  placement="bottom">
+							<Icon type="crop"></Icon>
+						</Tooltip>
+						<!--<Tooltip content="变形"@click.native="twistImg" placement="bottom">
+							<Icon type="android-map"></Icon>
+						</Tooltip>-->
+						<Tooltip content="锁定" @click.native="lockImg" placement="bottom">
+							<Icon type="locked" v-show='imgLock'></Icon>
+							<Icon type="unlocked" v-show='!imgLock'></Icon>
+						</Tooltip>
+						<Tooltip content="镜像" @click.native="flippHor" placement="bottom">
+							<Icon type="arrow-swap"></Icon>
+						</Tooltip>
+						<Tooltip content="复制" @click.native="copyImg" placement="bottom">
+							<Icon type="images"></Icon>
+						</Tooltip>
+						<Poptip title="" content="" placement="bottom-end">
+		               	<Tooltip content="滤镜" placement="bottom">
+							<Icon type="ios-settings-strong"></Icon>
+						</Tooltip>
+						<div slot="content" style="width: 180px;">
+							颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000" /><br/><br/>
+							亮度：<Slider class="slid" v-model="light" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							对比度：<Slider class="slid" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							饱和度：<Slider class="slid" v-model="saturability" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							清晰度：<Slider class="slid" v-model="definition" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							透明度：<Slider class="slid" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+						</div>
 		            </Poptip>
-								<Dropdown trigger="click">
-							      	<Tooltip content="上下层级" placement="bottom">
-												<Icon type="navicon-round"></Icon>
-											</Tooltip>
-							      	<DropdownMenu slot="list">
-							            <DropdownItem>上移一层</DropdownItem>
-							            <DropdownItem>下移一层</DropdownItem>
-							            <DropdownItem>置顶</DropdownItem>
-							            <DropdownItem>置底</DropdownItem>
-							        </DropdownMenu>
-						      	</Dropdown>
-						        <Tooltip content="关闭" @click.native="closeNone" style="float: right;color: #ccc;" placement="bottom">
-							      	<Icon type="close-round"></Icon>
-						        </Tooltip>
-						        <Tooltip content="删除" style="float: right;color: #ccc;" @click.native="elemRemove"  placement="bottom">
-							      	<Icon type="trash-b"></Icon>
-						        </Tooltip>
-
-                		</div>
+						<Dropdown trigger="click">
+							<Tooltip content="上下层级" placement="bottom">
+								<Icon type="navicon-round"></Icon>
+							</Tooltip>
+							<DropdownMenu slot="list">
+								<DropdownItem>上移一层</DropdownItem>
+								<DropdownItem>下移一层</DropdownItem>
+								<DropdownItem>置顶</DropdownItem>
+								<DropdownItem>置底</DropdownItem>
+							</DropdownMenu>
+						</Dropdown>
+						<Tooltip content="关闭" @click.native="closeNone" style="float: right;color: #ccc;" placement="bottom">
+							<Icon type="close-round"></Icon>
+						</Tooltip>
+						<Tooltip content="删除" style="float: right;color: #ccc;" @click.native="elemRemove" placement="bottom">
+							<Icon type="trash-b"></Icon>
+						</Tooltip>
+                	</div>
+                	<div class="menubox" v-if="menu_1==2" style="padding:0 150px 0 150px;">
+                      	<Tooltip content="取消"  @click.native="menuNone"  placement="bottom">
+							<Icon type="close-round"></Icon>
+						</Tooltip>
+						<Tooltip content="保存" @click.native="menuYes" style="float: right;color: #9ACD32;" placement="bottom">
+							<Icon type="checkmark-round"></Icon>
+						</Tooltip>
+                	</div>
                 		<div class="layout-content-main">
 	                			<div class="parent"style="width: 320px;height: 720px;">
 	                				<canvas class="one box" id="parent" style="width: 320px;height：720px"></canvas>
@@ -184,7 +191,7 @@
 
 <script>
 import canvasmy from "../components/pages/canvasmy.vue"
-import brand from "../components/pages/Brand"
+/*import brand from "../components/pages/Brand"*/
 import effect from "../components/pages/effect"
 import detail from "../components/pages/detail"
 
@@ -215,6 +222,9 @@ import detail from "../components/pages/detail"
 	                thumb:"",
 	                state:false,
 	                idData:[],
+	                menu_1:1,
+	                secCAnvas:'',
+	                imgActive:'',
 	            }
 	        },
 	         computed: {
@@ -226,13 +236,13 @@ import detail from "../components/pages/detail"
 	        	'idData'(val,Val1){},
 	        },
 	        components: {
-  					canvasmy,brand,effect,detail
+  					canvasmy,effect,detail
   				},
 	        created:function(){
 	        	this.getsearch();
 	        },
 	        mounted(){
-						this.getCanvas();
+				this.getCanvas();
 	        },
 	        methods:{
 	        	writeName(){
@@ -255,56 +265,75 @@ import detail from "../components/pages/detail"
                     onOk:()=>{
                     	if(this.value==''){
                     		this.$Message.warning('名称不能为空');
+
                     	}else{
                     		this.saveCanvas();
                     	}
                     },
                     onCancel: () => {
-				                console.log(data);
-				                console.log(11111111111111111);
 				                this.$Message.info('取消保存');
-				            },
-                })
-	        	},
-	        	saveCanvas(){
-	        		var data = this.Canvas.toJSON();
-	        		var svg = this.Canvas.toSVG();
-	        		var str = this.Encrypt();
-	        		var items = [];
-				  		var user_id = localStorage.getItem("user_id");
-				  		var token = localStorage.getItem("token");
-				  		var params = {
-								params:{
-									'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'name':this.value,'data':data,'thumb':svg,'items':items,
-								}
-							};
-							this.jsonpRequest(this,"Production.StoreProduction",params,function(res){
-				  					if(res){
-												this.$set(this, 'item', res.data);
-												this.item = res.body.data.list;
-												console.log("item:"+this.item);
-												console.log(res)
-				  					}
-				  		},function(err){
-				  			console.log(err);
-				  		});
-	        	},
-	        	changState(state){
-	        		if(state){
-	        			this.status = 1;
-	        		}else{
-	        			this.status = 0;
-	        		}
-	        	},
- 	        	getCanvas(){
-	        		var self = this
-	        		var staticCanvas = new fabric.Canvas('parent');
+					},
+				})
+			},
+			saveCanvas() {
+				var self = this;
+					var data = this.Canvas.toJSON().toString();
+					var svg = this.Canvas.toSVG();
+					var str = this.Encrypt();
+					var items = [];
+					var imgdate = this.Canvas.getObjects("image");
+					for(let i=0;i<imgdate.length;i++){
+						if($.inArray(imgdate[i].imgId,items) == -1){
+							items.push(imgdate[i].imgId)
+						}
+					}
+					var titems = items.join(',');
+					console.log(typeof(titems));
+					var user_id = localStorage.getItem("user_id");
+					var token = localStorage.getItem("token");
+					var params = {
+						params: {
+							'signature': str.sha,
+							'timestamp': str.timestamp,
+							'nonce': str.nonce,
+							'user_id': user_id,
+							'token': token,
+							'name': this.value,
+							'data': data,
+							'thumb': svg,
+							'items': titems,
+							'status': self.status,
+						}
+					};
+					this.jsonpRequest(this, "Production.StoreProduction", params, function(res) {
+						if(res) {
+							this.$set(this, 'item', res.data);
+							this.item = res.body.data.list;
+							console.log("item:" + this.item);
+							console.log(res)
+						}
+					}, function(err) {
+						console.log(err);
+					});
+				},
+				changState(state) {
+					if(state) {
+						this.status = 1;
+					} else {
+						this.status = 0;
+					}
+				},
+				getCanvas() {
+					var self = this
+					var staticCanvas = new fabric.Canvas('parent');
 	        		self.Canvas = staticCanvas;
 	        		self.Canvas.setWidth(800);
 	        		self.Canvas.setHeight(800);
 	        		self.Canvas.on('object:selected', function(opt){
 	        			self.selectItem = opt
-                $(".menubox").css("display","block");
+                		self.menu_1 = 1;
+                		self.imgActive = opt.target;
+             			console.log(self.imgActive)
 	        		});
 
 	        	},
@@ -368,27 +397,28 @@ import detail from "../components/pages/detail"
 				  			console.log(err);
 				  		});
 				  	},
-            Clip(){
-              var self =this;
-              var startPoint = new fabric.Point();
-              var endPoint = new fabric.Point();
-	        	  if(!self.Canvas.getActiveObject()){
+           	 Clip(){
+             	var self =this;
+              	var startPoint = new fabric.Point();
+            	var endPoint = new fabric.Point();
+            	console.log(self.Canvas.getActiveObject());
+	          if(!self.Canvas.getActiveObject()){
                 return;
               }
               var beforeImg = self.Canvas.getActiveObject();
-	        	  if($("#clip").length>0){
-                console.log($("#clip"));
-                return;
-              }else{
+	          if($("#secCanvas").length<=0){
+                var newdom = $("<canvas id='secCanvas' style='z-index: 50'></canvas>");
+                $('.parent').append(newdom);
+              }
+              	self.menu_1 = 2;
                 self.Canvas.setWidth(0);
                 self.Canvas.setHeight(0);
-                var newdom = $("<canvas id='clip' style='z-index: 50'></canvas>");
-                $('.parent').append(newdom);
-                var clip = new fabric.Canvas("clip",{
+                var clip = new fabric.Canvas("secCanvas",{
                   backgroundColor: 'rgba(0,0,0,0.2)',
                   width: beforeImg.getWidth(),
                   height: beforeImg.getHeight(),
                 });
+                self.secCanvas = clip;
                 var getPoint = clip.getPointer();
                 console.log(getPoint);
                 clip.add(beforeImg);
@@ -458,7 +488,6 @@ import detail from "../components/pages/detail"
 //
 //                  });
                 })
-              }
 
 
             },
@@ -469,15 +498,11 @@ import detail from "../components/pages/detail"
 				  		var user_id = localStorage.getItem("user_id");
 				  		var token = localStorage.getItem("token");
 				  		var params = {
-								params:{
 									'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'keyword':keyword
-								}
 							};
-							this.jsonpRequest(this,"Material.GetMaterialByKeyWord",params,function(res){
+							this.postRequest("Material.GetMaterialByKeyWord",params,function(res){
 				  					if(res){
 				  						self.searchi = res.body.data.list;
-				//					this.bigs = res.bodyText.data.list;
-				//					this.newslist = response.body.newslist
 										console.log("search:"+self.searchi);
 										console.log(res);
 				  					}
@@ -496,12 +521,59 @@ import detail from "../components/pages/detail"
 							  oImg.scale(0.5).set('flipX', true);
 							  oImg.imgId = item.id;
 							  self.Canvas.add(oImg);
-							  console.log(oImg);
-							});
+						});
 				  	},
+			menuNone(){
+				this.imgActive.evented = true;
+                this.imgActive.lockMovementX = false;
+                this.imgActive.lockMovementY = false;
+                this.imgActive.lockRotation = false;
+                this.imgActive.lockScalingX = false;
+                this.imgActive.lockScalingY = false;
+                this.imgActive.lockUniScaling = false;
+                this.imgActive.hasControls = true;
+                this.imgActive.hasBorders = true;
+				this.secCanvas.clear();
+				this.secCanvas.setWidth(0);
+				this.secCanvas.setHeight(0);
+				this.Canvas.setWidth(800);
+				this.Canvas.setHeight(800);
+				this.menu_1 = 1;
+			},
+			menuYes(){
+				var getObjImg = this.secCanvas.getObjects("image");
+				getObjImg.evented = true;
+                getObjImg.lockMovementX = false;
+                getObjImg.lockMovementY = false;
+                getObjImg.lockRotation = false;
+                getObjImg.lockScalingX = false;
+                getObjImg.lockScalingY = false;
+                getObjImg.lockUniScaling = false;
+                getObjImg.hasControls = true;
+                getObjImg.hasBorders = true;
+				this.Canvas.setWidth(800)
+				this.Canvas.setHeight(800)
+				this.secCanvas.setWidth(0);
+				this.secCanvas.setHeight(0);
+				this.imgActive.remove();
+				this.imgActive.evented = true;
+                this.imgActive.lockMovementX = false;
+                this.imgActive.lockMovementY = false;
+                this.imgActive.lockRotation = false;
+                this.imgActive.lockScalingX = false;
+                this.imgActive.lockScalingY = false;
+                this.imgActive.lockUniScaling = false;
+                this.imgActive.hasControls = true;
+                this.imgActive.hasBorders = true;
+				this.Canvas.add(getObjImg);
+				this.menu_1 = 1;
+			},
             closeNone(){
-              $(".menubox").css("display","none");
-            }
+             this.menu_1 = false;
+            },
+            Clear(){
+                this.Canvas.clear();
+            },
 	  		},
 
 	 }
@@ -516,7 +588,7 @@ import detail from "../components/pages/detail"
 		float: right;
 	}
 	.layout{
-				height: 709px;
+		height: 709px;
         border: 1px solid #d7dde4;
         background: #f5f7f9;
         position: relative;
