@@ -10,7 +10,7 @@ import 'iview/dist/styles/iview.css';    // 使用 CSS
 import '../src/assets/item-factory.js';
 import '../src/assets/style.css';
 import 'font-awesome/css/font-awesome.css'
-import 'fabric/dist/fabric.js'
+//import 'fabric/dist/fabric.js'
 import { jsonpRequest } from "@/util/jsonp_request.js"
 import { postRequest } from "@/util/post_request.js"
 import { Encrypt } from "@/util/encrypt.js"

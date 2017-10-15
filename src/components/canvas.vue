@@ -155,10 +155,10 @@
 								<Icon type="navicon-round"></Icon>
 							</Tooltip>
 							<DropdownMenu slot="list">
-								<DropdownItem>上移一层</DropdownItem>
-								<DropdownItem>下移一层</DropdownItem>
-								<DropdownItem>置顶</DropdownItem>
-								<DropdownItem>置底</DropdownItem>
+								<DropdownItem @click.native="UpLayer">上移一层</DropdownItem>
+							    <DropdownItem @click.native="DownLayer">下移一层</DropdownItem>
+							    <DropdownItem @click.native="FirstLayer">置顶</DropdownItem>
+							    <DropdownItem @click.native="LastLayer">置底</DropdownItem>
 							</DropdownMenu>
 						</Dropdown>
 						<Tooltip content="关闭" @click.native="closeNone" style="float: right;color: #ccc;" placement="bottom">
@@ -327,13 +327,15 @@ import detail from "../components/pages/detail"
 					var self = this
 					var staticCanvas = new fabric.Canvas('parent');
 	        		self.Canvas = staticCanvas;
+	        		self.Canvas.preserveObjectStacking = true;
 	        		self.Canvas.setWidth(800);
 	        		self.Canvas.setHeight(800);
 	        		self.Canvas.on('object:selected', function(opt){
 	        			self.selectItem = opt
                 		self.menu_1 = 1;
                 		self.imgActive = opt.target;
-             			console.log(self.imgActive)
+//           			console.log(self.imgActive)
+             			self.imgLock = opt.target.selectable;
 	        		});
 
 	        	},
@@ -357,8 +359,28 @@ import detail from "../components/pages/detail"
 	        	//lock and unlock
 	        	lockImg:function(){
 	        	 	var self = this;
+	        	 	
+	        	 	if(self.imgLock){
+	        	 		self.imgActive.lockMovementX = true;
+		                self.imgActive.lockMovementY = true;
+		                self.imgActive.lockRotation = true;
+		                self.imgActive.lockScalingX = true;
+		                self.imgActive.lockScalingY = true;
+		                self.imgActive.lockUniScaling = true;
+		                self.imgActive.hasControls = false;
+		                self.imgActive.hasBorders = false;
+	        	 	}else{
+	        	 		self.imgActive.lockMovementX = false;
+		                self.imgActive.lockMovementY = false;
+		                self.imgActive.lockRotation = false;
+		                self.imgActive.lockScalingX = false;
+		                self.imgActive.lockScalingY = false;
+		                self.imgActive.lockUniScaling = false;
+		                self.imgActive.hasControls = true;
+		                self.imgActive.hasBorders = true;
+	        	 	}
 	        	 	self.imgLock = !self.imgLock;
-	        		self.selectItem.target.selectable = self.imgLock;
+//	        		self.selectItem.target.selectable = self.imgLock;
 	        		self.Canvas.renderAll();
 	        	},
 	        	twistImg:function(){
@@ -397,6 +419,28 @@ import detail from "../components/pages/detail"
 				  			console.log(err);
 				  		});
 				  	},
+			UpLayer(){
+              var self = this;
+              var _item = self.Canvas.getActiveObject();
+              self.Canvas.bringForward(_item);
+            },
+            DownLayer(){
+              var self = this;
+              var _item = self.Canvas.getActiveObject();
+              self.Canvas.sendBackwards(_item);
+            },
+            FirstLayer(){
+              var self = this;
+              var _item = self.Canvas.getActiveObject();
+              self.Canvas.bringToFront(_item);
+
+            },
+            LastLayer(){
+              var self = this;
+              var _item = self.Canvas.getActiveObject();
+              self.Canvas.sendToBack (_item);
+            },
+
            	 Clip(){
              	var self =this;
               	var startPoint = new fabric.Point();
@@ -405,7 +449,6 @@ import detail from "../components/pages/detail"
 	          if(!self.Canvas.getActiveObject()){
                 return;
               }
-              var beforeImg = self.Canvas.getActiveObject();
 	          if($("#secCanvas").length<=0){
                 var newdom = $("<canvas id='secCanvas' style='z-index: 50'></canvas>");
                 $('.parent').append(newdom);
@@ -414,14 +457,22 @@ import detail from "../components/pages/detail"
                 self.Canvas.setWidth(0);
                 self.Canvas.setHeight(0);
                 var clip = new fabric.Canvas("secCanvas",{
-                  backgroundColor: 'rgba(0,0,0,0.2)',
-                  width: beforeImg.getWidth(),
-                  height: beforeImg.getHeight(),
+                  backgroundColor: 'rgba(255,255,255,0.2)',
                 });
                 self.secCanvas = clip;
                 var getPoint = clip.getPointer();
                 console.log(getPoint);
-                clip.add(beforeImg);
+                self.imgActive.clone(
+                	function(oImg){
+                		console.log(oImg)
+                		console.log(oImg.width)
+                		clip.setWidth(oImg.width/2)
+                		clip.setHeight(oImg.height/2)
+	        	 		clip.add(oImg);
+	        		});
+	        	var beforeImg = clip.getObjects("image");
+	        	console.log(beforeImg);
+//	        	clip.renderAll();
                 beforeImg.evented = false;
                 beforeImg.lockMovementX = true;
                 beforeImg.lockMovementY = true;
