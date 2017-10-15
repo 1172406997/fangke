@@ -143,11 +143,11 @@
 						</Tooltip>
 						<div slot="content" style="width: 180px;">
 							颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000" /><br/><br/>
-							亮度：<Slider class="slid" oninput="brightnessFilter" v-model="brightness" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							对比度：<Slider class="slid" oninput="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							饱和度：<Slider class="slid" oninput="blurFilter" v-model="blur" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							清晰度：<Slider class="slid" oninput="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							透明度：<Slider class="slid" oninput="Filter" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							亮度：<Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="0" :max="100" :step="1" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							对比度：<Slider class="slid" @on-input="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							饱和度：<Slider class="slid" @on-input="blurFilter" v-model="blur" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							清晰度：<Slider class="slid" @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							透明度：<Slider class="slid" oninput="xxxxx" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						</div>
 		            </Poptip>
 						<Dropdown trigger="click">
@@ -359,7 +359,7 @@ import detail from "../components/pages/detail"
 	        	//lock and unlock
 	        	lockImg:function(){
 	        	 	var self = this;
-	        	 	
+
 	        	 	if(self.imgLock){
 	        	 		self.imgActive.lockMovementX = true;
 		                self.imgActive.lockMovementY = true;
@@ -419,7 +419,7 @@ import detail from "../components/pages/detail"
 				  			console.log(err);
 				  		});
 				  	},
-			UpLayer(){
+			      UpLayer(){
               var self = this;
               var _item = self.Canvas.getActiveObject();
               self.Canvas.bringForward(_item);
@@ -440,40 +440,64 @@ import detail from "../components/pages/detail"
               var _item = self.Canvas.getActiveObject();
               self.Canvas.sendToBack (_item);
             },
-			Filter(){
+            UpdateImg(item, canvas){
+              item.applyFilters();
+              canvas.renderAll();
+            },
+            ApplyFilter(item, index, filt){
+              if (item.filters[index]){
+                return;
+              }
+              item.filters[index] = filt;
+            },
+            ApplyFilterValue(item, index, name, value){
+              if (item.filters[index]){
+                item.filters[index][name] = value;
+              }
+
+            },
+			      Filter(){
               var self = this;
               var _img = self.Canvas.getActiveObject();
-//              _img.filters[0] = new fabric.Image.filters.Brightness({brightness: parseFloat(0.2)});
-//              _img.filters[1] = new fabric.Image.filters.Contrast({contrast: parseFloat(100)});
-//              _img.filters[2] = new fabric.Image.filters.Blur({blur: 0.5});
-//              _img.filters[3] = new fabric.Image.filters.Saturation({saturation: 100});
-              _img.filters[0] = new fabric.Image.filters.Brightness();
-              _img.filters[1] = new fabric.Image.filters.Contrast();
-              _img.filters[2] = new fabric.Image.filters.Blur();
-              _img.filters[3] = new fabric.Image.filters.Saturation();
-              _img.applyFilters();
-              self.Canvas.renderAll();
+              self.ApplyFilter(_img, 0,  new fabric.Image.filters.Brightness());
+              self.ApplyFilter(_img, 1,  new fabric.Image.filters.Contrast());
+              self.ApplyFilter(_img, 2,  new fabric.Image.filters.Blur());
+              self.ApplyFilter(_img, 3,  new fabric.Image.filters.Saturation());
+              self.UpdateImg(_img, self.Canvas);
+//              _img.filters[0] = new fabric.Image.filters.Brightness();
+//              _img.filters[1] = new fabric.Image.filters.Contrast();
+//              _img.filters[2] = new fabric.Image.filters.Blur();
+//              _img.filters[3] = new fabric.Image.filters.Saturation();
+//              _img.applyFilters();
+//              self.Canvas.renderAll();
             },
-            brightnessFilter(){
-            	var self = this;
-            	var _img = self.Canvas.getActiveObject();
-            	_img.filters[0]['brightness'] =  parseFloat(self.brightness);
-            	
+            brightnessFilter: function () {
+              var self = this;
+              var _img = self.Canvas.getActiveObject();
+              self.ApplyFilterValue(_img, 0, 'brightness', parseFloat((self.brightness) / 50 - 1));
+//              _img.filters[0]['brightness'] = parseFloat((self.brightness) / 50 - 1);
+              self.UpdateImg(_img, self.Canvas);
             },
             contrastFilter(){
             	var self = this;
             	var _img = self.Canvas.getActiveObject();
-            	_img.filters[1]['contrast'] =  parseFloat(self.contrast);
+              self.ApplyFilterValue(_img, 1, 'contrast', parseFloat((self.contrast) / 50 - 1));
+//              _img.filters[1]['contrast'] =  parseFloat((self.contrast)/50 -1);
+              self.UpdateImg(_img, self.Canvas);
             },
             blurFilter(){
             	var self = this;
             	var _img = self.Canvas.getActiveObject();
-            	_img.filters[2]['blur'] =  parseFloat(self.blur);
+              self.ApplyFilterValue(_img, 2, 'blur', parseFloat(self.blur/100));
+//              _img.filters[2]['blur'] =  parseFloat(self.blur/100);
+              self.UpdateImg(_img, self.Canvas);
             },
             saturationFilter(){
             	var self = this;
             	var _img = self.Canvas.getActiveObject();
-            	_img.filters[3]['saturation'] =  parseFloat(self.saturation);
+              self.ApplyFilterValue(_img, 3, 'saturation', parseFloat(self.saturation)/50 -1);
+//              _img.filters[3]['saturation'] =  parseFloat((self.saturation)/50 -1);
+              self.UpdateImg(_img, self.Canvas);
             },
            	Clip(){
              	var self =this;
@@ -496,83 +520,73 @@ import detail from "../components/pages/detail"
                 self.secCanvas = clip;
                 var getPoint = clip.getPointer();
                 console.log(getPoint);
-                self.imgActive.clone(
-                	function(oImg){
+                self.imgActive.clone(function(oImg){
                 		console.log(oImg)
                 		console.log(oImg.width)
                 		clip.setWidth(oImg.width/2)
                 		clip.setHeight(oImg.height/2)
-	        	 		clip.add(oImg);
-	        		});
-	        	var beforeImg = clip.getObjects("image");
-	        	console.log(beforeImg);
-//	        	clip.renderAll();
-                beforeImg.evented = false;
-                beforeImg.lockMovementX = true;
-                beforeImg.lockMovementY = true;
-                beforeImg.lockRotation = true;
-                beforeImg.lockScalingX = true;
-                beforeImg.lockScalingY = true;
-                beforeImg.lockUniScaling = true;
-                beforeImg.hasControls = false;
-                beforeImg.hasBorders = false;
-                clip.defaultCursor = 'crosshair';
-                var rect = new fabric.Rect({
-                  width: 0,
-                  height: 0,
-                  left: 0,
-                  top: 0,
-                  fill: 'rgba(0,0,0,0.1)',
-                });
-                clip.on('mouse:down', function(options){
-                  var getPoint = clip.getPointer(options.e);
-                  console.log(getPoint);
-                  startPoint = getPoint;
-                  console.log('startPoint'+parseInt(startPoint.x));
-                  console.log('startPoint'+parseInt(startPoint.y));
-                });
-                clip.on('mouse:up', function(options){
-                  var getPoint = clip.getPointer(options.e);
-                  console.log(getPoint);
-                  endPoint = getPoint;
-                  console.log('end'+parseInt(endPoint.x));
-                  console.log('end'+parseInt(endPoint.x));
-                  var _width = parseInt(endPoint.x) - parseInt(startPoint.x);
-                  var _height = parseInt(endPoint.y) - parseInt(startPoint.y);
-                  clip.add(rect);
-                  rect.set({
-                    width: _width,
-                    height: _height,
-                    left: parseInt(startPoint.x),
-                    top: parseInt(startPoint.y),
-                    fill: 'rgba(0,0,0,0.1)',
-                  });
-//                console.log(beforeImg.getWidth());
-//                console.log(beforeImg.getHeight());
-                  console.log(parseInt(startPoint.x)*2-(beforeImg.getWidth()/2));
-                  console.log(parseInt(startPoint.y)*2-(beforeImg.getHeight()/2));
-
+	        	 		    clip.add(oImg);
+                    var beforeImg = oImg;
+                    console.log(beforeImg);
+                    beforeImg.evented = false;
+                    beforeImg.lockMovementX = true;
+                    beforeImg.lockMovementY = true;
+                    beforeImg.lockRotation = true;
+                    beforeImg.lockScalingX = true;
+                    beforeImg.lockScalingY = true;
+                    beforeImg.lockUniScaling = true;
+                    beforeImg.hasControls = false;
+                    beforeImg.hasBorders = false;
+                    clip.defaultCursor = 'crosshair';
+                    var rect = new fabric.Rect({
+                      width: 0,
+                      height: 0,
+                      left: 0,
+                      top: 0,
+                      fill: 'rgba(0,0,0,0.1)',
+                    });
+                    clip.on('mouse:down', function(options){
+                      var getPoint = clip.getPointer(options.e);
+                      console.log(getPoint);
+                      startPoint = getPoint;
+                      console.log('startPoint'+parseInt(startPoint.x));
+                      console.log('startPoint'+parseInt(startPoint.y));
+                    });
+                    clip.on('mouse:up', function(options){
+                      var getPoint = clip.getPointer(options.e);
+                      console.log(getPoint);
+                      endPoint = getPoint;
+                      console.log('end'+parseInt(endPoint.x));
+                      console.log('end'+parseInt(endPoint.x));
+                      var _width = parseInt(endPoint.x) - parseInt(startPoint.x);
+                      var _height = parseInt(endPoint.y) - parseInt(startPoint.y);
+                      clip.add(rect);
+                      rect.set({
+                        width: _width,
+                        height: _height,
+                        left: parseInt(startPoint.x),
+                        top: parseInt(startPoint.y),
+                        fill: 'rgba(0,0,0,0.1)',
+                      });
+//                console.log(beforeImg.width);
+//                console.log(beforeImg.height);
+                      console.log(parseInt(startPoint.x)*2-(beforeImg.width/2));
+                      console.log(parseInt(startPoint.y)*2-(beforeImg.height/2));
 //                  beforeImg.scale(0.5).set('flipX', true);
-                  beforeImg.set({
+                      beforeImg.set({
 //                      left: 0,
 //                      top: 0,
-                    //width:_width,
-                    //height:_height,
-                    //裁剪，原位置在中心，要定位在左上
-                    clipTo: function (ctx) {
-                      ctx.rect((parseInt(startPoint.x)-(beforeImg.getWidth()/2))*2, (parseInt(startPoint.y)-(beforeImg.getHeight()/2))*2,
-                        _width*2, _height*2);
-                    }
-                  });
-//                var url = "http://mpic.tiankong.com/12a/792/12a792475085025e5ac22b594710ee3b/640.jpg@300h";
-//                fabric.Image.fromURL(url, function(oImg) {
-//                  oImg.set('width', 500);
-//                  oImg.set('height', 400);oImg.selectable = false;
-//
-//                  clip.add(oImg);
-//
-//                  });
-                })
+                        //width:_width,
+                        //height:_height,
+                        //裁剪，原位置在中心，要定位在左上
+                        clipTo: function (ctx) {
+                          ctx.rect((parseInt(startPoint.x)-(beforeImg.width/2))*2, (parseInt(startPoint.y)-(beforeImg.height/2))*2,
+                            _width*2, _height*2);
+                        }
+                      });
+                    })
+	        		});
+
 
 
             },
