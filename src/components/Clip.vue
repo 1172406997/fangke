@@ -7,7 +7,7 @@
 </template>
 
 <script>
-	import 'fabric/dist/fabric.js'
+//	import 'fabric/dist/fabric.js'
 export default {
 	data () {
 		return{

@@ -138,16 +138,16 @@
 							<Icon type="images"></Icon>
 						</Tooltip>
 						<Poptip title="" content="" placement="bottom-end">
-		               	<Tooltip content="滤镜" placement="bottom">
+		               	<Tooltip content="滤镜" @click.native="Filter" placement="bottom">
 							<Icon type="ios-settings-strong"></Icon>
 						</Tooltip>
 						<div slot="content" style="width: 180px;">
 							颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000" /><br/><br/>
-							亮度：<Slider class="slid" v-model="light" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							对比度：<Slider class="slid" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							饱和度：<Slider class="slid" v-model="saturability" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							清晰度：<Slider class="slid" v-model="definition" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							透明度：<Slider class="slid" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							亮度：<Slider class="slid" oninput="brightnessFilter" v-model="brightness" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							对比度：<Slider class="slid" oninput="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							饱和度：<Slider class="slid" oninput="blurFilter" v-model="blur" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							清晰度：<Slider class="slid" oninput="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							透明度：<Slider class="slid" oninput="Filter" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						</div>
 		            </Poptip>
 						<Dropdown trigger="click">
@@ -209,10 +209,10 @@ import detail from "../components/pages/detail"
 	                Canvas:'',
 	                selectItem:"",
 	                imgLock:true,
-	                light:50,
+	                brightness:50,
 	                contrast:50,
-	                saturability:50,
-	                definition:50,
+	                blur:50,
+	                saturation:50,
 	                lucency:50,
 	                color:'',
 	                value:'',
@@ -440,8 +440,42 @@ import detail from "../components/pages/detail"
               var _item = self.Canvas.getActiveObject();
               self.Canvas.sendToBack (_item);
             },
-
-           	 Clip(){
+			Filter(){
+              var self = this;
+              var _img = self.Canvas.getActiveObject();
+//              _img.filters[0] = new fabric.Image.filters.Brightness({brightness: parseFloat(0.2)});
+//              _img.filters[1] = new fabric.Image.filters.Contrast({contrast: parseFloat(100)});
+//              _img.filters[2] = new fabric.Image.filters.Blur({blur: 0.5});
+//              _img.filters[3] = new fabric.Image.filters.Saturation({saturation: 100});
+              _img.filters[0] = new fabric.Image.filters.Brightness();
+              _img.filters[1] = new fabric.Image.filters.Contrast();
+              _img.filters[2] = new fabric.Image.filters.Blur();
+              _img.filters[3] = new fabric.Image.filters.Saturation();
+              _img.applyFilters();
+              self.Canvas.renderAll();
+            },
+            brightnessFilter(){
+            	var self = this;
+            	var _img = self.Canvas.getActiveObject();
+            	_img.filters[0]['brightness'] =  parseFloat(self.brightness);
+            	
+            },
+            contrastFilter(){
+            	var self = this;
+            	var _img = self.Canvas.getActiveObject();
+            	_img.filters[1]['contrast'] =  parseFloat(self.contrast);
+            },
+            blurFilter(){
+            	var self = this;
+            	var _img = self.Canvas.getActiveObject();
+            	_img.filters[2]['blur'] =  parseFloat(self.blur);
+            },
+            saturationFilter(){
+            	var self = this;
+            	var _img = self.Canvas.getActiveObject();
+            	_img.filters[3]['saturation'] =  parseFloat(self.saturation);
+            },
+           	Clip(){
              	var self =this;
               	var startPoint = new fabric.Point();
             	var endPoint = new fabric.Point();
@@ -513,8 +547,8 @@ import detail from "../components/pages/detail"
                     top: parseInt(startPoint.y),
                     fill: 'rgba(0,0,0,0.1)',
                   });
-                  console.log(beforeImg.getWidth());
-                  console.log(beforeImg.getHeight());
+//                console.log(beforeImg.getWidth());
+//                console.log(beforeImg.getHeight());
                   console.log(parseInt(startPoint.x)*2-(beforeImg.getWidth()/2));
                   console.log(parseInt(startPoint.y)*2-(beforeImg.getHeight()/2));
 
