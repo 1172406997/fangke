@@ -27,6 +27,7 @@ Vue.config.productionTip = false
 Vue.prototype.jsonpRequest = jsonpRequest;
 Vue.prototype.postRequest = postRequest;
 Vue.prototype.Encrypt = Encrypt;
+Vue.prototype.toLogin = toLogin;
 //Vue.prototype.Darkroom = Darkroom;
 
 /* eslint-disable no-new */

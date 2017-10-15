@@ -98,6 +98,7 @@
 
 <script>
 export default {
+	name: 'Hello',
 	data () {
 		return{
 			isActive:false,

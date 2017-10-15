@@ -143,11 +143,11 @@
 						</Tooltip>
 						<div slot="content" style="width: 180px;">
 							颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000" /><br/><br/>
-							亮度：<Slider class="slid" oninput="brightnessFilter" v-model="brightness" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							对比度：<Slider class="slid" oninput="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							饱和度：<Slider class="slid" oninput="blurFilter" v-model="blur" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							清晰度：<Slider class="slid" oninput="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							透明度：<Slider class="slid" oninput="Filter" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							亮度：<Slider class="slid"    @on-input="brightnessFilter" v-model="brightness" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							对比度：<Slider class="slid"  @on-input="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							饱和度：<Slider class="slid"  @on-input="blurFilter" v-model="blur" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							清晰度：<Slider class="slid"  @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							透明度：<Slider class="slid"  @on-input="Filter" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						</div>
 		            </Poptip>
 						<Dropdown trigger="click">

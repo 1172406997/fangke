@@ -101,11 +101,17 @@ export default {
 				}
 			};
 			this.jsonpRequest(this,"Production.GetProductionLimit",params,function(res){
-					var a = res;
-					self.$set(self, 'bigs', res);
-					self.bigs = res.body.data.list;
-					console.log("bigs:"+self.bigs);
-					console.log(res);
+					if(res.body.data.code==0){
+						var a = res;
+						self.$set(self, 'bigs', res);
+						self.bigs = res.body.data.list;
+						console.log("bigs:"+self.bigs);
+						console.log(res);
+					}else{
+						if(res.body.data.code==401){
+							self.toLogin(this,401);
+						}
+					}
 			},function(err){
 				console.log(err)
 			})

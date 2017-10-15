@@ -73,7 +73,7 @@ export default {
   		this.jsonpRequest(this,"User_User_Login.Web",params,function(res){
   			console.log(res);
   					if(res.body.data.code == 0){
-  						self.flag=true;
+						self.flag=true;
 							var locsl = {};
 							locsl = res.data.data.info;
 							localStorage.setItem("user_id", locsl.user_id);

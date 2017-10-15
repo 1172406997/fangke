@@ -87,14 +87,19 @@ import modals from "../components/pages/Single"
 				}
 			};
   		this.jsonpRequest(this,"Like.GetLike",params,function(res){
-  					if(res){
-								self.$set(self, 'getlikeitem', res.body.data.list);
+  				if(res.body.data.code==0){
+							self.$set(self, 'getlikeitem', res.body.data.list);
 								self.getlikeitem = res.body.data.list;
 								console.log("toson111111111111111111")
 								console.log(res);
 								console.log("getlike:"+self.getlikeitem);
 								console.log("toson111111111111111111")
-  					}
+					}else{
+						console.log(res);
+						if(res.body.ret==401){
+							self.toLogin(this,401);
+						}
+					}
   		},function(err){
   			console.log(err);
   		});

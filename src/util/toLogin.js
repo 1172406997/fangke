@@ -1,4 +1,3 @@
-import { publicMsg } from "./publicMsg.js"
 /* *
  * 
  * 判断是否登陆
@@ -7,8 +6,9 @@ import { publicMsg } from "./publicMsg.js"
  * */
 export  const toLogin = function(_this,res){
 	if(res==401){
+		_this.$Message.error('您还未登陆,请重新登陆');
 		localStorage.clear();
-		_this.$router.path("/Login");
+		_this.$router.push({name:"login"});
 		_this.flag == false;
 	}
 }
