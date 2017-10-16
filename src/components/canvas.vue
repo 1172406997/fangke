@@ -137,25 +137,17 @@
 						<Tooltip content="复制" @click.native="copyImg" placement="bottom">
 							<Icon type="images"></Icon>
 						</Tooltip>
-						<Poptip title="" content="" placement="bottom-end">
+						<Poptip title="" content="" placement="bottom-start">
 		               	<Tooltip content="滤镜" @click.native="Filter" placement="bottom">
 							<Icon type="ios-settings-strong"></Icon>
 						</Tooltip>
 						<div slot="content" style="width: 180px;">
 							颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000" /><br/><br/>
-<<<<<<< HEAD
-							亮度：<Slider class="slid"    @on-input="brightnessFilter" v-model="brightness" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							对比度：<Slider class="slid"  @on-input="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							饱和度：<Slider class="slid"  @on-input="blurFilter" v-model="blur" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							清晰度：<Slider class="slid"  @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-							透明度：<Slider class="slid"  @on-input="Filter" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-=======
 							亮度：<Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="0" :max="100" :step="1" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 							对比度：<Slider class="slid" @on-input="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 							饱和度：<Slider class="slid" @on-input="blurFilter" v-model="blur" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 							清晰度：<Slider class="slid" @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 							透明度：<Slider class="slid" oninput="xxxxx" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
->>>>>>> 38fdf3403a4ec706d527eb377be4b519bc5a085b
 						</div>
 		            </Poptip>
 						<Dropdown trigger="click">
