@@ -105,6 +105,7 @@
                     </div>
                   </div>
                 </div>
+<<<<<<< HEAD
               </div>
             </div>
             <div class="my" v-show="name==3">
@@ -162,6 +163,85 @@
                   透明度：
                   <Slider class="slid" oninput="xxxxx" v-model="lucency"
                           style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+=======
+                <div class="layout-content" style="padding:0px">
+                	<div class="layout-content-style " >
+                	<div class="menubox" v-if="menu_1==1">
+                      	<Tooltip content="裁剪" @click.native="Clip"  placement="bottom">
+							<Icon type="crop"></Icon>
+						</Tooltip>
+						<!--<Tooltip content="变形"@click.native="twistImg" placement="bottom">
+							<Icon type="android-map"></Icon>
+						</Tooltip>-->
+						<Tooltip content="锁定" @click.native="lockImg" placement="bottom">
+							<Icon type="locked" v-show='imgLock'></Icon>
+							<Icon type="unlocked" v-show='!imgLock'></Icon>
+						</Tooltip>
+						<Tooltip content="镜像" @click.native="flippHor" placement="bottom">
+							<Icon type="arrow-swap"></Icon>
+						</Tooltip>
+						<Tooltip content="复制" @click.native="copyImg" placement="bottom">
+							<Icon type="images"></Icon>
+						</Tooltip>
+						<!--<Poptip title="" content="" placement="bottom-start">-->
+		               	<Tooltip content="滤镜" @click.native="showFilter" placement="bottom">
+							<Icon type="ios-settings-strong"></Icon>
+						</Tooltip>
+						<!--<div slot="content" style="width: 180px;">
+							颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000" /><br/><br/>
+							亮度：<Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="0" :max="100" :step="1" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							对比度：<Slider class="slid" @on-input="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							饱和度：<Slider class="slid" @on-input="blurFilter" v-model="blur" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							清晰度：<Slider class="slid" @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							透明度：<Slider class="slid" oninput="xxxxx" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+						</div>-->
+		            	<!--</Poptip>-->
+						<Dropdown trigger="click">
+							<Tooltip content="上下层级" placement="bottom">
+								<Icon type="navicon-round"></Icon>
+							</Tooltip>
+							<DropdownMenu slot="list">
+								<DropdownItem @click.native="UpLayer">上移一层</DropdownItem>
+							    <DropdownItem @click.native="DownLayer">下移一层</DropdownItem>
+							    <DropdownItem @click.native="FirstLayer">置顶</DropdownItem>
+							    <DropdownItem @click.native="LastLayer">置底</DropdownItem>
+							</DropdownMenu>
+						</Dropdown>
+						<Tooltip content="关闭" @click.native="closeNone" style="float: right;color: #ccc;" placement="bottom">
+							<Icon type="close-round"></Icon>
+						</Tooltip>
+						<Tooltip content="删除" style="float: right;color: #ccc;" @click.native="elemRemove" placement="bottom">
+							<Icon type="trash-b"></Icon>
+						</Tooltip>
+                	</div>
+                	<div class="menubox" v-if="menu_1==2" style="padding:0 150px 0 150px;">
+                		<Poptip title="" content="" placement="bottom-start">
+		               	<Tooltip content="滤镜" @click.native="Filter" placement="bottom">
+							<Icon type="ios-settings-strong"></Icon>
+						</Tooltip>
+						<div slot="content" style="width: 180px;">
+							颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000" /><br/><br/>
+							亮度：<Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="0" :max="100" :step="1" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							对比度：<Slider class="slid" @on-input="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							饱和度：<Slider class="slid" @on-input="blurFilter" v-model="blur" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							清晰度：<Slider class="slid" @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+							透明度：<Slider class="slid" oninput="xxxxx" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+						</div>
+		            	</Poptip>
+                      	<Tooltip content="取消"  @click.native="menuNone"  placement="bottom">
+							<Icon type="close-round"></Icon>
+						</Tooltip>
+						<Tooltip content="保存" @click.native="menuYes" style="float: right;color: #9ACD32;" placement="bottom">
+							<Icon type="checkmark-round"></Icon>
+						</Tooltip>
+                	</div>
+                		<div class="layout-content-main">
+	                			<div class="parent"style="width: 320px;height: 720px;">
+	                				<canvas class="one box" id="parent" style="width: 320px;height：720px"></canvas>
+	                			</div>
+                			</div>
+                	</div>
+>>>>>>> df1bb05d4bbbdc232db94551be8699256f7bbc37
                 </div>
               </Poptip>
               <Dropdown trigger="click">
@@ -204,6 +284,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
   import canvasmy from "../components/pages/canvasmy.vue"
   /*import brand from "../components/pages/Brand"*/
   import effect from "../components/pages/effect"
@@ -511,6 +592,347 @@
         var self = this;
         var _img = self.Canvas.getActiveObject();
         self.ApplyFilterValue(_img, 3, 'saturation', parseFloat(self.saturation) / 50 - 1);
+=======
+import canvasmy from "../components/pages/canvasmy.vue"
+/*import brand from "../components/pages/Brand"*/
+import effect from "../components/pages/effect"
+import detail from "../components/pages/detail"
+
+	export default {
+	   data() {
+	            return {
+	                spanLeft: 2,
+	                spanRight: 22,
+	                select1:"",
+	                value1:'',
+	                name:2,
+	                item:{},
+	                flag:true,
+	                childUrl:'',
+	                Canvas:'',
+	                selectItem:"",
+	                imgLock:true,
+	                brightness:50,
+	                contrast:50,
+	                blur:50,
+	                saturation:50,
+	                lucency:50,
+	                color:'',
+	                value:'',
+	                data:'',
+	                status:0,
+	                item:'',
+	                thumb:"",
+	                state:false,
+	                idData:[],
+	                menu_1:1,
+	                secCAnvas:'',
+	                imgActive:'',
+	            }
+	        },
+	         computed: {
+	            iconSize () {
+	                return this.spanLeft === 2 ? 14 : 24;
+	            },
+	        },
+	        watch:{
+	        	'idData'(val,Val1){},
+	        },
+	        components: {
+  					canvasmy,effect,detail
+  				},
+	        created:function(){
+	        	this.getsearch();
+	        },
+	        mounted(){
+				this.getCanvas();
+	        },
+	        methods:{
+	        	writeName(){
+	        		this.$Modal.confirm({
+                    render: (h) => {
+                        return h('Input', {
+                            props: {
+                                value: this.value,
+                                autofocus: true,
+                                placeholder: '请输入作品名称'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.value = val;
+                                }
+                            },
+
+                        })
+                    },
+                    onOk:()=>{
+                    	if(this.value==''){
+                    		this.$Message.warning('名称不能为空');
+
+                    	}else{
+                    		this.saveCanvas();
+                    	}
+                    },
+                    onCancel: () => {
+				                this.$Message.info('取消保存');
+					},
+				})
+			},
+			saveCanvas() {
+				var self = this;
+					var data = this.Canvas.toJSON().toString();
+					var svg = this.Canvas.toSVG();
+					var str = this.Encrypt();
+					var items = [];
+					var imgdate = this.Canvas.getObjects("image");
+					for(let i=0;i<imgdate.length;i++){
+						if($.inArray(imgdate[i].imgId,items) == -1){
+							items.push(imgdate[i].imgId)
+						}
+					}
+					var titems = items.join(',');
+					console.log(typeof(titems));
+					var user_id = localStorage.getItem("user_id");
+					var token = localStorage.getItem("token");
+					var params = {
+						params: {
+							'signature': str.sha,
+							'timestamp': str.timestamp,
+							'nonce': str.nonce,
+							'user_id': user_id,
+							'token': token,
+							'name': this.value,
+							'data': data,
+							'thumb': svg,
+							'items': titems,
+							'status': self.status,
+						}
+					};
+					this.jsonpRequest(this, "Production.StoreProduction", params, function(res) {
+						if(res.body.data.code==0) {
+							this.$set(this, 'item', res.data);
+							this.item = res.body.data.list;
+							console.log("item:" + this.item);
+							console.log(res)
+						}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+					}, function(err) {
+						console.log(err);
+					});
+				},
+				changState(state) {
+					if(state) {
+						this.status = 1;
+					} else {
+						this.status = 0;
+					}
+				},
+				getCanvas() {
+					var self = this
+					var staticCanvas = new fabric.Canvas('parent');
+	        		self.Canvas = staticCanvas;
+	        		self.Canvas.preserveObjectStacking = true;
+	        		self.Canvas.setWidth(800);
+	        		self.Canvas.setHeight(800);
+	        		self.Canvas.on('object:selected', function(opt){
+	        			self.selectItem = opt
+                		self.menu_1 = 1;
+                		self.imgActive = opt.target;
+//           			console.log(self.imgActive)
+             			self.imgLock = opt.target.selectable;
+	        		});
+
+	        	},
+	        	add:function(){
+	        		var oParent = document.getElementById('#parent');
+					   	var additem='<div class="div1" onmousemove="posMove(this.className)"></div>';
+					   	oParent.append(additem);
+	        	},
+	        	elemRemove:function(){
+	        		var self = this;
+	        		self.Canvas.remove(self.selectItem.target);
+	        	},
+	        	//水平翻转
+	        	flippHor:function(){
+	        	 	var self = this;
+	        	 	if(!self.Canvas.getActiveObject()){
+		                return;
+		            }
+	        	 	console.log(this.selectItem)
+	        		self.selectItem.target.flipX = true;
+	        		//hasControls
+	        		self.Canvas.renderAll();
+	        	},
+	        	//lock and unlock
+	        	lockImg:function(){
+	        	 	var self = this;
+					if(!self.Canvas.getActiveObject()){
+		                return;
+		            }
+	        	 	if(self.imgLock){
+	        	 		self.imgActive.lockMovementX = true;
+		                self.imgActive.lockMovementY = true;
+		                self.imgActive.lockRotation = true;
+		                self.imgActive.lockScalingX = true;
+		                self.imgActive.lockScalingY = true;
+		                self.imgActive.lockUniScaling = true;
+		                self.imgActive.hasControls = false;
+		                self.imgActive.hasBorders = false;
+	        	 	}else{
+	        	 		self.imgActive.lockMovementX = false;
+		                self.imgActive.lockMovementY = false;
+		                self.imgActive.lockRotation = false;
+		                self.imgActive.lockScalingX = false;
+		                self.imgActive.lockScalingY = false;
+		                self.imgActive.lockUniScaling = false;
+		                self.imgActive.hasControls = true;
+		                self.imgActive.hasBorders = true;
+	        	 	}
+	        	 	self.imgLock = !self.imgLock;
+//	        		self.selectItem.target.selectable = self.imgLock;
+	        		self.Canvas.renderAll();
+	        	},
+	        	twistImg:function(){
+	        	 	var self = this;
+	        	 	console.log(self.selectItem.target.aCoords.bl)
+	        		self.Canvas.renderAll();
+	        	},
+	        	//copy
+	        	copyImg:function(){
+	        	 	var self = this;
+	        	 	if(!self.Canvas.getActiveObject()){
+		                return;
+		            };
+	        	 	self.selectItem.target.clone(
+	        	 		function(oImg){
+	        	 			self.Canvas.add(oImg);
+	        	 		}
+	        	 	)
+	        		self.Canvas.renderAll();
+	        	},
+
+	        	getsearch:function() {
+							var str = this.Encrypt();
+				  		var user_id = localStorage.getItem("user_id");
+				  		var token = localStorage.getItem("token");
+				  		var params = {
+								params:{
+									'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
+								}
+							};
+							this.jsonpRequest(this,"Type.GetAllType",params,function(res){
+				  					if(res.body.data.code==0){
+												this.$set(this, 'item', res.data);
+												this.item = res.body.data.list;
+												console.log("item:"+this.item);
+												console.log(res)
+				  					}else{
+				  						console.log(res);
+											if(res.body.ret==401){
+												self.toLogin(this,401);
+											}
+				  					}
+				  		},function(err){
+				  			console.log(err);
+				  		});
+				  	},
+			      UpLayer(){
+              var self = this;
+              var _item = self.Canvas.getActiveObject();
+              self.Canvas.bringForward(_item);
+            },
+            DownLayer(){
+              var self = this;
+              var _item = self.Canvas.getActiveObject();
+              self.Canvas.sendBackwards(_item);
+            },
+            FirstLayer(){
+              var self = this;
+              var _item = self.Canvas.getActiveObject();
+              self.Canvas.bringToFront(_item);
+
+            },
+            LastLayer(){
+              var self = this;
+              var _item = self.Canvas.getActiveObject();
+              self.Canvas.sendToBack (_item);
+            },
+            UpdateImg(item, canvas){
+              item.applyFilters();
+              canvas.renderAll();
+            },
+            ApplyFilter(item, index, filt){
+              if (item.filters[index]){
+                return;
+              }
+              item.filters[index] = filt;
+            },
+            ApplyFilterValue(item, index, name, value){
+              if (item.filters[index]){
+                item.filters[index][name] = value;
+              }
+
+            },
+            showFilter(){
+            	if(!self.Canvas.getActiveObject()){
+                	return;
+             	}
+            	self.menu_1 = 2;
+            },
+			Filter(){
+              var self = this;
+              if(!self.Canvas.getActiveObject()){
+                return;
+              }
+              self.menu_1 = 2;
+	          if($("#secCanvas").length<=0){
+                var newdom = $("<canvas id='secCanvas' style='z-index: 50'></canvas>");
+                $('.parent').append(newdom);
+              }
+	          var clip = new fabric.Canvas("secCanvas",{
+                  backgroundColor: 'rgba(255,255,255,0.2)',
+               });
+	          self.Canvas.setWidth(0);
+              self.Canvas.setHeight(0);
+              self.secCanvas = clip;
+              self.imgActive.clone(function(oImg){
+              	 var _img = self.secCanvas.getActiveObject();
+	              self.ApplyFilter(_img, 0,  new fabric.Image.filters.Brightness());
+	              self.ApplyFilter(_img, 1,  new fabric.Image.filters.Contrast());
+	              self.ApplyFilter(_img, 2,  new fabric.Image.filters.Blur());
+	              self.ApplyFilter(_img, 3,  new fabric.Image.filters.Saturation());
+	              self.UpdateImg(_img, self.secCanvas);
+              })
+            },
+            brightnessFilter: function () {
+              var self = this;
+              var _img = self.secCanvas.getActiveObject();
+              self.ApplyFilterValue(_img, 0, 'brightness', parseFloat((self.brightness) / 50 - 1));
+              self.UpdateImg(_img, self.secCanvas);
+            },
+            contrastFilter(){
+            	var self = this;
+            	var _img = self.secCanvas.getActiveObject();
+              self.ApplyFilterValue(_img, 1, 'contrast', parseFloat((self.contrast) / 50 - 1));
+//              _img.filters[1]['contrast'] =  parseFloat((self.contrast)/50 -1);
+              self.UpdateImg(_img, self.secCanvas);
+            },
+            blurFilter(){
+            	var self = this;
+            	var _img = self.secCanvas.getActiveObject();
+              self.ApplyFilterValue(_img, 2, 'blur', parseFloat(self.blur/100));
+//              _img.filters[2]['blur'] =  parseFloat(self.blur/100);
+              self.UpdateImg(_img, self.secCanvas);
+            },
+            saturationFilter(){
+            	var self = this;
+            	var _img = self.secCanvas.getActiveObject();
+              self.ApplyFilterValue(_img, 3, 'saturation', parseFloat(self.saturation)/50 -1);
+>>>>>>> df1bb05d4bbbdc232db94551be8699256f7bbc37
 //              _img.filters[3]['saturation'] =  parseFloat((self.saturation)/50 -1);
         self.UpdateImg(_img, self.Canvas);
       },
@@ -585,6 +1007,7 @@
             beforeImg.set({
 //                      left: 0,
 //                      top: 0,
+<<<<<<< HEAD
               //width:_width,
               //height:_height,
               //裁剪，原位置在中心，要定位在左上
@@ -694,6 +1117,112 @@
     },
 
   }
+=======
+                        //width:_width,
+                        //height:_height,
+                        //裁剪，原位置在中心，要定位在左上
+                        clipTo: function (ctx) {
+                          ctx.rect((parseInt(startPoint.x)-(beforeImg.width/2))*2, (parseInt(startPoint.y)-(beforeImg.height/2))*2,
+                            _width*2, _height*2);
+                        }
+                      });
+                    })
+	        	});
+            },
+				  	search:function(keyword){
+				  		this.flag=false;
+								//		var self = this;
+				  		var str = this.Encrypt();
+				  		var user_id = localStorage.getItem("user_id");
+				  		var token = localStorage.getItem("token");
+				  		var params = {
+									'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'keyword':keyword
+							};
+							this.postRequest("Material.GetMaterialByKeyWord",params,function(res){
+				  					if(res.body.data.code==0){
+				  						self.searchi = res.body.data.list;
+										console.log("search:"+self.searchi);
+										console.log(res);
+				  					}else{
+				  						console.log(res);
+											if(res.body.ret==401){
+												self.toLogin(this,401);
+											}
+				  					}
+				  		},function(err){
+				  			console.log(err);
+				  		});
+				  	},
+				  	forname(name){
+				  		this.name = name;
+				  	},
+				  	getChildImg(item){
+				  		this.childUrl = item.url;
+				  		var self = this;
+				  		this.idData.push(item.id);
+				  		fabric.Image.fromURL(item.url, function(oImg) {
+							  oImg.scale(0.5).set('flipX', true);
+							  oImg.imgId = item.id;
+							  self.Canvas.add(oImg);
+						});
+				  	},
+			menuNone(){
+				this.imgActive.evented = true;
+                this.imgActive.lockMovementX = false;
+                this.imgActive.lockMovementY = false;
+                this.imgActive.lockRotation = false;
+                this.imgActive.lockScalingX = false;
+                this.imgActive.lockScalingY = false;
+                this.imgActive.lockUniScaling = false;
+                this.imgActive.hasControls = true;
+                this.imgActive.hasBorders = true;
+				this.secCanvas.clear();
+				this.secCanvas.setWidth(0);
+				this.secCanvas.setHeight(0);
+				this.Canvas.setWidth(800);
+				this.Canvas.setHeight(800);
+				this.menu_1 = 1;
+			},
+			menuYes(){
+								var self = this;
+								var getObjImg = this.secCanvas.getObjects("image");
+								getObjImg.evented = true;
+                getObjImg.lockMovementX = false;
+                getObjImg.lockMovementY = false;
+                getObjImg.lockRotation = false;
+                getObjImg.lockScalingX = false;
+                getObjImg.lockScalingY = false;
+                getObjImg.lockUniScaling = false;
+                getObjImg.hasControls = true;
+                getObjImg.hasBorders = true;
+								this.Canvas.setWidth(800)
+								this.Canvas.setHeight(800)
+								this.secCanvas.setWidth(0);
+								this.secCanvas.setHeight(0);
+								this.secCanvas.dispose();
+								console.log(self.imgActive);
+								this.imgActive.evented = true;
+                this.imgActive.lockMovementX = false;
+                this.imgActive.lockMovementY = false;
+                this.imgActive.lockRotation = false;
+                this.imgActive.lockScalingX = false;
+                this.imgActive.lockScalingY = false;
+                this.imgActive.lockUniScaling = false;
+                this.imgActive.hasControls = true;
+                this.imgActive.hasBorders = true;
+				this.Canvas.add(getObjImg);
+				this.menu_1 = 1;
+			},
+            closeNone(){
+             this.menu_1 = false;
+            },
+            Clear(){
+                this.Canvas.clear();
+            },
+	  		},
+
+	 }
+>>>>>>> df1bb05d4bbbdc232db94551be8699256f7bbc37
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

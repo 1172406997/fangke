@@ -121,12 +121,17 @@ export default {
 				}
 			};
 			this.jsonpRequest(this,"Type.GetAllType",params,function(res){
-  					if(res){
+  					if(res.body.data.code==0){
 								this.$set(this, 'item', res.data);
 								this.item = res.body.data.list;
 								console.log("item:"+this.item);
 								console.log(res)
-  					}
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
   		},function(err){
   			console.log(err);
   		});
@@ -142,13 +147,18 @@ export default {
 				}
 			};
 			this.jsonpRequest(this,"Material.GetMaterialByKeyWord",params,function(res){
-  					if(res){
+  					if(res.body.data.code==0){
   						this.searchi = res.body.data.list;
 							console.log("search:"+this.searchi);
 							console.log("search"+1111111111111111111111)
 							console.log(res);
 							console.log("search"+1111111111111111111111)
-  					}
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
   		},function(err){
   			console.log(err);
   		});
@@ -164,10 +174,15 @@ export default {
 				}
 			};
 			this.jsonpRequest(this,"Like.StoreLike",params,function(res){
-  					if(res){
+  					if(res.body.data.code==0){
 								console.log(res);
 								console.log("getlike:"+this.getlikeitem);
-  					}
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
   		},function(err){
   			console.log(err);
   		});
@@ -183,11 +198,16 @@ export default {
 				}
 			};
 			this.jsonpRequest(this,"Type.GetTypeByPid",params,function(res){
-  					if(res){
+  					if(res.body.data.code==0){
 							this.secClass = res.body.data.list;
 							console.log("secClass1111111111111111111111111111111111");
 							console.log(res);
-  					}
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
   		},function(err){
   			console.log(err);
   		});
@@ -207,12 +227,17 @@ export default {
 				}
 			};
 			this.jsonpRequest(this,"Material.GetMaterialByKeyWord",params,function(res){
-  					if(res){
+  					if(res.body.data.code==0){
   						self.$set(this, 'item', res.data);
 							self.item = res.data;
 							console.log("item:"+self.item);
 							console.log(res)
-  					}
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
   		},function(err){
   			console.log(err);
   		});
