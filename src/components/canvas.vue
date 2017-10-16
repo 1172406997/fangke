@@ -4,7 +4,7 @@
             <i-col :span="spanLeft" class="layout-menu-left" >
                 <Menu active-name="2" theme="dark" width="100%" @on-select="forname" class="left">
                     <!--<div class="layout-logo-left"></div>-->
-                    <router-link to="/">
+                    <router-link to="/Hello ">
 				                <Menu-item name="1" >
 				                        <Icon type="arrow-left-a"></Icon>
 				                        <span class="layout-text">退出</span>
@@ -456,7 +456,7 @@ import detail from "../components/pages/detail"
               }
 
             },
-			      Filter(){
+			Filter(){
               var self = this;
               var _img = self.Canvas.getActiveObject();
               self.ApplyFilter(_img, 0,  new fabric.Image.filters.Brightness());
@@ -521,11 +521,12 @@ import detail from "../components/pages/detail"
                 var getPoint = clip.getPointer();
                 console.log(getPoint);
                 self.imgActive.clone(function(oImg){
-                		console.log(oImg)
-                		console.log(oImg.width)
-                		clip.setWidth(oImg.width/2)
-                		clip.setHeight(oImg.height/2)
-	        	 		    clip.add(oImg);
+                	console.log(oImg)
+                	console.log(oImg.width)
+                	console.log("oingwidth")
+                	clip.setWidth(oImg.width/2)
+                	clip.setHeight(oImg.height/2)
+	        	 	clip.add(oImg);
                     var beforeImg = oImg;
                     console.log(beforeImg);
                     beforeImg.evented = false;
@@ -567,7 +568,7 @@ import detail from "../components/pages/detail"
                         left: parseInt(startPoint.x),
                         top: parseInt(startPoint.y),
                         fill: 'rgba(0,0,0,0.1)',
-                      });
+                    });
 //                console.log(beforeImg.width);
 //                console.log(beforeImg.height);
                       console.log(parseInt(startPoint.x)*2-(beforeImg.width/2));
@@ -640,6 +641,7 @@ import detail from "../components/pages/detail"
 				this.menu_1 = 1;
 			},
 			menuYes(){
+				var self = this;
 				var getObjImg = this.secCanvas.getObjects("image");
 				getObjImg.evented = true;
                 getObjImg.lockMovementX = false;
@@ -654,7 +656,8 @@ import detail from "../components/pages/detail"
 				this.Canvas.setHeight(800)
 				this.secCanvas.setWidth(0);
 				this.secCanvas.setHeight(0);
-				this.imgActive.remove();
+				this.secCanvas.dispose();
+				console.log(self.imgActive);
 				this.imgActive.evented = true;
                 this.imgActive.lockMovementX = false;
                 this.imgActive.lockMovementY = false;

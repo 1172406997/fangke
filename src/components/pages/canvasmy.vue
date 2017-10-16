@@ -1,6 +1,6 @@
 <template>
   <div class="canvasmy">
-  	<Menu mode="horizontal" :theme="light" active-name="15" style="background-color: #353F48;">
+  	<Menu mode="horizontal"  active-name="15" style="background-color: #353F48;">
         <Menu-item name="15">
             <!--<Icon type="ios-paper"></Icon>-->
                         全部
