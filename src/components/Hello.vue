@@ -5,7 +5,7 @@
 			<Menu mode="horizontal" theme="dark" active-name="1" class="top">
 				<!--<div class="layout-logo"></div>-->
 				<div class="layout-nav">
-          <router-link to="/">
+          <router-link :to="{name:'content'}">
             <Menu-item name="1">
               <Icon type="ios-keypad" size="18"></Icon>
               <span class="layout-text ">成品预览</span>
@@ -82,7 +82,7 @@
 						<i-button type="text" class="bottom" style="float: left;">
 							<Poptip title="你好 " content="提示内容 " placement="bottom-end">
 								<Icon type="person" size="28"></Icon>
-								<div class="api" slot="content">
+								<div @click="closeLogin()" class="api" slot="content">
 									退出登录
 								</div>
 							</Poptip>
@@ -107,6 +107,10 @@ export default {
 	methods:{
 		routerTo(url){
 			this.$router.push({path: url});
+		},
+		closeLogin(){
+			localStorage.clear();
+			this.$router.push({name: "login"});
 		}
 	}
 

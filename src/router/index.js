@@ -15,35 +15,46 @@ import Clip from '@/components/Clip'
 
 Vue.use(Router)
 export default new Router({
-	mode: 'history',
   routes: [
     {
       path: '/',
       name: 'login',
       component: Login,
-      children:[
-		      {
-		      path: '/',
-		      name: 'Hello',
-		      component: Hello,
-		      children: [
-		            // { path: '/', component: my},
-		            { path: '/search', component: search},
-		            { path: '/puzzle', component: puzzle,
-			            children:[
-		//	            	{path: '/', component: all},
-		//	            	{path: '/project', component: project},
-		//	            	{path: '/puzzleson', component: puzzleson},
-			            ]
-		            },
-		            { path: '/', component: content},
-		            { path: '/myCollect', component: myCollect},
-		            { path: '/Clip', component: Clip},
-		        ]
-		   }
-      ]
     },
-    
+    {
+    	path: '/Hello',
+    	name: 'Hello',
+    	component: Hello,
+    	children: [
+    		// { path: '/', component: my},
+    		{
+    			path: '/search',
+    			component: search
+    		},
+    		{
+    			path: '/puzzle',
+    			component: puzzle,
+    			children: [
+    				//{path: '/', component: all},
+    				//{path: '/project', component: project},
+    				//{path: '/puzzleson', component: puzzleson},
+    			]
+    		},
+    		{
+    			path: '/',
+    			name:"content",
+    			component: content
+    		},
+    		{
+    			path: '/myCollect',
+    			component: myCollect
+    		},
+    		{
+    			path: '/Clip',
+    			component: Clip
+    		},
+    	]
+    },
     { path: '/canvas', component: canvas, meta:{isActive:true}},
 
   ]

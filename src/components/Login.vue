@@ -1,6 +1,6 @@
 <template>
   <div >
-  	<div class="login" v-if="!flag" style="overflow: hidden;">
+  	<div class="login"  style="overflow: hidden;">
   		<div class="big"></div>
 	    <div class="con">
 	    	<div><img src="../assets/img/meijian.png" alt="" style="width:30%;transform: translateY(-50%);" /></div>
@@ -19,9 +19,9 @@
 	    	<!--<a>免费注册</a>-->
 	    </div>
   	</div>
-    <div v-if="flag">
+    <!--<div v-if="flag">
     	    <router-view ></router-view>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -73,8 +73,8 @@ export default {
   		this.jsonpRequest(this,"User_User_Login.Web",params,function(res){
   			console.log(res);
   					if(res.body.data.code == 0){
-						self.flag=true;
 							var locsl = {};
+							self.$router.push({"path":'/Hello'});
 							locsl = res.data.data.info;
 							localStorage.setItem("user_id", locsl.user_id);
 							localStorage.setItem("token", locsl.token);

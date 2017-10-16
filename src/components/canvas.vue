@@ -77,7 +77,7 @@
 																<div class="conlist_con">
 																	<div class="conlist_content">
 																		<Col span="11" class="classify" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
-																		<p>{{itemd.name}}</p>
+																		<!--<p>{{itemd.name}}</p>-->
 													        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 													        	</Col>
 																	</div>
