@@ -319,11 +319,16 @@ import detail from "../components/pages/detail"
 						}
 					};
 					this.jsonpRequest(this, "Production.StoreProduction", params, function(res) {
-						if(res) {
+						if(res.body.data.code==0) {
 							this.$set(this, 'item', res.data);
 							this.item = res.body.data.list;
 							console.log("item:" + this.item);
 							console.log(res)
+						}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
 						}
 					}, function(err) {
 						console.log(err);
@@ -430,11 +435,16 @@ import detail from "../components/pages/detail"
 								}
 							};
 							this.jsonpRequest(this,"Type.GetAllType",params,function(res){
-				  					if(res){
+				  					if(res.body.data.code==0){
 												this.$set(this, 'item', res.data);
 												this.item = res.body.data.list;
 												console.log("item:"+this.item);
 												console.log(res)
+				  					}else{
+				  						console.log(res);
+											if(res.body.ret==401){
+												self.toLogin(this,401);
+											}
 				  					}
 				  		},function(err){
 				  			console.log(err);
@@ -634,10 +644,15 @@ import detail from "../components/pages/detail"
 									'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'keyword':keyword
 							};
 							this.postRequest("Material.GetMaterialByKeyWord",params,function(res){
-				  					if(res){
+				  					if(res.body.data.code==0){
 				  						self.searchi = res.body.data.list;
 										console.log("search:"+self.searchi);
 										console.log(res);
+				  					}else{
+				  						console.log(res);
+											if(res.body.ret==401){
+												self.toLogin(this,401);
+											}
 				  					}
 				  		},function(err){
 				  			console.log(err);
@@ -674,9 +689,9 @@ import detail from "../components/pages/detail"
 				this.menu_1 = 1;
 			},
 			menuYes(){
-				var self = this;
-				var getObjImg = this.secCanvas.getObjects("image");
-				getObjImg.evented = true;
+								var self = this;
+								var getObjImg = this.secCanvas.getObjects("image");
+								getObjImg.evented = true;
                 getObjImg.lockMovementX = false;
                 getObjImg.lockMovementY = false;
                 getObjImg.lockRotation = false;
@@ -685,13 +700,13 @@ import detail from "../components/pages/detail"
                 getObjImg.lockUniScaling = false;
                 getObjImg.hasControls = true;
                 getObjImg.hasBorders = true;
-				this.Canvas.setWidth(800)
-				this.Canvas.setHeight(800)
-				this.secCanvas.setWidth(0);
-				this.secCanvas.setHeight(0);
-				this.secCanvas.dispose();
-				console.log(self.imgActive);
-				this.imgActive.evented = true;
+								this.Canvas.setWidth(800)
+								this.Canvas.setHeight(800)
+								this.secCanvas.setWidth(0);
+								this.secCanvas.setHeight(0);
+								this.secCanvas.dispose();
+								console.log(self.imgActive);
+								this.imgActive.evented = true;
                 this.imgActive.lockMovementX = false;
                 this.imgActive.lockMovementY = false;
                 this.imgActive.lockRotation = false;

@@ -11,7 +11,7 @@ import myCollect from '@/components/myCollect'
 //import project from '@/components/project'
 //import puzzleson from '@/components/puzzleson'
 import canvas from '@/components/canvas'
-import Clip from '@/components/Clip'
+//import Clip from '@/components/Clip'
 
 Vue.use(Router)
 export default new Router({
@@ -48,11 +48,7 @@ export default new Router({
     		{
     			path: '/myCollect',
     			component: myCollect
-    		},
-    		{
-    			path: '/Clip',
-    			component: Clip
-    		},
+    		}
     	]
     },
     { path: '/canvas', component: canvas, meta:{isActive:true}},

@@ -118,11 +118,14 @@
 			};
 			this.jsonpRequest(this,"Production.GetProductionByUserId",params,function(res){
   			console.log(res);
-  					if(res){
+  					if(res.body.data.code==0){
   						console.log(res);
   					}else{
-  						console.log("err");
-  					}
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
   		},function(err){
   			console.log(err);
   		});

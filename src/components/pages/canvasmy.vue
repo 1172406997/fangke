@@ -70,11 +70,16 @@ export default {
 				}
 			};
   		this.jsonpRequest(this,"Material.GetAllMaterial",params,function(res){
-  					if(res){
+  					if(res.body.data.code==0){
 								self.$set(self, 'getlikeitem', res.body.data.list);
 								self.getlikeitem = res.body.data.list;
 								console.log(res);
 								console.log("getlike:"+self.getlikeitem);
+  					}else{
+  						console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
   					}
   		},function(err){
   			console.log(err);

@@ -137,8 +137,16 @@ export default {
 				}
 			};
 			this.jsonpRequest(this,"Like.DeleteLike",params,function(res){
-					console.log(res)
-					this.defaul = false;
+					if(res.body.data.code==0){
+						console.log(res)
+						this.defaul = false;
+						this.$Message.success("添加收藏成功！");
+					}else{
+						console.log(res);
+						if(res.body.ret==401){
+							self.toLogin(this,401);
+						}
+					}
 			},function(err){
 				console.log(err)
 			})
@@ -155,8 +163,16 @@ export default {
 				}
 			};
 			this.jsonpRequest(this,"Like.DeleteLike",params,function(res){
-					console.log(res)
-					this.defaul = true;
+					if(res.body.data.code==0){
+						console.log(res)
+						this.defaul = true;
+						this.$Message.success("删除成功！");
+					}else{
+						console.log(res);
+						if(res.body.ret==401){
+							self.toLogin(this,401);
+						}
+					}
 			},function(err){
 				console.log(err)
 			})
@@ -173,7 +189,14 @@ export default {
 				}
 			};
 			this.jsonpRequest(this,"GetProductionById",params,function(res){
-					console.log(res)
+				if(res.body.data.code==0){
+						console.log(res)
+					}else{
+						console.log(res);
+						if(res.body.ret==401){
+							self.toLogin(this,401);
+						}
+					}
 			},function(err){
 				console.log(err)
 			})
