@@ -364,11 +364,14 @@
         self.Canvas.setWidth(800);
         self.Canvas.setHeight(800);
         self.Canvas.on('object:selected', function (opt) {
-          self.selectItem = opt
+          self.selectItem = opt;
           self.menu_1 = 1;
           self.imgActive = opt.target;
-//           			console.log(self.imgActive)
           self.imgLock = opt.target.selectable;
+          self.selectItem.target.imgLock = self.selectItem.target.hasControls;
+//          console.log("--------------------");
+//          console.log(self.selectItem.target.imgLock);
+//          console.log("--------------------");
         });
 
       },
@@ -387,8 +390,9 @@
         if (!self.Canvas.getActiveObject()) {
           return;
         }
-        console.log(this.selectItem)
-        self.selectItem.target.flipX = true;
+//        console.log(this.selectItem);
+
+        self.selectItem.target.flipX = !self.selectItem.target.flipX;
         //hasControls
         self.Canvas.renderAll();
       },
@@ -398,7 +402,7 @@
         if (!self.Canvas.getActiveObject()) {
           return;
         }
-        if (self.imgLock) {
+        if (self.selectItem.target.imgLock) {
           self.imgActive.lockMovementX = true;
           self.imgActive.lockMovementY = true;
           self.imgActive.lockRotation = true;
@@ -417,7 +421,8 @@
           self.imgActive.hasControls = true;
           self.imgActive.hasBorders = true;
         }
-        self.imgLock = !self.imgLock;
+//        self.imgLock = !self.imgLock;
+        self.selectItem.target.imgLock = !self.selectItem.target.imgLock;
 //	        		self.selectItem.target.selectable = self.imgLock;
         self.Canvas.renderAll();
       },
@@ -554,7 +559,6 @@
         var self = this;
         var _img = self.secCanvas.getActiveObject();
         self.ApplyFilterValue(_img, 1, 'contrast', parseFloat((self.contrast) / 50 - 1));
-//              _img.filters[1]['contrast'] =  parseFloat((self.contrast)/50 -1);
         self.UpdateImg(_img, self.secCanvas);
       },
       blurFilter() {
