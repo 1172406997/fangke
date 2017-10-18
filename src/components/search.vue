@@ -18,19 +18,21 @@
 				<main>
 					<div class="layout-content">
 						<Spin size="large" class="layz"></Spin>
-						<div class="content_con"  v-if="flag" v-show="this.fenlei=='fenlei'">
-							<h2>分类标签</h2>
+						<div class="content_con"  v-if="flag" v-show="this.d=='fenlei'">
 							<Row >
+								<h2>分类标签</h2>
 								<!--<div v-on:click="getclassify()">
 								<Col span="4"  class="classify" v-on:click="getclassify()">
 					        	<p>椅子</p>
 					        	<img src="../assets/img/yizi.png" style="" alt="" />
 					       </Col>
 					       </div>-->
-					        <Col span="4" class="classify" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
-										<!--<p>{{itemd.name}}</p>-->
+					       <div class="searchclassfy" v-for="(itemd , index) in item" @click="getclassify(itemd.id)">
+					       		<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+					       </div>
+					        <!--<Col span="4" class="classify" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
 					        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
-					        </Col>
+					        </Col>-->
 					    </Row>
 						</div>
 						<div class="content_con2" v-if="!flag">
@@ -43,22 +45,14 @@
 						        	<!--<img src="../assets/img/yizi.png" style="" alt="" />-->
 						       <!--</Col>-->
 						       </div>
-						        <Col span="4" class="classify" v-for="(itemd , index) in secClass" @click.native="getSecList(itemd.pid)">
-											<!--<p>{{itemd.name}}</p>-->
-						        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
-						        </Col>
+						       <div class="searchclassfy" v-for="(itemd , index) in secClass" @click="getSecList(itemd.pid)">
+					       			<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+					       		</div>
 						    </Row>
 						  </div>
 							<h2>搜索结果</h2>
 							<div >
-								<!--<Col span="3" style="background-color: #fff;position:relative;" class="con2" >
-					        	<img src="../assets/logo.png" alt="" />
-					        	<p>一只一只</p>
-					        	<div class="hover">
-					        		<Icon type="ios-star" class="show" @click="collectid()"></Icon>
-					        	</div>
-					       </Col>-->
-						       <div class="dan">
+						       <!--<div class="dan">
 							      <div class="img">
 							      	<img src="../assets/img/meijian.png" alt="" />
 							      	<div class="modal" style="display: none;"></div>
@@ -73,6 +67,23 @@
 							      </div>
 							      <div class="price" style="display: none;">
 							      	圆圆圆
+							      </div>
+							    </div>-->
+									<div class="dan" v-for="item in searchi">
+							      <div class="img">
+							      	<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />
+							      	<div class="modal" style="display: none;"></div>
+							        <div class="icon">
+							      	<Tooltip content="收藏" placement="bottom">
+								      	<Icon type="archive" @click="StoreLike()"></Icon>
+							        </Tooltip>
+							      	</div>
+							      </div>
+							      <div class="nam">
+							      	{{item.name}}
+							      </div>
+							      <div class="price" style="display: none;">
+							      	{{item.price}}￥
 							      </div>
 							    </div>
 							</div>
@@ -105,6 +116,7 @@ export default {
        fenlei:'fenlei',
        //二级分类
        secClass:'',
+       fasClass:'',
     }
   },
   created:function(){
@@ -137,31 +149,65 @@ export default {
   		});
   	},
   	search:function(res){
-  		this.flag=false;
-			var str = this.Encrypt();
+			
+  		if(this.fasClass!=''){
+  			this.secSearch()
+  		}else{
+  			this.fenlei = false;
+  			this.flag=false;
+  			var str = this.Encrypt();
+  			var user_id = localStorage.getItem("user_id");
+  			var token = localStorage.getItem("token");
+  			var params = {
+						params:{
+							'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"keyword":res
+						}
+					};
+					this.jsonpRequest(this,"Material.GetMaterialByKeyWord",params,function(res){
+		  					if(res.body.data.code==0){
+		  						this.searchi = res.body.data.list;
+									console.log("search:"+this.searchi);
+									console.log("search"+1111111111111111111111)
+									console.log(res);
+									console.log("search"+1111111111111111111111)
+		  					}else{
+									console.log(res);
+									if(res.body.ret==401){
+										self.toLogin(this,401);
+									}
+								}
+		  		},function(err){
+		  			console.log(err);
+		  		});
+  		}
+  	},
+  	secSearch(){
+  		var str = this.Encrypt();
   		var user_id = localStorage.getItem("user_id");
   		var token = localStorage.getItem("token");
-  		var params = {
-				params:{
-					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"keyword":res
-				}
-			};
-			this.jsonpRequest(this,"Material.GetMaterialByKeyWord",params,function(res){
-  					if(res.body.data.code==0){
-  						this.searchi = res.body.data.list;
-							console.log("search:"+this.searchi);
-							console.log("search"+1111111111111111111111)
-							console.log(res);
-							console.log("search"+1111111111111111111111)
-  					}else{
-							console.log(res);
-							if(res.body.ret==401){
-								self.toLogin(this,401);
-							}
+  		this.fenlei = 'fenlei';
+  			this.flag=false;
+  			var params = {
+						params:{
+							'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"keyword":res
 						}
-  		},function(err){
-  			console.log(err);
-  		});
+					};
+					this.jsonpRequest(this,"Material.GetMaterialByKeyWordAndTypeId",params,function(res){
+		  					if(res.body.data.code==0){
+		  						this.searchi = res.body.data.list;
+									console.log("search:"+this.searchi);
+									console.log("search"+1111111111111111111111)
+									console.log(res);
+									console.log("search"+1111111111111111111111)
+		  					}else{
+									console.log(res);
+									if(res.body.ret==401){
+										self.toLogin(this,401);
+									}
+								}
+		  		},function(err){
+		  			console.log(err);
+		  		});
   	},
   	StoreLike:function(material_id) {
 			var self = this;
@@ -439,4 +485,26 @@ export default {
     .ivu-menu-light{
     	z-index: -0;
     }
+    
+    /*搜索样式*/
+   .searchclassfy{
+   	position: relative;
+   	width:185px;
+   	height: 124px;
+   	border-radius: 10px;
+   	margin: 5px;
+		cursor: pointer;
+		float: left;
+   }
+   .searchclassfy img{
+   	position: absolute;
+   	left: 0;
+   	top: 0;
+   	width: 100%;
+   	height: 100%;
+   	border-radius: 5px;
+   }
+   .searchclassfy:hover{
+			box-shadow: 2px 2px 5px #888888;;
+		}
 </style>
