@@ -172,7 +172,10 @@
               </Tooltip>
             </div>
             <div class="menubox" v-if="menu_1==2" style="padding:0 150px 0 150px;">
-              <Poptip title="" content="" placement="bottom-start">
+              <Tooltip content="取消" @click.native="menuNone" placement="bottom">
+                <Icon type="close-round"></Icon>
+              </Tooltip>
+              <Poptip title="" style="float: right;" v-model="filterVisible" v-if="filterMenu" content="" placement="bottom-start">
                 <Tooltip content="滤镜" @click.native="Filter" placement="bottom">
                   <Icon type="ios-settings-strong"></Icon>
                 </Tooltip>
@@ -180,13 +183,13 @@
                   颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color"
                                  value="#400000"/><br/><br/>
                   亮度：
-                  <Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="0" :max="100" :step="1"
+                  <Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="-100" :max="100"
                           style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
                   对比度：
                   <Slider class="slid" @on-input="contrastFilter" v-model="contrast"
                           style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
                   饱和度：
-                  <Slider class="slid" @on-input="blurFilter" v-model="blur"
+                  <Slider class="slid" @on-input="blurFilter" v-model="blur" :min="0" :max="100"
                           style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
                   清晰度：
                   <Slider class="slid" @on-input="saturationFilter" v-model="saturation"
@@ -196,12 +199,10 @@
                           style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
                 </div>
               </Poptip>
-              <Tooltip content="取消" @click.native="menuNone" placement="bottom">
-                <Icon type="close-round"></Icon>
-              </Tooltip>
               <Tooltip content="保存" @click.native="menuYes" style="float: right;color: #9ACD32;" placement="bottom">
                 <Icon type="checkmark-round"></Icon>
               </Tooltip>
+
             </div>
             <div class="layout-content-main">
               <div class="parent" style="width: 320px;height: 720px;">
@@ -252,6 +253,8 @@
         menu_1: 1,
         secCAnvas: '',
         imgActive: '',
+        filterMenu:false,
+        filterVisible:true,
       }
     },
     computed: {
@@ -493,29 +496,21 @@
         self.Canvas.sendToBack(_item);
       },
       UpdateImg(item, canvas) {
-        canvas.renderAll();
       },
       ApplyFilter(item, index, filt) {
-        if (!item)
-        {
-          return;
-        }
-        if (item.filters[index]) {
+        if (!item || item.filters[index]) {
           return;
         }
         item.filters[index] = filt;
-        item.applyFilters();
 
       },
-      ApplyFilterValue(item, index, name, value) {
-        if (!item)
-        {
-          return;
-        }
-        if (item.filters[index]) {
+      ApplyFilterValue(item, index, name, value, canvas) {
+        if (item && item.filters[index]) {
           item.filters[index][name] = value;
+          item.applyFilters();
+          canvas.renderAll();
+          console.log(item);
         }
-
       },
       showFilter() {
         var self = this;
@@ -523,7 +518,9 @@
           return;
         }
         self.menu_1 = 2;
+        self.filterMenu = true;
       },
+      //滤镜
       Filter() {
         var self = this;
         if (!self.Canvas.getActiveObject()) {
@@ -534,46 +531,54 @@
           var newdom = $("<canvas id='secCanvas' style='z-index: 50'></canvas>");
           $('.parent').append(newdom);
         }
+
         var clip = new fabric.Canvas("secCanvas", {
-          backgroundColor: 'rgba(255,255,255,0.2)',
+//          backgroundColor: 'rgba(255,255,255,0.2)',
         });
         self.Canvas.setWidth(0);
         self.Canvas.setHeight(0);
         self.secCanvas = clip;
+        self.secCanvas.setWidth(800);
+        self.secCanvas.setHeight(800);
+//        fabric.Image.fromURL("https://www.baidu.com/img/bd_logo1.png", function (oImg) {
         self.imgActive.clone(function (oImg) {
-          var _img = self.secCanvas.getActiveObject();
-          self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness());
-          self.ApplyFilter(_img, 1, new fabric.Image.filters.Contrast());
-          self.ApplyFilter(_img, 2, new fabric.Image.filters.Blur());
-          self.ApplyFilter(_img, 3, new fabric.Image.filters.Saturation());
-          self.UpdateImg(_img, self.secCanvas);
+          var _img = oImg;
+          _img.left = 0;
+          _img.top = 0;
+//          self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness({'brightness':parseFloat(self.brightness/100)}));
+//          self.ApplyFilter(_img, 1, new fabric.Image.filters.Contrast());
+          self.ApplyFilter(_img, 2, new fabric.Image.filters.Blur({'blur': 0}));
+//          self.ApplyFilter(_img, 3, new fabric.Image.filters.Saturation());
+          _img.applyFilters();
+          self.secCanvas.add(_img);
+          self.Canvas.remove(self.imgActive);
         })
       },
       brightnessFilter: function () {
         var self = this;
         var _img = self.secCanvas.getActiveObject();
-        self.ApplyFilterValue(_img, 0, 'brightness', parseFloat((self.brightness) / 50 - 1));
-        self.UpdateImg(_img, self.secCanvas);
+//        self.ApplyFilterValue(_img, 0, 'brightness', parseFloat((self.brightness) / 50 - 1), self.secCanvas);
+        console.log(self.brightness/100);
+        self.ApplyFilterValue(_img, 0, 'brightness', parseFloat(self.brightness/100), self.secCanvas);
       },
       contrastFilter() {
         var self = this;
         var _img = self.secCanvas.getActiveObject();
-        self.ApplyFilterValue(_img, 1, 'contrast', parseFloat((self.contrast) / 50 - 1));
-        self.UpdateImg(_img, self.secCanvas);
+        console.log(parseFloat((self.contrast) / 50 - 1));
+
+        self.ApplyFilterValue(_img, 1, 'contrast', parseFloat((self.contrast) / 50 - 1), self.secCanvas);
       },
       blurFilter() {
         var self = this;
         var _img = self.secCanvas.getActiveObject();
-        self.ApplyFilterValue(_img, 2, 'blur', parseFloat(self.blur / 100));
-//              _img.filters[2]['blur'] =  parseFloat(self.blur/100);
-        self.UpdateImg(_img, self.secCanvas);
+        self.ApplyFilterValue(_img, 2, 'blur', parseFloat(self.blur / 100, 10), self.secCanvas);
       },
       saturationFilter() {
         var self = this;
         var _img = self.secCanvas.getActiveObject();
-        self.ApplyFilterValue(_img, 3, 'saturation', parseFloat(self.saturation) / 50 - 1);
-//              _img.filters[3]['saturation'] =  parseFloat((self.saturation)/50 -1);
-        self.UpdateImg(_img, self.Canvas);
+        console.log(parseFloat(self.saturation / 50 - 1));
+
+        self.ApplyFilterValue(_img, 3, 'saturation', parseFloat(self.saturation / 50 - 1), self.secCanvas);
       },
       Clip() {
         var self = this;
@@ -600,6 +605,8 @@
           oImg.left = 0;
           oImg.top = 0;
           oImg.fill = 'rgba(0, 255, 0, 1)';
+//          oImg.scale(0.5);
+          console.log(oImg);
           self.Canvas.remove(self.imgActive);
           clip.add(oImg);
           var beforeImg = oImg;
@@ -707,6 +714,8 @@
         });
       },
       menuNone() {
+        var self = this;
+        self.filterMenu=false;
         this.imgActive.evented = true;
         this.imgActive.lockMovementX = false;
         this.imgActive.lockMovementY = false;
@@ -726,6 +735,7 @@
       },
       menuYes() {
         var self = this;
+        self.filterMenu=false;
         var getObjImgs = this.secCanvas.getObjects("image");
         var getObjImg = getObjImgs[0];
         getObjImg.evented = true;
