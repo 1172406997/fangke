@@ -363,7 +363,7 @@ $(document).ready(function(){
 
     .box{
     	padding:10px;
-    	width: 30%;
+    	width: 340px;
     	float: left;
     }
     .pic {

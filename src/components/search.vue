@@ -45,7 +45,7 @@
 						        	<!--<img src="../assets/img/yizi.png" style="" alt="" />-->
 						       <!--</Col>-->
 						       </div>
-						       <div class="searchclassfy" v-for="(itemd , index) in secClass" @click="getSecList(itemd.pid)">
+						       <div class="searchclassfy" v-for="(itemd , index) in secClass" @click="getclassify(itemd.pid)">
 					       			<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 					       		</div>
 						    </Row>
@@ -156,7 +156,7 @@ export default {
   	search:function(res){
 			
   		if(this.fasClass!=''){
-  			this.secSearch()
+  			this.secSearch(res);
   		}else{
   			this.fenlei = false;
   			this.flag=false;
@@ -186,7 +186,8 @@ export default {
 		  		});
   		}
   	},
-  	secSearch(){
+  	secSearch(res){
+  		var self = this;
   		var str = this.Encrypt();
   		var user_id = localStorage.getItem("user_id");
   		var token = localStorage.getItem("token");
@@ -194,7 +195,7 @@ export default {
   			this.flag=false;
   			var params = {
 						params:{
-							'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"keyword":res
+							'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"keyword":res,'type_id':self.fasClass
 						}
 					};
 					this.jsonpRequest(this,"Material.GetMaterialByKeyWordAndTypeId",params,function(res){
@@ -242,7 +243,8 @@ export default {
   		var self = this;
   		this.flag=false;
   		this.fenlei = 'fenlei';
-		var str = this.Encrypt();
+  		this.fasClass = id;
+			var str = this.Encrypt();
   		var user_id = localStorage.getItem("user_id");
   		var token = localStorage.getItem("token");
   		var params = {

@@ -115,10 +115,16 @@ import modals from "../components/pages/Single"
 				}
 			};
 			this.jsonpRequest(this,"Like.DeleteLike",params,function(res){
-  					if(res){
-								console.log(res);
-								self.getlike();
-  					}
+				if (res.body.data.code == 0) {
+            console.log(res);
+            self.getlike();
+            this.$Message.success('删除成功！如若页面没有更改请刷新');
+          } else {
+            this.$Message.error('删除失败，请重试！');
+            if (res.body.ret == 401) {
+              self.toLogin(this, 401);
+            }
+          }
   		},function(err){
   			console.log(err);
   		});
