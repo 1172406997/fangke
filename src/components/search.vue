@@ -18,7 +18,7 @@
 				<main>
 					<div class="layout-content">
 						<Spin size="large" class="layz"></Spin>
-						<div class="content_con"  v-if="flag" v-show="this.d=='fenlei'">
+						<div class="content_con"  v-if="flag" >
 							<Row >
 								<h2>分类标签</h2>
 								<!--<div v-on:click="getclassify()">
@@ -36,7 +36,7 @@
 					    </Row>
 						</div>
 						<div class="content_con2" v-if="!flag">
-							<div>
+							<div v-show="fenlei=='fenlei'">
 							<h2>更多分类 <p style="float: right;cursor: pointer;" @click="flag=true">返回</p></h2>
 								<Row >
 									<div v-on:click="getclassify()">
@@ -49,44 +49,48 @@
 					       			<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 					       		</div>
 						    </Row>
-						  </div>
-							<h2>搜索结果</h2>
-							<div >
-						       <!--<div class="dan">
-							      <div class="img">
-							      	<img src="../assets/img/meijian.png" alt="" />
-							      	<div class="modal" style="display: none;"></div>
-							        <div class="icon">
-							      	<Tooltip content="收藏" placement="bottom">
-								      	<Icon type="archive" @click="StoreLike()"></Icon>
-							        </Tooltip>
-							      	</div>
-							      </div>
-							      <div class="nam">
-							      	我叫小明
-							      </div>
-							      <div class="price" style="display: none;">
-							      	圆圆圆
-							      </div>
-							    </div>-->
-									<div class="dan" v-for="item in searchi">
-							      <div class="img">
-							      	<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />
-							      	<div class="modal" style="display: none;"></div>
-							        <div class="icon">
-							      	<Tooltip content="收藏" placement="bottom">
-								      	<Icon type="archive" @click="StoreLike()"></Icon>
-							        </Tooltip>
-							      	</div>
-							      </div>
-							      <div class="nam">
-							      	{{item.name}}
-							      </div>
-							      <div class="price" style="display: none;">
-							      	{{item.price}}￥
-							      </div>
-							    </div>
+						  	</div>
+						  	<div >
+							<h2>搜索结果<p style="float: right;cursor: pointer;" @click="flag=true">返回</p></h2>
+								<div >
+							       <!--<div class="dan">
+								      <div class="img">
+								      	<img src="../assets/img/meijian.png" alt="" />
+								      	<div class="modal" style="display: none;"></div>
+								        <div class="icon">
+								      	<Tooltip content="收藏" placement="bottom">
+									      	<Icon type="archive" @click="StoreLike()"></Icon>
+								        </Tooltip>
+								      	</div>
+								      </div>
+								      <div class="nam">
+								      	我叫小明
+								      </div>
+								      <div class="price" style="display: none;">
+								      	圆圆圆
+								      </div>
+								    </div>-->
+										<div class="dan" v-for="item in searchi">
+								      <div class="img">
+								      	<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />
+								      	<div class="modal" style="display: none;"></div>
+								        <div class="icon">
+								      	<Tooltip content="收藏" placement="bottom">
+									      	<Icon type="archive" @click="StoreLike()"></Icon>
+								        </Tooltip>
+								      	</div>
+								      </div>
+								      <div class="nam">
+								      	{{item.name}}
+								      </div>
+								      <div class="price" style="display: none;">
+								      	{{item.price}}￥
+								      </div>
+								    </div>
+								</div>
 							</div>
+							
+							
 						</div>
 						<!--<div v-for="item in item">
 
@@ -117,6 +121,7 @@ export default {
        //二级分类
        secClass:'',
        fasClass:'',
+       keyWord:'',
     }
   },
   created:function(){
@@ -143,7 +148,7 @@ export default {
 							if(res.body.ret==401){
 								self.toLogin(this,401);
 							}
-						}
+					}
   		},function(err){
   			console.log(err);
   		});
@@ -234,20 +239,41 @@ export default {
   		});
 		},
   	getclassify:function(id){
+  		var self = this;
   		this.flag=false;
-			var str = this.Encrypt();
+  		this.fenlei = 'fenlei';
+		var str = this.Encrypt();
   		var user_id = localStorage.getItem("user_id");
   		var token = localStorage.getItem("token");
   		var params = {
-				params:{
-					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"pid":id
-				}
-			};
-			this.jsonpRequest(this,"Type.GetTypeByPid",params,function(res){
+			params:{
+				'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"pid":id
+			}
+		};
+		this.jsonpRequest(this,"Type.GetTypeByPid",params,function(res){
   					if(res.body.data.code==0){
 							this.secClass = res.body.data.list;
-							console.log("secClass1111111111111111111111111111111111");
+//							console.log("secClass1111111111111111111111111111111111");
 							console.log(res);
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+  		},function(err){
+  			console.log(err);
+  		});
+  		var Material = {
+			params:{
+				'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"type_id":id
+			}
+		};
+  		this.jsonpRequest(this,"Material.GetMaterial",Material,function(res){
+  					if(res.body.data.code==0){
+						console.log("GetMaterial1111111111111111111111111111111111");
+						self.searchi = res.body.data.list;
+						console.log(res);
   					}else{
 							console.log(res);
 							if(res.body.ret==401){

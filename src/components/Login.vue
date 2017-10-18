@@ -4,7 +4,7 @@
   		<div class="big"></div>
 	    <div class="con">
 	    	<div><img src="../assets/img/meijian.png" alt="" style="width:30%;transform: translateY(-50%);" /></div>
-	    	<div v-if="clickr">
+	    	<div style="margin-top: 80px;" v-if="clickr">
 		    	<p style=" margin-top: 10px;font-size: 24px;color:#fff">欢迎回来</p>
 		    	<div style="width: 60%; margin-top: 10px;color: red;" v-if="show">&nbsp;用户名密码错误</div>
 		    	<Input v-model="username" placeholder="请输入用户名" style="width: 60%; margin-top: 10px;"></Input><br/>
@@ -126,8 +126,13 @@ export default {
 		text-align: center;
 		box-sizing: border-box;
 		}
+		.con>div{
+			/*position:absolute;*/
+		}
 		.con>div>img{
-			transform: translateY(-50%);
+			/*position: absolute;
+			left: -15%;*/
+			transform: translateY(50%);
 		}
 	@keyframes userlogin_bg{
 		0%{

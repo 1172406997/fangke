@@ -77,11 +77,14 @@
                       <div class="conlist_show">
                         <div class="conlist_con">
                           <div class="conlist_content">
-                            <Col span="11" class="classify" v-for="(itemd , index) in item"
-                                 @click.native="getclassify(itemd.id)">
+                            <!--<Col span="11" class="classify" v-for="(itemd , index) in item"
+                                 @click.native="getclassify(itemd.id)">-->
                             <!--<p>{{itemd.name}}</p>-->
-                            <img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt=""/>
-                            </Col>
+                            <!--<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt=""/>
+                            </Col>-->
+                            <div class="searchclassfy" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
+                            	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt=""/>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1132,6 +1135,27 @@
   .classify:hover {
     box-shadow: 2px 2px 5px #888888;;
   }
+  /*搜索样式*/
+   .searchclassfy{
+   	position: relative;
+   	width:185px;
+   	height: 124px;
+   	border-radius: 10px;
+   	margin: 5px;
+		cursor: pointer;
+		float: left;
+   }
+  .searchclassfy img{
+   	position: absolute;
+   	left: 0;
+   	top: 0;
+   	width: 100%;
+   	height: 100%;
+   	border-radius: 5px;
+   }
+   .searchclassfy:hover{
+			box-shadow: 2px 2px 5px #888888;;
+		}
 
   .con2 > img {
     max-width: 90%;
