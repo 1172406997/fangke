@@ -548,10 +548,10 @@
           var _img = oImg;
           _img.left = 0;
           _img.top = 0;
-//          self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness({'brightness':parseFloat(self.brightness/100)}));
-//          self.ApplyFilter(_img, 1, new fabric.Image.filters.Contrast());
+          self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness({'brightness':parseFloat(self.brightness/100)}));
+          self.ApplyFilter(_img, 1, new fabric.Image.filters.Contrast());
           self.ApplyFilter(_img, 2, new fabric.Image.filters.Blur({'blur': 0}));
-//          self.ApplyFilter(_img, 3, new fabric.Image.filters.Saturation());
+          self.ApplyFilter(_img, 3, new fabric.Image.filters.Saturation());
           _img.applyFilters();
           self.secCanvas.add(_img);
           self.Canvas.remove(self.imgActive);

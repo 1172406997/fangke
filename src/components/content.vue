@@ -81,9 +81,10 @@ export default {
     modals
   },
   created:function(){
-	  		this.falls();
+	  		
 	},
 	mounted:function(){
+		this.falls();
 		this.path = this.$route.path;
 		if(this.$route.path == '/content'){
 			this.Load();
