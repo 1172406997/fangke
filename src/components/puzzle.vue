@@ -20,7 +20,7 @@
               <router-link to="/puzzleson">
                 <Menu-item name="7">拼图</Menu-item>
               </router-link>-->
-							 <router-link to="/canvas"><Button style="float: right;position:relative;top:10px;" class="btn"><Icon type="ios-folder"></Icon>&nbsp;新建项目</Button></router-link>
+							 <router-link to=""><Button @click="creatFile()" style="float: right;position:relative;top:10px;" class="btn"><Icon type="ios-folder"></Icon>&nbsp;新建项目</Button></router-link>
             </div>
         </Menu>
 				<main>
@@ -29,6 +29,38 @@
 						<!--瀑布流開始-->
 						 <div class="body layout-content" style="">
 						 	<div id="main">
+						 		
+						 		<!--文件夹样式-->
+						 		<div class="box filebox">
+						 			<div class="fileboxcon">
+						 				<img src="../../dist/instatic/img/1.d80e543.png" alt="" />
+							 			<div class="bg"></div>
+							 			<div class="modal"></div>
+							 			<h2>Title</h2>
+						 			</div>
+						 			<div class="pic">
+						      	<div class="icon del">
+							      	<Tooltip content="删除" placement="bottom">
+								      	<Icon type="trash-b"></Icon>
+							        </Tooltip>
+						      	</div>
+						      	<Dropdown trigger="click">
+						      	<div class="icon menu">
+							      	<Tooltip content="菜单" placement="bottom">
+								      	<Icon type="android-more-vertical"></Icon>
+							        </Tooltip>
+						      	</div>
+							      	<DropdownMenu slot="list" style="z-index: 10;">
+							            <!--<DropdownItem>查看</DropdownItem>-->
+							            <DropdownItem >修改</DropdownItem>
+							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
+							            <DropdownItem>北京烤鸭</DropdownItem>-->
+							        </DropdownMenu>
+						      	</Dropdown>
+						 			</div>
+						 		</div>
+						 		
+						 		
 						 		<div class="box" >
 						 			<div class="boxcon">
 						 			<div class="pic">
@@ -51,6 +83,9 @@
 						      	</div>
 							      	<DropdownMenu slot="list">
 							            <!--<DropdownItem>查看</DropdownItem>-->
+							            <DropdownItem >移动到</DropdownItem>
+							            <DropdownItem >查看清单</DropdownItem>
+							            <DropdownItem >查看清单</DropdownItem>
 							            <DropdownItem @click="topdf(id)">导出为pdf</DropdownItem>
 							            <DropdownItem>设置为公开不公开</DropdownItem>
 							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
@@ -72,12 +107,14 @@
 							 					<p>介绍</p>
 							 				</div>
 							 				<ul>
-						 						<li><Icon type="heart"></Icon></li>
+						 						<!--<li><Icon type="heart"></Icon></li>-->
 						 					</ul>
 						 				</div>
 						 			</div>
 						 		</div>
 						 		</div>
+						 		
+						 		
 						 	</div>
 						</div>
 					</div>
@@ -107,7 +144,31 @@
       modals,
     },
   methods:{
-  	//获取作品信息
+  	//创建文件夹
+  	creatFile() {
+  		this.$Modal.confirm({
+  			render: (h) => {
+  				return h('Input', {
+  					props: {
+  						value: this.value,
+  						autofocus: true,
+  						placeholder: '请输入要创建的文件夹名称'
+  					},
+  					on: {
+  						input: (val) => {
+  							this.value = val;
+  						}
+  					},
+  				})
+  			},
+  			onOk: () => {
+          this.$Message.info('点击了确定');
+        },
+        onCancel: () => {
+          this.$Message.info('点击了取消');
+        }
+  		})
+  	},//获取作品信息
   	GetProductionByUserId:function (){
   		var self = this;
   		var str = this.Encrypt();
@@ -249,8 +310,59 @@ $(document).ready(function(){
 
     .box{
     	padding:10px;
-    	width: 30%;
+    	width: 340px;
     	float: left;
+    	min-height: 280px;
+    }
+    .filebox{
+    	height: 338px;
+    	border-radius: 4px;
+    	position: relative;
+    	/*overflow: hidden;*/
+    }
+    .filebox .fileboxcon{
+    	position: absolute;
+    	left: 0;
+    	right: 0;
+    	top: 0;
+    	bottom: 0;
+    	border-radius: 4px;
+    	overflow: hidden;
+    }
+    .filebox h2{
+    	position: absolute;
+    	font-size: 32px;
+    	color: #fff;
+    	line-height: 338px;
+    	margin-left: 10px;
+    	z-index: 3;
+    }
+    .filebox .bg{
+    	position: absolute;
+    	left:0;
+    	right:0;
+    	bottom:0;
+    	top:0;
+    	z-index: 2;
+    	background-color: rgba(134,156,170,.9);
+    }
+    .filebox .modal{
+    	position:absolute;
+    	left:0;
+    	right:0;
+    	top:0;
+    	bottom: 0;
+    	z-index: 2;
+    	cursor: pointer;
+    	background-color: rgba(0,0,0,.3);
+    }
+    .filebox img{
+    	position: absolute;
+    	z-index: 1;
+    	left:50%;
+    	top:50%;
+    	transform: translate(-50%,-50%);
+    	width: 100%;
     }
     .pic {
     	position: relative;

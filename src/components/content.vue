@@ -41,7 +41,11 @@
 									 					<p>{{item.production.ctime | Time}}</p>
 									 				</div>
 									 				<ul>
-								 						<li><Icon type="heart"></Icon></li>
+								 						<li class="show-icon">
+								 							<Tooltip content="再创作" placement="bottom">
+							      						<Icon type="heart"></Icon>
+						       	 					</Tooltip>
+								 						</li>
 								 					</ul>
 								 				</div>
 								 			</div>
@@ -575,5 +579,8 @@ $(document).ready(function(){
     }
     .ivu-icon{
     	color: #999;
+    }
+    .show-icon .ivu-icon-heart:before {
+    	color: #FF556A;
     }
 </style>
