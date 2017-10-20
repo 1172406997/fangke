@@ -1,6 +1,15 @@
 <template>
   <div class="showList">
-  	
+  	<header>
+  		<div class="listtop">
+  			
+  		</div>
+  	</header>
+  	<footer>
+  		<div class="footer">
+  			
+  		</div>
+  	</footer>
 	</div>
 </template>
 
@@ -25,5 +34,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	
+	header{
+		
+	}
 </style>	

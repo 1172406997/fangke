@@ -312,7 +312,8 @@
       saveCanvas() {
         var self = this;
         var data = this.Canvas.toJSON().toString();
-        var svg = this.Canvas.toSVG();
+        var svg = this.Canvas.toDataURL({format: 'jpeg'});
+        console.log(svg);
         var str = this.Encrypt();
         var items = [];
         var imgdate = this.Canvas.getObjects("image");
