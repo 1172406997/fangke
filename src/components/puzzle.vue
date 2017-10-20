@@ -31,7 +31,7 @@
 						 	<div id="main">
 						 		
 						 		<!--文件夹样式-->
-						 		<div class="box filebox">
+						 		<!--<div class="box filebox">
 						 			<div class="fileboxcon">
 						 				<img src="../../dist/instatic/img/1.d80e543.png" alt="" />
 							 			<div class="bg"></div>
@@ -50,44 +50,44 @@
 								      	<Icon type="android-more-vertical"></Icon>
 							        </Tooltip>
 						      	</div>
-							      	<DropdownMenu slot="list" style="z-index: 10;">
+							      	<DropdownMenu slot="list" style="z-index: 10;">-->
 							            <!--<DropdownItem>查看</DropdownItem>-->
-							            <DropdownItem >修改</DropdownItem>
+							            <!--<DropdownItem >修改</DropdownItem>-->
 							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
 							            <DropdownItem>北京烤鸭</DropdownItem>-->
-							        </DropdownMenu>
+							        <!--</DropdownMenu>
 						      	</Dropdown>
 						 			</div>
-						 		</div>
+						 		</div>-->
 						 		
 						 		
-						 		<div class="box" >
+						 		<div class="box"  v-for="item in getlikeitem">
 						 			<div class="boxcon">
 						 			<div class="pic">
 						 				<img src="../img/1.png"/>
-						 				<div class="icon myedit">
+						 				<!--<div class="icon myedit">
 							      	<Tooltip content="编辑" placement="bottom">
 								      	<Icon type="compose"></Icon>
 							        </Tooltip>
-						      	</div>
-						      	<div class="icon del">
+						      	</div>-->
+						      	<!--<div class="icon del">
 							      	<Tooltip content="删除" placement="bottom">
 								      	<Icon type="trash-b"></Icon>
 							        </Tooltip>
-						      	</div>
+						      	</div>-->
 						      	<Dropdown trigger="click">
-						      	<div class="icon menu">
+						      	<!--<div class="icon menu">
 							      	<Tooltip content="菜单" placement="bottom">
 								      	<Icon type="android-more-vertical"></Icon>
 							        </Tooltip>
-						      	</div>
+						      	</div>-->
 							      	<DropdownMenu slot="list">
 							            <!--<DropdownItem>查看</DropdownItem>-->
-							            <DropdownItem >移动到</DropdownItem>
-							            <DropdownItem >查看清单</DropdownItem>
-							            <DropdownItem >查看清单</DropdownItem>
-							            <DropdownItem @click="topdf(id)">导出为pdf</DropdownItem>
-							            <DropdownItem>设置为公开不公开</DropdownItem>
+							            <!--<DropdownItem >移动到</DropdownItem>-->
+							            <!--<DropdownItem >查看清单</DropdownItem>-->
+							            <!--<DropdownItem >查看清单</DropdownItem>-->
+							            <!--<DropdownItem @click="topdf(id)">导出为pdf</DropdownItem>-->
+							            <!--<DropdownItem>设置为公开不公开</DropdownItem>-->
 							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
 							            <DropdownItem>北京烤鸭</DropdownItem>-->
 							        </DropdownMenu>
@@ -98,13 +98,14 @@
 						 				<div class="borderbox">
 
 							 				<span class="thumb">
-							 					<img src="../assets/logo.png"/>
-							 				</span>
+									 			<!--<img src="../assets/logo.png"/>-->
+									 			<p>{{item.userinfo.username | Username}}</p>
+									 		</span>
 							 				<div style="width: 15px;"></div>
 							 				<div class="box-txt">
-							 					<p>用户名</p>
+							 					<p>{{item.userinfo.username}}</p>
 							 					<div style="height: 5px;"></div>
-							 					<p>介绍</p>
+							 					<p>{{item.production.ctime | Time}}</p>
 							 				</div>
 							 				<ul>
 						 						<!--<li><Icon type="heart"></Icon></li>-->
@@ -121,7 +122,7 @@
 					<div class="modal"  ></div>
 					 <Back-top></Back-top>
 					</div>
-          <modals v-if="this.modal=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
+          <!--<modals v-if="this.modal=='modal'" :toson='toson'  @modal="getsonitem()"></modals >-->
 				</main>
 	</div>
 </template>
@@ -133,7 +134,7 @@
   name: 'content',
   data () {
     return {
-			 value13: '',
+	   value13: '',
        select3: 'day',
        getlikeitem: '',
        modal:'',
@@ -143,7 +144,31 @@
     components:{
       modals,
     },
-  methods:{
+    mounted(){
+    	this.GetProductionByUserId();
+    	this.movingPos();
+		this.colorRand();
+    },
+    filters:{
+  		Time(val){
+  		console.log(typeof(val))
+  		val = new Date(parseInt(val)*1000);
+  		return val.format("yyyy-MM-dd hh:mm:ss");
+		},
+		Username(val){
+			return val.substr(0,1);
+		},
+	},
+  	methods:{
+  	colorRand() {
+			console.log(1111111111111111111111)
+			console.log($("#main").find(".thumb"));
+			var ranColor = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
+			setTimeout(function () {
+					$("#main").find(".thumb").css("background", ranColor);
+			},500)
+			
+	},
   	//创建文件夹
   	creatFile() {
   		this.$Modal.confirm({
@@ -172,6 +197,8 @@
   	GetProductionByUserId:function (){
   		var self = this;
   		var str = this.Encrypt();
+		var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
   		var params = {
 				params:{
 					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
@@ -180,6 +207,8 @@
 			this.jsonpRequest(this,"Production.GetProductionByUserId",params,function(res){
   			console.log(res);
   					if(res.body.data.code==0){
+  						this.$set(this, 'getlikeitem', res.body.data.list);
+  						self.getlikeitem = res.body.data.list;
   						console.log(res);
   					}else{
 							console.log(res);
@@ -195,11 +224,80 @@
   		window.location.href="";
   	},
     modalS:function(){
-//      this.toson = item;
       this.modal="modal";
     },
     getsonitem:function(msg){
       this.modal=msg;
+    },
+    checkScrollSlide(){
+				var self = this;
+				 if(this.$route.name=='content'){
+				var oParent=document.getElementById('main');
+        var oBoxs=self.getByClass(oParent,'box');
+        var lastBoxH=oBoxs[oBoxs.length-1].offsetTop + Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);
+        var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;
+        var height=document.body.clientHeight || document.documentElement.clientHeight;
+        return (lastBoxH<scrollTop+height)?true:false;
+       }else{
+       		return
+       }
+		},
+		movingPos(){
+			var self = this;
+			setTimeout(function () {
+          $("#main").children(".box").each(function (index, val) {
+                 var $this = $(this);
+									var $img = $this.find("img").first();
+									$img.on("load", function () {
+							        //将main下的所有class为box的元素取出来
+							        var oParent=document.getElementById('main');
+							        var oBoxs=self.getByClass(oParent,'box');
+							        //计算整个页面的显示雷氏（页面/box的宽）
+							        var oBoxW=$this[0].offsetWidth;
+											var winW = oParent.offsetWidth;
+							        var cols=Math.floor(winW/oBoxW);
+							        //console.log(cols);
+							        //设置main的宽
+							//      oParent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto';
+							        var hArr=[];//存放每一列高度
+							        for(var i=0;i<oBoxs.length;i++){
+							            if(i<cols){
+							                hArr.push(oBoxs[i].offsetHeight);
+							            }
+							            else{
+							                var minH=Math.min.apply(null,hArr);
+							                var index=self.getMinhIndex(hArr,minH);
+							                oBoxs[i].style.position="absolute";
+							                oBoxs[i].style.top=minH+'px';
+							                oBoxs[i].style.left=oBoxW*index+'px';
+							                hArr[index]+=oBoxs[i].offsetHeight;
+							            }
+							        }
+									});
+          	})
+			}, 0);   
+		},
+		getByClass(parent,clsName){
+    	if(this.$route.name == 'content'){
+    		 var boxArr=new Array(),//用来存储获取到的所有class为Box的元素
+        	oElements=parent.getElementsByTagName('*');
+        	console.log("boxarr")
+	        for(var i=0;i<oElements.length;i++){
+	            if (oElements[i].className==clsName) {
+	                boxArr.push(oElements[i]);
+	            }
+	        }
+	        return boxArr;
+    	}else{
+    		return;
+    	}
+    },
+    getMinhIndex(arr,val){
+        for(var i in arr){
+            if(arr[i]==val){
+                return i;
+            }
+        }
     },
   },
  }
@@ -407,6 +505,7 @@ $(document).ready(function(){
     	display: flex;
     	align-items: center;
     }
+    
     .boxcon {
     	padding: 10px;
     	/*cursor: pointer;*/
@@ -441,6 +540,21 @@ $(document).ready(function(){
   	line-height: 12px;
     font-size: 12px;
     color: #b2c0c8;
+  }
+  .boxcon .footer .thumb {
+  	display: inline-block;
+  	width: 66px;
+  	height: 32px;
+  	border-radius: 50%;
+  	/*background-color: ;*/
+  }
+
+  .boxcon .footer .thumb p{
+  	text-align: center;
+  	line-height: 35px;
+  	font-size: 18px;
+  	color: #fff;
+  	font-weight: 500;
   }
 
   .boxcon .footer .thumb img {

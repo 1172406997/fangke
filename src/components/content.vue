@@ -59,7 +59,7 @@
 					<div class="modal" v-show="this.modal=='modal'"></div>
 					 <Back-top></Back-top>
 				</div>
-        <modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
+        <!--<modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >-->
 				<div class="layout-copy">
 					2011-2017 &copy; TalkingData
 				</div>
@@ -114,9 +114,9 @@ created: function() {},
 			
 		},
 		falls: function() {
-				var self = this;
-				var str = this.Encrypt();
-				var user_id = localStorage.getItem("user_id");
+			var self = this;
+			var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id");
   		var token = localStorage.getItem("token");
   		var params = {
 				params:{
