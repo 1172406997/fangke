@@ -209,9 +209,10 @@
       modals,
     },
     mounted(){
+    	this.getFolder();
     	this.GetProductionByUserId();
     	this.movingPos();
-		this.colorRand();
+			this.colorRand();
     },
     filters:{
   		Time(val){
@@ -259,6 +260,33 @@
         }
   		})
   	},
+  	//获取文件夹
+  	getFolder(){
+  		var self = this;
+  		var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
+  		var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'limit':1,'start':0,'type':1
+				}
+			};
+			this.jsonpRequest(this,"Folder.GetFolderList",params,function(res){
+  			console.log(res);
+  					if(res.body.data.code==0){
+  						console.log(res);
+  						console.log("resresresresresres");
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+  		},function(err){
+  			console.log(err);
+  			console.log("resresresresresres");
+  		});
+  	},
   	//创建文件夹
   	creatFolder(){
   		var self = this;
@@ -267,7 +295,7 @@
   		var token = localStorage.getItem("token");
   		var params = {
 				params:{
-					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'folderName':self.value,'type':1
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'folderName':self.value,'type':1
 				}
 			};
 			this.jsonpRequest(this,"Folder.CreateFolder",params,function(res){
