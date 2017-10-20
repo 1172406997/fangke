@@ -20,7 +20,7 @@
               <router-link to="/puzzleson">
                 <Menu-item name="7">拼图</Menu-item>
               </router-link>-->
-							 <router-link to=""><Button @click="creatFile()" style="float: right;position:relative;top:10px;" class="btn"><Icon type="ios-folder"></Icon>&nbsp;新建项目</Button></router-link>
+							 <router-link to=""><Button @click="clickCreat()" style="float: right;position:relative;top:10px;" class="btn"><Icon type="ios-folder"></Icon>&nbsp;新建项目</Button></router-link>
             </div>
         </Menu>
 				<main>
@@ -28,10 +28,10 @@
 						<div  class="left" style="width: 100%;">
 						<!--瀑布流開始-->
 						 <div class="body layout-content" style="">
-						 	<div id="main">
+						 	<div id="main" v-if="fileShowHide">
 						 		
 						 		<!--文件夹样式-->
-						 		<!--<div class="box filebox">
+						 		<div class="box filebox">
 						 			<div class="fileboxcon">
 						 				<img src="../../dist/instatic/img/1.d80e543.png" alt="" />
 							 			<div class="bg"></div>
@@ -50,21 +50,84 @@
 								      	<Icon type="android-more-vertical"></Icon>
 							        </Tooltip>
 						      	</div>
-							      	<DropdownMenu slot="list" style="z-index: 10;">-->
+							      	<DropdownMenu slot="list" style="z-index: 10;">
 							            <!--<DropdownItem>查看</DropdownItem>-->
 							            <!--<DropdownItem >修改</DropdownItem>-->
 							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
 							            <DropdownItem>北京烤鸭</DropdownItem>-->
-							        <!--</DropdownMenu>
+							        </DropdownMenu>
 						      	</Dropdown>
 						 			</div>
-						 		</div>-->
+						 		</div>
 						 		
 						 		
 						 		<div class="box"  v-for="item in getlikeitem">
 						 			<div class="boxcon">
 						 			<div class="pic">
-						 				<img src="../img/1.png"/>
+						 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
+						 				<!--<div class="icon myedit">
+							      	<Tooltip content="编辑" placement="bottom">
+								      	<Icon type="compose"></Icon>
+							        </Tooltip>
+						      	</div>-->
+						      	<!--<div class="icon del">
+							      	<Tooltip content="删除" placement="bottom">
+								      	<Icon type="trash-b"></Icon>
+							        </Tooltip>
+						      	</div>-->
+						      	<Dropdown trigger="click">
+						      	<!--<div class="icon menu">
+							      	<Tooltip content="菜单" placement="bottom">
+								      	<Icon type="android-more-vertical"></Icon>
+							        </Tooltip>
+						      	</div>-->
+							      	<DropdownMenu slot="list">
+							            <!--<DropdownItem>查看</DropdownItem>-->
+							            <DropdownItem @click.native="deleteFolder">删除文件夹</DropdownItem>
+							            <!--<DropdownItem >移动到</DropdownItem>-->
+							            <!--<DropdownItem >查看清单</DropdownItem>-->
+							            <!--<DropdownItem >查看清单</DropdownItem>-->
+							            <!--<DropdownItem @click="topdf(id)">导出为pdf</DropdownItem>-->
+							            <!--<DropdownItem>设置为公开不公开</DropdownItem>-->
+							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
+							            <DropdownItem>北京烤鸭</DropdownItem>-->
+							        </DropdownMenu>
+						      	</Dropdown>
+						 				<div class="modal" @click="modalS()"></div>
+						 			</div>
+						 			<div class="footer">
+						 				<div class="borderbox">
+
+							 				<span class="thumb">
+									 			<!--<img src="../assets/logo.png"/>-->
+									 			<p>{{item.userinfo.username | Username}}</p>
+									 		</span>
+							 				<div style="width: 15px;"></div>
+							 				<div class="box-txt">
+							 					<p>{{item.userinfo.username}}</p>
+							 					<div style="height: 5px;"></div>
+							 					<p>{{item.production.ctime | Time}}</p>
+							 				</div>
+							 				<ul>
+						 						<!--<li><Icon type="heart"></Icon></li>-->
+						 					</ul>
+						 				</div>
+						 			</div>
+						 		</div>
+						 		</div>
+						 		
+						 		
+						 	</div>
+						 	
+						 	
+						 	
+						 	
+						 	<!--文件夹内容显示-->
+						 	<div id="main" v-if="fileShowHide">
+						 		<div class="box"  v-for="item in getlikeitem">
+						 			<div class="boxcon">
+						 			<div class="pic">
+						 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
 						 				<!--<div class="icon myedit">
 							      	<Tooltip content="编辑" placement="bottom">
 								      	<Icon type="compose"></Icon>
@@ -107,12 +170,12 @@
 							 					<div style="height: 5px;"></div>
 							 					<p>{{item.production.ctime | Time}}</p>
 							 				</div>
-							 				<ul>
+							 					<ul>
 						 						<!--<li><Icon type="heart"></Icon></li>-->
-						 					</ul>
+						 						</ul>
+						 					</div>
 						 				</div>
 						 			</div>
-						 		</div>
 						 		</div>
 						 		
 						 		
@@ -139,6 +202,7 @@
        getlikeitem: '',
        modal:'',
        toson:'',
+       fileShowHide:true,
     }
   },
     components:{
@@ -161,16 +225,17 @@
 	},
   	methods:{
   	colorRand() {
-			console.log(1111111111111111111111)
 			console.log($("#main").find(".thumb"));
 			var ranColor = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
 			setTimeout(function () {
-					$("#main").find(".thumb").css("background", ranColor);
+					$("#main").find(".thumb").each(function(){
+						$(this).css("background", ranColor);
+					})
 			},500)
-			
 	},
-  	//创建文件夹
-  	creatFile() {
+  	//点击创建文件夹按钮
+  	clickCreat() {
+  		var self = this;
   		this.$Modal.confirm({
   			render: (h) => {
   				return h('Input', {
@@ -187,17 +252,96 @@
   				})
   			},
   			onOk: () => {
-          this.$Message.info('点击了确定');
+  				self.creatFolder();
         },
         onCancel: () => {
-          this.$Message.info('点击了取消');
+          this.$Message.info('已取消');
         }
   		})
-  	},//获取作品信息
+  	},
+  	//创建文件夹
+  	creatFolder(){
+  		var self = this;
+  		var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
+  		var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'folderName':self.value,'type':1
+				}
+			};
+			this.jsonpRequest(this,"Folder.CreateFolder",params,function(res){
+  			console.log(res);
+  					if(res.body.data.code==0){
+  						console.log(res);
+  						this.$Message.info('创建文件夹成功');
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+  		},function(err){
+  			console.log(err);
+  		});
+  	},
+  	//删除文件夹
+  	deleteFolder(id){
+  		var self = this;
+  		var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
+  		var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'folderId':id
+				}
+			};
+			this.jsonpRequest(this,"Folder.DelFolder",params,function(res){
+  			console.log(res);
+  					if(res.body.data.code==0){
+  						console.log(res);
+  						this.$Message.info('删除文件夹成功！');
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+  		},function(err){
+  			console.log(err);
+  		});
+  	},
+  	//添加文件到文件夹
+  	addProdFolder(){
+  		var self = this;
+  		var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
+  		var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'imgId':imgId,'folderId':folderId
+				}
+			};
+			this.jsonpRequest(this,"Folder.StoreImg",params,function(res){
+  			console.log(res);
+  					if(res.body.data.code==0){
+  						console.log(res);
+  						this.$Message.info('添加文件夹成功！');
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+  		},function(err){
+  			console.log(err);
+  		});
+  	},
+  	//获取作品信息
   	GetProductionByUserId:function (){
   		var self = this;
   		var str = this.Encrypt();
-		var user_id = localStorage.getItem("user_id");
+			var user_id = localStorage.getItem("user_id");
   		var token = localStorage.getItem("token");
   		var params = {
 				params:{

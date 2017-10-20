@@ -20,7 +20,7 @@
 						 		<div class="box" v-for ="item in bigs">
 						 			<div class="boxcon">
 								 			<div class="pic" @click="modalS()">
-								 				<img src="../img/1.png"/>
+								 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
 								 				<!--<div class="icon">
 								      	<Tooltip content="收藏" placement="bottom">
 									      	<Icon type="archive"></Icon>
@@ -109,7 +109,9 @@ created: function() {},
 			console.log($("#main").find(".thumb"));
 			var ranColor = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
 			setTimeout(function () {
-					$("#main").find(".thumb").css("background", ranColor);
+					$("#main").find(".thumb").each(function(){
+						$(this).css("background", ranColor);
+					})
 			},500)
 			
 		},

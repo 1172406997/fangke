@@ -11,6 +11,7 @@ import myCollect from '@/components/myCollect'
 //import project from '@/components/project'
 //import puzzleson from '@/components/puzzleson'
 import canvas from '@/components/canvas'
+import showList from '@/components/showList'
 //import Clip from '@/components/Clip'
 
 Vue.use(Router)
@@ -48,6 +49,11 @@ export default new Router({
     		{
     			path: '/myCollect',
     			component: myCollect
+    		},
+    		,
+    		{
+    			path: '/showList',
+    			component: showList
     		}
     	]
     },

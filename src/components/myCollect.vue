@@ -31,7 +31,7 @@
 						      <div class="img">
 						      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
 						      	<div class="modal" @click="modalS(item)"></div>
-						      	<div class="icon"  @click="DelLike(item.like)">
+						      	<div class="icon"  @click="DelLike(item.id)">
 						      	<Tooltip content="删除" placement="bottom">
 							      	<Icon type="trash-a"></Icon>
 						        </Tooltip>
