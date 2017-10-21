@@ -45,7 +45,7 @@
 						        	<!--<img src="../assets/img/yizi.png" style="" alt="" />-->
 						       <!--</Col>-->
 						       </div>
-						       <div class="searchclassfy" v-for="(itemd , index) in secClass" @click="getclassify(itemd.pid)">
+						       <div class="searchclassfy" v-for="(itemd , index) in secClass" @click="getByTermal(itemd.id)">
 					       			<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 					       		</div>
 						    </Row>
@@ -266,11 +266,21 @@ export default {
   		},function(err){
   			console.log(err);
   		});
+  		this.getByTermal(id);
+  	},
+  	getByTermal(id){
+  		var self = this;
+  		this.flag=false;
+  		this.fenlei = 'fenlei';
+  		this.fasClass = id;
+			var str = this.Encrypt();
+  		var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
   		var Material = {
 			params:{
 				'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,"type_id":id
 			}
-		};
+			};
   		this.jsonpRequest(this,"Material.GetMaterial",Material,function(res){
   					if(res.body.data.code==0){
 						console.log("GetMaterial1111111111111111111111111111111111");
