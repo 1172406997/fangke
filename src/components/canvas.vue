@@ -311,8 +311,11 @@
       },
       saveCanvas() {
         var self = this;
+        var svg = this.Canvas.toDataURL();
         var data = this.Canvas.toJSON().toString();
-        var svg = this.Canvas.toDataURL({format: 'jpeg'});
+//      var svg = this.Canvas.toDataURL({format: 'jpeg'});
+       
+        console.log(this.Canvas)
         console.log(svg);
         var str = this.Encrypt();
         var items = [];
