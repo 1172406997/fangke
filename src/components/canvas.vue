@@ -40,15 +40,15 @@
         <div class="layout-ceiling">
           <div class="layout-ceiling-main">
             <a href="javascript:;" @click="writeName">保存</a> |
-            <!--<a href="#">下载高清大图</a> |-->
+            <a href="#" @click = "exportImg">导出高清大图</a> |
             <!--<a href="#">服务大厅</a>   | -->
             <a href="javascript:;" @click="Clear">清空</a> |
             <a href="javascript:;" @click="Clear">
             	<Dropdown trigger="click">
 	               <a href="javascript:;">画布设置</a>
                 <DropdownMenu slot="list">
-                  <DropdownItem @click.native="">A3(横)</DropdownItem>
-                  <DropdownItem @click.native="">A3(竖)</DropdownItem>
+                  <DropdownItem @click.native="setCanvasDimension(Canvas,1103,780)">A3(横)</DropdownItem>
+                  <DropdownItem @click.native="setCanvasDimension(Canvas,546,780)">A3(竖)</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </a>
@@ -281,6 +281,7 @@
     },
     created: function () {
       this.getsearch();
+      console.log(this.$route.params.id);
     },
     mounted() {
       this.getCanvas();
@@ -469,6 +470,10 @@
         canvas.setWidth(width);
         canvas.setHeight(height);
       },
+      exportImg(){
+      	var self = this;
+      	self.Canvas.toDataURL();
+      },
       getsearch: function () {
         var str = this.Encrypt();
         var user_id = localStorage.getItem("user_id");
@@ -483,6 +488,29 @@
             this.$set(this, 'item', res.data);
             this.item = res.body.data.list;
             console.log("item:" + this.item);
+            console.log(res)
+          } else {
+            console.log(res);
+            if (res.body.ret == 401) {
+              self.toLogin(this, 401);
+            }
+          }
+        }, function (err) {
+          console.log(err);
+        });
+      },
+       getProductionBy: function () {
+        var str = this.Encrypt();
+        var user_id = localStorage.getItem("user_id");
+        var token = localStorage.getItem("token");
+        var production_id = this.$router.params.id;
+        var params = {
+          params: {
+            'signature': str.sha, 'timestamp': str.timestamp, 'nonce': str.nonce, 'user_id': user_id, 'token': token,'production_id':production_id,
+          }
+        };
+        this.jsonpRequest(this, "Production.GetProductionById", params, function (res) {
+          if (res.body.data.code == 0) {
             console.log(res)
           } else {
             console.log(res);

@@ -31,16 +31,17 @@
 						 	<div id="main" v-if="fileShowHide">
 						 		
 						 		<!--文件夹样式-->
-						 		<div class="box filebox">
+						 		<div class="box " v-for="item in Folder">
+						 			<div class="boxcon filebox">
 						 			<div class="fileboxcon">
-						 				<img src="../../dist/instatic/img/1.d80e543.png" alt="" />
+						 				<img v-if="item.img[0]!='null'"  src="../../dist/instatic/img/1.d80e543.png" alt="" />
 							 			<div class="bg"></div>
 							 			<div class="modal"></div>
-							 			<h2>Title</h2>
+							 			<h2>{{item.name}}</h2>
 						 			</div>
 						 			<div class="pic">
 						      	<div class="icon del">
-							      	<Tooltip content="删除" placement="bottom">
+							      	<Tooltip content="删除" @click.native="deleteFolder()" placement="bottom">
 								      	<Icon type="trash-b"></Icon>
 							        </Tooltip>
 						      	</div>
@@ -58,6 +59,7 @@
 							        </DropdownMenu>
 						      	</Dropdown>
 						 			</div>
+						 			</div>
 						 		</div>
 						 		
 						 		
@@ -66,7 +68,7 @@
 						 			<div class="pic">
 						 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
 						 				<div class="icon myedit">
-							      	<Tooltip content="编辑" placement="bottom">
+							      	<Tooltip @click.native="edit(item.id)" content="编辑" placement="bottom">
 								      	<Icon type="compose"></Icon>
 							        </Tooltip>
 						      	</div>
@@ -83,14 +85,14 @@
 						      	</div>
 							      	<DropdownMenu slot="list">
 							            <!--<DropdownItem>查看</DropdownItem>-->
-							            <DropdownItem @click.native="deleteFolder">删除文件夹</DropdownItem>
-							            <DropdownItem >移动到</DropdownItem>
-							            <DropdownItem >查看清单</DropdownItem>
+							            <DropdownItem @click.native="">删除文件夹</DropdownItem>
+							            <DropdownItem @click.native="moveToFolder()">移动到</DropdownItem>
+							            <DropdownItem  @click.native="showDetail()">查看清单</DropdownItem>
 							             <DropdownItem><a :href="'http://www.shatuhome.com/pdfdownload/'+item.production.id">导出为pdf</a></DropdownItem>
 							            <DropdownItem>设置为公开不公开</DropdownItem>
 							        </DropdownMenu>
 						      	</Dropdown>
-						 				<div class="modal" @click="modalS()"></div>
+						 				<div class="modal" @click="modalS(item)"></div>
 						 			</div>
 						 			<div class="footer">
 						 				<div class="borderbox">
@@ -126,7 +128,7 @@
 						 			<div class="pic">
 						 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
 						 				<!--<div class="icon myedit">
-							      	<Tooltip content="编辑" placement="bottom">
+							      	<Tooltip @click.native="edit(item.id)" content="编辑" placement="bottom">
 								      	<Icon type="compose"></Icon>
 							        </Tooltip>
 						      	</div>-->
@@ -149,7 +151,7 @@
 							            <DropdownItem>设置为公开不公开</DropdownItem>
 							        </DropdownMenu>-->
 						      	</Dropdown>
-						 				<div class="modal" @click="modalS()"></div>
+						 				<div class="modal" @click="modalS(item)"></div>
 						 			</div>
 						 			<div class="footer">
 						 				<div class="borderbox">
@@ -180,6 +182,14 @@
 					 <Back-top></Back-top>
 					</div>
           <modals v-if="this.modal=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
+          	<Modal v-model="ToFolder" title="请选择要移动到的文件夹" @on-ok="toFolderOk">
+          		 <RadioGroup v-model="foldercheck" vertical>
+					        <Radio v-for="item in Folder" >
+					            <span>{{item.name}}</span>
+					        </Radio>
+					    </RadioGroup>
+				        <!--<p >{{item.name}}</p>-->
+    				</Modal>
 				</main>
 	</div>
 </template>
@@ -197,6 +207,10 @@
        modal:'',
        toson:'',
        fileShowHide:true,
+       toson:'',
+       Folder:'',
+       ToFolder:false,
+       foldercheck: ''
     }
   },
     components:{
@@ -269,7 +283,7 @@
   			console.log(res);
   					if(res.body.data.code==0){
   						console.log(res);
-  						console.log("resresresresresres");
+  						self.Folder = res.body.data.data;
   					}else{
 							console.log(res);
 							if(res.body.ret==401){
@@ -294,7 +308,7 @@
 			};
 			this.jsonpRequest(this,"Folder.CreateFolder",params,function(res){
   			console.log(res);
-  					if(res.body.data.code==0){
+  					if(res.data.code==0){
   						console.log(res);
   						this.$Message.info('创建文件夹成功');
   						self.getFolder();
@@ -316,7 +330,7 @@
   		var token = localStorage.getItem("token");
   		var params = {
 				params:{
-					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'folderId':id
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,user_id:user_id,token:token,'folderId':id
 				}
 			};
 			this.jsonpRequest(this,"Folder.DelFolder",params,function(res){
@@ -360,6 +374,9 @@
   			console.log(err);
   		});
   	},
+  	edit(id){
+  		this.$router.push({name:'canvas',params:{id:id}});
+  	},
   	//获取作品信息
   	GetProductionByUserId:function (){
   		var self = this;
@@ -388,7 +405,8 @@
   	topdf(){
   		window.location.href="";
   	},
-    modalS:function(){
+    modalS:function(item){
+    	this.toson = item,
       this.modal="modal";
     },
     getsonitem:function(msg){
@@ -460,6 +478,15 @@
                 return i;
             }
         }
+    },
+    showDetail(){
+    	this.$router.push({path:'/showList'});
+    },
+    moveToFolder(){
+    	
+    },
+    toFolderOk(){
+    	
     },
   },
  }

@@ -57,7 +57,7 @@ export default new Router({
     		}
     	]
     },
-    { path: '/canvas', component: canvas, meta:{isActive:true}},
+    { path: '/canvas',name:'canvas',component: canvas, meta:{isActive:true}},
 
   ]
 })

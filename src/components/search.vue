@@ -70,10 +70,10 @@
 								      	圆圆圆
 								      </div>
 								    </div>-->
-										<div class="dan" v-for="item in searchi">
+										<div class="dan" @click="listenClick(item.id)" v-for="item in searchi">
 								      <div class="img">
 								      	<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />
-								      	<div class="modal" @click="modalS()" style="display: none;"></div>
+								      	<div class="modal" @click="modalS(item)" style="display: none;"></div>
 								        <div class="icon">
 								      	<Tooltip content="收藏" placement="bottom">
 									      	<Icon type="archive" @click.native="StoreLike(item.id)"></Icon>
@@ -331,8 +331,32 @@ export default {
   			console.log(err);
   		});
   	},
-  	modalS:function(){
-//      this.toson = item;
+  	listenClick(material_id){
+  		var self = this;
+			var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
+			var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'material_id':material_id
+				}
+			};
+			this.jsonpRequest(this,"Like.Click",params,function(res){
+  					if(res.body.data.code==0){
+//								console.log(res);
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+  		},function(err){
+  			console.log(err);
+  			self.$Message.error("网络问题，请重试！");
+  		});
+  	},
+  	modalS:function(item){
+        this.toson = item;
       this.modalz="modal";
     },
     getsonitem:function(msg){

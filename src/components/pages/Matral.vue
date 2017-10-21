@@ -9,7 +9,7 @@
 					 	<Carousel v-model="value1"  style="width: 500px;" >
 					        <Carousel-item>
 					            <div class="demo-carousel">
-					            	<img :src="'http://www.shatuhome.com/material/'+parSon.filename" alt="" />
+					            	<img v-for="item in toson.displayimg" v-if="item!=null" :src="'http://www.shatuhome.com/material/'+item" alt="" />
 					            </div>
 					        </Carousel-item>
 					        <!--<Carousel-item>
@@ -31,24 +31,30 @@
        		<Col span="8">
        			<div class="right">
         			<div class="rightt">
-        				<h1>姓名</h1>
-        				<p>#风格</p>
-        				<Button type="success" icon="edit" long class="btn">再创作</Button>
-        				<Button type="primary"  icon="android-add-circle" long class="btn">保存为模板</Button>
+        				<h1>{{toson.name}}</h1>
+        				<p>#{{toson.style}}</p>
+        				<!--<p><span style="padding-right: 10px;">品牌</span>{{toson}}</p>
+        				<p><span style="padding-right: 10px;">分类</span>{{toson}}</p>-->
+        				<p><span style="padding-right: 10px;">编号</span>{{toson.code}}</p>
+        				<p><span style="padding-right: 10px;">风格</span>{{toson.style}}</p>
+        				<p><span style="padding-right: 10px;">颜色</span>{{toson.color}}</p>
+        				<p><span style="padding-right: 10px;">尺寸</span>{{toson.size}}</p>
+        				<!--<Button type="success" icon="edit" long class="btn">再创作</Button>-->
+        				<!--<Button type="primary"  icon="android-add-circle" long class="btn">保存为模板</Button>-->
         			</div>
         			<div class="rightc">
-        				<p>作者</p>
+        				<p>简介</p>
         				<div class="thrmb">
-        					<img src="../../assets/img/meijian.png" alt="" />
+        					<!--<img :src="toson.thumbfilename" alt="" />-->
         					<div class="info">
-        						<span>尺寸</span>
-        						<p>110*120*130</p>
+        						<!--<span>尺寸</span>-->
+        						<p>{{toson.remark}}</p>
         					</div>
         				</div>
         			</div>
-        			<div class="rightb">
+        			<!--<div class="rightb">-->
         				<!--<p>{{parSon.like}}人赞了</p>-->
-        				<div class="zan">
+        				<!--<div class="zan">
         					<Tooltip content="收藏" placement="bottom">
         					<span><img src="../../assets/img/yizi.png" alt="" /></span>
         					</Tooltip>
@@ -59,7 +65,7 @@
         					<span><img src="../../assets/img/yizi.png" alt="" /></span>
         					</Tooltip>
         				</div>
-        			</div>
+        			</div>-->
         		</div>
        		</Col>
     	</Row>
@@ -83,7 +89,8 @@
         props:['toson'],
         created(){
 //        	this.parSon = this.toson;
-//        	console.log(this.parSon);
+          	console.log(111111111111111111111111);
+          	console.log(this.toson);
         },
         mounted(){
 //        	this.parSon = this.toson;
@@ -168,7 +175,7 @@
   	display: flex;
   	justify-content: center;
 	align-items: center;
-	border: 1px solid #000;
+	/*border: 1px solid #000;*/
   }
   .demo-carousel{
   		width: 500px;
@@ -286,6 +293,7 @@
   	margin-top: 6px;
     font-size: 12px;
     color: #b2c0c8;
+    line-height: 24px;
   }
   .endLine span {
     width: 40%;

@@ -19,7 +19,7 @@
 						 	<div id="main">
 						 		<div class="box" v-for ="item in bigs">
 						 			<div class="boxcon">
-								 			<div class="pic" @click="modalS()">
+								 			<div class="pic" @click="modalS(item)">
 								 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
 								 				<!--<div class="icon">
 								      	<Tooltip content="收藏" placement="bottom">
@@ -42,7 +42,7 @@
 									 				</div>
 									 				<ul>
 								 						<li class="show-icon">
-								 							<Tooltip content="再创作" placement="bottom">
+								 							<Tooltip content="再创作" @click.native="addClick(event)" placement="bottom">
 							      						<Icon type="heart"></Icon>
 						       	 					</Tooltip>
 								 						</li>
@@ -293,12 +293,25 @@ created: function() {},
             }
         }
     },
-    modalS:function(){
-//      this.toson = item;
+    modalS:function(item){
+        this.toson = item;
       this.modalz="modal";
     },
     getsonitem:function(msg){
       this.modalz=msg;
+    },
+    addClick(){
+//  	console.log();
+			if($(event.srcElement).hasClass('pink')){
+				$(event.srcElement).removeClass("pink")
+			}else{
+				$(event.srcElement).addClass("pink")
+			}
+			
+//  	$(".box").each(function(){
+//  		$(this).find(".ivu-icon").addClass("pink");
+//  	})
+//  	$(".show-icon").find(".ivu-icon").addClass("pink");
     },
 	}
 }
@@ -582,7 +595,10 @@ $(document).ready(function(){
     .ivu-icon{
     	color: #999;
     }
-    .show-icon .ivu-icon-heart:before {
+    .show-icon .ivu-icon.pink{
     	color: #FF556A;
     }
+    /*.show-icon .ivu-icon-heart:before {
+    	color: #FF556A;
+    }*/
 </style>

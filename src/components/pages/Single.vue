@@ -9,7 +9,7 @@
 					 	<Carousel v-model="value1"  style="width: 500px;" >
 					        <Carousel-item>
 					            <div class="demo-carousel">
-					            	<img :src="'http://www.shatuhome.com/material/'+parSon.filename" alt="" />
+					            	<img v-show="toson.production.thumb!=null" :src="'http://www.shatuhome.com/thumb/'+toson.production.thumb" alt="" />
 					            </div>
 					        </Carousel-item>
 					        <!--<Carousel-item>
@@ -31,24 +31,24 @@
        		<Col span="8">
        			<div class="right">
         			<div class="rightt">
-        				<h1>姓名</h1>
-        				<p>#风格</p>
-        				<Button type="success" icon="edit" long class="btn">再创作</Button>
-        				<Button type="primary"  icon="android-add-circle" long class="btn">保存为模板</Button>
+        				<h1>{{toson.production.name}}</h1>
+        				<p>创建时间:{{toson.production.ctime |Time}}</p>
+        				<Button type="success" @cliclk.native="editer(item.production.id)" icon="edit" long class="btn">再创作</Button>
+        				<Button type="primary" @cliclk.native="saveTemplate()"  icon="android-add-circle" long class="btn">保存为模板</Button>
         			</div>
         			<div class="rightc">
-        				<p>作者</p>
+        				<!--<p>作者</p>-->
         				<div class="thrmb">
-        					<img src="../../assets/img/meijian.png" alt="" />
+        					<!--<img src="../../assets/img/meijian.png" alt="" />-->
         					<div class="info">
-        						<span>尺寸</span>
-        						<p>110*120*130</p>
+        						<span>修改时间</span>
+        						<p>{{toson.production.utime |Time}}</p>
         					</div>
         				</div>
         			</div>
         			<div class="rightb">
-        				<!--<p>{{parSon.like}}人赞了</p>-->
-        				<div class="zan">
+        				<!--<p>{{toson.production.like}}人赞了</p>-->
+        				<!--<div class="zan">
         					<Tooltip content="收藏" placement="bottom">
         					<span><img src="../../assets/img/yizi.png" alt="" /></span>
         					</Tooltip>
@@ -58,7 +58,7 @@
         					<Tooltip content="收藏" placement="bottom">
         					<span><img src="../../assets/img/yizi.png" alt="" /></span>
         					</Tooltip>
-        				</div>
+        				</div>-->
         			</div>
         		</div>
        		</Col>
@@ -80,10 +80,20 @@
             	parSon:'',
             }
         },
+        filters:{
+		  	Time(val){
+		  		console.log(typeof(val))
+		  		val = new Date(parseInt(val)*1000);
+		  		return val.format("yyyy-MM-dd hh:mm:ss");
+				},
+				Username(val){
+					return val.substr(0,1);
+				},
+		},
         props:['toson'],
         created(){
-//        	this.parSon = this.toson;
-//        	console.log(this.parSon);
+//        	this.parSon = this.;
+          	console.log(this.toson);
         },
         mounted(){
 //        	this.parSon = this.toson;
@@ -111,6 +121,12 @@
 		  		},function(err){
 		  			console.log(err);
 		  		});
+			},
+			saveTemplate(){
+				
+			},
+			editor(id){
+				this.$router.push({name:'canvas',params:{id:id}});
 			},
         },
 

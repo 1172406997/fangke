@@ -22,7 +22,7 @@
   	</div>-->
   	<div class="exportList__export-list___3m-DD">
 	<div>
-		<header><i class="exportList__close___KEQqc" style="cursor: pointer;"></i>
+		<header><i @click="goPuzz()" class="exportList__close___KEQqc" style="cursor: pointer;"></i>
 			<div class="exportList__p-1___2TtAQ"></div>
 			<div class="exportList__p-2___X90Su"></div>
 			<div class="exportList__p-3___PI4-E">单品名称</div>
@@ -124,9 +124,9 @@
 			</div>
 			<div class="exportList__p-export___1JLXB">
 				<div class="exportList__export-btns___1UYlI">导出清单</div>
-				<div class="exportList__export-btns___1UYlI exportList__no-board___2WiVv">含拼图PDF</div>
-				<div class="exportList__export-btns___1UYlI exportList__with-board___2frRl">不含拼图PDF</div>
-				<div class="exportList__export-btns___1UYlI exportList__excel-export___1EQIU">EXCEL格式</div>
+				<div class="exportList__export-btns___1UYlI exportList__no-board___2WiVv">EXCEL格式</div>
+				<!--<div class="exportList__export-btns___1UYlI exportList__with-board___2frRl">不含拼图PDF</div>-->
+				<!--<div class="exportList__export-btns___1UYlI exportList__excel-export___1EQIU">含拼图PDF</div>-->
 			</div>
 		</footer>
 	</div>
@@ -148,7 +148,9 @@ export default {
   created:function(){
 	},
 	methods:{
-		
+		goPuzz(){
+			this.$router.push({path:'puzzle'});
+		},
 	}
 }
 //import "@/assets/app_meijian.css"
