@@ -59,7 +59,7 @@
 					<div class="modal" v-show="this.modal=='modal'"></div>
 					 <Back-top></Back-top>
 				</div>
-        <!--<modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >-->
+        <modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
 				<div class="layout-copy">
 					2011-2017 &copy; TalkingData
 				</div>
@@ -182,7 +182,7 @@ created: function() {},
 					if(res.body.data.code==0){
 						console.log(res)
 						this.defaul = true;
-						this.$Message.success("删除成功！");
+						this.$Message.info('删除成功！');
 					}else{
 						console.log(res);
 						if(res.body.ret==401){

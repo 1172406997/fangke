@@ -65,32 +65,29 @@
 						 			<div class="boxcon">
 						 			<div class="pic">
 						 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
-						 				<!--<div class="icon myedit">
+						 				<div class="icon myedit">
 							      	<Tooltip content="编辑" placement="bottom">
 								      	<Icon type="compose"></Icon>
 							        </Tooltip>
-						      	</div>-->
-						      	<!--<div class="icon del">
+						      	</div>
+						      	<div class="icon del">
 							      	<Tooltip content="删除" placement="bottom">
 								      	<Icon type="trash-b"></Icon>
 							        </Tooltip>
-						      	</div>-->
+						      	</div>
 						      	<Dropdown trigger="click">
-						      	<!--<div class="icon menu">
+						      	<div class="icon menu">
 							      	<Tooltip content="菜单" placement="bottom">
 								      	<Icon type="android-more-vertical"></Icon>
 							        </Tooltip>
-						      	</div>-->
+						      	</div>
 							      	<DropdownMenu slot="list">
 							            <!--<DropdownItem>查看</DropdownItem>-->
 							            <DropdownItem @click.native="deleteFolder">删除文件夹</DropdownItem>
-							            <!--<DropdownItem >移动到</DropdownItem>-->
-							            <!--<DropdownItem >查看清单</DropdownItem>-->
-							            <!--<DropdownItem >查看清单</DropdownItem>-->
-							            <!--<DropdownItem @click="topdf(id)">导出为pdf</DropdownItem>-->
-							            <!--<DropdownItem>设置为公开不公开</DropdownItem>-->
-							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
-							            <DropdownItem>北京烤鸭</DropdownItem>-->
+							            <DropdownItem >移动到</DropdownItem>
+							            <DropdownItem >查看清单</DropdownItem>
+							             <DropdownItem><a :href="'http://www.shatuhome.com/pdfdownload/'+item.production.id">导出为pdf</a></DropdownItem>
+							            <DropdownItem>设置为公开不公开</DropdownItem>
 							        </DropdownMenu>
 						      	</Dropdown>
 						 				<div class="modal" @click="modalS()"></div>
@@ -123,7 +120,7 @@
 						 	
 						 	
 						 	<!--文件夹内容显示-->
-						 	<div id="main" v-if="fileShowHide">
+						 	<div id="main" v-if="!fileShowHide">
 						 		<div class="box"  v-for="item in getlikeitem">
 						 			<div class="boxcon">
 						 			<div class="pic">
@@ -144,16 +141,13 @@
 								      	<Icon type="android-more-vertical"></Icon>
 							        </Tooltip>
 						      	</div>-->
-							      	<DropdownMenu slot="list">
-							            <!--<DropdownItem>查看</DropdownItem>-->
-							            <!--<DropdownItem >移动到</DropdownItem>-->
-							            <!--<DropdownItem >查看清单</DropdownItem>-->
-							            <!--<DropdownItem >查看清单</DropdownItem>-->
-							            <!--<DropdownItem @click="topdf(id)">导出为pdf</DropdownItem>-->
-							            <!--<DropdownItem>设置为公开不公开</DropdownItem>-->
-							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
-							            <DropdownItem>北京烤鸭</DropdownItem>-->
-							        </DropdownMenu>
+							      	<!--<DropdownMenu slot="list">
+							            <DropdownItem>查看</DropdownItem>
+							            <DropdownItem >移动到</DropdownItem>
+							            <DropdownItem >查看清单</DropdownItem>
+							            <DropdownItem><a :href="'http://www.shatuhome.com/pdfdownload/'+item.id">导出为pdf</a></DropdownItem>
+							            <DropdownItem>设置为公开不公开</DropdownItem>
+							        </DropdownMenu>-->
 						      	</Dropdown>
 						 				<div class="modal" @click="modalS()"></div>
 						 			</div>
@@ -185,7 +179,7 @@
 					<div class="modal"  ></div>
 					 <Back-top></Back-top>
 					</div>
-          <!--<modals v-if="this.modal=='modal'" :toson='toson'  @modal="getsonitem()"></modals >-->
+          <modals v-if="this.modal=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
 				</main>
 	</div>
 </template>
@@ -303,6 +297,7 @@
   					if(res.body.data.code==0){
   						console.log(res);
   						this.$Message.info('创建文件夹成功');
+  						self.getFolder();
   					}else{
 							console.log(res);
 							if(res.body.ret==401){
@@ -379,9 +374,7 @@
 			this.jsonpRequest(this,"Production.GetProductionByUserId",params,function(res){
   			console.log(res);
   					if(res.body.data.code==0){
-  						this.$set(this, 'getlikeitem', res.body.data.list);
   						self.getlikeitem = res.body.data.list;
-  						console.log(res);
   					}else{
 							console.log(res);
 							if(res.body.ret==401){
@@ -405,7 +398,7 @@
 				var self = this;
 				 if(this.$route.name=='content'){
 				var oParent=document.getElementById('main');
-        var oBoxs=self.getByClass(oParent,'box');
+        var oBoxs=self.getByClass(oParent,'.box');
         var lastBoxH=oBoxs[oBoxs.length-1].offsetTop + Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);
         var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;
         var height=document.body.clientHeight || document.documentElement.clientHeight;
@@ -423,12 +416,12 @@
 									$img.on("load", function () {
 							        //将main下的所有class为box的元素取出来
 							        var oParent=document.getElementById('main');
-							        var oBoxs=self.getByClass(oParent,'box');
+							        var oBoxs=self.getByClass(oParent,'.box');
 							        //计算整个页面的显示雷氏（页面/box的宽）
 							        var oBoxW=$this[0].offsetWidth;
 											var winW = oParent.offsetWidth;
 							        var cols=Math.floor(winW/oBoxW);
-							        //console.log(cols);
+							        console.log(cols);
 							        //设置main的宽
 							//      oParent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto';
 							        var hArr=[];//存放每一列高度
@@ -450,19 +443,16 @@
 			}, 0);   
 		},
 		getByClass(parent,clsName){
-    	if(this.$route.name == 'content'){
     		 var boxArr=new Array(),//用来存储获取到的所有class为Box的元素
         	oElements=parent.getElementsByTagName('*');
-        	console.log("boxarr")
-	        for(var i=0;i<oElements.length;i++){
-	            if (oElements[i].className==clsName) {
-	                boxArr.push(oElements[i]);
-	            }
-	        }
+        boxArr = $(parent).find(clsName)
+//	        for(var i=0;i<oElements.length;i++){
+////							console.log($(oElements[i]).hasClass("clsName"));
+//	            if (oElements[i].className==clsName) {
+//	                boxArr.push(oElements[i]);
+//	            }
+//	        }
 	        return boxArr;
-    	}else{
-    		return;
-    	}
     },
     getMinhIndex(arr,val){
         for(var i in arr){

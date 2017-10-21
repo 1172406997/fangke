@@ -73,10 +73,10 @@
 										<div class="dan" v-for="item in searchi">
 								      <div class="img">
 								      	<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />
-								      	<div class="modal" style="display: none;"></div>
+								      	<div class="modal" @click="modalS()" style="display: none;"></div>
 								        <div class="icon">
 								      	<Tooltip content="收藏" placement="bottom">
-									      	<Icon type="archive" @click="StoreLike()"></Icon>
+									      	<Icon type="archive" @click.native="StoreLike(item.id)"></Icon>
 								        </Tooltip>
 								      	</div>
 								      </div>
@@ -92,16 +92,15 @@
 							
 							
 						</div>
-						<!--<div v-for="item in item">
-
-						</div>-->
+						 <modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
 					</div>
 				</main>
 	</div>
 </template>
 
 <script>
-
+  import modals from "../components/pages/Matral"
+  
 export default {
   name: 'search',
   data () {
@@ -122,7 +121,11 @@ export default {
        secClass:'',
        fasClass:'',
        keyWord:'',
+       modalz:'',
     }
+  },
+  components: {
+    modals
   },
   created:function(){
 	this.getsearch();
@@ -229,6 +232,7 @@ export default {
   					if(res.body.data.code==0){
 								console.log(res);
 								console.log("getlike:"+this.getlikeitem);
+								self.$Message.success("收藏成功！");
   					}else{
 							console.log(res);
 							if(res.body.ret==401){
@@ -237,6 +241,7 @@ export default {
 						}
   		},function(err){
   			console.log(err);
+  			self.$Message.error("网络问题，请重试！");
   		});
 		},
   	getclassify:function(id){
@@ -326,6 +331,13 @@ export default {
   			console.log(err);
   		});
   	},
+  	modalS:function(){
+//      this.toson = item;
+      this.modalz="modal";
+    },
+    getsonitem:function(msg){
+      this.modalz=msg;
+    },
   }
  }
 

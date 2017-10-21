@@ -4,12 +4,10 @@
       <i-col :span="spanLeft" class="layout-menu-left">
         <Menu active-name="2" theme="dark" width="100%" @on-select="forname" class="left">
           <!--<div class="layout-logo-left"></div>-->
-          <router-link to="/Hello ">
-            <Menu-item name="1">
+            <Menu-item name="1"  @click.native="backUp">
               <Icon type="arrow-left-a"></Icon>
               <span class="layout-text">退出</span>
             </Menu-item>
-          </router-link>
           <Menu-item name="2">
             <Icon type="ios-search-strong"></Icon>
             <span class="layout-text">搜索</span>
@@ -44,7 +42,16 @@
             <a href="javascript:;" @click="writeName">保存</a> |
             <!--<a href="#">下载高清大图</a> |-->
             <!--<a href="#">服务大厅</a>   | -->
-            <a href="javascript:;" @click="Clear">清空</a>
+            <a href="javascript:;" @click="Clear">清空</a> |
+            <a href="javascript:;" @click="Clear">
+            	<Dropdown trigger="click">
+	               <a href="javascript:;">画布设置</a>
+                <DropdownMenu slot="list">
+                  <DropdownItem @click.native="">A3(横)</DropdownItem>
+                  <DropdownItem @click.native="">A3(竖)</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </a>
             <div class="right" style="margin-right: 20px;">
               <!--<a href="#" class="left">片羽时光</a> -->
               <!--<a href="#" class="left">显示菜单</a>-->
@@ -330,7 +337,6 @@
         var user_id = localStorage.getItem("user_id");
         var token = localStorage.getItem("token");
         var params = {
-          params: {
             'signature': str.sha,
             'timestamp': str.timestamp,
             'nonce': str.nonce,
@@ -341,14 +347,11 @@
             'thumb': svg,
             'items': titems,
             'status': self.status,
-          }
         };
-        this.jsonpRequest(this, "Production.StoreProduction", params, function (res) {
-          if (res.body.data.code == 0) {
-            this.$set(this, 'item', res.data);
-            this.item = res.body.data.list;
-            console.log("item:" + this.item);
-            console.log(res)
+        this.postRequest("Production.StoreProduction", params, function (res) {
+        	console.log(res.data.code)
+          if (res.data.code == 0) {
+						
           } else {
             console.log(res);
             if (res.body.ret == 401) {
@@ -678,6 +681,7 @@
       },
       search: function (keyword) {
         this.flag = false;
+        var self = this;
         //		var self = this;
         var str = this.Encrypt();
         var user_id = localStorage.getItem("user_id");
@@ -777,18 +781,29 @@
 //        });
         this.Canvas.add(getObjImg);
         this.menu_1 = 1;
-      },
-      closeNone() {
-        this.menu_1 = false;
-      },
-      Clear() {
-        this.Canvas.clear();
-      },
-    },
+        },
+        backUp() {
+        		this.$Modal.confirm({
+        			title: '退出提示',
+        			content: '请选择是否保存',
+        			onOk: () => {
+        				this.saveCanvas();
+        				this.$router.push({name:'content'});
+        			},
+        			onCancel: () => {
+        				this.$router.push({name:'content'});
+        			}
+        		});
+        	},
+        	closeNone() {
+        		this.menu_1 = false;
+        	},
+        	Clear() {
+        		this.Canvas.clear();
+        	},
+        },
 
-  }
-
-</script>
+        }</script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .left {
