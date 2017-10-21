@@ -321,7 +321,7 @@
         var svg = this.Canvas.toDataURL();
         var data = this.Canvas.toJSON().toString();
 //      var svg = this.Canvas.toDataURL({format: 'jpeg'});
-       
+
         console.log(this.Canvas)
         console.log(svg);
         var str = this.Encrypt();
@@ -374,8 +374,9 @@
         var staticCanvas = new fabric.Canvas('parent');
         self.Canvas = staticCanvas;
         self.Canvas.preserveObjectStacking = true;
-        self.Canvas.setWidth(800);
-        self.Canvas.setHeight(800);
+        self.setCanvasDimension(self.Canvas, 1103, 780);
+//        self.Canvas.setWidth(800);
+//        self.Canvas.setHeight(800);
         self.Canvas.on('object:selected', function (opt) {
         self.selectItem = opt;
         self.menu_1 = 1;
@@ -458,7 +459,16 @@
         )
         self.Canvas.renderAll();
       },
-
+      //设置canvas的宽高
+      //以下数据来自美间
+      // A3 横版 1103*780
+      // A3 竖版 546*780
+      // 1:1 780*780
+      //16:9 1350*759
+      setCanvasDimension (canvas, width, height){
+        canvas.setWidth(width);
+        canvas.setHeight(height);
+      },
       getsearch: function () {
         var str = this.Encrypt();
         var user_id = localStorage.getItem("user_id");
