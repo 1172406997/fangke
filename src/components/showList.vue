@@ -146,6 +146,10 @@ export default {
 
    },
   created:function(){
+  	
+	},
+	mounted(){
+		console.log(this.$route.params.productId);
 	},
 	methods:{
 		goPuzz(){

@@ -53,6 +53,7 @@ export default new Router({
     		,
     		{
     			path: '/showList',
+    			name: 'showList',
     			component: showList
     		}
     	]

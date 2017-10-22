@@ -42,7 +42,7 @@
 									 				</div>
 									 				<ul>
 								 						<li class="show-icon">
-								 							<Tooltip content="再创作" @click.native="addClick(event)" placement="bottom">
+								 							<Tooltip content="点赞" @click.native="addClick(event)" placement="bottom">
 							      						<Icon type="heart"></Icon>
 						       	 					</Tooltip>
 								 						</li>

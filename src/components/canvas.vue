@@ -76,45 +76,82 @@
                 </Select>
                 <Button slot="append" icon="ios-search" @click="search(value1)"></Button>
                 </Input>
-                <div class="search-content">
-                  <!--搜索信息列表-->
-                  <div class="content_con" v-if="flag">
-                    <p>分类标签</p>
-                    <Row><!-- -->
-                      <div class="conlist_show">
-                        <div class="conlist_con">
-                          <div class="conlist_content">
-                            <!--<Col span="11" class="classify" v-for="(itemd , index) in item"
-                                 @click.native="getclassify(itemd.id)">-->
-                            <!--<p>{{itemd.name}}</p>-->
-                            <!--<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt=""/>
-                            </Col>-->
-                            <div class="searchclassfy" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
-                            	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt=""/>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Row>
-                  </div>
-                  <!--搜索结果列表-->
-                  <div class="content_con2" v-if="!flag">
-                    <h2>搜索结果</h2>
-                    <div class="conlist_show">
-                      <div class="conlist_con">
-                        <Col span="6" style="background-color: #fff;position:relative;" class="con2">
-                        <img src="../assets/logo.png" alt=""/>
-                        <p>一只一只</p>
-                        </Col>
-                        <Col span="6" v-for="(itemd , index) in searchi"
-                             style="background-color: #fff;position:relative;" class="con2">
-                        <img :src="itemd.path" alt=""/>
-                        <p>一只一只</p>
-                        </Col>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <!--搜索列表-->
+                <div class="layout-content">
+										<Spin size="large" class="layz"></Spin>
+										<div class="content_con"  v-if="flag" >
+											<Row >
+												<h2>分类标签</h2>
+												<!--<div v-on:click="getclassify()">
+												<Col span="4"  class="classify" v-on:click="getclassify()">
+									        	<p>椅子</p>
+									        	<img src="../assets/img/yizi.png" style="" alt="" />
+									       </Col>
+									       </div>-->
+									       <div class="searchclassfy" v-for="(itemd , index) in item" @click="getclassify(itemd.id)">
+									       		<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+									       </div>
+									        <!--<Col span="4" class="classify" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
+									        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+									        </Col>-->
+									    </Row>
+										</div>
+										<div class="content_con2" v-if="!flag">
+											<div v-show="fenlei=='fenlei'">
+											<h2>更多分类 <p style="float: right;cursor: pointer;" @click="flag=true">返回</p></h2>
+												<Row >
+													<div v-on:click="getclassify()">
+													<!--<Col span="4"  class="classify" v-on:click="getclassify()">-->
+										        	<!--<p>椅子</p>-->
+										        	<!--<img src="../assets/img/yizi.png" style="" alt="" />-->
+										       <!--</Col>-->
+										       </div>
+										       <div class="searchclassfy" v-for="(itemd , index) in secClass" @click="getByTermal(itemd.id)">
+									       			<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+									       		</div>
+										    </Row>
+										  	</div>
+										  	<div >
+											<h2>搜索结果<p style="float: right;cursor: pointer;" @click="flag=true">返回</p></h2>
+												<div >
+											       <!--<div class="dan">
+												      <div class="img">
+												      	<img src="../assets/img/meijian.png" alt="" />
+												      	<div class="modal" style="display: none;"></div>
+												        <div class="icon">
+												      	<Tooltip content="收藏" placement="bottom">
+													      	<Icon type="archive" @click="StoreLike()"></Icon>
+												        </Tooltip>
+												      	</div>
+												      </div>
+												      <div class="nam">
+												      	我叫小明
+												      </div>
+												      <div class="price" style="display: none;">
+												      	圆圆圆
+												      </div>
+												    </div>-->
+														<div class="dan" @click="listenClick(item.id)" v-for="item in searchi">
+												      <div class="img">
+												      	<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />
+												      	<div class="modal" @click="modalS(item)" style="display: none;"></div>
+												        <div class="icon">
+												      	<Tooltip content="收藏" placement="bottom">
+													      	<Icon type="archive" @click.native="StoreLike(item.id)"></Icon>
+												        </Tooltip>
+												      	</div>
+												      </div>
+												      <div class="nam">
+												      	{{item.name}}
+												      </div>
+												      <div class="price" style="display: none;">
+												      	{{item.price}}￥
+												      </div>
+												    </div>
+												</div>
+											</div>
+										</div>
+									</div>
               </div>
             </div>
             <div class="my" v-show="name==3">
@@ -123,9 +160,9 @@
             <div class="puzz" v-show="name==4">
               <!--<brand></brand>-->
             </div>
-            <div class="effect" v-show="name==5">
+            <!--<div class="effect" v-show="name==5">
               <effect></effect>
-            </div>
+            </div>-->
             <div class="detail" v-show="name==6">
               <detail></detail>
             </div>
@@ -281,10 +318,13 @@
     },
     created: function () {
       this.getsearch();
-      console.log(this.$route.params.id);
+      console.log();
     },
     mounted() {
       this.getCanvas();
+      if(this.$route.params.id){
+      	this.getProducId()
+      }
     },
     methods: {
       writeName() {
@@ -316,6 +356,31 @@
             this.$Message.info('取消保存');
           },
         })
+      },
+			//如果有id直接获取数据初始化到画布      
+      getProducId(){
+      	var id = this.$route.params.id;
+      	var str = this.Encrypt();
+        var user_id = localStorage.getItem("user_id");
+        var token = localStorage.getItem("token");
+        var params = {
+          params: {
+            'signature': str.sha, 'timestamp': str.timestamp, 'nonce': str.nonce, 'user_id': user_id, 'token': token,production_id:id,
+          }
+        };
+        this.jsonpRequest(this, "Production.GetProductionById", params, function (res) {
+        	console.log(res)
+          if (res.body.data.code == 0) {
+            console.log(res)
+          } else {
+            console.log(res);
+            if (res.body.ret == 401) {
+              self.toLogin(this, 401);
+            }
+          }
+        }, function (err) {
+          console.log(err);
+        });
       },
       saveCanvas() {
         var self = this;

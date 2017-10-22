@@ -34,14 +34,14 @@
 						 		<div class="box " v-for="item in Folder">
 						 			<div class="boxcon filebox">
 						 			<div class="fileboxcon">
-						 				<img v-if="item.img[0]!='null'"  src="../../dist/instatic/img/1.d80e543.png" alt="" />
+						 				<img v-if="item.img[0]!='null'"  src="../img/1.png" alt="" />
 							 			<div class="bg"></div>
 							 			<div class="modal"></div>
 							 			<h2>{{item.name}}</h2>
 						 			</div>
 						 			<div class="pic">
 						      	<div class="icon del">
-							      	<Tooltip content="删除" @click.native="deleteFolder()" placement="bottom">
+							      	<Tooltip content="删除" @click.native="deleteFolder(item.id)" placement="bottom">
 								      	<Icon type="trash-b"></Icon>
 							        </Tooltip>
 						      	</div>
@@ -68,7 +68,7 @@
 						 			<div class="pic">
 						 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
 						 				<div class="icon myedit">
-							      	<Tooltip @click.native="edit(item.id)" content="编辑" placement="bottom">
+							      	<Tooltip @click.native="edit(item.production.id)" content="编辑" placement="bottom">
 								      	<Icon type="compose"></Icon>
 							        </Tooltip>
 						      	</div>
@@ -87,7 +87,7 @@
 							            <!--<DropdownItem>查看</DropdownItem>-->
 							            <DropdownItem @click.native="">删除文件夹</DropdownItem>
 							            <DropdownItem @click.native="moveToFolder()">移动到</DropdownItem>
-							            <DropdownItem  @click.native="showDetail()">查看清单</DropdownItem>
+							            <DropdownItem  @click.native="showDetail(item.production.id)">查看清单</DropdownItem>
 							             <DropdownItem><a :href="'http://www.shatuhome.com/pdfdownload/'+item.production.id">导出为pdf</a></DropdownItem>
 							            <DropdownItem>设置为公开不公开</DropdownItem>
 							        </DropdownMenu>
@@ -308,7 +308,7 @@
 			};
 			this.jsonpRequest(this,"Folder.CreateFolder",params,function(res){
   			console.log(res);
-  					if(res.data.code==0){
+  					if(res.body.data.code==0){
   						console.log(res);
   						this.$Message.info('创建文件夹成功');
   						self.getFolder();
@@ -479,8 +479,9 @@
             }
         }
     },
-    showDetail(){
-    	this.$router.push({path:'/showList'});
+    showDetail(id){
+    	alert(id)
+    	this.$router.push({name:'showList',params:{productId:id}});
     },
     moveToFolder(){
     	

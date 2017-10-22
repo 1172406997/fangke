@@ -33,8 +33,8 @@
         			<div class="rightt">
         				<h1>{{toson.production.name}}</h1>
         				<p>创建时间:{{toson.production.ctime |Time}}</p>
-        				<Button type="success" @cliclk.native="editer(item.production.id)" icon="edit" long class="btn">再创作</Button>
-        				<Button type="primary" @cliclk.native="saveTemplate()"  icon="android-add-circle" long class="btn">保存为模板</Button>
+        				<Button type="success" @click="editer(toson.production.id)" icon="edit" long class="btn">再创作</Button>
+        				<Button type="primary" @click="saveTemplate()"  icon="android-add-circle" long class="btn">保存为模板</Button>
         			</div>
         			<div class="rightc">
         				<!--<p>作者</p>-->
@@ -123,9 +123,16 @@
 		  		});
 			},
 			saveTemplate(){
-				
+				this.$Modal.confirm({
+                    title: '提示',
+                    content: '<h2>功能正在开发中，敬请期待</h2>',
+                    onOk: () => {
+                    },
+                    onCancel: () => {
+                    }
+                });
 			},
-			editor(id){
+			editer(id){
 				this.$router.push({name:'canvas',params:{id:id}});
 			},
         },

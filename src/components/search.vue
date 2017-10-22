@@ -7,9 +7,9 @@
 					<div class="sub_title">
 						<Input v-model="keyword" style="width:60%">
 							<Select v-model="select1" slot="prepend" style="width: 80px">
-								<Option value="puzz">拼图</Option>
+								<Option value="puzz">单品</Option>
 								<!--<Option value="user">用户</Option>-->
-								<Option value="brand">品牌</Option>
+								<!--<Option value="brand">品牌</Option>-->
 							</Select>
 							<Button slot="append" icon="ios-search" @click="search(keyword)"></Button>
 						</Input>
