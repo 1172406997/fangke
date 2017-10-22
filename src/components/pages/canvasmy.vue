@@ -60,6 +60,7 @@ export default {
   },
   methods:{
   	getlike:function(){
+  		//
   		var self = this;
   		var str = this.Encrypt();
   		var user_id = localStorage.getItem("user_id"); 
@@ -69,21 +70,45 @@ export default {
 					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
 				}
 			};
-  		this.jsonpRequest(this,"Material.GetAllMaterial",params,function(res){
-  					if(res.body.data.code==0){
-								self.$set(self, 'getlikeitem', res.body.data.list);
+  		this.jsonpRequest(this,"Like.GetLike",params,function(res){
+  				if(res.body.data.code==0){
+							self.$set(self, 'getlikeitem', res.body.data.list);
 								self.getlikeitem = res.body.data.list;
+								console.log("toson111111111111111111")
 								console.log(res);
 								console.log("getlike:"+self.getlikeitem);
-  					}else{
-  						console.log(res);
-							if(res.body.ret==401){
-								self.toLogin(this,401);
-							}
-  					}
+								console.log("toson111111111111111111")
+					}else{
+						console.log(res);
+						if(res.body.ret==401){
+							self.toLogin(this,401);
+						}
+					}
   		},function(err){
   			console.log(err);
   		});
+//		
+//		var self = this;
+//		var str = this.Encrypt();
+//		var user_id = localStorage.getItem("user_id"); 
+//		var token = localStorage.getItem("token"); 
+//		var params = {
+//				params:{
+//					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token
+//				}
+//			};
+//		this.jsonpRequest(this,"Like.GetLike",params,function(res){
+//					if(res.body.data.code==0){
+//								self.$set(self, 'getlikeitem', res.body.data.list);
+//								self.getlikeitem = res.body.data.list;
+//					}else{
+//							if(res.body.ret==401){
+//								self.toLogin(this,401);
+//							}
+//					}
+//		},function(err){
+//			console.log(err);
+//		});
 		},
 		addCanvas(url,id){
 			var imgurl = "http://www.shatuhome.com/material/"+url
@@ -123,14 +148,14 @@ export default {
 			z-index: 10;
 		}
 		.dan{
-    	width: 203px;
-    	height: 227px;
+    	width: 122px;
+    	height: 136px;
     	padding: 12px 12px 0px;
     	background-color: #fff;
     	border-radius: 5px;
     	position: relative;
     	margin: 10px;
-    	margin-left: 60px;
+    	/*margin-left: 60px;*/
     	cursor:pointer;
     	float: left;
     	overflow: hidden;
@@ -141,8 +166,8 @@ export default {
     }
     .img{
     	position: relative;
-    	width: 179px;
-    	height: 179px;
+    	width: 100%;
+    	height: 107px;
     }
     .img>img{
     	width: 100%;
@@ -175,12 +200,12 @@ export default {
     }
     .nam{
     	width: 100%;
-    	line-height: 36px;
+    	line-height: 18px;
     }
     .price{
     	width: 100%;
     	display: none;
-    	line-height: 36px;
+    	line-height: 18px;
     }
     .icon:hover{
     	color: #3B454C;

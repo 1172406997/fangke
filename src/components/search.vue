@@ -157,7 +157,6 @@ export default {
   		});
   	},
   	search:function(res){
-			
   		if(this.fasClass!=''){
   			this.secSearch(res);
   		}else{
