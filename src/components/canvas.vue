@@ -140,14 +140,14 @@
 						<canvasmy @imgdata="getChildImg"></canvasmy>
 					</div>
 					<div class="puzz" v-show="name==4">
-						<!--<brand></brand>-->
+						<brand></brand>
 					</div>
-					<!--<div class="effect" v-show="name==5">
+					<div class="effect" v-show="name==5">
 						<effect></effect>
-					</div>-->
-					<!--<div class="detail" v-show="name==6">
-              <detail></detail>
-            </div>-->
+					</div>
+					<div class="detail" v-show="name==6">
+		              <detail></detail>
+		            </div>
 				</div>
 	</div>
 	<div class="layout-content" style="padding:0px">
@@ -243,7 +243,7 @@
 
 <script>
 	import canvasmy from "../components/pages/canvasmy.vue"
-	/*import brand from "../components/pages/Brand"*/
+   	import brand from "../components/pages/Brand"
 	import effect from "../components/pages/effect"
 	import detail from "../components/pages/detail"
 
@@ -297,7 +297,8 @@
 		components: {
 			canvasmy,
 			effect,
-			detail
+			detail,
+			brand,
 		},
 		created: function() {
 			this.getsearch();
