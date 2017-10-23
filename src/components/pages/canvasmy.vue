@@ -217,13 +217,16 @@ export default {
    .conlist_show{
    		width: 100%;
    		overflow: hidden;
-   		height: 732px;
+   		position: relative;
+   		min-height: 732px;
    		padding-top: 20px;
    }
-   .conlist_con{
-   	width:calc(100% + 20px);
-   	height: 570px;
-   	overflow-x: hidden;
-   	overflow-y: scroll;
-   }
+   .conlist_con {
+		width: calc(100% + 20px);
+		min-height: 570px;
+		height: 100%;
+		position: absolute;
+		overflow-x: hidden;
+		overflow-y: scroll;
+	}
 </style>	

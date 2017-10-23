@@ -133,6 +133,7 @@
   	min-width: 1268px;
   	width: 99.4%;
   	z-index: 30;
+  	bottom: 0;
     background-color:rgba(53,63,72,0.7);
     padding: 0 12px 0;
 

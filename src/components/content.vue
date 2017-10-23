@@ -491,7 +491,7 @@ $(document).ready(function(){
     	background:#F2F2F4;
     	overflow: hidden;
     }
-		.layout-content{
+		huantaipingyang-content{
 			min-height:900px;
 		}
     .layout-content .left {

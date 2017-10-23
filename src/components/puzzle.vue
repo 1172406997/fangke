@@ -34,9 +34,9 @@
 						 		<div class="box " v-for="item in Folder">
 						 			<div class="boxcon filebox">
 						 			<div class="fileboxcon">
-						 				<img v-if="item.img[0]!='null'"  src="../img/1.png" alt="" />
+						 				<img v-if="item.img!=null"  src="../img/1.png" alt="" />
 							 			<div class="bg"></div>
-							 			<div class="modal"></div>
+							 			<div class="modal" @click="getFloderCon(item.id)"></div>
 							 			<h2>{{item.name}}</h2>
 						 			</div>
 						 			<div class="pic">
@@ -52,6 +52,7 @@
 							        </Tooltip>
 						      	</div>
 							      	<DropdownMenu slot="list" style="z-index: 10;">
+							      			<DropdownItem @click.native="">删除文件夹</DropdownItem>
 							            <!--<DropdownItem>查看</DropdownItem>-->
 							            <!--<DropdownItem >修改</DropdownItem>-->
 							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
@@ -73,7 +74,7 @@
 							        </Tooltip>
 						      	</div>
 						      	<div class="icon del">
-							      	<Tooltip content="删除" placement="bottom">
+							      	<Tooltip content="删除" @click.native="deleteProduc(item.production.id)" placement="bottom">
 								      	<Icon type="trash-b"></Icon>
 							        </Tooltip>
 						      	</div>
@@ -85,11 +86,11 @@
 						      	</div>
 							      	<DropdownMenu slot="list">
 							            <!--<DropdownItem>查看</DropdownItem>-->
-							            <DropdownItem @click.native="">删除文件夹</DropdownItem>
 							            <DropdownItem @click.native="moveToFolder()">移动到</DropdownItem>
 							            <DropdownItem  @click.native="showDetail(item.production.id)">查看清单</DropdownItem>
 							             <DropdownItem><a :href="'http://www.shatuhome.com/pdfdownload/'+item.production.id">导出为pdf</a></DropdownItem>
-							            <DropdownItem>设置为公开不公开</DropdownItem>
+							            <DropdownItem v-show ="item.production.status == 0" @click.native = "setStatus(0,item.production.id)">设置为公开</DropdownItem>
+							            <DropdownItem v-show ="item.production.status == 1" @click.native = "setStatus(1,item.production.id)">设置为不公开</DropdownItem>
 							        </DropdownMenu>
 						      	</Dropdown>
 						 				<div class="modal" @click="modalS(item)"></div>
@@ -235,7 +236,7 @@
   	methods:{
   	colorRand() {
 			console.log($("#main").find(".thumb"));
-			var ranColor = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
+			var ranColor = '#' + ('00000' + (Math.random() * 0x1000000<<0).toString(16)).slice(-6);
 			setTimeout(function () {
 					$("#main").find(".thumb").each(function(){
 						$(this).css("background", ranColor);
@@ -276,7 +277,7 @@
   		var token = localStorage.getItem("token");
   		var params = {
 				params:{
-					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'limit':1,'start':0,'type':1
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'limit':0,'start':0,'type':1
 				}
 			};
 			this.jsonpRequest(this,"Folder.GetFolderList",params,function(res){
@@ -284,6 +285,33 @@
   					if(res.body.data.code==0){
   						console.log(res);
   						self.Folder = res.body.data.data;
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+  		},function(err){
+  			console.log(err);
+  			console.log("resresresresresres");
+  		});
+  	},
+  	//获取文件夹内元素
+  	getFloderCon(id){
+  		alert(id);
+  		var self = this;
+  		var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
+  		var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'floderId':id,type:1
+				}
+			};
+			this.jsonpRequest(this,"Folder.GetFolderDetail",params,function(res){
+  			console.log(res);
+  					if(res.body.data.code==0){
+  						console.log(res);
   					}else{
 							console.log(res);
 							if(res.body.ret==401){
@@ -336,8 +364,8 @@
 			this.jsonpRequest(this,"Folder.DelFolder",params,function(res){
   			console.log(res);
   					if(res.body.data.code==0){
-  						console.log(res);
   						this.$Message.info('删除文件夹成功！');
+  						self.getFolder();
   					}else{
 							console.log(res);
 							if(res.body.ret==401){
@@ -392,6 +420,32 @@
   			console.log(res);
   					if(res.body.data.code==0){
   						self.getlikeitem = res.body.data.list;
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+  		},function(err){
+  			console.log(err);
+  		});
+  	},
+  	//删除作品信息
+  	deleteProduc(id){
+  		var self = this;
+  		var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
+  		var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'production_id':id
+				}
+			};
+			this.jsonpRequest(this,"Production.DeleteProduction",params,function(res){
+  					console.log(res);
+  					if(res.body.data.code==0){
+  						self.$Message.info("删除成功!");
+  						self.GetProductionByUserId();
   					}else{
 							console.log(res);
 							if(res.body.ret==401){
@@ -479,8 +533,38 @@
             }
         }
     },
+    //设置作品公开，不公开
+    setStatus(num,id){
+    	if(num==0){
+    		var strText = "Production.UpdateProductionPublic"
+    	}else{
+    		var strText = "Production.UpdateProductionPrivate"
+    	}
+    	var self = this;
+  		var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
+  		var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'production_id':id
+				}
+			};
+			this.jsonpRequest(this,strText,params,function(res){
+  					console.log(res);
+  					if(res.body.data.code==0){
+  						self.$Message.info("修改状态成功!");
+						self.GetProductionByUserId();
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+  		},function(err){
+  			console.log(err);
+  		});
+    },
     showDetail(id){
-    	alert(id)
     	this.$router.push({name:'showList',params:{productId:id}});
     },
     moveToFolder(){
@@ -606,6 +690,7 @@ $(document).ready(function(){
     	height: 338px;
     	border-radius: 4px;
     	position: relative;
+    	cursor: pointer;
     	/*overflow: hidden;*/
     }
     .filebox .fileboxcon{
@@ -619,9 +704,11 @@ $(document).ready(function(){
     }
     .filebox h2{
     	position: absolute;
+    	display: inline;
     	font-size: 32px;
+    	top: 50%;
+    	transform: translateY(-50%);
     	color: #fff;
-    	line-height: 338px;
     	margin-left: 10px;
     	z-index: 3;
     }

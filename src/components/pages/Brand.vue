@@ -164,13 +164,14 @@
    .conlist_show{
    		width: 100%;
    		overflow: hidden;
-   		height: 732px;
+   		min-height: 732px;
    		padding-top: 20px;
    }
-   .conlist_con{
-   	width:calc(100% + 20px);
-   	height: 610px;
-   	overflow-x: hidden;
-   	overflow-y: scroll;
-   }
+   .conlist_con {
+		width: calc(100% + 20px);
+		min-height: 570px;
+		height: 100%;
+		overflow-x: hidden;
+		overflow-y: scroll;
+	}
 </style>

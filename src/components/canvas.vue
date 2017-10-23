@@ -73,12 +73,12 @@
 								<Select v-model="select1" slot="prepend" style="width: 80px">
 									<Option value="day">单品</Option>
 								</Select>
-								<Button slot="append" icon="ios-search" @click="search(value1)"></Button>
+								<Button slot="append" icon="ios-search" @click="searchBy(value1)"></Button>
 								</Input>
 								<div class="search-content">
 									<!--搜索信息列表-->
 									<div class="content_con" v-if="flag">
-										<p>分类标签</p>
+										<h2 style="margin-top: 10px;">分类标签</h2>
 										<Row>
 											<!-- -->
 											<div class="conlist_show">
@@ -89,7 +89,7 @@
 														<!--<p>{{itemd.name}}</p>-->
 														<!--<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt=""/>
                             </Col>-->
-														<div class="searchclassfy" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
+														<div class="searchclassfy" v-for="(itemd , index) in item" @click="getclassify(itemd.id)">
 															<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 														</div>
 													</div>
@@ -99,7 +99,7 @@
 									</div>
 									<!--搜索结果列表-->
 									<div class="content_con2" v-if="!flag">
-										<h2>搜索结果</h2>
+										<h2 style="margin-top: 10px;margin-right: 20px;">搜索结果 <span style="cursor:pointer;float: right;" @click="backSearch()">退出</span></h2>
 										<div class="conlist_show">
 											<!--<div class="conlist_con">
                         <Col span="6" style="background-color: #fff;position:relative;" class="con2">
@@ -116,9 +116,9 @@
 													<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />
 													<div class="modal" @click="modalS(item)" style="display: none;"></div>
 													<div class="icon">
-														<Tooltip content="收藏" placement="bottom">
-															<Icon type="archive" @click.native="StoreLike(item.id)"></Icon>
-														</Tooltip>
+														<Tooltip content="添加" @click="getChildImg('add',item.filename,item.id)" placement="bottom">
+													      	<Icon type="android-exit"></Icon>
+												        </Tooltip>
 													</div>
 												</div>
 												<div class="nam">
@@ -140,9 +140,9 @@
 					<div class="puzz" v-show="name==4">
 						<!--<brand></brand>-->
 					</div>
-					<div class="effect" v-show="name==5">
+					<!--<div class="effect" v-show="name==5">
 						<effect></effect>
-					</div>
+					</div>-->
 					<!--<div class="detail" v-show="name==6">
               <detail></detail>
             </div>-->
@@ -299,7 +299,6 @@
 		},
 		created: function() {
 			this.getsearch();
-			console.log();
 		},
 		mounted() {
 			this.getCanvas();
@@ -351,7 +350,7 @@
 						'nonce': str.nonce,
 						'user_id': user_id,
 						'token': token,
-						production_id: id,
+						 'production_id': id,
 					}
 				};
 				this.jsonpRequest(this, "Production.GetProductionById", params, function(res) {
@@ -584,7 +583,6 @@
 			getclassify: function(id) {
 				var self = this;
 				this.flag = false;
-				this.fenlei = 'fenlei';
 				this.fasClass = id;
 				var str = this.Encrypt();
 				var user_id = localStorage.getItem("user_id");
@@ -617,11 +615,10 @@
 			},
 			//通过keyword 查询
 			//通过typeId 和 keyword 查询
-			searchBy() {
+			searchBy(res) {
 				if(this.fasClass != '') {
 					this.secSearch(res);
 				} else {
-					this.fenlei = false;
 					this.flag = false;
 					var str = this.Encrypt();
 					var user_id = localStorage.getItem("user_id");
@@ -654,12 +651,11 @@
 					});
 				}
 			},
-			secSearch() {
+			secSearch(res) {
 				var self = this;
 				var str = this.Encrypt();
 				var user_id = localStorage.getItem("user_id");
 				var token = localStorage.getItem("token");
-				this.fenlei = 'fenlei';
 				this.flag = false;
 				var params = {
 					params: {
@@ -918,7 +914,10 @@
 			forname(name) {
 				this.name = name;
 			},
-			getChildImg(item) {
+			getChildImg(item,name,id) {
+				if(item=='add'){
+					item = {url:""}
+				}
 				this.childUrl = item.url;
 				var self = this;
 				this.idData.push(item.id);
@@ -1011,7 +1010,9 @@
 			Clear() {
 				this.Canvas.clear();
 			},
-
+			backSearch(){
+				this.flag = true;
+			},
 		},
 
 	}
@@ -1027,10 +1028,15 @@
 	}
 	
 	.layout {
-		height: 709px;
+		min-width: 1650px;
+		min-height: 709px;
 		border: 1px solid #d7dde4;
 		background: #f5f7f9;
-		position: relative;
+		position: absolute;
+		left:0;
+		right: 0;
+		top: 0;
+		bottom: 0;
 		border-radius: 4px;
 		overflow: hidden;
 	}
@@ -1061,8 +1067,9 @@
 	.layout-breadcrumb {
 		float: left;
 		min-width: 200px;
-		width: 30%;
+		width: 20%;
 		min-height: 672px;
+		height: 100%;
 	}
 	
 	.layout-content {
@@ -1071,7 +1078,7 @@
 		display: flex;
 		justify-content: center;
 		float: left;
-		width: 70%;
+		width: 80%;
 		overflow: hidden;
 		min-height: 600px;
 		padding: 0px 0px 10px 5px;
@@ -1099,7 +1106,7 @@
 	
 	.layout-menu-left {
 		background: #293036;
-		height: 710px;
+		min-height: 710px;
 		float: left;
 	}
 	
@@ -1135,14 +1142,18 @@
 	
 	.ivu-col {
 		transition: width .2s ease-in-out;
+		/*height: 100%;*/
 	}
-	
+	.ivu-row-flex{
+		height: 100%;
+	}
 	.aside {
 		float: left;
 		width: 100%;
 		min-height: 672px;
 		background-color: #353F48;
 		overflow-y: auto;
+		height: 100%;
 	}
 	
 	.search-title {
@@ -1524,6 +1535,7 @@
 	/*滚动显示样式*/
 	
 	.conlist_show {
+		position: absolute;
 		width: 100%;
 		overflow: hidden;
 		height: 732px;
@@ -1531,7 +1543,8 @@
 	
 	.conlist_con {
 		width: calc(100% + 20px);
-		height: 570px;
+		min-height: 570px;
+		height: 100%;
 		overflow-x: hidden;
 		overflow-y: scroll;
 	}
