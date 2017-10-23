@@ -230,8 +230,8 @@
 
 			</div>
 			<div class="layout-content-main">
-				<div class="parent" style="width: 320px;height: 720px;">
-					<canvas class="one box" id="parent" style="width: 320px;height：720px"></canvas>
+				<div class="parent" >
+					<canvas class="one box" id="parent" ></canvas>
 				</div>
 			</div>
 		</div>
