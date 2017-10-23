@@ -111,12 +111,13 @@
                         <img :src="itemd.path" alt=""/>
                         <p>一只一只</p>
                         </Col>-->
+                        				<div class="conlist_con">
 											<div class="dan" @click="" v-for="item in searchi">
 												<div class="img">
 													<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />
-													<div class="modal" @click="modalS(item)" style="display: none;"></div>
+													<div class="modal" style="display: none;"></div>
 													<div class="icon">
-														<Tooltip content="添加" @click="getChildImg('add',item.filename,item.id)" placement="bottom">
+														<Tooltip content="添加" @click.native="searchAddImg(item.filename,item.id)" placement="bottom">
 													      	<Icon type="android-exit"></Icon>
 												        </Tooltip>
 													</div>
@@ -128,6 +129,7 @@
 													{{item.price}}￥
 												</div>
 											</div>
+										</div>
 
 										</div>
 									</div>
@@ -339,6 +341,7 @@
 			},
 			//如果有id直接获取数据初始化到画布      
 			getProducId() {
+				var self = this;
 				var id = this.$route.params.id;
 				var str = this.Encrypt();
 				var user_id = localStorage.getItem("user_id");
@@ -356,7 +359,9 @@
 				this.jsonpRequest(this, "Production.GetProductionById", params, function(res) {
 					console.log(res)
 					if(res.body.data.code == 0) {
-						console.log(res)
+						var list = res.body.data.list[0].production.data;
+						self.Canvas.loadFromJSON(list);
+//						console.log(res.body.data.list[0].production.data);
 					} else {
 						console.log(res);
 						if(res.body.ret == 401) {
@@ -914,10 +919,18 @@
 			forname(name) {
 				this.name = name;
 			},
-			getChildImg(item,name,id) {
-				if(item=='add'){
-					item = {url:""}
-				}
+			getChildImg(item) {
+				this.childUrl = item.url;
+				var self = this;
+				this.idData.push(item.id);
+				fabric.Image.fromURL(item.url, function(oImg) {
+					oImg.scale(0.5);
+					oImg.imgId = item.id;
+					self.Canvas.add(oImg);
+				});
+			},
+			searchAddImg(name,id){
+				var item = {url:'http://static.shatuhome.com/material/'+name,id:id};
 				this.childUrl = item.url;
 				var self = this;
 				this.idData.push(item.id);
@@ -1096,6 +1109,7 @@
 	
 	.layout-content-main {
 		padding: 10px;
+		overflow: auto;
 	}
 	
 	.layout-copy {
@@ -1343,6 +1357,7 @@
 	
 	.layout-content {
 		position: relative;
+		height: 100%;
 	}
 	
 	.layz {
@@ -1531,6 +1546,9 @@
 	
 	.ivu-menu-light {
 		z-index: -0;
+	}
+	.content_con2{
+		position: relative;
 	}
 	/*滚动显示样式*/
 	

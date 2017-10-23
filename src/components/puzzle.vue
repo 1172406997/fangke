@@ -305,7 +305,7 @@
   		var token = localStorage.getItem("token");
   		var params = {
 				params:{
-					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'floderId':id,type:1
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'folderId':id,type:1
 				}
 			};
 			this.jsonpRequest(this,"Folder.GetFolderDetail",params,function(res){
