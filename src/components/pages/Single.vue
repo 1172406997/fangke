@@ -1,7 +1,7 @@
 <template>
-   <div class="container modals">
+   <div class="container">
    	<div class="modals"></div>
-     <p><span  v-on:click="modalH()"><Icon type="close-round" color="#fff" size="20" class="ico"></Icon></span></p>
+     <p><Icon @click.native="modalH()" type="close-round" color="#fff" size="20" class="ico"></Icon></p>
      <div class="mine">
      	<Row>
         	<Col span="14" class="dada">
@@ -27,7 +27,6 @@
 					    </Carousel>
         			</div>
         		</div>
-
         	</Col>
        		<Col span="8">
        			<div class="right">
@@ -153,7 +152,7 @@
   	bottom: 0;
     background-color:rgba(53,63,72,0.7);
     padding: 0 12px 0;
-
+    padding-top: 80px;
   }
   .modals{
   	position: absolute;
@@ -164,10 +163,22 @@
   }
   .container>p {
     height: 48px;
-    position: relative;
+    width: 100%;
   }
-  .container>p i {
-
+  .container>p:first-of-type {
+    height: 48px;
+    width: 100%;
+    background-color: rgba(53,63,72,0.7);
+    position: absolute;
+    top: 0;
+    left:0;
+    line-height: 48px;
+  }
+  .container>p:first-of-type i{
+  	position: absolute;
+  	left: 95%;
+  	/*right: 10px;*/
+	/*top:10px;*/
   }
   .container>p span{
   	overflow: hidden;
@@ -318,6 +329,11 @@
   	margin-top: 6px;
     font-size: 12px;
     color: #b2c0c8;
+  }
+  .endLine{
+  	position: absolute;
+  	bottom:0;
+  	left:0;
   }
   .endLine span {
     width: 40%;
