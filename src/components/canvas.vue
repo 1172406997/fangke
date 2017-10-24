@@ -2,34 +2,36 @@
 	<div class="layout">
 		<Row type="flex">
 			<i-col :span="spanLeft" class="layout-menu-left">
-				<Menu active-name="2" theme="dark" width="100%" @on-select="forname" class="left">
+				<Menu active-name="2" style="text-align: center;" theme="dark" width="100%" @on-select="forname" class="layout-left left">
 					<!--<div class="layout-logo-left"></div>-->
 					<Menu-item name="1" @click.native="backUp">
-						<Icon type="arrow-left-a"></Icon>
-						<span class="layout-text">退出</span>
+							<Icon type="arrow-left-a" size='24'></Icon>
+						<!--<Icon type="arrow-left-a" size='24'></Icon>-->
+						<!--<span class="layout-text">退出</span>-->
 					</Menu-item>
 					<Menu-item name="2">
-						<Icon type="ios-search-strong"></Icon>
-						<span class="layout-text">搜索</span>
+						<Icon type="ios-search-strong" size='24'></Icon>
+						<!--<Icon type="ios-search-strong" size='24'></Icon>-->
+						<!--<span class="layout-text">搜索</span>-->
 					</Menu-item>
-					<Menu-item name="3" on-select="unitemy()">
-						<Icon type="ios-box"></Icon>
-						<span class="layout-text">单品</span>
+					<Menu-item name="3" style="width: 100%;" on-select="unitemy()">
+						<Icon type="ios-box" size='24'></Icon>
+						<!--<span class="layout-text">单品</span>-->
 					</Menu-item>
 					<Menu-item name="4" on-select="puzzmy">
-						<Icon type="images"></Icon>
-						<span class="layout-text">拼图</span>
+						<Icon type="images" size='24'></Icon>
+						<!--<span class="layout-text">拼图</span>-->
 						<!--<Icon type="ios-navigate" :size="iconSize"></Icon>-->
 					</Menu-item>
 					<Menu-item name="5" @click="add()" on-select="effectmy">
-						<Icon type="wand"></Icon>
+						<Icon type="wand" size='24'></Icon>
 						<!--<span class="layout-text">选项 1</span>-->
-						<span class="layout-text">辅助</span>
+						<!--<span class="layout-text">辅助</span>-->
 					</Menu-item>
 					<Menu-item name="6" on-select="detailmy">
 						<Tooltip content="当前详情" placement="bottom">
-							<Icon type="information-circled"></Icon>
-							<span class="layout-text">详情</span>
+							<Icon type="information-circled" size='24'></Icon>
+							<!--<span class="layout-text">详情</span>-->
 							<!--<span class="layout-text">选项 1</span>-->
 						</Tooltip>
 					</Menu-item>
@@ -140,7 +142,7 @@
 						<canvasmy @imgdata="getChildImg"></canvasmy>
 					</div>
 					<div class="puzz" v-show="name==4">
-						<brand></brand>
+						<!--<brand></brand>-->
 					</div>
 					<div class="effect" v-show="name==5">
 						<effect></effect>
@@ -250,8 +252,8 @@
 	export default {
 		data() {
 			return {
-				spanLeft: 2,
-				spanRight: 22,
+				spanLeft: 1,
+				spanRight: 23,
 				select1: "",
 				value1: '',
 				name: 2,
@@ -288,7 +290,7 @@
 		},
 		computed: {
 			iconSize() {
-				return this.spanLeft === 2 ? 14 : 24;
+				return this.spanLeft === 1 ? 12 : 24;
 			},
 		},
 		watch: {
@@ -311,6 +313,7 @@
 		},
 		methods: {
 			writeName() {
+				alert(123456);
 				this.$Modal.confirm({
 					render: (h) => {
 						return h('Input', {
@@ -333,6 +336,7 @@
 
 						} else {
 							this.saveCanvas();
+							this.$router.push({name: 'content'});
 						}
 					},
 					onCancel: () => {
@@ -1002,14 +1006,12 @@
 				this.menu_1 = 1;
 			},
 			backUp() {
+				var self = this;
 				this.$Modal.confirm({
 					title: '退出提示',
 					content: '请选择是否保存',
 					onOk: () => {
-						this.saveCanvas();
-						this.$router.push({
-							name: 'content'
-						});
+						self.writeName();
 					},
 					onCancel: () => {
 						this.$router.push({
@@ -1583,4 +1585,27 @@
 		left: 0;
 		top: 0;
 	}
+	/*侧边滑动*/
+	.layout-left  ul li{
+		cousor:pointer;
+	}
+	/*padding调整*/
+	/*.ivu-menu-vertical .ivu-menu-item, .ivu-menu-vertical .ivu-menu-submenu-title{
+		padding:0;
+	}
+	.ivu-menu-item>i {
+		line-height: 37.6px;
+	}
+	.ivu-tooltip{
+		width: 100%;
+	}
+	.ivu-icon .ivu-icon-ios-box{
+		width: 100%;
+	}
+	.ivu-tooltip .ivu-tooltip-rel{
+		width: 100% !important;
+	}
+	.ivu-menu-item{
+		width: 100%;
+	}*/
 </style>

@@ -104,7 +104,7 @@
 									 		</span>
 							 				<div style="width: 15px;"></div>
 							 				<div class="box-txt">
-							 					<p>{{item.userinfo.username}}</p>
+							 					<p>{{item.production.name}}</p>
 							 					<div style="height: 5px;"></div>
 							 					<p>{{item.production.ctime | Time}}</p>
 							 				</div>
