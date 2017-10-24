@@ -211,8 +211,8 @@
 						<Icon type="ios-settings-strong"></Icon>
 					</Tooltip>
 					<div slot="content" style="width: 180px;">
-						<!--颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color"
-                                 value="#400000"/><br/><br/>-->
+						颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color"
+                                 value="#400000"/><br/><br/>
 						亮度：
 						<Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="-100" :max="100" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						对比度：
@@ -221,9 +221,8 @@
 						<Slider class="slid" @on-input="blurFilter" v-model="blur" :min="0" :max="100" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						清晰度：
 						<Slider class="slid" @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-						<!--透明度：
-                  <Slider class="slid" oninput="xxxxx" v-model="lucency"
-                          style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>-->
+						透明度：
+            <Slider class="slid" @on-input="lucencyImg" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 					</div>
 				</Poptip>
 				<Tooltip content="保存" @click.native="menuYes" style="float: right;color: #9ACD32;" placement="bottom">
@@ -344,7 +343,7 @@
 					},
 				})
 			},
-			//如果有id直接获取数据初始化到画布      
+			//如果有id直接获取数据初始化到画布
 			getProducId() {
 				var self = this;
 				var id = this.$route.params.id;
@@ -534,14 +533,14 @@
 					format: 'png'
 				});
 				//    	javascript:void(window.open().location = con);
-				//    	var image = new Image();  
-				// canvas.toDataURL 返回的是一串Base64编码的URL，当然,浏览器自己肯定支持  
-				// 指定格式 PNG  
+				//    	var image = new Image();
+				// canvas.toDataURL 返回的是一串Base64编码的URL，当然,浏览器自己肯定支持
+				// 指定格式 PNG
 				//		    image.src = con;
 				this._download("down", con);
 			},
 			_download: function(filename, content) {
-				//  		var blob = new Blob([content], {type: 'image/jpeg'}); 
+				//  		var blob = new Blob([content], {type: 'image/jpeg'});
 				var a = document.getElementById('downloadFtsetBtn');
 				a.download = "fileName";
 				a.href = content;
@@ -549,14 +548,14 @@
 				//      try{
 				//          var URL=window.URL || window.webkitURL;
 				//          a.href=URL.createObjectURL(blob);
-				//          a.download = filename;  
+				//          a.download = filename;
 				//          if (typeof navigator.msSaveBlob == "function"){  //IE
 				//              navigator.msSaveBlob(blob,filename);
 				//　　　　　　 }
 				//       		a.click();
 				//       	}
 				//	        catch(e){
-				//	     
+				//
 				//	       	}
 
 			},
@@ -756,7 +755,7 @@
 					item.filters[index][name] = value;
 					item.applyFilters();
 					canvas.renderAll();
-					console.log(item);
+//					console.log(item);
 				}
 			},
 			showFilter() {
@@ -791,30 +790,41 @@
 					var _img = oImg;
 					_img.left = 0;
 					_img.top = 0;
-					self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness({
-						'brightness': parseFloat(self.brightness / 100)
-					}));
-					self.ApplyFilter(_img, 1, new fabric.Image.filters.Contrast());
-					self.ApplyFilter(_img, 2, new fabric.Image.filters.Blur({
-						'blur': 0
-					}));
-					self.ApplyFilter(_img, 3, new fabric.Image.filters.Saturation());
+//					self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness({
+//						'brightness': parseFloat(self.brightness / 100)
+//					}));
+//					self.ApplyFilter(_img, 1, new fabric.Image.filters.Contrast());
+//					self.ApplyFilter(_img, 2, new fabric.Image.filters.Blur({
+//						'blur': 0
+//					}));
+//					self.ApplyFilter(_img, 3, new fabric.Image.filters.Saturation());
+//					self.ApplyFilter(_img, 4, new fabric.Image.filters.BlendColor({
+//            color: '#0f0',
+//            mode: 'add',
+//            alpha: 0.1
+//          }));
 					_img.applyFilters();
 					self.secCanvas.add(_img);
 					//        self.Canvas.remove(self.imgActive);
 				})
 			},
+      colorFilter:function(){
+        var self = this;
+        var _img = self.secCanvas.getObjects()[4];
+        console.log(self.color);
+        self.ApplyFilterValue(_img, 4, 'color', self.color, self.secCanvas);
+      },
 			brightnessFilter: function() {
 				var self = this;
 				var _img = self.secCanvas.getObjects()[0];
 				//        self.ApplyFilterValue(_img, 0, 'brightness', parseFloat((self.brightness) / 50 - 1), self.secCanvas);
-				console.log(self.brightness / 100);
+//				console.log(self.brightness / 100);
 				self.ApplyFilterValue(_img, 0, 'brightness', parseFloat(self.brightness / 100), self.secCanvas);
 			},
 			contrastFilter() {
 				var self = this;
 				var _img = self.secCanvas.getObjects()[0];
-				console.log(parseFloat((self.contrast) / 50 - 1));
+//				console.log(parseFloat((self.contrast) / 50 - 1));
 
 				self.ApplyFilterValue(_img, 1, 'contrast', parseFloat((self.contrast) / 50 - 1), self.secCanvas);
 			},
@@ -826,10 +836,17 @@
 			saturationFilter() {
 				var self = this;
 				var _img = self.secCanvas.getObjects()[0];
-				console.log(parseFloat(self.saturation / 50 - 1));
+//				console.log(parseFloat(self.saturation / 50 - 1));
 
 				self.ApplyFilterValue(_img, 3, 'saturation', parseFloat(self.saturation / 50 - 1), self.secCanvas);
 			},
+      lucencyImg(){
+        var self = this;
+        var _img = self.secCanvas.getObjects()[0];
+        console.log(parseFloat(1-self.lucency/100));
+        _img.set({opacity: parseFloat(1-self.lucency/100)});
+        self.secCanvas.renderAll();
+      },
 			Clip() {
 				var self = this;
 				var startPoint = new fabric.Point();
@@ -850,6 +867,7 @@
 				});
 				self.secCanvas = clip;
 				self.imgActive.clone(function(oImg) {
+          oImg.scale(0.5);
 					clip.setWidth(oImg.width / 2);
 					clip.setHeight(oImg.height / 2);
 					oImg.left = 0;
@@ -979,8 +997,9 @@
 				getObjImg.lockUniScaling = false;
 				getObjImg.hasControls = true;
 				getObjImg.hasBorders = true;
-				this.Canvas.setWidth(800);
-				this.Canvas.setHeight(800);
+        self.setCanvasDimension(self.Canvas, 1103, 780);
+//				this.Canvas.setWidth(800);
+//				this.Canvas.setHeight(800);
 				this.secCanvas.setWidth(0);
 				this.secCanvas.setHeight(0);
 				this.secCanvas.clear();
@@ -1038,11 +1057,11 @@
 	.left {
 		float: left;
 	}
-	
+
 	.right {
 		float: right;
 	}
-	
+
 	.layout {
 		min-width: 1650px;
 		min-height: 709px;
@@ -1056,30 +1075,30 @@
 		border-radius: 4px;
 		overflow: hidden;
 	}
-	
+
 	.ivu-menu-light {
 		z-index: -0;
 	}
-	
+
 	.layout-ceiling {
 		background: #293036;
 		padding: 10px 0;
 		overflow: hidden;
 	}
-	
+
 	.layout-ceiling-main {
 		margin-right: 15px;
 	}
-	
+
 	.ivu-menu-item {
 		background-color: #293036;
 	}
-	
+
 	.layout-ceiling .layout-ceiling-main a {
 		margin-left: 10px;
 		color: #fff;
 	}
-	
+
 	.layout-breadcrumb {
 		float: left;
 		min-width: 200px;
@@ -1087,7 +1106,7 @@
 		min-height: 672px;
 		height: 100%;
 	}
-	
+
 	.layout-content {
 		/*position: relative;*/
 		/*margin: 0 auto;*/
@@ -1103,36 +1122,36 @@
 		border-radius: 4px;
 		box-sizing: border-box;
 	}
-	
+
 	.layout-content-style {
 		width: 100%;
 		min-height: 700px;
 		background-color: #fff;
 	}
-	
+
 	.layout-content-main {
 		padding: 10px;
 		overflow: auto;
 	}
-	
+
 	.layout-copy {
 		text-align: center;
 		padding: 10px 0 20px;
 		color: #9ea7b4;
 	}
-	
+
 	.layout-menu-left {
 		background: #293036;
 		min-height: 710px;
 		float: left;
 	}
-	
+
 	.layout-header {
 		height: 60px;
 		background: #fff;
 		box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
 	}
-	
+
 	.layout-logo-left {
 		width: 90%;
 		height: 30px;
@@ -1140,23 +1159,23 @@
 		border-radius: 3px;
 		margin: 15px auto;
 	}
-	
+
 	.layout-ceiling-main a {
 		color: #293036;
 	}
-	
+
 	.layout-hide-text .layout-text {
 		display: none;
 	}
-	
+
 	.layout-text {
 		font-size: 12px;
 	}
-	
+
 	li.ivu-menu-item {
 		height: 37.6px;
 	}
-	
+
 	.ivu-col {
 		transition: width .2s ease-in-out;
 		/*height: 100%;*/
@@ -1172,29 +1191,29 @@
 		overflow-y: auto;
 		height: 100%;
 	}
-	
+
 	.search-title {
 		margin-left: 20px;
 		margin-bottom: 20px;
 	}
-	
+
 	.search-content>div>p {
 		line-height: 48px;
 		font-size: 12px;
 	}
-	
+
 	.con2 {
 		position: relative;
 		overflow: hidden;
 		margin: 10px;
 	}
-	
+
 	.con2>img {
 		max-width: 90%;
 		max-height: 90%;
 		float: right;
 	}
-	
+
 	.con2>p {
 		padding: 5px 10px;
 		font-size: 0.3em;
@@ -1207,30 +1226,30 @@
 		color: #9EA7B4;
 		z-index: 10;
 	}
-	
+
 	.content-con2>h2 {
 		margin-top: 10px;
 		margin-bottom: 10px;
 	}
-	
+
 	.my>div>p {
 		line-height: 48px;
 		color: #fff;
 		margin-left: 20px;
 	}
-	
+
 	#parent {
 		position: relative;
 		width: 300px;
 		height: 500px;
 	}
-	
+
 	.parent {
 		position: relative;
 		display: flex;
 		justify-content: center;
 	}
-	
+
 	.parent .one {
 		width: 388px;
 		height: 554px;
@@ -1238,7 +1257,7 @@
 		box-shadow: 1px 2px 5px #293036;
 		overflow: hidden;
 	}
-	
+
 	.div1 {
 		min-width: 50px;
 		min-height: 50px;
@@ -1248,7 +1267,7 @@
 		cursor: pointer;
 	}
 	/*//改变大小*/
-	
+
 	.box .t,
 	.box .b,
 	.box .l,
@@ -1257,7 +1276,7 @@
 		z-index: 1;
 		/*background:#666;*/
 	}
-	
+
 	.box .l,
 	.box .r {
 		/*width: 2px;*/
@@ -1265,7 +1284,7 @@
 		border: 1px dashed #666;
 		cursor: col-resize;
 	}
-	
+
 	.box .t,
 	.box .b {
 		width: 100%;
@@ -1273,24 +1292,24 @@
 		border: 1px dashed #666;
 		cursor: row-resize;
 	}
-	
+
 	.box .t {
 		top: 0;
 	}
-	
+
 	.box .b {
 		bottom: 0;
 	}
-	
+
 	.box .l {
 		left: 0;
 	}
-	
+
 	.box .r {
 		right: 0;
 	}
 	/*四角*/
-	
+
 	.box .tl,
 	.box .bl,
 	.box .br,
@@ -1303,32 +1322,32 @@
 		z-index: 2;
 		cursor: nwse-resize
 	}
-	
+
 	.box .tl,
 	.box .bl {
 		left: -5px;
 	}
-	
+
 	.box .tr,
 	.box .br {
 		right: -5px;
 	}
-	
+
 	.box .br,
 	.box .bl {
 		bottom: -5px;
 	}
-	
+
 	.box .tl,
 	.box .tr {
 		top: -5px;
 	}
-	
+
 	.box .tr,
 	.box .bl {
 		cursor: nesw-resize;
 	}
-	
+
 	.menubox {
 		width: 100%;
 		box-shadow: 0 0 5px #ccc;
@@ -1339,14 +1358,14 @@
 		padding: 0 20px 0 10px;
 		font-size: 24px;
 	}
-	
+
 	.menubox .ivu-icon {
 		margin-left: 10px;
 		cursor: pointer;
 		/*margin-left: 10px;*/
 	}
 	/*search 样式*/
-	
+
 	.classify>p {
 		position: absolute;
 		display: inline;
@@ -1357,29 +1376,29 @@
 		font-size: 16px;
 		z-index: 1;
 	}
-	
+
 	.layout-content {
 		position: relative;
 		height: 100%;
 	}
-	
+
 	.layz {
 		position: absolute;
 		top: 0px;
 		left: 50%;
 		display: none;
 	}
-	
+
 	.con-content2 {
 		padding: 0 24px;
 	}
-	
+
 	.con2 {
 		text-align: center;
 		line-height: none;
 		cursor: pointer;
 	}
-	
+
 	.classify {
 		background-color: #fff;
 		position: relative;
@@ -1388,13 +1407,13 @@
 		cursor: pointer;
 		border-radius: 2px;
 	}
-	
+
 	.classify:hover {
 		box-shadow: 2px 2px 5px #888888;
 		;
 	}
 	/*搜索样式*/
-	
+
 	.searchclassfy {
 		position: relative;
 		width: 130px;
@@ -1404,7 +1423,7 @@
 		cursor: pointer;
 		float: left;
 	}
-	
+
 	.searchclassfy img {
 		position: absolute;
 		left: 0;
@@ -1413,17 +1432,17 @@
 		height: 100%;
 		border-radius: 5px;
 	}
-	
+
 	.searchclassfy:hover {
 		box-shadow: 2px 2px 5px #888888;
 		;
 	}
-	
+
 	.con2>img {
 		max-width: 90%;
 		max-height: 90%;
 	}
-	
+
 	.con2>p {
 		padding: 5px 14px;
 		font-size: 0.3em;
@@ -1436,7 +1455,7 @@
 		color: #000;
 		z-index: 10;
 	}
-	
+
 	.con2 .show {
 		display: block;
 		position: absolute;
@@ -1449,7 +1468,7 @@
 		background-color: #fff;
 		z-index: 2;
 	}
-	
+
 	.con2 .hover {
 		position: absolute;
 		left: 0;
@@ -1460,7 +1479,7 @@
 		/*margin: 0 auto;*/
 		background-color: rgba(0, 0, 0, .1);
 	}
-	
+
 	.classify>img {
 		position: absolute;
 		width: 100%;
@@ -1470,11 +1489,11 @@
 		z-index: 0;
 		bottom: 0px;
 	}
-	
+
 	.ivu-menu-light {
 		z-index: -0;
 	}
-	
+
 	.dan {
 		width: 122px;
 		height: 136px;
@@ -1488,23 +1507,23 @@
 		float: left;
 		overflow: hidden;
 	}
-	
+
 	.dan:hover {
 		box-shadow: 0 4px 12px rgba(6, 31, 50, .24);
 		-webkit-box-shadow: 0 4px 12px rgba(6, 31, 50, .24);
 	}
-	
+
 	.img {
 		position: relative;
 		width: 100%;
 		height: 107px;
 	}
-	
+
 	.img>img {
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.modal {
 		position: absolute;
 		width: 100%;
@@ -1515,7 +1534,7 @@
 		border-radius: 2px;
 		background-color: rgba(0, 0, 0, 0.1);
 	}
-	
+
 	.icon {
 		width: 40px;
 		height: 40px;
@@ -1531,22 +1550,22 @@
 		display: none;
 		cursor: pointer;
 	}
-	
+
 	.nam {
 		width: 100%;
 		line-height: 18px;
 	}
-	
+
 	.price {
 		width: 100%;
 		display: none;
 		line-height: 18px;
 	}
-	
+
 	.icon:hover {
 		color: #3B454C;
 	}
-	
+
 	.ivu-menu-light {
 		z-index: -0;
 	}
@@ -1554,14 +1573,14 @@
 		position: relative;
 	}
 	/*滚动显示样式*/
-	
+
 	.conlist_show {
 		position: absolute;
 		width: 100%;
 		overflow: hidden;
 		height: 732px;
 	}
-	
+
 	.conlist_con {
 		width: calc(100% + 20px);
 		min-height: 570px;
@@ -1570,16 +1589,16 @@
 		overflow-y: scroll;
 	}
 	/*滑动框样式*/
-	
+
 	.slid .ivu-slider-wrap {
 		margin-top: 7px;
 	}
 	/*clip*/
-	
+
 	#clip {
 		position: absolute;
 	}
-	
+
 	.canvas-container {
 		poaition: absolute;
 		left: 0;
