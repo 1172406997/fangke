@@ -3,8 +3,8 @@
    	<div class="modals"></div>
      <p><Icon @click.native="modalH()" type="close-round" color="#fff" size="20" class="ico"></Icon></p>
      <div class="mine">
-     	<Row>
-        	<Col span="14" class="dada">
+     	<div class="col">
+        	<!--<Col span="14" class="dada">-->
         		<div class="left">
         			<div class="left_con">
 					 	<Carousel v-model="value1"  style="width: 500px;" >
@@ -27,8 +27,9 @@
 					    </Carousel>
         			</div>
         		</div>
-        	</Col>
-       		<Col span="8">
+        	</div>
+        	<!--</Col>-->
+       		<div class="col">
        			<div class="right">
         			<div class="rightt">
         				<h1>{{toson.production.name}}</h1>
@@ -61,12 +62,12 @@
         				</div>-->
         			</div>
         		</div>
-       		</Col>
-    	</Row>
+       		<!--</Col>-->
+       		</div>
      </div>
-     <p class="endLine">
+     <!--<p class="endLine">
        <span>没有更多内容</span>
-     </p>
+     </p>-->
    </div>
 </template>
 
@@ -195,10 +196,13 @@
   }
 
   .mine{
+  	/*margin-top: 50px;*/
+  	position: absolute;
+  	width: 100%;
   	padding:0px 48px 20px 48px;
   }
   .left{
-  	width: 100%;
+  	width: 70%;
   	border-bottom-left-radius: 10px;
   	border-top-left-radius: 10px;
   	overflow: hidden;
@@ -207,7 +211,7 @@
   }
   .left_con{
   	margin: 12px;
-  	height: 480px;
+  	height: 600px;
   	display: flex;
   	justify-content: center;
 	align-items: center;
@@ -234,8 +238,8 @@
     align-items: center;
   }
   .right{
-  	width: 100%;
-  	height: 504px;
+  	width: 25%;
+  	height: 624px;
   	border-top-right-radius: 12px;
   	border-bottom-right-radius: 12px;
   	float: left;
