@@ -1009,10 +1009,8 @@
 				var self = this;
 				this.$Modal.confirm({
 					title: '退出提示',
-					content: '请选择是否保存',
-					onOk: () => {
-						self.writeName();
-					},
+					content: '您需要保存么？',
+					onOk: () => {},
 					onCancel: () => {
 						this.$router.push({
 							name: 'content'

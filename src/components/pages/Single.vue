@@ -1,5 +1,6 @@
 <template>
    <div class="container modals">
+   	<div class="modals"></div>
      <p><span  v-on:click="modalH()"><Icon type="close-round" color="#fff" size="20" class="ico"></Icon></span></p>
      <div class="mine">
      	<Row>
@@ -153,6 +154,13 @@
     background-color:rgba(53,63,72,0.7);
     padding: 0 12px 0;
 
+  }
+  .modals{
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  	bottom: 0;
+  	right: 0;
   }
   .container>p {
     height: 48px;
