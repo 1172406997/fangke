@@ -194,7 +194,6 @@
   	height: 30px;
     line-height: 30px;
   }
-
   .mine{
   	/*margin-top: 50px;*/
   	position: absolute;
