@@ -77,7 +77,7 @@ import modals from "../components/pages/Single"
   methods:{
   	//获取所有单品
   	getlike:function(){
-  		var self = this;
+  		var self = this;	
   		var str = this.Encrypt();
   		var user_id = localStorage.getItem("user_id"); 
   		var token = localStorage.getItem("token"); 

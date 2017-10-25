@@ -3,33 +3,22 @@
    	<div class="modals"></div>
      <p><Icon @click.native="modalH()" type="close-round" color="#fff" size="20" class="ico"></Icon></p>
      <div class="mine">
-     	<div class="col">
+     	<!--<div class="col">-->
         	<!--<Col span="14" class="dada">-->
         		<div class="left">
         			<div class="left_con">
-					 	<Carousel v-model="value1"  style="width: 500px;" >
+					 	<Carousel v-model="value1"  style="width: 100%;">
 					        <Carousel-item>
 					            <div class="demo-carousel">
 					            	<img v-show="toson.production.thumb!=null" :src="'http://www.shatuhome.com/thumb/'+toson.production.thumb" alt="" />
 					            </div>
 					        </Carousel-item>
-					        <!--<Carousel-item>
-					            <div class="demo-carousel">
-					            	<img src="../../assets/logo.png"/>
-					            </div>
-					        </Carousel-item>
-					        <Carousel-item>
-					            <div class="demo-carousel">3</div>
-					        </Carousel-item>
-					        <Carousel-item>
-					            <div class="demo-carousel">4</div>
-					        </Carousel-item>-->
 					    </Carousel>
         			</div>
         		</div>
-        	</div>
+        	<!--</div>-->
         	<!--</Col>-->
-       		<div class="col">
+       		<!--<div class="col">-->
        			<div class="right">
         			<div class="rightt">
         				<h1>{{toson.production.name}}</h1>
@@ -61,7 +50,7 @@
         					</Tooltip>
         				</div>-->
         			</div>
-        		</div>
+        		<!--</div>-->
        		<!--</Col>-->
        		</div>
      </div>
@@ -198,36 +187,46 @@
   	/*margin-top: 50px;*/
   	position: absolute;
   	width: 100%;
+  	height: 90%;
   	padding:0px 48px 20px 48px;
   }
+  /*.col{
+  	position: absolute;
+  	width: 100%;
+  	height: 100%;
+  }*/
   .left{
   	width: 70%;
+  	height:inherit;
   	border-bottom-left-radius: 10px;
   	border-top-left-radius: 10px;
   	overflow: hidden;
   	float: left;
   	background-color:#fff ;
+  	background-color: #F4F3F4;
   }
   .left_con{
+  	width: 100%;
   	margin: 12px;
-  	height: 600px;
+  	height: 100%;
+  	padding: 20px;
   	display: flex;
   	justify-content: center;
 	align-items: center;
 	/*border: 1px solid #000;*/
   }
   .demo-carousel{
-  		width: 500px;
-        height: 330px;
-        line-height: 330px;
+  		/*width: 500px;*/
+        /*height: 330px;*/
+        /*line-height: 330px;*/
         text-align: center;
         color: #fff;
         font-size: 20px;
         /*background: #506b9e;*/
     }
   .left_con img{
-  	width: 100%;
-  	height: 100%;
+  	width: 75%;
+  	/*height: 100%;*/
   }
   .endLine {
     color: #7e8e98;
@@ -238,7 +237,8 @@
   }
   .right{
   	width: 25%;
-  	height: 624px;
+  	height:inherit;
+  	/*height: 624px;*/
   	border-top-right-radius: 12px;
   	border-bottom-right-radius: 12px;
   	float: left;

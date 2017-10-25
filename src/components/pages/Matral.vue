@@ -1,9 +1,11 @@
 <template>
-   <div class="container modals">
+   <div class="container">
+   	<div class="modals"></div>
      <p><span  v-on:click="modalH()"><Icon type="close-round" color="#fff" size="20" class="ico"></Icon></span></p>
      <div class="mine">
-     	<Row>
-        	<Col span="14" class="dada">
+     	<!--<Row>-->
+        	<!--<Col span="14" class="dada">-->
+        		<!--<div class="col">-->
         		<div class="left">
         			<div class="left_con">
 					 	<Carousel v-model="value1"  style="width: 500px;" >
@@ -25,10 +27,11 @@
 					        </Carousel-item>-->
 					    </Carousel>
         			</div>
-        		</div>
-
-        	</Col>
-       		<Col span="8">
+        		<!--</div>-->
+				</div>
+        	<!--</Col>-->
+        	<!--<div class="col">-->
+       		<!--<Col span="8">-->
        			<div class="right">
         			<div class="rightt">
         				<h1>{{toson.name}}</h1>
@@ -66,13 +69,14 @@
         					</Tooltip>
         				</div>
         			</div>-->
-        		</div>
-       		</Col>
-    	</Row>
+        		<!--</div>-->
+       		<!--</Col>-->
+       	</div>
+    	<!--</Row>-->
      </div>
-     <p class="endLine">
+     <!--<p class="endLine">
        <span>没有更多内容</span>
-     </p>
+     </p>-->
    </div>
 </template>
 
@@ -125,7 +129,7 @@
 </script>
 
 <style scoped>
-  .container {
+ .container {
   	position:fixed;
   	left: 5px;
   	right: 5px;
@@ -136,14 +140,33 @@
   	bottom: 0;
     background-color:rgba(53,63,72,0.7);
     padding: 0 12px 0;
-
+    padding-top: 80px;
+  }
+   .modals{
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  	bottom: 0;
+  	right: 0;
   }
   .container>p {
     height: 48px;
-    position: relative;
+    width: 100%;
   }
-  .container>p i {
-
+  .container>p:first-of-type {
+    height: 48px;
+    width: 100%;
+    background-color: rgba(53,63,72,0.7);
+    position: absolute;
+    top: 0;
+    left:0;
+    line-height: 48px;
+  }
+  .container>p:first-of-type i{
+  	position: absolute;
+  	left: 95%;
+  	/*right: 10px;*/
+	/*top:10px;*/
   }
   .container>p span{
   	overflow: hidden;
@@ -158,12 +181,21 @@
   	height: 30px;
     line-height: 30px;
   }
-
   .mine{
+  	/*margin-top: 50px;*/
+  	position: absolute;
+  	width: 100%;
+  	height: 90%;
   	padding:0px 48px 20px 48px;
   }
-  .left{
+  /*.col{
+  	position: absolute;
   	width: 100%;
+  	height: 100%;
+  }*/
+  .left{
+  	width: 70%;
+  	height:inherit;
   	border-bottom-left-radius: 10px;
   	border-top-left-radius: 10px;
   	overflow: hidden;
@@ -171,25 +203,27 @@
   	background-color:#fff ;
   }
   .left_con{
+  	width: 100%;
   	margin: 12px;
-  	height: 480px;
+  	height: 100%;
+  	padding: 20px;
   	display: flex;
   	justify-content: center;
 	align-items: center;
 	/*border: 1px solid #000;*/
   }
   .demo-carousel{
-  		width: 500px;
-        height: 330px;
-        line-height: 330px;
+  		/*width: 500px;*/
+        /*height: 330px;*/
+        /*line-height: 330px;*/
         text-align: center;
         color: #fff;
         font-size: 20px;
         /*background: #506b9e;*/
     }
   .left_con img{
-  	width: 100%;
-  	height: 100%;
+  	width: 75%;
+  	/*height: 100%;*/
   }
   .endLine {
     color: #7e8e98;
@@ -199,8 +233,9 @@
     align-items: center;
   }
   .right{
-  	width: 100%;
-  	height: 504px;
+  	width: 25%;
+  	height:inherit;
+  	/*height: 624px;*/
   	border-top-right-radius: 12px;
   	border-bottom-right-radius: 12px;
   	float: left;
@@ -294,7 +329,11 @@
   	margin-top: 6px;
     font-size: 12px;
     color: #b2c0c8;
-    line-height: 24px;
+  }
+  .endLine{
+  	position: absolute;
+  	bottom:0;
+  	left:0;
   }
   .endLine span {
     width: 40%;
