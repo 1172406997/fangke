@@ -25,10 +25,14 @@ import login from './components/Login';
 </script>
 
 <style>
-#app{
-
+	#app{
+		height: 100%;
 	}
 	html,body{
-		height:auto;
+		position: relative;
+		margin: 0;
+		padding: 0;
+		height: 100% !important;
+		width: 100% !important;
 	}
 </style>
