@@ -2,6 +2,7 @@
   	<div class="login"  style="overflow: hidden;">
   		<div class="left"></div>
   		<div class="cen">
+  					<div class="big"></div>
 		  			<div class="con">
 			    	<div><img src="../assets/img/meijian.png" alt="" style="width:30%;transform: translateY(-50%);" /></div>
 			    	<div style="margin-top: 80px;" v-if="clickr">
@@ -101,15 +102,15 @@ export default {
 	}
 	body{
 		font-family: HanHei SC,PingFang SC,Helvetica,Microsoft YaHei,\\9ED1\4F53;
-	  -webkit-font-smoothing: antialiased;
-	  height: 100%;
-	  min-width:100%;
-    display:-webkit-flex;
-    display:flex;
-    -webkit-flex-flow:column wrap;
-    flex-flow:column wrap;
-    -webkit-justify-content:start;
-    justify-content:start;
+	  	-webkit-font-smoothing: antialiased;
+	  	height: 100%;
+	    min-width:100%;
+    	display:-webkit-flex;
+    	display:flex;
+    	-webkit-flex-flow:column wrap;
+    	flex-flow:column wrap;
+    	-webkit-justify-content:start;
+    	justify-content:start;
 	}
 	.login{
       min-width:100%;
@@ -127,20 +128,19 @@ export default {
       width:25%;
       height: 100%;
       -webkit-order:1;
-      background:url(../img/left.jpg) center center no-repeat;
+      background:url(../img/left3.png) center center no-repeat;
       background-size: cover;
       margin: 0;
       padding: 0;
     }
     .cen{
       background-color:blue;
-      padding:1%;
+      overflow: hidden;
+      /*padding:1%;*/
       /*margin-left:2%;*/
       /*margin-right:2%;*/
       -webkit-flex:1;
       -webkit-order:2;
-      background:url(../img/img.png) center center no-repeat;
-      background-size: cover;
       margin: 0;
       padding: 0;
     }
@@ -150,16 +150,17 @@ export default {
       width:25%;
       -webkit-order:1;
       height: 100%;
-      background:url(../img/right.jpg) center center no-repeat;
+      background:url(../img/right3.png) center center no-repeat;
       background-size: cover;
       -webkit-order:3;
       margin: 0;
       padding: 0;
     }
 	.big{
-		width: 4096px;
-    height: 2560px;
+		width: 1638px;
+    	height: 1116px;
 		background: url('../img/img.png') dimgray no-repeat;
+		background-size: contain;
 		animation: userlogin_bg 30s ease-out .5s infinite alternate;
 		-webkit-animation: userlogin_bg 30s ease-out .5s infinite alternate ;
 	}

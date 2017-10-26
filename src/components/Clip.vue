@@ -1,89 +1,278 @@
 <template>
 
 	<div class="layout-l" >
-    <canvas id="c" style="position: relative;left:10px;right:30px;"></canvas>
+	<!--<img src="../img/thumbnails/3dOcean_tn.jpg" alt="" />-->
+    <canvas id="scale" style="position: relative;left:10px;right:30px;width:1000px;height: 600px;"></canvas>
     <!--<img src="../../dist/instatic/img/1.d80e543.png" id="taget"/>-->
     </div>
 </template>
 
 <script>
-//	import 'fabric/dist/fabric.js'
+	import "@/assets/scale/matrix.js"
+//	import "@/assets/scale/demo1.js"
 export default {
 	data () {
 		return{
 			isActive:false,
+			ctx:'',
+			canvas:'',
+			dots:'',
+			dotscopy:'',
+			idots: '',
+			count:'',
+			img:'',
+			hasRect:false,
+			hasPic:true,
+			hasDot:false,
 		}
 	},
 	mounted(){
-    var self = this;
-    var startPoint = new fabric.Point();
-    var endPoint = new fabric.Point();
+// 		 //是否显示点的checkbox
+//	    var dotChoose = document.getElementById("dot");
+//	    //是否显示方格的checkbox
+//	    var rectChoose = document.getElementById("rect");
+//	    //是否显示贴图的checkbox
+//	    var picChoose = document.getElementById("pic");
+//	    //将图片分割的分数控制
+//	    var countChoose = document.getElementById("count");
+		var self = this;
+	    var hasDot = false,
+	        hasRect = false,
+	        hasPic = true;
+        self.count = 30;
+	
+	    // dotChoose.onchange = function(){ hasDot = this.checked;render(); };
+	    // rectChoose.onchange = function(){ hasRect = this.checked;render(); };
+	    // picChoose.onchange = function(){ hasPic = this.checked;render(); };
+	    // countChoose.onchange = function(){
+	    //     count = getSelected();
+	    //     //count更改后需要重新计算所有点的初始位置
+	    //     idots = rectsplit(count, dotscopy[0], dotscopy[1], dotscopy[2], dotscopy[3]);
+	    //     render();
+	    // };
+	    // //获取平分length
+	    // function getSelected(){
+	    //     var ops = countChoose.getElementsByTagName("OPTION") ,op;
+	    //     for(var i=0;i<ops.length;i++){
+	    //         op = ops[i];
+	    //         if(op.selected)return +op.value;
+	    //     }
+	    // }
+	
+	    var canvas = document.getElementById("scale");
+	    self.ctx = canvas.getContext("2d");
+		this.canvas = canvas;
+	    self.dots = [];
+//	    self.dotscopy , 	
+//	    self.idots;
+	
+	    var img = new Image();
+	    img.src = '/instatic/img/3dOcean_tn.13f1fea.jpg';
+	    img.onload = function(){
+	        var img_w = img.width/2;
+	        var img_h = img.height/2;
+	        var left = (canvas.width - img_w)/2;
+	        var top = (canvas.height - img_h)/2;
+	
+	        img.width = img_w;
+	        img.height = img_h;
+	
+	        self.dots = [
+	            { x:left, y:top },
+	            { x:left + img_w, y:top },
+	            { x:left + img_w, y:top + img_h},
+	            { x:left, y:top + img_h}
+	        ];
+	
+	        //保存一份不变的拷贝
+	        self.dotscopy = [
+	            { x:left, y:top },
+	            { x:left + img_w, y:top },
+	            { x:left + img_w, y:top + img_h},
+	            { x:left, y:top + img_h}
+	        ];
+		   self.img = img;
+	        //获得所有初始点坐标
+	      self.idots = self.rectsplit(self.count, self.dotscopy[0], self.dotscopy[1], self.dotscopy[2], self.dotscopy[3]);
+	      self.render();
+    	};
+    	
+    /**
+     * 鼠标拖动事件绑定
+     * @param e
+     */
+    window.onmousedown = function(e){
+        if(!self.dots.length)return;
 
-    var canvas = new fabric.Canvas('c', {
-      backgroundColor: 'rgba(127,255,170,0.2)',
-      width: 500,
-      height: 400,
-    });
-    var url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507817322315&di=947aa54914cd1aa8d140d091b5e66e56&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fa6efce1b9d16fdfab6fb9f8bbe8f8c5494ee7b3b.jpg";
-    fabric.Image.fromURL(url, function(oImg) {
+        var area = self.getArea(e);
+        var dot,i;
+        //鼠标事件触发区域
+        var qy = 40;
 
-      oImg.set('width', 500);
-      oImg.set('height', 400);
-      oImg.selectable = false;
-      oImg.evented = false;
-      oImg.lockMovementX = true;
-      oImg.lockMovementY = true;
-      oImg.lockRotation = true;
-      oImg.lockScalingX = true;
-      oImg.lockScalingY = true;
-      oImg.lockUniScaling = true;
-      oImg.hasControls = false;
-      oImg.hasBorders = false;
-      canvas.add(oImg);
-      canvas.defaultCursor = 'crosshair';
-      var rect = new fabric.Rect({
-        width: 0,
-        height: 0,
-        left: 0,
-        top: 0,
-        fill: 'rgba(0,0,0,0.1)',
-      });
-      canvas.add(rect);
-      canvas.on('mouse:down', function(options){
-        startPoint = options.e;
-      });
-      canvas.on('mouse:up', function(options){
-        endPoint = options.e;
-        var _width = endPoint.clientX - startPoint.clientX;
-        var _height = endPoint.clientY - startPoint.clientY;
-        rect.set({
-          width: _width,
-          height: _height,
-          left: startPoint.clientX,
-          top: startPoint.clientY,
-          fill: 'rgba(0,0,0,0.1)',
-        });
-        oImg.set({
-          left: 0,
-          top: 0,
-          //width:_width,
-          //height:_height,
-          //裁剪，原位置在中心，要定位在左上
-          clipTo: function (ctx) {
-            ctx.rect(parseInt(startPoint.clientX)-(oImg.getWidth()/2), parseInt(startPoint.clientY)-(oImg.getHeight()/2),
-              _width, _height);
-          }
-        });
-      });
-    });
+        for (i = 0; i < self.dots.length; i++) {
+            dot = self.dots[i];
+            if (area.t >= (dot.y - qy) && area.t <= (dot.y + qy) && area.l >= (dot.x - qy) && area.l <= (dot.x + qy)) {
+                break;
+            } else {
+                dot = null;
+            }
+        }
 
-  },
+        if(!dot) return;
+
+        window.onmousemove = function(e){
+            var narea = self.getArea(e);
+            var nx = narea.l-area.l;
+            var ny = narea.t-area.t;
+
+            dot.x += nx;
+            dot.y += ny;
+
+            area = narea;
+
+            self.render();
+        };
+
+        window.onmouseup = function(){
+            window.onmousemove = null;
+            window.onmouseup = null;
+        }
+    	};
+  	},
 	methods:{
 		routerTo(url){
-			this.$router.push({path: url});
 		},
-		init(){},
+		 /**
+	     * 获取鼠标点击/移过的位置
+	     * @param e
+	     * @returns {{t: number, l: number}}
+	     */
+	     getArea(e){
+	     	var self = this;
+	        e = e || window.event;
+	        return {
+	            t : e.clientY - self.canvas.offsetTop + document.body.scrollTop + document.documentElement.scrollTop,
+	            l : e.clientX - self.canvas.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft
+	        }
+	    },
+	    render(){
+	    var self = this;
+        this.ctx.clearRect(0,0,self.canvas.width,self.canvas.height);
+
+        var ndots = self.rectsplit(self.count, self.dots[0], self.dots[1], self.dots[2], self.dots[3]);
+
+        ndots.forEach(function(d , i){
+            //获取平行四边形的四个点
+            var dot1 = ndots[i];
+            var dot2 = ndots[i + 1];
+            var dot3 = ndots[i + self.count + 2];
+            var dot4 = ndots[i + self.count + 1];
+
+            //获取初始平行四边形的四个点
+            var idot1 = self.idots[i];
+            var idot2 = self.idots[i + 1];
+            var idot3 = self.idots[i + self.count + 2];
+            var idot4 = self.idots[i + self.count + 1];
+
+            if (dot2 && dot3 && i%(self.count+1)<self.count){
+                //绘制三角形的下半部分
+                self.renderImage(idot3, dot3, idot2, dot2, idot4, dot4);
+
+                //绘制三角形的上半部分
+                self.renderImage(idot1, dot1, idot2, dot2, idot4, dot4);
+            }
+	            //出现红点
+	            if(self.hasDot){
+	                self.ctx.save();
+	                self.ctx.fillStyle = "red";
+	                self.ctx.fillRect(d.x-1 , d.y-1 , 2 , 2);
+	                self.ctx.save();
+	            }
+       		});
+    	},
+    	/**
+     * 计算矩阵，同时渲染图片
+     * @param arg_1
+     * @param _arg_1
+     * @param arg_2
+     * @param _arg_2
+     * @param arg_3
+     * @param _arg_3
+     */
+    renderImage(arg_1 , _arg_1 , arg_2 , _arg_2 , arg_3 , _arg_3){
+    	var self = this;
+        this.ctx.save();
+        //根据变换后的坐标创建剪切区域
+        this.ctx.beginPath();
+        this.ctx.moveTo(_arg_1.x, _arg_1.y);
+        this.ctx.lineTo(_arg_2.x, _arg_2.y);
+        this.ctx.lineTo(_arg_3.x, _arg_3.y);
+        this.ctx.closePath();
+        //出现红线
+        if(self.hasRect){
+            self.ctx.lineWidth = 2;
+            self.ctx.strokeStyle = "red";
+            self.ctx.stroke();
+        }
+        this.ctx.clip();
+
+        if(self.hasPic){
+            //传入变换前后的点坐标，计算变换矩阵
+            var result = matrix.getMatrix.apply(this , arguments);
+
+            //变形
+            this.ctx.transform(result.a , result.b , result.c , result.d , result.e , result.f);
+
+            //绘制图片
+            this.ctx.drawImage(self.img , self.idots[0].x , self.idots[0].y , self.img.width , self.img.height);
+        }
+
+        this.ctx.restore();
+    	},
+    	
+    	 /**
+     * 将abcd四边形分割成n的n次方份，获取n等分后的所有点坐标
+     * @param n     多少等分
+     * @param a     a点坐标
+     * @param b     b点坐标
+     * @param c     c点坐标
+     * @param d     d点坐标
+     * @returns {Array}
+     */
+    rectsplit(n , a , b , c , d){
+        //ad向量方向n等分
+        var ad_x = (d.x - a.x)/n;
+        var ad_y = (d.y - a.y)/n;
+        //bc向量方向n等分
+        var bc_x = (c.x - b.x)/n;
+        var bc_y = (c.y - b.y)/n;
+
+        var ndots = [];
+        var x1, y1, x2, y2, ab_x, ab_y;
+
+        //左边点递增，右边点递增，获取每一次递增后的新的向量，继续n等分，从而获取所有点坐标
+        for(var i=0;i<=n;i++){
+            //获得ad向量n等分后的坐标
+            x1 = a.x + ad_x * i;
+            y1 = a.y + ad_y * i;
+            //获得bc向量n等分后的坐标
+            x2 = b.x + bc_x * i;
+            y2 = b.y + bc_y * i;
+
+            for(var j=0;j<=n;j++){
+                //ab向量为：[x2 - x1 , y2 - y1]，所以n等分后的增量为除于n
+                ab_x = (x2 - x1)/n;
+                ab_y = (y2 - y1)/n;
+
+                ndots.push({
+                    x: x1 + ab_x * j,
+                    y: y1 + ab_y * j
+                })
+            }
+        }
+        return ndots;
 	}
+  }
 
 }
 </script>
