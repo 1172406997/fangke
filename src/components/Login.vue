@@ -4,7 +4,7 @@
   		<div class="cen">
   					<div class="big"></div>
 		  			<div class="con">
-			    	<div><img src="../assets/img/meijian.png" alt="" style="width:30%;transform: translateY(-50%);" /></div>
+			    	<div><img src="../assets/img/logo.png"  alt="" style="width:50%;transform: translateY(-75%);" /></div>
 			    	<div style="margin-top: 80px;" v-if="clickr">
 				    	<p style=" margin-top: 10px;font-size: 24px;color:#fff">欢迎回来</p>
 				    	<div style="width: 60%; margin-top: 10px;color: red;" v-if="show">&nbsp;用户名密码错误</div>
@@ -128,7 +128,7 @@ export default {
       width:25%;
       height: 100%;
       -webkit-order:1;
-      background:url(../img/left3.png) center center no-repeat;
+      background:url(../assets/img/left3.png) center center no-repeat;
       background-size: cover;
       margin: 0;
       padding: 0;
@@ -150,7 +150,7 @@ export default {
       width:25%;
       -webkit-order:1;
       height: 100%;
-      background:url(../img/right3.png) center center no-repeat;
+      background:url(../assets/img/right3.png) center center no-repeat;
       background-size: cover;
       -webkit-order:3;
       margin: 0;
@@ -159,7 +159,7 @@ export default {
 	.big{
 		width: 1638px;
     	height: 1116px;
-		background: url('../img/img.png') dimgray no-repeat;
+		background: url('../assets/img/img.png') dimgray no-repeat;
 		background-size: contain;
 		animation: userlogin_bg 30s ease-out .5s infinite alternate;
 		-webkit-animation: userlogin_bg 30s ease-out .5s infinite alternate ;
@@ -182,8 +182,8 @@ export default {
 			/*position:absolute;*/
 		}
 		.con>div>img{
-			/*position: absolute;
-			left: -15%;*/
+			position: absolute;
+			right: 0;
 			transform: translateY(50%);
 		}
 	@keyframes userlogin_bg{
