@@ -123,7 +123,7 @@
                 });
 			},
 			editer(id){
-				this.$router.push({name:'canvas',params:{id:id}});
+				this.$router.push({name:'canvas',params:{id:id,up:'up'}});
 			},
         },
 

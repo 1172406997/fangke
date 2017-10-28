@@ -92,7 +92,7 @@
 														<!--<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt=""/>
                             </Col>-->
 														<div class="searchclassfy" v-for="(itemd , index) in item" @click="getclassify(itemd.id)">
-															<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+															<img :src="'http://static.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 														</div>
 													</div>
 												</div>
@@ -307,12 +307,15 @@
 		mounted() {
 			this.getCanvas();
 			if(this.$route.params.id) {
-				this.getProducId()
+				this.getProducId();
 			}
 		},
 		methods: {
 			writeName() {
-				alert(123456);
+				if(this.$route.params.id) {
+					this.UpDate();
+					return;
+				}
 				this.$Modal.confirm({
 					render: (h) => {
 						return h('Input', {
@@ -342,6 +345,39 @@
 						this.$Message.info('取消保存');
 					},
 				})
+			},
+			//再编辑更新接口
+			UpDate(){
+				var self = this;
+				var id = this.$route.params.id;
+				var str = this.Encrypt();
+				var user_id = localStorage.getItem("user_id");
+				var token = localStorage.getItem("token");
+				var params = {
+					params: {
+						'signature': str.sha,
+						'timestamp': str.timestamp,
+						'nonce': str.nonce,
+						'user_id': user_id,
+						'token': token,
+						 'production_id': id,
+					}
+				};
+				this.jsonpRequest(this, "Production.UpdateProduction", params, function(res) {
+					console.log(res)
+					if(res.body.data.code == 0) {
+						var list = res.body.data.list[0].production.data;
+						self.Canvas.loadFromJSON(list);
+//						console.log(res.body.data.list[0].production.data);
+					} else {
+						console.log(res);
+						if(res.body.ret == 401) {
+							self.toLogin(this, 401);
+						}
+					}
+				}, function(err) {
+					console.log(err);
+				});
 			},
 			//如果有id直接获取数据初始化到画布
 			getProducId() {

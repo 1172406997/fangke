@@ -28,7 +28,7 @@
 					       </Col>
 					       </div>-->
 					       <div class="searchclassfy" v-for="(itemd , index) in item" @click="getclassify(itemd.id)">
-					       		<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+					       		<img :src="'http://static.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 					       </div>
 					        <!--<Col span="4" class="classify" v-for="(itemd , index) in item" @click.native="getclassify(itemd.id)">
 					        	<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
@@ -46,7 +46,7 @@
 						       <!--</Col>-->
 						       </div>
 						       <div class="searchclassfy" v-for="(itemd , index) in secClass" @click="getByTermal(itemd.id)">
-					       			<img :src="'http://www.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
+					       			<img :src="'http://static.shatuhome.com/typeimg/'+itemd.image" style="" alt="" />
 					       		</div>
 						    </Row>
 						  	</div>
@@ -72,7 +72,7 @@
 								    </div>-->
 										<div class="dan" @click="listenClick(item.id)" v-for="item in searchi">
 								      <div class="img">
-								      	<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />
+								      	<img :src="'http://static.shatuhome.com/material/thumbNew/'+item.thumbNew" alt="" />
 								      	<div class="modal" @click="modalS(item)" style="display: none;"></div>
 								        <div class="icon">
 								      	<Tooltip content="收藏" placement="bottom">
@@ -132,6 +132,7 @@ export default {
   },
   methods:{
   	getsearch:function() {
+  		var self = this;
   		var str = this.Encrypt();
   		var user_id = localStorage.getItem("user_id");
   		var token = localStorage.getItem("token");
@@ -157,6 +158,7 @@ export default {
   		});
   	},
   	search:function(res){
+  		var self = this;
   		if(this.fasClass!=''){
   			this.secSearch(res);
   		}else{
