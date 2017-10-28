@@ -142,10 +142,10 @@
 						<canvasmy @imgdata="getChildImg"></canvasmy>
 					</div>
 					<div class="puzz" v-show="name==4">
-						<brand></brand>
+						<!--<brand></brand>-->
 					</div>
 					<div class="effect" v-show="name==5">
-						<effect></effect>
+						<effect @imgdata="getChildImg"></effect>
 					</div>
 					<div class="detail" v-show="name==6">
 		              <detail></detail>
@@ -1007,7 +1007,9 @@
 			getChildImg(item) {
 				this.childUrl = item.url;
 				var self = this;
-				this.idData.push(item.id);
+				if(item.id){
+					this.idData.push(item.id);
+				}
 				fabric.Image.fromURL(item.url, function(oImg) {
 					oImg.scale(0.5);
 					oImg.imgId = item.id;

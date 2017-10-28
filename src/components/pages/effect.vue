@@ -112,14 +112,19 @@
 						<span style="font-size: 20px;margin-left: 20px;">{{showTex}}</span>
 		  		</p>
 		  		<div class="showIcon">
-		  			<div class="box">
-		  				<div class="modal"></div>
-		  						<div class="icon"  @click="addCanvas(item.filename,item.id)">
-								    <Tooltip content="添加" placement="bottom">
-									    <Icon type="android-exit"></Icon>
-								    </Tooltip>
-								  </div>
-							<img src="" alt="" />
+		  			<div class="showIconbox"  v-for="n in showNum1">
+		  				<div class="boxcon">
+		  					<div class="modal"></div>
+			  				<div class="icon" @click="addCanvas($event)">
+									<Icon size="24" type="android-exit"></Icon>
+								</div>
+								<div class="img">
+									<!--<svg width="100%" height="100%" xmlns="">
+										<use x="0" y="0" xlink:href="../assets/img/help/graph/1.svg"></use>
+									</svg>-->
+									<embed width="90%" height="90%" :src="'/instatic/img/help/graph/'+n+'.svg'" type="image/svg+xml" />
+								</div>
+		  				</div>
 		  			</div>
 		  		</div>
 		  	</div>
@@ -136,7 +141,23 @@
       	xiaoguo:true,
       	showTex:'图形',
       	showNum:1,
+      	showNum1:19,
       }
+    },
+    mounted(){
+    	$(document).ready(function(){
+			$(document).on("mouseover",".showIconbox",function(){
+					$(".showIcon").find(".modal").hide();
+					$(".showIcon").find(".icon").hide();
+					$(this).find(".modal").show();
+					$(this).find(".icon").show();
+			});
+		    $(document).on("mouseout",".showIconbox",function(){
+					$(this).find(".modal").hide();
+					$(this).find(".icon").hide();
+		    });
+		
+		});
     },
     methods:{
     	change(num){
@@ -145,6 +166,14 @@
     	},
     	showEffect(){
     		this.xiaoguo=true;
+    	},
+    	addCanvas(e){
+//  		console.log(e.currentTarget)
+    		var url = $(e.currentTarget).siblings('.img').find("embed").attr("src");
+				var host = window.location.host;
+				var imgurl = "http://"+host+url
+//				console.log(imgurl)
+				this.$emit("imgdata",{url:imgurl})
     	},
     },
   }
@@ -234,4 +263,58 @@
   	top: 50%;
   	transform: translateY(-45%);
   }
+  .showIcon{
+  	overflow: hidden;
+  }
+  .showIcon .showIconbox{
+  	width:10.5vw;
+  	height:10.5vw;
+  	padding:17px;
+  	margin: 10px;
+  	background-color: #fff;
+  	border-radius: 4px;
+  	cursor: pointer;
+  	float: left;
+  }
+  .showIcon .showIconbox .modal{
+  	display: none;
+  	position: absolute;
+  	width: 100%;
+  	height: 100%;
+  	background-color: rgba(0,0,0,0.1);
+  	z-index: 2;
+  }
+  .showIcon .showIconbox .icon{
+  	position: absolute;
+  	right: 5px;
+  	top: 5px;
+  	width: 40px;
+  	height: 40px;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	background-color: #fff;
+  	border-radius: 4px;
+  	z-index: 3;
+  	visibility: none;
+  }
+  .boxcon{
+  	position: relative;
+  	width: 100%;
+  	height: 100%;
+  }
+  .showIcon .img{
+  	position: absolute;
+  	width:100%;
+  	height:100%;
+  	z-index: 1;
+  	display: flex;
+  	justify-content: center;
+  	align-content: center;
+  }
+  /*.showIcon .box .icon .ivu-icon{
+  	position: absolute;
+  	top: 50%;
+  	transform:translateY(-50%);
+  }*/
 </style>
