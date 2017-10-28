@@ -88,7 +88,7 @@
 							            <!--<DropdownItem>查看</DropdownItem>-->
 							            <DropdownItem @click.native="moveToFolder()">移动到</DropdownItem>
 							            <DropdownItem  @click.native="showDetail(item.production.id)">查看清单</DropdownItem>
-							             <DropdownItem><a :href="'http://www.shatuhome.com/pdfdownload/'+item.production.id">导出为pdf</a></DropdownItem>
+							             <DropdownItem><a :href="'http://admin.shatuhome.com/pdfdownload/'+item.production.id">导出为pdf</a></DropdownItem>
 							            <DropdownItem v-show ="item.production.status == 0" @click.native = "setStatus(0,item.production.id)">设置为公开</DropdownItem>
 							            <DropdownItem v-show ="item.production.status == 1" @click.native = "setStatus(1,item.production.id)">设置为不公开</DropdownItem>
 							        </DropdownMenu>

@@ -157,7 +157,7 @@ export default {
        margin-left: 30px;
     }
     .layout-text{
-    	font-size: 12px;
+    	/*font-size: 12px;*/
     }
     .layout-assistant{
         width: 300px;

@@ -157,8 +157,8 @@ export default {
       padding: 0;
     }
 	.big{
-		width: 1965px;
-    	height: 1562px;
+		width: 1768px;
+    	height: 1405px;
 		background: url('../assets/img/img.png') dimgray no-repeat;
 		background-size: contain;
 		animation: userlogin_bg 30s ease-out .5s infinite alternate;

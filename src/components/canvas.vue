@@ -104,15 +104,15 @@
 										<h2 style="margin-top: 10px;margin-right: 20px;">搜索结果 <span style="cursor:pointer;float: right;" @click="backSearch()">退出</span></h2>
 										<div class="conlist_show">
 											<!--<div class="conlist_con">
-                        <Col span="6" style="background-color: #fff;position:relative;" class="con2">
-                        <img src="../assets/logo.png" alt=""/>
-                        <p>一只一只</p>
-                        </Col>
-                        <Col span="6" v-for="(itemd , index) in searchi"
-                             style="background-color: #fff;position:relative;" class="con2">
-                        <img :src="itemd.path" alt=""/>
-                        <p>一只一只</p>
-                        </Col>-->
+						                        <Col span="6" style="background-color: #fff;position:relative;" class="con2">
+						                        <img src="../assets/logo.png" alt=""/>
+						                        <p>一只一只</p>
+						                        </Col>
+						                        <Col span="6" v-for="(itemd , index) in searchi"
+						                             style="background-color: #fff;position:relative;" class="con2">
+						                        <img :src="itemd.path" alt=""/>
+						                        <p>一只一只</p>
+						                        </Col>-->
                         				<div class="conlist_con">
 											<div class="dan" @click="" v-for="item in searchi">
 												<div class="img">
@@ -142,7 +142,7 @@
 						<canvasmy @imgdata="getChildImg"></canvasmy>
 					</div>
 					<div class="puzz" v-show="name==4">
-						<!--<brand></brand>-->
+						<brand></brand>
 					</div>
 					<div class="effect" v-show="name==5">
 						<effect></effect>
@@ -239,6 +239,13 @@
 	</div>
 	</i-col>
 	</Row>
+	<Modal
+        v-model="backYeaOrNo"
+        title="退出提示"
+        @on-ok="ok"
+        @on-cancel="cancel">
+        <p>您需要保存么？</p>
+    </Modal>
 	</div>
 </template>
 
@@ -285,6 +292,7 @@
 				fasClass: "",
 				//搜索结果，单品
 				searchi: "",
+				backYeaOrNo:false,
 			}
 		},
 		computed: {
@@ -361,8 +369,8 @@
 						items.push(imgdate[i].imgId)
 					}
 				}
+				console.log(str);
 				var titems = items.join(',');
-				console.log(typeof(titems));
 				var user_id = localStorage.getItem("user_id");
 				var token = localStorage.getItem("token");
 				var params = {
@@ -378,7 +386,7 @@
 					'items': titems,
 					'status': self.status,
 				};
-				this.jsonpRequest(this, "Production.UpdateProduction", params, function(res) {
+				this.postRequest("Production.UpdateProduction",params, function(res) {
 					console.log(res)
 					if(res.body.data.code == 0) {
 //						var list = res.body.data.list[0].production.data;
@@ -1080,16 +1088,19 @@
 			},
 			backUp() {
 				var self = this;
-				this.$Modal.confirm({
-					title: '退出提示',
-					content: '您需要保存么？',
-					onOk: () => {},
-					onCancel: () => {
-						this.$router.push({
-							name: 'content'
-						});
-					}
-				});
+				this.backYeaOrNo = true
+//				this.$Modal.confirm({
+//					title: '退出提示',
+//					content: '您需要保存么？',
+//					onOk: () => {
+//						this.writeName();
+//					},
+//					onCancel: () => {
+//						this.$router.push({
+//							name: 'content'
+//						});
+//					}
+//				});
 			},
 			closeNone() {
 				this.menu_1 = false;
@@ -1100,6 +1111,14 @@
 			backSearch(){
 				this.flag = true;
 			},
+			ok () {
+               this.writeName();
+            },
+            cancel () {
+                this.$router.push({
+					name: 'content'
+				});
+            },
 		},
 
 	}
@@ -1134,7 +1153,9 @@
 
 	.layout-ceiling {
 		background: #293036;
-		padding: 10px 0;
+		/*padding: 10px 0;*/
+		height: 55px;
+		line-height: 55px;
 		overflow: hidden;
 	}
 
@@ -1221,11 +1242,11 @@
 	}
 
 	.layout-text {
-		font-size: 12px;
+		/*font-size: 12px;*/
 	}
 
 	li.ivu-menu-item {
-		height: 37.6px;
+		/*height: 37.6px;*/
 	}
 
 	.ivu-col {
@@ -1251,7 +1272,7 @@
 
 	.search-content>div>p {
 		line-height: 48px;
-		font-size: 12px;
+		/*font-size: 12px;*/
 	}
 
 	.con2 {

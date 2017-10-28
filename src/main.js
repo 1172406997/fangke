@@ -17,6 +17,8 @@ import { toLogin } from "@/util/toLogin.js"
 import { Encrypt } from "@/util/encrypt.js"
 import '@/util/baseTime.js'
 import VueResource from 'vue-resource';
+import "@/assets/font/iconfont.js"
+import "@/assets/font/iconfontInmy.css"
 
 
 
