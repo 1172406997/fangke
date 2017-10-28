@@ -33,7 +33,11 @@
       self.canvas.height = 500;
 
       var img = new Image();
+<<<<<<< HEAD
       img.src = '/instatic/img/1.a832775.png';
+=======
+      img.src = '/instatic/img/1.d80e543.png';
+>>>>>>> 507c23dc17b96b6bd0802b99ee671e4df5b8c6de
       img.onload = function () {
         var _scale = 0.5;
         var img_w = img.width*_scale;
