@@ -1,6 +1,7 @@
 <template>
 
   <div class="layout-l">
+  	<button @click="Cancel()">取消</button>&nbsp;&nbsp;&nbsp;&nbsp;<button @click="Save">保存</button>
     <canvas id="scalee" style="position: relative;left:10px;right:30px;width:1000px;height: 500px;"></canvas>
   </div>
 </template>
@@ -33,11 +34,7 @@
       self.canvas.height = 500;
 
       var img = new Image();
-<<<<<<< HEAD
-      img.src = '/instatic/img/1.a832775.png';
-=======
       img.src = '/instatic/img/1.d80e543.png';
->>>>>>> 507c23dc17b96b6bd0802b99ee671e4df5b8c6de
       img.onload = function () {
         var _scale = 0.5;
         var img_w = img.width*_scale;
@@ -111,6 +108,8 @@
     methods: {
       routerTo(url) {
       },
+      Cancel(){},
+      Save(){},
       /**
        * 获取鼠标点击/移过的位置
        * @param e
@@ -251,6 +250,14 @@
 
 <!-- Add "scoped " attribute to limit CSS to this component only -->
 <style scoped>
+	button{
+		width: 120px;
+		height: 50px;
+		background-color: #009E6B;
+		border-radius: 5px;
+		font-size: 24px;
+		color: #fff;
+	}
   textarea {
     border: 0;
     outline: none;
