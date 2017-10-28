@@ -312,8 +312,8 @@
 		},
 		methods: {
 			writeName() {
-				if(this.$route.params.id) {
-					this.UpDate();
+				if(this.$route.params.id&&this.$route.params.up!='up') {
+					this.UpDate(this.$route.params.id);
 					return;
 				}
 				this.$Modal.confirm({
@@ -347,27 +347,43 @@
 				})
 			},
 			//再编辑更新接口
-			UpDate(){
+			UpDate(id){
 				var self = this;
-				var id = this.$route.params.id;
-				var str = this.Encrypt();
+				var svg = this.Canvas.toDataURL();
+				var data = this.Canvas.toJSON();
+				data = JSON.stringify(data);
+				//      var svg = this.Canvas.toDataURL({format: 'jpeg'});
+				var str = self.Encrypt();
+				var items = [];
+				var imgdate = this.Canvas.getObjects("image");
+				for(let i = 0; i < imgdate.length; i++) {
+					if($.inArray(imgdate[i].imgId, items) == -1) {
+						items.push(imgdate[i].imgId)
+					}
+				}
+				var titems = items.join(',');
+				console.log(typeof(titems));
 				var user_id = localStorage.getItem("user_id");
 				var token = localStorage.getItem("token");
 				var params = {
-					params: {
-						'signature': str.sha,
-						'timestamp': str.timestamp,
-						'nonce': str.nonce,
-						'user_id': user_id,
-						'token': token,
-						 'production_id': id,
-					}
+					'signature': str.sha,
+					'timestamp': str.timestamp,
+					'nonce': str.nonce,
+					'user_id': user_id,
+					'token': token,
+					'production_id':id,
+					'name': this.value,
+					'data': data,
+					'thumb': svg,
+					'items': titems,
+					'status': self.status,
 				};
 				this.jsonpRequest(this, "Production.UpdateProduction", params, function(res) {
 					console.log(res)
 					if(res.body.data.code == 0) {
-						var list = res.body.data.list[0].production.data;
-						self.Canvas.loadFromJSON(list);
+//						var list = res.body.data.list[0].production.data;
+//						self.Canvas.loadFromJSON(list);
+						this.$Message.info('保存成功！');
 //						console.log(res.body.data.list[0].production.data);
 					} else {
 						console.log(res);
@@ -377,6 +393,7 @@
 					}
 				}, function(err) {
 					console.log(err);
+					this.$Message.info('网络有问题，请刷新重试！');
 				});
 			},
 			//如果有id直接获取数据初始化到画布
@@ -400,6 +417,7 @@
 					console.log(res)
 					if(res.body.data.code == 0) {
 						var list = res.body.data.list[0].production.data;
+						self.value = res.body.data.list[0].production.name;
 						self.Canvas.loadFromJSON(list);
 //						console.log(res.body.data.list[0].production.data);
 					} else {
@@ -1136,7 +1154,7 @@
 	.layout-breadcrumb {
 		float: left;
 		min-width: 200px;
-		width: 20%;
+		width: 25%;
 		min-height: 672px;
 		height: 100%;
 	}
@@ -1147,7 +1165,7 @@
 		display: flex;
 		justify-content: center;
 		float: left;
-		width: 80%;
+		width: 75%;
 		overflow: hidden;
 		min-height: 600px;
 		padding: 0px 0px 10px 5px;

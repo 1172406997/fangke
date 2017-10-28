@@ -67,7 +67,7 @@
 						 		<div class="box"  v-for="item in getlikeitem">
 						 			<div class="boxcon">
 						 			<div class="pic">
-						 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
+						 				<img :src="'http://static.shatuhome.com/thumb/'+item.production.thumb"/>
 						 				<div class="icon myedit">
 							      	<Tooltip @click.native="edit(item.production.id)" content="编辑" placement="bottom">
 								      	<Icon type="compose"></Icon>
@@ -127,7 +127,7 @@
 						 		<div class="box"  v-for="item in getlikeitem">
 						 			<div class="boxcon">
 						 			<div class="pic">
-						 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
+						 				<img :src="'http://static.shatuhome.com/thumb/'+item.production.thumb"/>
 						 				<!--<div class="icon myedit">
 							      	<Tooltip @click.native="edit(item.id)" content="编辑" placement="bottom">
 								      	<Icon type="compose"></Icon>

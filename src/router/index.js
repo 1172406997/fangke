@@ -59,7 +59,7 @@ export default new Router({
     	]
     },
     { path: '/canvas',name:'canvas',component: canvas, meta:{isActive:true}},
-//  { path: '/Clip',name:'Clip',component: Clip, meta:{isActive:true}},
+    { path: '/Clip',name:'Clip',component: Clip, meta:{isActive:true}},
 
   ]
 })
