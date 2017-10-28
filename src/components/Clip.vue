@@ -67,7 +67,7 @@ export default {
 //	    self.idots;
 	
 	    var img = new Image();
-	    img.src = '/instatic/img/3dOcean_tn.13f1fea.jpg';
+	    img.src = '/instatic/img/img.1e49d7d.png';
 	    img.onload = function(){
 	        var img_w = img.width/2;
 	        var img_h = img.height/2;
