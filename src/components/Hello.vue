@@ -3,7 +3,9 @@
 		<Affix v-bind:class="{ active: isActive }">
 			<div class="demo-affix">
 			<Menu mode="horizontal" theme="dark" active-name="1" class="top">
-				<!--<div class="layout-logo"></div>-->
+				<div class="layout-logo" :style="layoutLog">
+					
+				</div>
 				<div class="layout-nav">
           <router-link :to="{name:'content'}">
             <Menu-item name="1">
@@ -102,6 +104,14 @@ export default {
 	data () {
 		return{
 			isActive:false,
+			layoutLog:{
+            backgroundImage: "url(" + require("../assets/img/log.png") + ")",
+            backgroundRepeat: "no-repeat",
+            backgroundColor:'#293036',
+            backgroundPosition: "center center",
+            backgroundRepeat:"no-repeat",
+            backgroundSize: 'cover',
+			}
 		}
 	},
 	methods:{

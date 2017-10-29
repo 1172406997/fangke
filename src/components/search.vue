@@ -18,9 +18,9 @@
 				<main>
 					<div class="layout-content">
 						<Spin size="large" class="layz"></Spin>
-						<div class="content_con"  v-if="flag" >
+						<div class="content_con"  v-if="flag" style="padding-bottom: 20px;">
 							<Row >
-								<h2>分类标签</h2>
+								<h2  style="margin-bottom: 2em;">分类标签</h2>
 								<!--<div v-on:click="getclassify()">
 								<Col span="4"  class="classify" v-on:click="getclassify()">
 					        	<p>椅子</p>
@@ -37,7 +37,7 @@
 						</div>
 						<div class="content_con2" v-if="!flag">
 							<div v-show="fenlei=='fenlei'">
-							<h2>更多分类 <p style="float: right;cursor: pointer;" @click="flag=true">返回</p></h2>
+							<h2 >更多分类 <p style="float: right;cursor: pointer;" @click="flag=true">返回</p></h2>
 								<Row >
 									<div v-on:click="getclassify()">
 									<!--<Col span="4"  class="classify" v-on:click="getclassify()">-->
@@ -96,6 +96,52 @@
 						<BackTop></BackTop>
 					</div>
 				</main>
+				<div class="ifyBUtton" style="padding:10px 24px">
+					<h2>风格标签</h2>
+					<div class="btncon" style="margin-top: 20px;">
+						<div class="btnconlist">
+							<button style=" background-color: #3fb5be;">北欧</button>
+							<button style=" background-color: #3a9294;">后现代</button>
+							<button style=" background-color: #44928e;">美式</button>
+							<button style=" background-color: #378480;">简美</button>
+						<!--</div>
+						<div class="btnconlist">-->
+							<button style=" background-color: #3fb5be;">美式田园</button>
+							<button style=" background-color: #3a9294;">港式</button>
+							<button style=" background-color: #44928e;">现代简约</button>
+							<button style=" background-color: #378480;">地中海</button>
+						<!--</div>
+						<div class="btnconlist">-->
+							<button style=" background-color: #3fb5be;">巴洛克</button>
+							<button style=" background-color: #3a9294;">古典欧式</button>
+							<button style=" background-color: #44928e;">新古典</button>
+							<button style=" background-color: #378480;">简欧</button>
+						<!--</div>
+						<div class="btnconlist">-->
+							<button style=" background-color: #3fb5be;">普罗旺斯</button>
+							<button style=" background-color: #3a9294;">洛可可</button>
+							<button style=" background-color: #44928e;">摩洛哥</button>
+							<button style=" background-color: #378480;">明清</button>
+						<!--</div>
+						<div class="btnconlist">-->
+							<button style=" background-color: #3fb5be;">普罗旺斯</button>
+							<button style=" background-color: #3a9294;">洛可可</button>
+							<button style=" background-color: #44928e;">摩洛哥</button>
+							<button style=" background-color: #378480;">明清</button>
+							
+							
+							<button style=" background-color: #3fb5be;">新中式</button>
+							<button style=" background-color: #3a9294;">东南亚</button>
+							<button style=" background-color: #44928e;">Loft</button>
+							<button style=" background-color: #378480;">泰式</button>
+							
+							<button style=" background-color: #3fb5be;">法式古典</button>
+							<button style=" background-color: #3a9294;">简法</button>
+							<button style=" background-color: #44928e;">日韩</button>
+						</div>
+					</div>
+				</div>
+				
 	</div>
 </template>
 
@@ -582,5 +628,22 @@ export default {
    }
    .searchclassfy:hover{
 			box-shadow: 2px 2px 5px #888888;;
+		}
+		.btnconlist{
+			/*float: left;*/
+			display: inline-block;
+			margin-bottom: 10px;
+		}
+		.btnconlist button{
+			margin-bottom: 10px;
+			height: 34px;
+			border-radius: 5px;
+			line-height: 34px;
+			text-align: center;
+			/*background-color: #3a9294;*/
+			color: #fff;font-size:14px;
+			padding:0 20px;
+			border: none;
+			margin-right: 20px;
 		}
 </style>
