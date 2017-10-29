@@ -2,7 +2,7 @@
   <div class="effect">
   	<div class="conlist_show">
   		<div class="conlist_con">
-  			<h2 v-show="xiaoguo" style="margin-bottom: 5px;margin-left:10px;margin-top: 5px;">辅助效果</h2>
+  			<h2 v-show="xiaoguo" style="margin-bottom: 5px;margin-left:10px;margin-top: 5px;color: #b2c0c8;">辅助效果</h2>
 		  	<!--<Row :gutter="16">
 		  		<Col span="11" class="dada">
 						<img src="../../assets/img/meijian.png" alt="" style="width:100%;" />
@@ -12,7 +12,7 @@
 		      </Col>
 		  	</Row>-->
 		  	<ul v-show="xiaoguo">
-		  		<li @click="change(1)">
+		  		<li @click="change(1,'图形')">
 		  			<div class="effectcon">
 		  				<div>
 		  					<i>
@@ -25,7 +25,7 @@
 		  				</div>
 		  			</div>
 		  		</li>
-		  		<li  @click="change(2)">
+		  		<li  @click="change(2,'色卡')">
 		  			<div style="background-color: #678aed;" class="effectcon">
 		  				<div>
 		  					<i>
@@ -38,7 +38,7 @@
 		  				</div>
 		  			</div>
 		  		</li>
-		  		<li  @click="change(3)">
+		  		<li  @click="change(3,'灯光')">
 		  			<div style="background-color: #f8bf34;" class="effectcon">
 		  				<div>
 		  					<i>
@@ -51,7 +51,7 @@
 		  				</div>
 		  			</div>
 		  		</li>
-		  		<li  @click="change(4)">
+		  		<li  @click="change(4,'阴影')">
 		  			<div class="effectcon" style="background-color: #5a6d8d;">
 		  				<div>
 		  					<i>
@@ -64,7 +64,7 @@
 		  				</div>
 		  			</div>
 		  		</li>
-		  		<li  @click="change(5)">
+		  		<li  @click="change(5,'透视')">
 		  			<div class="effectcon" style="background-color: #a08e80;">
 		  				<div>
 		  					<i>
@@ -77,7 +77,7 @@
 		  				</div>
 		  			</div>
 		  		</li>
-		  		<li  @click="change(6)">
+		  		<li  @click="change(6,'图标')">
 		  			<div class="effectcon" style="background-color: #ed7291;">
 		  				<div>
 		  					<i>
@@ -90,7 +90,7 @@
 		  				</div>
 		  			</div>
 		  		</li>
-		  		<li  @click="change(7)">
+		  		<li  @click="change(7,'排版装饰')">
 		  			<div class="effectcon" style="background-color: #4da2b9;">
 		  				<div>
 		  					<i>
@@ -111,7 +111,8 @@
 						</svg>
 						<span style="font-size: 20px;margin-left: 20px;">{{showTex}}</span>
 		  		</p>
-		  		<div class="showIcon">
+		  		<!--图形-->
+		  		<div class="showIcon" v-if="showNum==1">
 		  			<div class="showIconbox"  v-for="n in showNum1">
 		  				<div class="boxcon">
 		  					<div class="modal"></div>
@@ -127,6 +128,119 @@
 		  				</div>
 		  			</div>
 		  		</div>
+		  		
+		  		
+		  		<!--色卡-->
+		  		<div class="showIcon" v-if="showNum==2">
+		  			<div class="showIconbox"  v-for="n in showNum2">
+		  				<div class="boxcon">
+		  					<div class="modal"></div>
+			  				<div class="icon" @click="addCanvas($event)">
+									<Icon size="24" type="android-exit"></Icon>
+								</div>
+								<div class="img">
+									<!--<svg width="100%" height="100%" xmlns="">
+										<use x="0" y="0" xlink:href="../assets/img/help/graph/1.svg"></use>
+									</svg>-->
+									<embed width="90%" height="90%" :src="'/instatic/img/help/color/'+n+'.svg'" type="image/svg+xml" />
+								</div>
+		  				</div>
+		  			</div>
+		  		</div>
+		  		
+		  		
+		  		<!--灯光-->
+		  		<div class="showIcon" v-if="showNum==3">
+		  			<div class="showIconbox light" v-for="n in showNum3">
+		  				<div class="boxcon">
+		  					<div class="modal"></div>
+			  				<div class="icon" @click="addCanvas($event,3)">
+									<Icon size="24" type="android-exit"></Icon>
+								</div>
+								<div class="img" :style="'background-image:url(/instatic/img/help/light/'+n+'.png);background-size:contain;background-position:center center;background-repeat:no-repeat;'">
+									<!--<img src="/instatic/img/help/light/1.png" :style="background-image: url(/instatic/img/help/light/1.png);" alt="" />-->
+									<!--<embed width="90%" height="90%" :src="'/instatic/img/help/color/'+n+'.svg'" type="image/svg+xml" />-->
+								</div>
+		  				</div>
+		  			</div>
+		  		</div>
+		  		
+		  		
+		  		<!--阴影-->
+		  		<div class="showIcon" v-if="showNum==4">
+		  			<div class="showIconbox"  v-for="n in showNum4">
+		  				<div class="boxcon">
+		  					<div class="modal"></div>
+			  				<div class="icon" @click="addCanvas($event,4)">
+									<Icon size="24" type="android-exit"></Icon>
+								</div>
+								<div class="img" :style="'background-image: url(/instatic/img/help/shadow/'+n+'.png);background-size:contain;background-position:center center;background-repeat:no-repeat;'">
+									<!--<svg width="100%" height="100%" xmlns="">
+										<use x="0" y="0" xlink:href="../assets/img/help/graph/1.svg"></use>
+									</svg>-->
+									<!--<embed width="90%" height="90%" :src="'/instatic/img/help/shadow/'+n+'.png'" type="image/svg+xml" />-->
+								</div>
+		  				</div>
+		  			</div>
+		  		</div>
+		  		
+		  		
+		  		<!--透视-->
+		  		<div class="showIcon" v-if="showNum==5">
+		  			<div class="showIconbox"  v-for="n in showNum5">
+		  				<div class="boxcon">
+		  					<div class="modal"></div>
+			  				<div class="icon" @click="addCanvas($event)">
+									<Icon size="24" type="android-exit"></Icon>
+								</div>
+								<div class="img">
+									<!--<svg width="100%" height="100%" xmlns="">
+										<use x="0" y="0" xlink:href="../assets/img/help/graph/1.svg"></use>
+									</svg>-->
+									<embed width="90%" height="90%" :src="'/instatic/img/help/ray/'+n+'.svg'" type="image/svg+xml" />
+								</div>
+		  				</div>
+		  			</div>
+		  		</div>
+		  		
+		  		
+		  		<!--图标-->
+		  		<div class="showIcon" v-if="showNum==6">
+		  			<div class="showIconbox"  v-for="n in showNum6">
+		  				<div class="boxcon">
+		  					<div class="modal"></div>
+			  				<div class="icon" @click="addCanvas($event)">
+									<Icon size="24" type="android-exit"></Icon>
+								</div>
+								<div class="img">
+									<!--<svg width="100%" height="100%" xmlns="">
+										<use x="0" y="0" xlink:href="../assets/img/help/graph/1.svg"></use>
+									</svg>-->
+									<embed width="90%" height="90%" :src="'/instatic/img/help/count/'+n+'.svg'" type="image/svg+xml" />
+								</div>
+		  				</div>
+		  			</div>
+		  		</div>
+		  		
+		  		<!--描述-->
+		  		<div class="showIcon" v-if="showNum==7">
+		  			<div class="showIconbox"  v-for="n in showNum7">
+		  				<div class="boxcon">
+		  					<div class="modal"></div>
+			  				<div class="icon" @click="addCanvas($event,7)">
+									<Icon size="24" type="android-exit"></Icon>
+								</div>
+								<div class="img" :style="'background-image: url(/instatic/img/help/des/'+n+'.png);background-size:contain;background-position:center center;background-repeat:no-repeat;'">
+									<!--<svg width="100%" height="100%" xmlns="">
+										<use x="0" y="0" xlink:href="../assets/img/help/graph/1.svg"></use>
+									</svg>-->
+									<!--<embed width="90%" height="90%" :src="'/instatic/img/help/shadow/'+n+'.png'" type="image/svg+xml" />-->
+								</div>
+		  				</div>
+		  			</div>
+		  		</div>
+		  		
+		  		
 		  	</div>
   		</div>
   	</div>
@@ -142,11 +256,18 @@
       	showTex:'图形',
       	showNum:1,
       	showNum1:19,
+      	showNum2:15,
+      	showNum3:83,
+      	showNum4:24,
+      	showNum5:6,
+      	showNum6:28,
+      	showNum7:209,
       }
     },
     mounted(){
     	$(document).ready(function(){
 			$(document).on("mouseover",".showIconbox",function(){
+					$('.boxcon').css('background-color','');
 					$(".showIcon").find(".modal").hide();
 					$(".showIcon").find(".icon").hide();
 					$(this).find(".modal").show();
@@ -155,24 +276,29 @@
 		    $(document).on("mouseout",".showIconbox",function(){
 					$(this).find(".modal").hide();
 					$(this).find(".icon").hide();
+					$('.boxcon').css('background-color','background-color: rgba(255,255,255,.2);');
 		    });
 		
 		});
     },
     methods:{
-    	change(num){
+    	change(num,Txt){
     		this.xiaoguo=false;
     		this.showNum=num;
+    		this.showTex = Txt;
     	},
     	showEffect(){
     		this.xiaoguo=true;
     	},
-    	addCanvas(e){
+    	addCanvas(e,num){
 //  		console.log(e.currentTarget)
     		var url = $(e.currentTarget).siblings('.img').find("embed").attr("src");
 				var host = window.location.host;
-				var imgurl = "http://"+host+url
-//				console.log(imgurl)
+				var imgurl = "http://"+host+url;
+				if(num==3||num==4||num==7){
+    			imgurl = $(e.currentTarget).siblings('.img').css("background-image"); 
+    			imgurl = imgurl.split('"')[1];
+    		}
 				this.$emit("imgdata",{url:imgurl})
     	},
     },
@@ -251,6 +377,7 @@
  	display: block;
  	height: 50px;
  	line-height: 55px;
+ 	color: #b2c0c8;
  	position: relative;
  }
  .listShow>p>svg{
@@ -281,7 +408,7 @@
   	position: absolute;
   	width: 100%;
   	height: 100%;
-  	background-color: rgba(0,0,0,0.1);
+  	background-color: rgba(0,0,0,0.2);
   	z-index: 2;
   }
   .showIcon .showIconbox .icon{
@@ -311,6 +438,24 @@
   	display: flex;
   	justify-content: center;
   	align-content: center;
+  }
+  .showIcon .light{
+  	width: 10.5vw;
+  	height: 10.5vw;
+  	background-color:#293036;
+  	margin: 10px;
+  	padding: 17px;
+  	border-radius: 4px;
+  }
+  .showIcon .light .boxcon{
+  	background-color: rgba(255,255,255,.2);
+  	border-radius: 2px;
+  }
+  .showIcon .img img{
+  	width: 100%;
+  	height: 100%;
+  	position: absolute;
+  	z-index: 1;
   }
   /*.showIcon .box .icon .ivu-icon{
   	position: absolute;

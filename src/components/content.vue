@@ -20,7 +20,7 @@
 						 		<div class="box" v-for ="item in bigs">
 						 			<div class="boxcon">
 								 			<div class="pic" @click="modalS(item)">
-								 				<img :src="'http://www.shatuhome.com/thumb/'+item.production.thumb"/>
+								 				<img :src="'http://static.shatuhome.com/thumb/'+item.production.thumb"/>
 								 				<!--<div class="icon">
 								      	<Tooltip content="收藏" placement="bottom">
 									      	<Icon type="archive"></Icon>
@@ -487,7 +487,7 @@ $(document).ready(function(){
     /*頭部*/
      main{
     	width: 100%;
-    	padding:0 60px ;
+    	padding:0 50px ;
     	background:#F2F2F4;
     	overflow: hidden;
     }

@@ -71,8 +71,8 @@
 								      </div>
 								    </div>-->
 										<div class="dan" @click="listenClick(item.id)" v-for="item in searchi">
-								      <div class="img">
-								      	<img :src="'http://static.shatuhome.com/material/thumbNew/'+item.thumbNew" alt="" />
+								      <div class="img"  :style="'background-image: url(http://static.shatuhome.com/material/thumbNew/'+item.thumbNew+');background-position:center center;background-repeat:no-repeat;background-size:contain;'">
+								      	<img src="" alt="" />
 								      	<div class="modal" @click="modalS(item)" style="display: none;"></div>
 								        <div class="icon">
 								      	<Tooltip content="收藏" placement="bottom">
@@ -92,7 +92,8 @@
 							
 							
 						</div>
-						 <modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
+						<modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
+						<BackTop></BackTop>
 					</div>
 				</main>
 	</div>
