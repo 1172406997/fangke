@@ -21,7 +21,7 @@
 					<div class="conlist_con">
 						 <div class="dan" v-for="(item ,index) in getlikeitem" ref="abc"  >
 								      <div class="img">
-								      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
+								      	<img :src="'http://static.shatuhome.com/material/thumbNew/'+item.thumbNew" alt="" />
 								      	<div class="modal" ></div>
 								      	<div class="icon"  @click="addCanvas(item.filename,item.id)">
 								      	<Tooltip content="添加" placement="bottom">
@@ -111,7 +111,7 @@ export default {
 //		});
 		},
 		addCanvas(url,id){
-			var imgurl = "http://www.shatuhome.com/material/"+url
+			var imgurl = "http://static.shatuhome.com/material/"+url
 			this.$emit("imgdata",{url:imgurl,id:id})
 		},
   }

@@ -4,37 +4,47 @@
 			<i-col :span="spanLeft" class="layout-menu-left">
 				<Menu active-name="2" style="text-align: center;" theme="dark" width="100%" @on-select="forname" class="layout-left left">
 					<!--<div class="layout-logo-left"></div>-->
-					<Menu-item name="1" @click.native="backUp">
+					<Tooltip content="退出" style="width:100%;" placement="bottom">
+						<Menu-item name="1" @click.native="backUp">
 							<Icon type="arrow-left-a" size='24'></Icon>
-						<!--<Icon type="arrow-left-a" size='24'></Icon>-->
-						<!--<span class="layout-text">退出</span>-->
-					</Menu-item>
+							<!--<Icon type="arrow-left-a" size='24'></Icon>-->
+							<!--<span class="layout-text">退出</span>-->
+						</Menu-item>
+					</Tooltip>
+					<Tooltip content="搜索" style="width:100%;" placement="bottom">
 					<Menu-item name="2">
 						<Icon type="ios-search-strong" size='24'></Icon>
 						<!--<Icon type="ios-search-strong" size='24'></Icon>-->
 						<!--<span class="layout-text">搜索</span>-->
 					</Menu-item>
-					<Menu-item name="3" style="width: 100%;" on-select="unitemy()">
+					</Tooltip>
+					<Tooltip style="width:100%;" content="单品" placement="bottom">
+					<Menu-item name="3" on-select="unitemy()">
 						<Icon type="ios-box" size='24'></Icon>
 						<!--<span class="layout-text">单品</span>-->
 					</Menu-item>
-					<Menu-item name="4" on-select="puzzmy">
-						<Icon type="images" size='24'></Icon>
-						<!--<span class="layout-text">拼图</span>-->
-						<!--<Icon type="ios-navigate" :size="iconSize"></Icon>-->
-					</Menu-item>
+					</Tooltip>
+					<Tooltip content="辅助效果" placement="bottom">
 					<Menu-item name="5" @click="add()" on-select="effectmy">
-						<Icon type="wand" size='24'></Icon>
+						<Icon type="wand" size='22'></Icon>
 						<!--<span class="layout-text">选项 1</span>-->
 						<!--<span class="layout-text">辅助</span>-->
 					</Menu-item>
-					<Menu-item name="6" on-select="detailmy">
-						<Tooltip content="当前详情" placement="bottom">
-							<Icon type="information-circled" size='24'></Icon>
-							<!--<span class="layout-text">详情</span>-->
-							<!--<span class="layout-text">选项 1</span>-->
-						</Tooltip>
+					</Tooltip>
+					<Tooltip content="拼图"  placement="bottom">
+					<Menu-item name="4" @click.native="noticeShow()" on-select="puzzmy">
+						<Icon type="images" size='22'></Icon>
+						<!--<span class="layout-text">拼图</span>-->
+						<!--<Icon type="ios-navigate" :size="iconSize"></Icon>-->
 					</Menu-item>
+					</Tooltip>
+					<Tooltip content="详情" placement="bottom">
+					<Menu-item name="6" @click.native="noticeShow()" on-select="detailmy">
+						<Icon type="information-circled" size='22'></Icon>
+						<!--<span class="layout-text">详情</span>-->
+						<!--<span class="layout-text">选项 1</span>-->
+					</Menu-item>
+					</Tooltip>
 				</Menu>
 			</i-col>
 			<i-col :span="spanRight" class="left" width="100%">
@@ -45,7 +55,7 @@
 						<a href="#" @click="exportImg" id="downloadFtsetBtn">导出高清大图</a> |
 						<!--<a href="#">服务大厅</a>   | -->
 						<a href="javascript:;" @click="Clear">清空</a> |
-						<a href="javascript:;" @click="Clear">
+						<a href="javascript:;" @click="">
 							<Dropdown trigger="click">
 								<a href="javascript:;">画布设置</a>
 								<DropdownMenu slot="list">
@@ -141,15 +151,15 @@
 					<div class="my" v-show="name==3">
 						<canvasmy @imgdata="getChildImg"></canvasmy>
 					</div>
-					<div class="puzz" v-show="name==4">
-						<!--<brand></brand>-->
-					</div>
+					<!--<div class="puzz" v-show="name==4">
+						<brand></brand>
+					</div>-->
 					<div class="effect" v-show="name==5">
 						<effect @imgdata="getChildImg"></effect>
 					</div>
-					<div class="detail" v-show="name==6">
+					<!--<div class="detail" v-show="name==6">
 		              <detail></detail>
-		            </div>
+		            </div>-->
 				</div>
 	</div>
 	<div class="layout-content" style="padding:0px">
@@ -211,8 +221,7 @@
 						<Icon type="ios-settings-strong"></Icon>
 					</Tooltip>
 					<div slot="content" style="width: 180px;">
-						颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color"
-                                 value="#400000"/><br/><br/>
+						颜色：<br/><input type="color" @change="onColorChange()" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000"/><br/><br/>
 						亮度：
 						<Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="-100" :max="100" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						对比度：
@@ -239,13 +248,8 @@
 	</div>
 	</i-col>
 	</Row>
-	<Modal
-        v-model="backYeaOrNo"
-        title="退出提示"
-        @on-ok="ok"
-        @on-cancel="cancel">
-        <p>您需要保存么？</p>
-    </Modal>
+	<Modal v-model="backYeaOrNo" title="退出提示" @on-ok="ok" @on-cancel="cancel"> <p>您需要保存么？</p></Modal>
+	<!--<Modal v-model="noticeShowlist" title="提示" ><h1>功能正在开发中，敬请期待！</h1></Modal>-->
 	</div>
 </template>
 
@@ -293,6 +297,7 @@
 				//搜索结果，单品
 				searchi: "",
 				backYeaOrNo:false,
+				noticeShowlist:false,
 			}
 		},
 		computed: {
@@ -319,6 +324,18 @@
 			}
 		},
 		methods: {
+			onColorChange(){
+//				alert(this.color);
+				this.colorFilter();
+			},
+			noticeShow(){
+//				this.noticeShowlist = true;
+				 this.$Modal.confirm({
+                    title: '提示',
+                    content: '<p>功能正在开发中，敬请期待！</p>',
+                    okText: 'OK',
+                });
+			},
 			writeName() {
 				if(this.$route.params.id&&this.$route.params.up!='up') {
 					this.UpDate(this.$route.params.id);
@@ -586,8 +603,11 @@
 			// 1:1 780*780
 			//16:9 1350*759
 			setCanvasDimension(canvas, width, height) {
-				canvas.setWidth(width);
-				canvas.setHeight(height);
+				var list = this.Canvas.toJSON();
+				this.Canvas.setWidth(width);
+				this.Canvas.setHeight(height);
+				this.Canvas.loadFromJSON(list);
+				canvas.renderAll();
 			},
 			exportImg() {
 				var self = this;
@@ -852,30 +872,38 @@
 					var _img = oImg;
 					_img.left = 0;
 					_img.top = 0;
-//					self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness({
-//						'brightness': parseFloat(self.brightness / 100)
-//					}));
-//					self.ApplyFilter(_img, 1, new fabric.Image.filters.Contrast());
-//					self.ApplyFilter(_img, 2, new fabric.Image.filters.Blur({
-//						'blur': 0
-//					}));
-//					self.ApplyFilter(_img, 3, new fabric.Image.filters.Saturation());
-//					self.ApplyFilter(_img, 4, new fabric.Image.filters.BlendColor({
-//            color: '#0f0',
-//            mode: 'add',
-//            alpha: 0.1
-//          }));
+					self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness({
+						'brightness': parseFloat(self.brightness / 100)
+					}));
+					self.ApplyFilter(_img, 1, new fabric.Image.filters.Contrast());
+					self.ApplyFilter(_img, 2, new fabric.Image.filters.Blur({
+						'blur': 0
+					}));
+					self.ApplyFilter(_img, 3, new fabric.Image.filters.Saturation());
+					self.ApplyFilter(_img, 4, new fabric.Image.filters.BlendColor({
+		            color: '#fff',
+		            mode: 'add',
+		            alpha: 0.5
+		          }));
 					_img.applyFilters();
+					_img.lockMovementX = true;
+					_img.lockMovementY = true;
+					_img.lockRotation = true;
+					_img.lockScalingX = true;
+					_img.lockScalingY = true;
+					_img.lockUniScaling = true;
+					_img.hasControls = false;
+					_img.hasBorders = false;
 					self.secCanvas.add(_img);
 					//        self.Canvas.remove(self.imgActive);
 				})
 			},
-      colorFilter:function(){
-        var self = this;
-        var _img = self.secCanvas.getObjects()[4];
-        console.log(self.color);
-        self.ApplyFilterValue(_img, 4, 'color', self.color, self.secCanvas);
-      },
+	      colorFilter(){
+	        var self = this;
+	        var _img = self.secCanvas.getObjects()[0];
+	        console.log(self.color);
+	        self.ApplyFilterValue(_img, 4, 'color', self.color, self.secCanvas);
+	      },
 			brightnessFilter: function() {
 				var self = this;
 				var _img = self.secCanvas.getObjects()[0];
@@ -929,7 +957,7 @@
 				});
 				self.secCanvas = clip;
 				self.imgActive.clone(function(oImg) {
-          oImg.scale(0.5);
+          			oImg.scale(0.5);
 					clip.setWidth(oImg.width / 2);
 					clip.setHeight(oImg.height / 2);
 					oImg.left = 0;
@@ -1002,6 +1030,9 @@
 				});
 			},
 			forname(name) {
+				if(name==4||name==6){
+					return;
+				}
 				this.name = name;
 			},
 			getChildImg(item) {
@@ -1252,6 +1283,7 @@
 	}
 
 	.ivu-col {
+		overflow: hidden;
 		transition: width .2s ease-in-out;
 		/*height: 100%;*/
 	}
@@ -1491,8 +1523,10 @@
 
 	.searchclassfy {
 		position: relative;
-		width: 130px;
-		height: 87px;
+		/*width: 130px;
+		height: 87px;*/
+		width: 10.5vw;
+		height: 8.4vw;
 		border-radius: 10px;
 		margin: 5px;
 		cursor: pointer;

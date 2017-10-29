@@ -494,6 +494,7 @@
 											var winW = oParent.offsetWidth;
 							        var cols=Math.floor(winW/oBoxW);
 							        console.log(cols);
+							        console.log("colscolscols")
 							        //设置main的宽
 							//      oParent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto';
 							        var hArr=[];//存放每一列高度
@@ -512,7 +513,7 @@
 							        }
 									});
           	})
-			}, 0);   
+			}, 200);   
 		},
 		getByClass(parent,clsName){
     		 var boxArr=new Array(),//用来存储获取到的所有class为Box的元素
@@ -870,7 +871,7 @@ $(document).ready(function(){
     /*頭部*/
      main{
     	width: 100%;
-    	padding:0 60px ;
+    	padding:0 50px ;
     	background:#F2F2F4;
     	overflow: hidden;
     }

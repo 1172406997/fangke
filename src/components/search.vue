@@ -92,7 +92,8 @@
 							
 							
 						</div>
-						 <modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
+						<modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
+						<BackTop></BackTop>
 					</div>
 				</main>
 	</div>
