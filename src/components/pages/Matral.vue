@@ -11,7 +11,7 @@
 					 	<Carousel v-model="value1"  style="width: 500px;" >
 					        <Carousel-item>
 					            <div class="demo-carousel">
-					            	<img v-for="item in toson.displayimg" v-if="item!=null" :src="'http://static.shatuhome.com/material/'+item" alt="" />
+					            	<img v-for="item in toson.displayimg" v-if="item!=null" :src="'http://static.shatuhome.com/material/displayimg/'+item" alt="" />
 					            </div>
 					        </Carousel-item>
 					        <!--<Carousel-item>
@@ -222,7 +222,7 @@
         /*background: #506b9e;*/
     }
   .left_con img{
-  	width: 75%;
+  	width: 100%;
   	/*height: 100%;*/
   }
   .endLine {
