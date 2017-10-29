@@ -28,8 +28,8 @@
 						      </div>
 						    </div>-->
 							  <div class="dan" v-for="(item ,index) in getlikeitem" ref="abc"  >
-						      <div class="img">
-						      	<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />
+						      <div class="img" :style="'background-image: url(http://static.shatuhome.com/material/thumbNew/'+item.thumbNew+');background-position:center center;background-repeat:no-repeat;background-size:contain;'">
+						      	<!--<img :src="'http://www.shatuhome.com/material/'+item.filename" alt="" />-->
 						      	<div class="modal" @click="modalS(item)"></div>
 						      	<div class="icon"  @click="DelLike(item.id)">
 						      	<Tooltip content="删除" placement="bottom">
