@@ -20,8 +20,8 @@
 				<div class="conlist_show">
 					<div class="conlist_con">
 						 <div class="dan" v-for="(item ,index) in getlikeitem" ref="abc"  >
-								      <div class="img">
-								      	<img :src="'http://static.shatuhome.com/material/thumbNew/'+item.thumbNew" alt="" />
+								      <div class="img" :style="'background-image: url(http://static.shatuhome.com/material/thumbNew/'+item.thumbNew+');background-position:center center;background-repeat:no-repeat;background-size:contain;'">
+								      	<!--<img :src="'http://static.shatuhome.com/material/thumbNew/'+item.thumbNew" alt="" />-->
 								      	<div class="modal" ></div>
 								      	<div class="icon"  @click="addCanvas(item.filename,item.id)">
 								      	<Tooltip content="添加" placement="bottom">
@@ -148,8 +148,9 @@ export default {
 			z-index: 10;
 		}
 		.dan{
-    	width: 122px;
-    	height: 136px;
+    	width: 10.5vw;
+    	/*height: 136px;*/
+    	height: 10.5vw;
     	padding: 12px 12px 0px;
     	background-color: #fff;
     	border-radius: 5px;
@@ -167,7 +168,8 @@ export default {
     .img{
     	position: relative;
     	width: 100%;
-    	height: 107px;
+    	height: 80%;
+    	margin-bottom: 5px;
     }
     .img>img{
     	width: 100%;

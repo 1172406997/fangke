@@ -125,8 +125,8 @@
 						                        </Col>-->
                         				<div class="conlist_con">
 											<div class="dan" @click="" v-for="item in searchi">
-												<div class="img">
-													<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />
+												<div class="img" :style="'background-image: url(http://static.shatuhome.com/material/thumbNew/'+item.thumbNew+');background-position:center center;background-repeat:no-repeat;background-size:contain;'">
+													<!--<img :src="'http://static.shatuhome.com/material/'+item.filename" alt="" />-->
 													<div class="modal" style="display: none;"></div>
 													<div class="icon">
 														<Tooltip content="添加" @click.native="searchAddImg(item.filename,item.id)" placement="bottom">
@@ -273,7 +273,7 @@
 				Canvas: '',
 				selectItem: "",
 				imgLock: true,
-				brightness: 50,
+				brightness: -20,
 				contrast: 50,
 				blur: 50,
 				saturation: 50,
@@ -521,6 +521,7 @@
 					self.imgActive = opt.target;
 					self.imgLock = opt.target.selectable;
 					self.selectItem.target.imgLock = self.selectItem.target.hasControls;
+					console.log(opt.target);
 					//          console.log("--------------------");
 					//          console.log(self.selectItem.target.imgLock);
 					//          console.log("--------------------");
@@ -1604,8 +1605,8 @@
 	}
 
 	.dan {
-		width: 122px;
-		height: 136px;
+		width: 10.5vw;
+		height: 10.5vw;
 		padding: 12px 12px 0px;
 		background-color: #fff;
 		border-radius: 5px;
@@ -1625,7 +1626,8 @@
 	.img {
 		position: relative;
 		width: 100%;
-		height: 107px;
+		height: 80%;
+		margin-bottom: 5px;
 	}
 
 	.img>img {
