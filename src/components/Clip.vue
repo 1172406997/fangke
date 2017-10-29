@@ -2,7 +2,9 @@
 
   <div class="layout-l">
   	<button @click="Cancel()">取消</button>&nbsp;&nbsp;&nbsp;&nbsp;<button @click="Save">保存</button>
-    <canvas id="scalee" style="position: relative;left:10px;right:30px;width:1000px;height: 500px;"></canvas>
+    <!--<canvas id="scalee" style="position: relative;left:10px;right:30px;width:1000px;height: 500px;"></canvas>-->
+    <canvas id="scalee" style="position: relative;left:10px;right:30px;"></canvas>
+    <canvas id="fabCanvas" style="position: relative;left:10px;right:30px;"></canvas>
   </div>
 </template>
 
@@ -13,6 +15,8 @@
       return {
         isActive: false,
         ctx: '',
+        fabricCtx:'',
+        result:'',
         canvas: '',
         fabricCanvas:'',
         dots: [],
@@ -23,20 +27,27 @@
         hasRect: false,
         hasPic: true,
         hasDot: true,
+        imgData:"",
+        lastPoint:'',
       }
     },
     mounted() {
       var self = this;
       var canvas = document.getElementById("scalee");
+      self.fabCanvas = document.getElementById("fabCanvas");
+
       self.canvas = canvas;
       self.ctx = self.canvas.getContext("2d");
+      self.fabricCtx = self.fabCanvas.getContext("2d");
       self.canvas.width = 1000;
       self.canvas.height = 500;
+      self.fabCanvas.width = 1000;
+      self.fabCanvas.height = 500;
 
       var img = new Image();
       img.src = '/instatic/img/1.d80e543.png';
       img.onload = function () {
-        var _scale = 0.5;
+        var _scale = 1;
         var img_w = img.width*_scale;
         var img_h = img.height*_scale;
         var left = (self.canvas.width - img_w)/2;
@@ -97,6 +108,7 @@
 
           area = narea;
           self.render();
+
         };
 
         window.onmouseup = function () {
@@ -109,7 +121,38 @@
       routerTo(url) {
       },
       Cancel(){},
-      Save(){},
+      Save(){
+        var self = this;
+//        self.render();
+//        var _left = self.dots[0].x < self.dots[3].x?self.dots[0].x : self.dots[3].x;
+//        var _top = self.dots[0].y < self.dots[1].x?self.dots[0].y : self.dots[1].y;
+//        var _relWidth = (self.dots[1].x - self.dots[0].x) > (self.dots[2].x - self.dots[3].x) ?
+//                           self.dots[1].x - self.dots[0].x:self.dots[2].x - self.dots[3].x;
+//        var _relHeight = (self.dots[3].y - self.dots[0].y) > (self.dots[2].y - self.dots[1].y) ?
+//                            self.dots[3].y - self.dots[0].y : self.dots[2].y - self.dots[1].y;
+//        var _width = self.img.width;
+//        var _height = self.img.height;
+//        var imgData = self.ctx.getImageData(_left,_top,_relWidth,_relHeight);
+//        self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
+//        self.ctx.putImageData(imgData,0,0);
+//        self.fabricCanvas = document.getElementById("fabCanvas");
+//        self.fabricCanvas.width = _width;
+//        self.fabricCanvas.height = _height;
+//        self._ctx = self.fabricCanvas.getContext("2d");
+//        self._ctx.putImageData(imgData,0,0);
+        self.canvas.width = 0;
+        self.canvas.height = 0;
+//        console.log(self.img);
+//
+//        self.fabricCanvas = new fabric.Canvas("fabCanvas",{
+//          width:1000,
+//          height:500
+//        });
+//        fabric.Image.fromElement(self.img,function(oImg){
+//          console.log(oImg);
+//          self.fabricCanvas.add(oImg);
+//        });
+      },
       /**
        * 获取鼠标点击/移过的位置
        * @param e
@@ -126,6 +169,7 @@
       render() {
         var self = this;
         this.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
+        this.fabricCtx.clearRect(0, 0, self.canvas.width, self.canvas.height);
 
         var ndots = self.rectsplit(self.count, self.dots[0], self.dots[1], self.dots[2], self.dots[3]);
         ndots.forEach(function (d, i) {
@@ -180,26 +224,32 @@
         this.ctx.lineTo(_arg_2.x, _arg_2.y);
         this.ctx.lineTo(_arg_3.x, _arg_3.y);
         this.ctx.closePath();
-        //出现红线
-        if (self.hasRect) {
-          self.ctx.lineWidth = 2;
-          self.ctx.strokeStyle = "red";
-          self.ctx.stroke();
-        }
         this.ctx.clip();
 
-        if (self.hasPic) {
-          //传入变换前后的点坐标，计算变换矩阵
-          var result = matrix.getMatrix.apply(this, arguments);
+        this.fabricCtx.save();
+        //根据变换后的坐标创建剪切区域
+        this.fabricCtx.beginPath();
+        this.fabricCtx.moveTo(_arg_1.x, _arg_1.y);
+        this.fabricCtx.lineTo(_arg_2.x, _arg_2.y);
+        this.fabricCtx.lineTo(_arg_3.x, _arg_3.y);
+        this.fabricCtx.closePath();
+        this.fabricCtx.clip();
 
-          //变形
-          this.ctx.transform(result.a, result.b, result.c, result.d, result.e, result.f);
 
-          //绘制图片
-          this.ctx.drawImage(self.img, self.idots[0].x, self.idots[0].y, self.img.width, self.img.height);
-        }
+        //传入变换前后的点坐标，计算变换矩阵
+        self.result = matrix.getMatrix.apply(this, arguments);
+
+        //变形
+        this.ctx.transform(self.result.a, self.result.b, self.result.c, self.result.d, self.result.e, self.result.f);
+        this.fabricCtx.transform(self.result.a, self.result.b, self.result.c, self.result.d, self.result.e, self.result.f);
+
+        //绘制图片
+        this.ctx.drawImage(self.img, self.idots[0].x, self.idots[0].y, self.img.width, self.img.height);
+        this.fabricCtx.drawImage(self.img, self.idots[0].x, self.idots[0].y, self.img.width, self.img.height);
+
 
         this.ctx.restore();
+        this.fabricCtx.restore();
       },
 
       /**
