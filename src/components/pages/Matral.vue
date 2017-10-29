@@ -11,7 +11,7 @@
 					 	<Carousel v-model="value1"  style="width: 500px;" >
 					        <Carousel-item>
 					            <div class="demo-carousel">
-					            	<img v-for="item in toson.displayimg" v-if="item!=null" :src="'http://www.shatuhome.com/material/'+item" alt="" />
+					            	<img v-for="item in toson.displayimg" v-if="item!=null" :src="'http://static.shatuhome.com/material/'+item" alt="" />
 					            </div>
 					        </Carousel-item>
 					        <!--<Carousel-item>
@@ -116,8 +116,8 @@
 					};
 					this.jsonpRequest(this,"Like.StoreLike",params,function(res){
 		  					if(res){
-										console.log(res);
-										console.log("getlike:"+this.getlikeitem);
+								console.log(res);
+								console.log("getlike:"+this.getlikeitem);
 		  					}
 		  		},function(err){
 		  			console.log(err);

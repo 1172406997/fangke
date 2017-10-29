@@ -185,15 +185,6 @@
 				<Tooltip content="滤镜" @click.native="showFilter" placement="bottom">
 					<Icon type="ios-settings-strong"></Icon>
 				</Tooltip>
-				<!--<div slot="content" style="width: 180px;">
-                              颜色：<br/><input type="color" style="width: 100%;margin-top: 2px;" v-model="color" value="#400000" /><br/><br/>
-                              亮度：<Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="0" :max="100" :step="1" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-                              对比度：<Slider class="slid" @on-input="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-                              饱和度：<Slider class="slid" @on-input="blurFilter" v-model="blur" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-                              清晰度：<Slider class="slid" @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-                              透明度：<Slider class="slid" oninput="xxxxx" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-                          </div>-->
-				<!--</Poptip>-->
 				<Dropdown trigger="click">
 					<Tooltip content="上下层级" placement="bottom">
 						<Icon type="navicon-round"></Icon>
@@ -205,6 +196,9 @@
 						<DropdownItem @click.native="LastLayer">置底</DropdownItem>
 					</DropdownMenu>
 				</Dropdown>
+				<!--<Tooltip content="颜色" placement="bottom">
+					<ColorPicker v-model="color5" @on-change="changeColor"/>
+				</Tooltip>-->
 				<Tooltip content="关闭" @click.native="closeNone" style="float: right;color: #ccc;" placement="bottom">
 					<Icon type="close-round"></Icon>
 				</Tooltip>
@@ -231,7 +225,7 @@
 						清晰度：
 						<Slider class="slid" @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						透明度：
-            <Slider class="slid" @on-input="lucencyImg" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+           				<Slider class="slid" @on-input="lucencyImg" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 					</div>
 				</Poptip>
 				<Tooltip content="保存" @click.native="menuYes" style="float: right;color: #9ACD32;" placement="bottom">
@@ -273,7 +267,7 @@
 				Canvas: '',
 				selectItem: "",
 				imgLock: true,
-				brightness: -20,
+				brightness: -50,
 				contrast: 50,
 				blur: 50,
 				saturation: 50,
@@ -298,6 +292,8 @@
 				searchi: "",
 				backYeaOrNo:false,
 				noticeShowlist:false,
+				filterVisible1:true,
+				color5:'#000',
 			}
 		},
 		computed: {
@@ -405,10 +401,13 @@
 				};
 				this.postRequest("Production.UpdateProduction",params, function(res) {
 					console.log(res)
-					if(res.body.data.code == 0) {
+					if(res.data.code == 0) {
 //						var list = res.body.data.list[0].production.data;
 //						self.Canvas.loadFromJSON(list);
-						this.$Message.info('保存成功！');
+						self.$Message.info('保存成功！');
+						self.$router.push({
+							name: 'content'
+						});
 //						console.log(res.body.data.list[0].production.data);
 					} else {
 						console.log(res);
@@ -896,15 +895,33 @@
 					_img.hasControls = false;
 					_img.hasBorders = false;
 					self.secCanvas.add(_img);
-					//        self.Canvas.remove(self.imgActive);
+		        	self.Canvas.remove(self.imgActive);
 				})
 			},
-	      colorFilter(){
-	        var self = this;
-	        var _img = self.secCanvas.getObjects()[0];
-	        console.log(self.color);
-	        self.ApplyFilterValue(_img, 4, 'color', self.color, self.secCanvas);
-	      },
+		      colorFilter(){
+		        var self = this;
+		        var _img = self.secCanvas.getObjects()[0];
+		        console.log(self.color);
+		        self.ApplyFilterValue(_img, 4, 'color', self.color, self.secCanvas);
+		      },
+			changeColor(){
+				var self = this;
+				console.log(this.color5);
+				console.log(self.imgActive);
+				var _img = self.imgActive;
+				if (!_img.filters[4])
+				{
+					self.ApplyFilter(_img, 4, new fabric.Image.filters.BlendColor({
+			            color: self.color5,
+			            mode: 'add',
+			            alpha: 1
+		          	}));
+				}
+				self.ApplyFilterValue(_img, 4, 'color', self.color5, self.Canvas);
+//				self.Canvas.renderAll();
+
+				
+			},
 			brightnessFilter: function() {
 				var self = this;
 				var _img = self.secCanvas.getObjects()[0];
@@ -1093,13 +1110,8 @@
 				getObjImg.lockUniScaling = false;
 				getObjImg.hasControls = true;
 				getObjImg.hasBorders = true;
-        self.setCanvasDimension(self.Canvas, 1103, 780);
-//				this.Canvas.setWidth(800);
-//				this.Canvas.setHeight(800);
-				this.secCanvas.setWidth(0);
-				this.secCanvas.setHeight(0);
-				this.secCanvas.clear();
-				this.secCanvas.dispose();
+
+				
 				this.imgActive.evented = true;
 				this.imgActive.lockMovementX = false;
 				this.imgActive.lockMovementY = false;
@@ -1118,6 +1130,12 @@
 				//          }
 				//        });
 				this.Canvas.add(getObjImg);
+				this.secCanvas.setWidth(0);
+				this.secCanvas.setHeight(0);
+				this.secCanvas.clear();
+				this.secCanvas.dispose();
+        		self.setCanvasDimension(self.Canvas, 1103, 780);
+				
 				this.menu_1 = 1;
 			},
 			backUp() {

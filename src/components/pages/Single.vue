@@ -10,7 +10,7 @@
 					 	<Carousel v-model="value1"  style="width: 100%;">
 					        <Carousel-item>
 					            <div class="demo-carousel">
-					            	<img v-show="toson.production.thumb!=null" :src="'http://www.shatuhome.com/thumb/'+toson.production.thumb" alt="" />
+					            	<img v-show="toson.production.thumb!=null" :src="'http://static.shatuhome.com/thumb/'+toson.production.thumb" alt="" />
 					            </div>
 					        </Carousel-item>
 					    </Carousel>
