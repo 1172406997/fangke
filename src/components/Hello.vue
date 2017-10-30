@@ -105,7 +105,7 @@ export default {
 		return{
 			isActive:false,
 			layoutLog:{
-            backgroundImage: "url(" + require("../assets/img/log.png") + ")",
+            backgroundImage: "url(" + require("../assets/img/logopsd.png") + ")",
             backgroundRepeat: "no-repeat",
             backgroundColor:'#293036',
             backgroundPosition: "center center",
