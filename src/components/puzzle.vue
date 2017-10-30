@@ -236,13 +236,13 @@
   	methods:{
   	colorRand() {
 			console.log($("#main").find(".thumb"));
-			var ranColor = '#' + ('00000' + (Math.random() * 0x1000000<<0).toString(16)).slice(-6);
 			setTimeout(function () {
 					$("#main").find(".thumb").each(function(){
+						var ranColor = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
 						$(this).css("background", ranColor);
 					})
 			},500)
-	},
+		},
   	//点击创建文件夹按钮
   	clickCreat() {
   		var self = this;
@@ -742,10 +742,16 @@ $(document).ready(function(){
     }
     .pic {
     	position: relative;
-    	border: 1px solid #CCC;
-    	box-shadow: 0 0 5px #ccc;
+    	/*display: flex;*/
+    	/*justify-content: center;*/
+    	/*align-content: center;*/
+    	/*border: 1px solid #CCC;*/
+    	/*box-shadow: 0 0 5px #ccc;*/
+    	min-width: 100%;
+    	min-height: 180px;
     	margin: 0;
     	padding: 0;
+    	overflow: hidden;
     	cursor: pointer;
     }
 
@@ -817,19 +823,21 @@ $(document).ready(function(){
   .box-txt p:last-of-type{
   	line-height: 12px;
     font-size: 12px;
-    color: #b2c0c8;
+    color: #8a8989;
   }
   .boxcon .footer .thumb {
   	display: inline-block;
   	width: 66px;
   	height: 32px;
-  	border-radius: 50%;
+  	text-align:center;
+  	line-height:32px;
+  	border-radius: 4px;
   	/*background-color: ;*/
   }
 
   .boxcon .footer .thumb p{
   	text-align: center;
-  	line-height: 35px;
+  	/*line-height: 35px;*/
   	font-size: 18px;
   	color: #fff;
   	font-weight: 500;

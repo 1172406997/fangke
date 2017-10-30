@@ -36,7 +36,7 @@
 									 				</span>
 									 				<div style="width: 15px;"></div>
 									 				<div class="box-txt">
-									 					<p>{{item.userinfo.username}}</p>
+									 					<p>{{item.production.name}}</p>
 									 					<div style="height: 5px;"></div>
 									 					<p>{{item.production.ctime | Time}}</p>
 									 				</div>
@@ -64,6 +64,11 @@
 					2011-2017 &copy; TalkingData
 				</div>
 				</main>
+				 <BackTop :height="100" :bottom="200">
+        	<div class="backtop">
+        		<Icon type="ios-arrow-up"></Icon>
+        	</div>
+    		</BackTop>
 	</div>
 </template>
 
@@ -105,15 +110,13 @@ created: function() {},
 	},
 	methods: {
 		colorRand() {
-			console.log(1111111111111111111111)
 			console.log($("#main").find(".thumb"));
-			var ranColor = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
 			setTimeout(function () {
 					$("#main").find(".thumb").each(function(){
+						var ranColor = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
 						$(this).css("background", ranColor);
 					})
 			},500)
-			
 		},
 		falls: function() {
 			var self = this;
@@ -372,10 +375,20 @@ $(document).ready(function(){
     }
     .pic {
     	position: relative;
-    	border: 1px solid #CCC;
-    	box-shadow: 0 0 5px #ccc;
+    	/*display: flex;*/
+    	/*justify-content: center;*/
+    	/*align-content: center;*/
+    	/*border: 1px solid #CCC;*/
+    	/*box-shadow: 0 0 5px #ccc;*/
+    	min-width: 100%;
+    	min-height: 180px;
     	margin: 0;
     	padding: 0;
+    	overflow: hidden;
+    	cursor: pointer;
+    	background-position: center center;
+    	background-repeat: no-repeat;
+    	background-size: contain;
     }
 
     .modal {
@@ -445,20 +458,22 @@ $(document).ready(function(){
   .box-txt p:last-of-type{
   	line-height: 12px;
     font-size: 12px;
-    color: #b2c0c8;
+    color: #8a8989;
   }
 
   .boxcon .footer .thumb {
   	display: inline-block;
   	width: 66px;
   	height: 32px;
-  	border-radius: 50%;
+  	border-radius: 5px;
+  	text-align: center;
+  	line-height: 32px;
   	/*background-color: ;*/
   }
 
   .boxcon .footer .thumb p{
   	text-align: center;
-  	line-height: 35px;
+  	/*line-height: 35px;*/
   	font-size: 18px;
   	color: #fff;
   	font-weight: 500;
@@ -601,4 +616,16 @@ $(document).ready(function(){
     /*.show-icon .ivu-icon-heart:before {
     	color: #FF556A;
     }*/
+   .backtop{
+   	width: 45px;
+   	height: 45px;
+   	background-color: #a6a6a6;
+   	color: #fff;
+   	text-align: center;
+   	line-height: 45px;
+   	border-radius: 50%;
+   }
+   .backtop .ivu-icon{
+   	color: #fff;
+   }
 </style>

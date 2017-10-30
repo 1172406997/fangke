@@ -141,7 +141,11 @@
 						</div>
 					</div>
 				</div>
-				
+				<BackTop :height="100" :bottom="200">
+        	<div class="backtop">
+        		<Icon type="ios-arrow-up"></Icon>
+        	</div>
+    		</BackTop>
 	</div>
 </template>
 
@@ -646,4 +650,17 @@ export default {
 			border: none;
 			margin-right: 20px;
 		}
+		/*返回上层*/
+		.backtop{
+   	width: 45px;
+   	height: 45px;
+   	background-color: #a6a6a6;
+   	color: #fff;
+   	text-align: center;
+   	line-height: 45px;
+   	border-radius: 50%;
+   }
+   .backtop .ivu-icon{
+   	color: #fff;
+   }
 </style>
