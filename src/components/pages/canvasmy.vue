@@ -58,6 +58,20 @@ export default {
   components: {
   	
   },
+  mounted(){
+  	if(this.$route.path=="/canvas"){
+  		$(document).ready(function(){
+					$(document).on("mouseover",".canvasmy .dan",function(){
+							$(this).find(".modal").show();
+							$(this).find(".icon").show();
+					});
+				    $(document).on("mouseout",".canvasmy .dan",function(){
+							$(this).find(".modal").hide();
+							$(this).find(".icon").hide();
+				    });
+				});
+  	}
+  },
   methods:{
   	getlike:function(){
   		//
@@ -148,14 +162,14 @@ export default {
 			z-index: 10;
 		}
 		.dan{
-    	width: 10.5vw;
+    	width: 8vw;
     	/*height: 136px;*/
-    	height: 10.5vw;
+    	height: 9vw;
     	padding: 12px 12px 0px;
     	background-color: #fff;
     	border-radius: 5px;
     	position: relative;
-    	margin: 10px;
+    	margin: 5px;
     	/*margin-left: 60px;*/
     	cursor:pointer;
     	float: left;

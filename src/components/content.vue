@@ -318,21 +318,21 @@ created: function() {},
     },
 	}
 }
-$(document).ready(function(){
-	$(document).on("mouseover",".dan",function(){
-			$(this).find(".modal").show();
-			$(this).find(".icon").show();
-			$(this).children(".nam").hide();
-			$(this).children(".price").show();
-	});
-    $(document).on("mouseout",".dan",function(){
-			$(this).find(".modal").hide();
-			$(this).find(".icon").hide();
-			$(this).children(".nam").show();
-			$(this).children(".price").hide();
-    });
-
-});
+//$(document).ready(function(){
+//	$(document).on("mouseover",".dan",function(){
+//			$(this).find(".modal").show();
+//			$(this).find(".icon").show();
+//			$(this).children(".nam").hide();
+//			$(this).children(".price").show();
+//	});
+//  $(document).on("mouseout",".dan",function(){
+//			$(this).find(".modal").hide();
+//			$(this).find(".icon").hide();
+//			$(this).children(".nam").show();
+//			$(this).children(".price").hide();
+//  });
+//
+//});
 
 </script>
 
@@ -372,14 +372,10 @@ $(document).ready(function(){
     	padding:10px;
     	width: 340px;
     	float: left;
+    	
     }
     .pic {
     	position: relative;
-    	/*display: flex;*/
-    	/*justify-content: center;*/
-    	/*align-content: center;*/
-    	/*border: 1px solid #CCC;*/
-    	/*box-shadow: 0 0 5px #ccc;*/
     	min-width: 100%;
     	min-height: 180px;
     	margin: 0;
@@ -419,7 +415,6 @@ $(document).ready(function(){
     .borderbox {
     	/*position: absolute;*/
     	/*width: calc(100% - 44px);*/
-
     	height: 100%;
     	cursor: pointer;
     	display: flex;
@@ -428,6 +423,7 @@ $(document).ready(function(){
     .boxcon {
     	padding: 10px;
     	cursor: pointer;
+    	background-color: #fff;
     	/*margin: 15px 0 0 15px;*/
     	border-radius: 2px;
     	box-shadow: 0 0 5px rgba(6, 31, 50, .24);

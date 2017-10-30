@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="search">
         <header>
 					<div class="title">
 						搜索你想要的
@@ -93,7 +93,11 @@
 							
 						</div>
 						<modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
-						<BackTop></BackTop>
+						<BackTop :height="100" :bottom="200">
+		        	<div class="backtop">
+		        		<Icon type="ios-arrow-up"></Icon>
+		        	</div>
+		        </BackTop>
 					</div>
 				</main>
 				<div class="ifyBUtton" style="padding:10px 24px">
@@ -180,6 +184,20 @@ export default {
   },
   created:function(){
 	this.getsearch();
+  },
+  mounted(){
+  	if(this.$route.path=='/search'){
+    		$(document).ready(function(){
+					$(document).on("mouseover",".search .dan",function(){
+							$(this).find(".modal").show();
+							$(this).find(".icon").show();
+					});
+				    $(document).on("mouseout",".search .dan",function(){
+							$(this).find(".modal").hide();
+							$(this).find(".icon").hide();
+				    });
+				});
+    	}
   },
   methods:{
   	getsearch:function() {
@@ -422,19 +440,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	.header header{
+	.search header{
     	width: 100%;
     	height: 180px;
     	background: #293036;
     	text-align: center;
     	color:#fff;
     }
-    .header .title{
+    .search .title{
     	padding-top: 48px;
 	    font-size: 32px;
 	    line-height: 32px;
     }
-    .header .sub_title{
+    .search .sub_title{
     	padding-top: 20px;
 	    font-size: 14px;
 	    line-height: 14px;
@@ -652,15 +670,16 @@ export default {
 		}
 		/*返回上层*/
 		.backtop{
-   	width: 45px;
-   	height: 45px;
+   	width: 40px;
+   	height: 40px;
    	background-color: #a6a6a6;
    	color: #fff;
    	text-align: center;
-   	line-height: 45px;
+   	line-height: 40px;
    	border-radius: 50%;
    }
    .backtop .ivu-icon{
    	color: #fff;
+   	font-weight: 600;
    }
 </style>

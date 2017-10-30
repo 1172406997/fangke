@@ -9,7 +9,9 @@
 				<div class="layout-nav">
           <router-link :to="{name:'content'}">
             <Menu-item name="1">
-              <Icon type="ios-keypad" size="18"></Icon>
+              <svg class="icon" style="fill:currentcolor;transform:scale(1.1)">
+				<use xlink:href="#icon-faxian"></use>
+			  </svg>
               <span class="layout-text ">成品预览</span>
             </Menu-item>
           </router-link>
@@ -22,19 +24,25 @@
 					<!--</router-link>-->
 					<router-link to="/search">
 						<Menu-item name="2">
-							<Icon type="ios-search" size="18"></Icon>
+							<svg class="icon" style="fill:currentcolor;transform:scale(1.1)">
+								<use xlink:href="#icon-0202chazhao"></use>
+							  </svg>
 							<span class="layout-text">我的搜索</span>
 						</Menu-item>
 					</router-link>
           <router-link to="/puzzle">
             <Menu-item name="3">
-              <Icon type="ios-analytics " size="18 "></Icon>
+              <svg class="icon" style="fill:currentcolor;transform:scale(1.1)">
+				<use xlink:href="#icon-pintu"></use>
+			  </svg>
               <span class="layout-text ">我的拼图</span>
             </Menu-item>
           </router-link>
 					<router-link to="/myCollect">
 						<Menu-item name="4">
-							<Icon type="heart"  size="18"></Icon>
+							<svg class="icon" style="fill:currentcolor;transform:scale(1.1)">
+								<use xlink:href="#icon-shoucang"></use>
+							</svg>
 							<span class="layout-text ">我的单品</span>
 						</Menu-item>
 					</router-link>

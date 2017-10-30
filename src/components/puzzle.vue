@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="puzzle">
         <header>
 					<div class="body">
 						<div class="title">
@@ -192,6 +192,11 @@
 				        <!--<p >{{item.name}}</p>-->
     				</Modal>
 				</main>
+				<BackTop :height="100" :bottom="200">
+        	<div class="backtop">
+        		<Icon type="ios-arrow-up"></Icon>
+        	</div>
+        </BackTop>
 	</div>
 </template>
 
@@ -218,6 +223,18 @@
       modals,
     },
     mounted(){
+    	if(this.$route.path=='/puzzle'){
+    		$(document).ready(function(){
+					$(document).on("mouseover",".puzzle .box",function(){
+							$(this).find(".modal").show();
+							$(this).find(".icon").show();
+					});
+				    $(document).on("mouseout",".puzzle .box",function(){
+							$(this).find(".modal").hide();
+							$(this).find(".icon").hide();
+				    });
+				});
+    	}
     	this.getFolder();
     	this.GetProductionByUserId();
     	this.movingPos();
@@ -577,22 +594,11 @@
   },
  }
 
-
-$(document).ready(function(){
-	$(document).on("mouseover",".box",function(){
-			$(this).find(".modal").show();
-			$(this).find(".icon").show();
-	});
-    $(document).on("mouseout",".box",function(){
-			$(this).find(".modal").hide();
-			$(this).find(".icon").hide();
-    });
-});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	.header header{
+	.puzzle header{
     	width: 100%;
     	/*height: 310px;*/
     	padding:0 60px 24px;
@@ -601,7 +607,7 @@ $(document).ready(function(){
     	color:#fff;
     	box-sizing: border-box;
     }
-    .header .body{
+    .puzzle .body{
     	width: 100%;
     	padding-top: 24px;
     	margin-bottom: 12px;
@@ -651,19 +657,19 @@ $(document).ready(function(){
     .ivu-menu-light{
     	z-index: -0;
     }
-    .header header{
+    .puzzle header{
     	width: 100%;
     	height: 180px;
     	background: #293036;
     	text-align: center;
     	color:#fff;
     }
-    .header .title{
+    .puzzle .title{
     	padding-top: 48px;
 	    font-size: 32px;
 	    line-height: 32px;
     }
-    .header .sub_title {
+    .puzzle .sub_title {
     	padding-top: 20px;
     	font-size: 14px;
     	line-height: 14px;
@@ -686,6 +692,7 @@ $(document).ready(function(){
     	width: 340px;
     	float: left;
     	min-height: 280px;
+    	
     }
     .filebox{
     	height: 338px;
@@ -753,6 +760,7 @@ $(document).ready(function(){
     	padding: 0;
     	overflow: hidden;
     	cursor: pointer;
+    	
     }
 
     .modal {
@@ -794,6 +802,7 @@ $(document).ready(function(){
     	padding: 10px;
     	/*cursor: pointer;*/
     	/*margin: 15px 0 0 15px;*/
+    	background-color: #fff;
     	border-radius: 2px;
     	box-shadow: 0 0 5px rgba(6, 31, 50, .24);
     }
@@ -969,4 +978,17 @@ $(document).ready(function(){
     /*.ivu-icon{
     	color: #999;
     }*/
+   .backtop{
+   	width: 40px;
+   	height: 40px;
+   	background-color: #a6a6a6;
+   	color: #fff;
+   	text-align: center;
+   	line-height: 40px;
+   	border-radius: 50%;
+   }
+   .backtop .ivu-icon{
+   	color: #fff;
+   	font-weight: 600;
+   }
 </style>

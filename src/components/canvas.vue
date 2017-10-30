@@ -1,5 +1,5 @@
 <template>
-	<div class="layout">
+	<div class="layout canvas">
 		<Row type="flex">
 			<i-col :span="spanLeft" class="layout-menu-left">
 				<Menu active-name="2" style="text-align: center;" theme="dark" width="100%" @on-select="forname" class="layout-left left">
@@ -166,7 +166,9 @@
 		<div class="layout-content-style ">
 			<div class="menubox" v-if="menu_1==1">
 				<Tooltip content="裁剪" @click.native="Clip" placement="bottom">
-					<Icon type="crop"></Icon>
+					<svg class="icon" style="fill:currentcolor;transform:scale(1.1)">
+						<use xlink:href="#icon-shoucang"></use>
+					</svg>
 				</Tooltip>
 				<!--<Tooltip content="变形"@click.native="twistImg" placement="bottom">
                               <Icon type="android-map"></Icon>
@@ -1227,7 +1229,7 @@
 	.layout-breadcrumb {
 		float: left;
 		min-width: 200px;
-		width: 25%;
+		width: 22%;
 		min-height: 672px;
 		height: 100%;
 	}
@@ -1238,7 +1240,7 @@
 		display: flex;
 		justify-content: center;
 		float: left;
-		width: 75%;
+		width: 78%;
 		overflow: hidden;
 		min-height: 600px;
 		padding: 0px 0px 10px 5px;
@@ -1544,8 +1546,8 @@
 		position: relative;
 		/*width: 130px;
 		height: 87px;*/
-		width: 10.5vw;
-		height: 8.4vw;
+		width: 9.5vw;
+		height: 7.2vw;
 		border-radius: 10px;
 		margin: 5px;
 		cursor: pointer;
@@ -1623,13 +1625,13 @@
 	}
 
 	.dan {
-		width: 10.5vw;
-		height: 10.5vw;
+		width: 9vw;
+		height: 11vw;
 		padding: 12px 12px 0px;
 		background-color: #fff;
 		border-radius: 5px;
 		position: relative;
-		margin: 10px;
+		margin: 5px;
 		/*margin-left: 60px;*/
 		cursor: pointer;
 		float: left;

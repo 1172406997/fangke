@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="mycollect">
         <header>
 			<div class="title">
 				<Icon type="android-upload" style="color: #fff;"></Icon>&nbsp;我的收藏
@@ -69,7 +69,22 @@ import modals from "../components/pages/Single"
 	this.getlike();
   },
   mounted:function(){
-	
+	if(this.$route.path=='/myCollect'){
+    		$(document).ready(function(){
+				$(document).on("mouseover",".mycollect .dan",function(){ 
+						$(this).find(".modal").show();
+						$(this).find(".icon").show();
+						$(this).children(".nam").hide();
+						$(this).children(".price").show();
+				});
+			    $(document).on("mouseout",".mycollect .dan",function(){
+						$(this).find(".modal").hide();
+						$(this).find(".icon").hide();
+						$(this).children(".nam").show();
+						$(this).children(".price").hide();
+			    });
+				});
+    	}
   },
   components:{
   	modals
@@ -141,37 +156,26 @@ import modals from "../components/pages/Single"
  }
 
 $(document).ready(function(){
-	$(document).on("mouseover",".dan",function(){ 
-			$(this).find(".modal").show();
-			$(this).find(".icon").show();
-			$(this).children(".nam").hide();
-			$(this).children(".price").show();
-	});
-    $(document).on("mouseout",".dan",function(){
-			$(this).find(".modal").hide();
-			$(this).find(".icon").hide();
-			$(this).children(".nam").show();
-			$(this).children(".price").hide();
-    });
+
 });
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	.header header{
+	.mycollect header{
     	width: 100%;
     	height: 180px;
     	background: #293036;
     	text-align: center;
     	color:#fff;
     }
-    .header .title{
+    .mycollect .title{
     	padding-top: 48px;
 	    font-size: 32px;
 	    line-height: 32px;
     }
-    .header .sub_title{
+    .mycollect .sub_title{
     	padding-top: 20px;
 	    font-size: 14px;
 	    line-height: 14px;

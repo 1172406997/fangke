@@ -149,16 +149,16 @@ import modals from "../components/pages/Single"
 
 $(document).ready(function(){
 	$(document).on("mouseover",".dan",function(){ 
-			$(this).find(".modal").show();
-			$(this).find(".icon").show();
-			$(this).children(".nam").hide();
-			$(this).children(".price").show();
+//			$(this).find(".modal").show();
+//			$(this).find(".icon").show();
+//			$(this).children(".nam").hide();
+//			$(this).children(".price").show();
 	});
     $(document).on("mouseout",".dan",function(){
-			$(this).find(".modal").hide();
-			$(this).find(".icon").hide();
-			$(this).children(".nam").show();
-			$(this).children(".price").hide();
+//			$(this).find(".modal").hide();
+//			$(this).find(".icon").hide();
+//			$(this).children(".nam").show();
+//			$(this).children(".price").hide();
     });
 });
 
