@@ -338,7 +338,7 @@
  		height: 10.5vw;
  		position: relative;
  		border-radius: 4px;
- 		background-color: #19BE6B;
+ 		background-color: #2bAc96;
  		cursor: pointer;
  }
  .effectcon>div{

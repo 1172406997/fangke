@@ -191,10 +191,14 @@ export default {
 					$(document).on("mouseover",".search .dan",function(){
 							$(this).find(".modal").show();
 							$(this).find(".icon").show();
+							$(this).children(".nam").hide();
+							$(this).children(".price").show();
 					});
 				    $(document).on("mouseout",".search .dan",function(){
 							$(this).find(".modal").hide();
 							$(this).find(".icon").hide();
+							$(this).children(".nam").show();
+							$(this).children(".price").hide();
 				    });
 				});
     	}

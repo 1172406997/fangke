@@ -1062,10 +1062,13 @@
 					this.idData.push(item.id);
 				}
 				fabric.Image.fromURL(item.url, function(oImg) {
+					console.log(oImg)
+					console.log(oImg.crossOrigin)
+					oImg.crossOrigin="anonymous";
 					oImg.scale(0.5);
 					oImg.imgId = item.id;
 					self.Canvas.add(oImg);
-				});
+				},null,'crossOrigin=anonymous');
 			},
 			searchAddImg(name,id){
 				var item = {url:'http://static.shatuhome.com/material/'+name,id:id};
