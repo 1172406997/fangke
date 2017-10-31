@@ -31,7 +31,7 @@
 						 	<div id="main" v-if="fileShowHide">
 						 		
 						 		<!--文件夹样式-->
-						 		<div class="box " v-for="item in Folder">
+						 		<!--<div class="box " v-for="item in Folder">
 						 			<div class="boxcon filebox">
 						 			<div class="fileboxcon">
 						 				<img v-if="item.img!=null"  src="../img/1.png" alt="" />
@@ -53,16 +53,14 @@
 						      	</div>
 							      	<DropdownMenu slot="list" style="z-index: 10;">
 							      			<DropdownItem @click.native="">删除文件夹</DropdownItem>
-							            <!--<DropdownItem>查看</DropdownItem>-->
-							            <!--<DropdownItem >修改</DropdownItem>-->
-							            <!--<DropdownItem>冰糖葫芦</DropdownItem>
-							            <DropdownItem>北京烤鸭</DropdownItem>-->
+							            
 							        </DropdownMenu>
 						      	</Dropdown>
 						 			</div>
 						 			</div>
-						 		</div>
-						 		
+						 		</div>-->
+						 		<!--<DropdownItem>查看</DropdownItem>-->
+							  <!--<DropdownItem >修改</DropdownItem>-->
 						 		
 						 		<div class="box"  v-for="item in getlikeitem">
 						 			<div class="boxcon">
@@ -192,11 +190,6 @@
 				        <!--<p >{{item.name}}</p>-->
     				</Modal>
 				</main>
-				<BackTop :height="100" :bottom="200">
-        	<div class="backtop">
-        		<Icon type="ios-arrow-up"></Icon>
-        	</div>
-        </BackTop>
 	</div>
 </template>
 

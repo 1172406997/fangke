@@ -7,13 +7,13 @@
         	<!--<Col span="14" class="dada">-->
         		<div class="left">
         			<div class="left_con">
-					 	<Carousel v-model="value1"  style="width: 100%;">
-					        <Carousel-item>
-					            <div class="demo-carousel">
-					            	<img v-show="toson.production.thumb!=null" :src="'http://static.shatuhome.com/thumb/'+toson.production.thumb" alt="" />
-					            </div>
-					        </Carousel-item>
-					    </Carousel>
+							 	<Carousel v-model="value1"  style="width: 100%;">
+							        <Carousel-item>
+							            <div class="demo-carousel">
+							            	<img v-show="toson.production.thumb!=null" :src="'http://static.shatuhome.com/thumb/'+toson.production.thumb" alt="" />
+							            </div>
+							        </Carousel-item>
+							    </Carousel>
         			</div>
         		</div>
         	<!--</div>-->
@@ -204,7 +204,7 @@
   	overflow: hidden;
   	float: left;
   	background-color:#fff ;
-  	background-color: #F4F3F4;
+  	/*background-color: #F4F3F4;*/
   }
   .left_con{
   	width: 100%;
@@ -265,7 +265,7 @@
   }
 
   .rightt .btn{
-  	margin-top:16px ;
+  	margin-top:40px ;
   	height: 60px;
   	background-color: #50a9b5;
   	width: 80%;
@@ -274,14 +274,17 @@
   	font-size: 16px;
   }
   .right .rightc{
-  	padding:12px 12px 0px;
+  	/*padding:12px 12px 0px;*/
   	border-top:1px solid #999;
   	border-bottom:1px solid #999;
+  	min-height: 75px;
+  	line-height: 75px;
   }
   .rightc>p{
   	line-height: 1;
-    font-size: 12px;
+    /*font-size: 12px;*/
     color: #7e8e98;
+    font-size: 18px;
   }
   .rightc .thrmb{
   	overflow: hidden;
@@ -337,7 +340,7 @@
   }
   .info>p{
   	margin-top: 6px;
-    font-size: 12px;
+    font-size: 18px;
     color: #b2c0c8;
   }
   .endLine{

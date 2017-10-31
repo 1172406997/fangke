@@ -64,11 +64,11 @@
 					2011-2017 &copy; TalkingData
 				</div>
 				</main>
-				 <BackTop :height="100" :bottom="200">
+				 <!--<BackTop :height="100" :bottom="200">
         	<div class="backtop">
         		<Icon type="ios-arrow-up"></Icon>
         	</div>
-    		</BackTop>
+    		</BackTop>-->
 	</div>
 </template>
 
