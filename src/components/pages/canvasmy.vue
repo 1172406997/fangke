@@ -125,7 +125,7 @@ export default {
 //		});
 		},
 		addCanvas(url,id){
-			var imgurl = "http://static.shatuhome.com/material/"+url
+			var imgurl = "http://www.shatuhome.com/material/"+url
 			this.$emit("imgdata",{url:imgurl,id:id})
 		},
   }

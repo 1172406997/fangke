@@ -1071,7 +1071,7 @@
 				},null,'crossOrigin=anonymous');
 			},
 			searchAddImg(name,id){
-				var item = {url:'http://static.shatuhome.com/material/'+name,id:id};
+				var item = {url:'http://www.shatuhome.com/material/'+name,id:id};
 				this.childUrl = item.url;
 				var self = this;
 				this.idData.push(item.id);
