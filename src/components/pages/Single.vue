@@ -21,18 +21,19 @@
        		<!--<div class="col">-->
        			<div class="right">
         			<div class="rightt">
-        				<h1>{{toson.production.name}}</h1>
-        				<p>创建时间:{{toson.production.ctime |Time}}</p>
-        				<Button type="success" @click="editer(toson.production.id)" icon="edit" long class="btn">再创作</Button>
-        				<Button type="primary" @click="saveTemplate()"  icon="android-add-circle" long class="btn">保存为模板</Button>
+        				<h1 style="font-size: 24px;font-weight:400;color: #9c9c9c;">{{toson.production.name}}</h1>
+        				<!--<p>创建时间:{{toson.production.ctime |Time}}</p>-->
+        				<Button style="" @click="editer(toson.production.id)" icon="edit" long class="btn">再编辑创作</Button>
+        				<!--<Button type="primary" @click="saveTemplate()"  icon="android-add-circle" long class="btn">保存为模板</Button>-->
         			</div>
         			<div class="rightc">
         				<!--<p>作者</p>-->
         				<div class="thrmb">
         					<!--<img src="../../assets/img/meijian.png" alt="" />-->
         					<div class="info">
-        						<span>修改时间</span>
-        						<p>{{toson.production.utime |Time}}</p>
+        						<!--<span>修改时间</span>-->
+        						<!--<p>{{toson.production.utime |Time}}</p>-->
+        						<p>创建时间:{{toson.production.ctime |Time}}</p>
         					</div>
         				</div>
         			</div>
@@ -133,11 +134,11 @@
 <style scoped>
   .container {
   	position:fixed;
-  	left: 5px;
-  	right: 5px;
+  	left: 0px;
+  	right: 0px;
   	top:47px;
   	min-width: 1268px;
-  	width: 99.4%;
+  	width: 100%;
   	z-index: 30;
   	bottom: 0;
     background-color:rgba(53,63,72,0.7);
@@ -244,18 +245,19 @@
   	float: left;
   	overflow: hidden;
   	background-color: #fff;
+  	border-left:1px solid #777;
   }
   .right .rightt{
   	width: 296px;
-  	height: 220px;
-  	padding: 22px 12px 18px;
+  	height: 180px;
+  	padding: 22px 18px 18px;
   }
   .rightt h1{
-  	overflow: hidden;
+  	/*overflow: hidden;*/
     text-overflow: ellipsis;
     white-space: nowrap;
     line-height: 22px;
-    font-size: 18px;
+    font-size: 20px;
     color: #3b454c;
   }
   .rightt p{
@@ -264,7 +266,12 @@
 
   .rightt .btn{
   	margin-top:16px ;
-  	height: 40px;
+  	height: 60px;
+  	background-color: #50a9b5;
+  	width: 80%;
+  	height: 40%;
+  	color: #fff;
+  	font-size: 16px;
   }
   .right .rightc{
   	padding:12px 12px 0px;

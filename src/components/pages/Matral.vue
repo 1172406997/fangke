@@ -42,7 +42,7 @@
         				<p><span style="padding-right: 10px;">风格</span>{{toson.style}}</p>
         				<p><span style="padding-right: 10px;">颜色</span>{{toson.color}}</p>
         				<p><span style="padding-right: 10px;">尺寸</span>{{toson.size}}</p>
-        				<p><span style="padding-right: 10px;">价格</span>{{toson.price}}￥</p>
+        				<p><span style="padding-right: 10px;">价格</span>￥{{toson.price}}</p>
         				<!--<Button type="success" icon="edit" long class="btn">再创作</Button>-->
         				<!--<Button type="primary"  icon="android-add-circle" long class="btn">保存为模板</Button>-->
         			</div>

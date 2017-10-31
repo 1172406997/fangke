@@ -1071,12 +1071,13 @@
 				},null,'crossOrigin=anonymous');
 			},
 			searchAddImg(name,id){
-				var item = {url:'http://static.shatuhome.com/material/'+name,id:id};
+				var item = {url:'http://www.shatuhome.com/material/'+name,id:id};
 				this.childUrl = item.url;
 				var self = this;
 				this.idData.push(item.id);
 				fabric.Image.fromURL(item.url, function(oImg) {
 					oImg.scale(0.5);
+					oImg.crossOrigin = "anonymous";
 					oImg.imgId = item.id;
 					self.Canvas.add(oImg);
 				});

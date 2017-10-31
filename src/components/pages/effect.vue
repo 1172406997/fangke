@@ -394,8 +394,8 @@
   	overflow: hidden;
   }
   .showIcon .showIconbox{
-  	width:10.5vw;
-  	height:10.5vw;
+  	width:10vw;
+  	height:10vw;
   	padding:17px;
   	margin: 10px;
   	background-color: #fff;
