@@ -331,11 +331,11 @@
 	}
 	ul li {
 		float: left;
-		margin: 10px;
+		margin: 5px;
 	}
  .effectcon{
- 		width: 10.5vw;
- 		height: 10.5vw;
+ 		width: 10vw;
+ 		height: 10vw;
  		position: relative;
  		border-radius: 4px;
  		background-color: #2bAc96;
@@ -397,7 +397,7 @@
   	width:10vw;
   	height:10vw;
   	padding:17px;
-  	margin: 10px;
+  	margin: 5px;
   	background-color: #fff;
   	border-radius: 4px;
   	cursor: pointer;

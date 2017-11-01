@@ -173,11 +173,20 @@
 				<!--<Tooltip content="变形"@click.native="twistImg" placement="bottom">
                               <Icon type="android-map"></Icon>
                           </Tooltip>-->
-				<Tooltip content="锁定" @click.native="lockImg" placement="bottom">
+				<Tooltip content="锁定" style="width: 50px;height: 50px;" @click.native="lockImg" placement="bottom">
+					<!--<svg class="icon" v-show='imgLock' style="fill:currentcolor;transform:scale(1.1)">
+						<use xlink:href="#icon-suo_faaa_siyou"></use>
+					</svg>
+					<svg class="icon" v-show='!imgLock' style="fill:currentcolor;transform:scale(1.1)">
+						<use xlink:href="#icon-suo_faaa_gongkai"></use>
+					</svg>-->
 					<Icon type="locked" v-show='imgLock'></Icon>
 					<Icon type="unlocked" v-show='!imgLock'></Icon>
 				</Tooltip>
 				<Tooltip content="镜像" @click.native="flippHor" placement="bottom">
+					<!--<svg class="icon" v-show='!imgLock' style="fill:currentcolor;transform:scale(1.1)">
+						<use xlink:href="#icon-jingxiang"></use>
+					</svg>-->
 					<Icon type="arrow-swap"></Icon>
 				</Tooltip>
 				<Tooltip content="复制" @click.native="copyImg" placement="bottom">
@@ -320,6 +329,22 @@
 			if(this.$route.params.id) {
 				this.getProducId();
 			}
+			if(this.$route.path=='/canvas'){
+    		$(document).ready(function(){
+					$(document).on("mouseover",".canvas .search .dan",function(){
+							$(this).find(".modal").show();
+							$(this).find(".icon").show();
+							$(this).children(".nam").hide();
+							$(this).children(".price").show();
+					});
+				    $(document).on("mouseout",".canvas .search .dan",function(){
+							$(this).find(".modal").hide();
+							$(this).find(".icon").hide();
+							$(this).children(".nam").show();
+							$(this).children(".price").hide();
+				    });
+				});
+    	}
 		},
 		methods: {
 			onColorChange(){
@@ -729,10 +754,7 @@
 					this.jsonpRequest(this, "Material.GetMaterialByKeyWord", params, function(res) {
 						if(res.body.data.code == 0) {
 							this.searchi = res.body.data.list;
-							console.log("search:" + this.searchi);
-							console.log("search" + 1111111111111111111111)
 							console.log(res);
-							console.log("search" + 1111111111111111111111)
 						} else {
 							console.log(res);
 							if(res.body.ret == 401) {
@@ -1233,7 +1255,7 @@
 	.layout-breadcrumb {
 		float: left;
 		min-width: 200px;
-		width: 22%;
+		width: 23%;
 		min-height: 672px;
 		height: 100%;
 	}
@@ -1244,7 +1266,7 @@
 		display: flex;
 		justify-content: center;
 		float: left;
-		width: 78%;
+		width: 77%;
 		overflow: hidden;
 		min-height: 600px;
 		padding: 0px 0px 10px 5px;
