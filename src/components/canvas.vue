@@ -320,6 +320,22 @@
 			if(this.$route.params.id) {
 				this.getProducId();
 			}
+			if(this.$route.path=='/canvas'){
+    		$(document).ready(function(){
+					$(document).on("mouseover",".canvas .search .dan",function(){
+							$(this).find(".modal").show();
+							$(this).find(".icon").show();
+							$(this).children(".nam").hide();
+							$(this).children(".price").show();
+					});
+				    $(document).on("mouseout",".canvas .search .dan",function(){
+							$(this).find(".modal").hide();
+							$(this).find(".icon").hide();
+							$(this).children(".nam").show();
+							$(this).children(".price").hide();
+				    });
+				});
+    	}
 		},
 		methods: {
 			onColorChange(){
@@ -729,10 +745,7 @@
 					this.jsonpRequest(this, "Material.GetMaterialByKeyWord", params, function(res) {
 						if(res.body.data.code == 0) {
 							this.searchi = res.body.data.list;
-							console.log("search:" + this.searchi);
-							console.log("search" + 1111111111111111111111)
 							console.log(res);
-							console.log("search" + 1111111111111111111111)
 						} else {
 							console.log(res);
 							if(res.body.ret == 401) {
@@ -1233,7 +1246,7 @@
 	.layout-breadcrumb {
 		float: left;
 		min-width: 200px;
-		width: 22%;
+		width: 23%;
 		min-height: 672px;
 		height: 100%;
 	}
@@ -1244,7 +1257,7 @@
 		display: flex;
 		justify-content: center;
 		float: left;
-		width: 78%;
+		width: 77%;
 		overflow: hidden;
 		min-height: 600px;
 		padding: 0px 0px 10px 5px;

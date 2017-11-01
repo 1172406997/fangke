@@ -37,7 +37,7 @@
 						</div>
 						<div class="content_con2" v-if="!flag">
 							<div v-show="fenlei=='fenlei'">
-							<h2 >更多分类 <p style="float: right;cursor: pointer;" @click="backTrue()">返回</p></h2>
+							<h2 >更多分类 <p style="float: right;cursor: pointer;" @click="backKeyWord()">返回</p></h2>
 								<Row >
 									<div v-on:click="getclassify()">
 									<!--<Col span="4"  class="classify" v-on:click="getclassify()">-->
@@ -51,7 +51,7 @@
 						    </Row>
 						  	</div>
 						  	<div >
-							<h2>搜索结果<p style="float: right;cursor: pointer;" @click="backTrue()">返回</p></h2>
+							<h2>搜索结果<p style="float: right;cursor: pointer;" @click="backKeyWord()">返回</p></h2>
 								<div >
 							       <!--<div class="dan">
 								      <div class="img">
@@ -93,7 +93,8 @@
 							
 						</div>
 						<modals v-if="this.modalz=='modal'" :toson='toson'  @modal="getsonitem()"></modals >
-						<BackTop :height="100" :bottom="50"> </BackTop>
+						<BackTop :height="100" :bottom="50">
+		        </BackTop>
 					</div>
 				</main>
 				<div class="ifyBUtton" style="padding:10px 24px">
@@ -141,6 +142,11 @@
 						</div>
 					</div>
 				</div>
+				<!--<BackTop :height="100" :bottom="200">
+        	<div class="backtop">
+        		<Icon type="ios-arrow-up"></Icon>
+        	</div>
+    		</BackTop>-->
 	</div>
 </template>
 
@@ -195,10 +201,9 @@ export default {
     	}
   },
   methods:{
-  	backTrue(){
+  	backKeyWord(){
   		this.flag=true;
   		this.fasClass = '';
-  		this.keyWord = '';
   	},
   	getsearch:function() {
   		var self = this;
@@ -274,7 +279,10 @@ export default {
 					this.jsonpRequest(this,"Material.GetMaterialByKeyWordAndTypeId",params,function(res){
 		  					if(res.body.data.code==0){
 		  						this.searchi = res.body.data.list;
-								self.fasClass='';
+									console.log("search:"+this.searchi);
+									console.log("search"+1111111111111111111111)
+									console.log(res);
+									console.log("search"+1111111111111111111111)
 		  					}else{
 									console.log(res);
 									if(res.body.ret==401){
@@ -630,12 +638,14 @@ export default {
     /*搜索样式*/
    .searchclassfy{
    	position: relative;
-   	width:223px;
-   	height: 148px;
+   	/*width:223px;*/
+   	/*height: 148px;*/
+   	width: 12vw;
+   	height: 8.2vw;
    	border-radius: 10px;
-   	margin: 7px;
-	cursor: pointer;
-	float: left;
+   	margin: 5px;
+		cursor: pointer;
+		float: left;
    }
    .searchclassfy img{
    	position: absolute;

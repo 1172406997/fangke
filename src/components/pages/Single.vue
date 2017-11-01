@@ -7,13 +7,13 @@
         	<!--<Col span="14" class="dada">-->
         		<div class="left">
         			<div class="left_con">
-							 	<Carousel v-model="value1"  style="width: 100%;">
-							        <Carousel-item>
-							            <div class="demo-carousel">
-							            	<img v-show="toson.production.thumb!=null" :src="'http://static.shatuhome.com/thumb/'+toson.production.thumb" alt="" />
-							            </div>
-							        </Carousel-item>
-							    </Carousel>
+					 	<Carousel v-model="value1"  style="width: 100%;">
+					        <Carousel-item>
+					            <div class="demo-carousel">
+					            	<img v-show="toson.production.thumb!=null" :src="'http://static.shatuhome.com/thumb/'+toson.production.thumb" alt="" />
+					            </div>
+					        </Carousel-item>
+					    </Carousel>
         			</div>
         		</div>
         	<!--</div>-->
@@ -204,7 +204,6 @@
   	overflow: hidden;
   	float: left;
   	background-color:#fff ;
-  	/*background-color: #F4F3F4;*/
   }
   .left_con{
   	width: 100%;
