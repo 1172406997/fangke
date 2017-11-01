@@ -8,9 +8,15 @@
         		<!--<div class="col">-->
         		<div class="left">
         			<div class="left_con">
+<<<<<<< HEAD
 					 	<Carousel v-model="value1">
 					        <Carousel-item v-for="item in toson.displayimg"  v-if="item!=null">
 					            <div class="demo-carousel" :style="'background-image: url(http://static.shatuhome.com/material/displayimg/'+item+');background-position:center center;background-repeat:no-repeat;background-size:contain;'">
+=======
+					 	<Carousel v-model="value1" >
+					        <Carousel-item v-for="item in toson.displayimg"  v-if="item!=null">
+					            <div class="demo-carousel" :style="'background-image: url('+item+');background-position:center center;background-repeat:no-repeat;background-size:contain;'">
+>>>>>>> 9018678b6e912a40a9bd35aeed937a66fa2a3897
 					            	<!--<img  src="" alt="" />-->
 					            </div>
 					        </Carousel-item>
@@ -215,17 +221,32 @@
 	/*border: 1px solid #000;*/
   }
   .ivu-carousel{
+<<<<<<< HEAD
   	width: 85%;
   	height: 90%;
   }
   .demo-carousel{
   		/*min-width: 400px;*/
         /*height: 330px;*/
+=======
+  	width: 100%;
+  	height: 80%;
+  }
+  .demo-carousel{
+  		width: 100%;
+  		/*min-width: 400px;*/
+        height: 100%;
+       	min-width: 500px;
+       	min-height: 500px;
+>>>>>>> 9018678b6e912a40a9bd35aeed937a66fa2a3897
         /*line-height: 330px;*/
         text-align: center;
         color: #fff;
         font-size: 20px;
         /*background: #506b9e;*/
+    }
+    .ivu-carousel-list{
+    	height: 90%;
     }
   .left_con img{
   	width: 100%;

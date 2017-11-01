@@ -166,18 +166,28 @@
 		<div class="layout-content-style ">
 			<div class="menubox" v-if="menu_1==1">
 				<Tooltip content="裁剪" @click.native="Clip" placement="bottom">
-					<svg class="icon" style="fill:currentcolor;transform:scale(1.1)">
+					<!--<svg class="icon" style="fill:currentcolor;transform:scale(1.1)">
 						<use xlink:href="#icon-shoucang"></use>
-					</svg>
+					</svg>-->
+					<Icon type="crop"></Icon>
 				</Tooltip>
 				<!--<Tooltip content="变形"@click.native="twistImg" placement="bottom">
                               <Icon type="android-map"></Icon>
                           </Tooltip>-->
 				<Tooltip content="锁定" @click.native="lockImg" placement="bottom">
+					<!--<svg class="icon" v-show='imgLock' style="fill:currentcolor;transform:scale(1.1)">
+						<use xlink:href="#icon-suo_faaa_siyou"></use>
+					</svg>
+					<svg class="icon" v-show='!imgLock' style="fill:currentcolor;transform:scale(1.1)">
+						<use xlink:href="#icon-suo_faaa_gongkai"></use>
+					</svg>-->
 					<Icon type="locked" v-show='imgLock'></Icon>
 					<Icon type="unlocked" v-show='!imgLock'></Icon>
 				</Tooltip>
 				<Tooltip content="镜像" @click.native="flippHor" placement="bottom">
+					<!--<svg class="icon" v-show='!imgLock' style="fill:currentcolor;transform:scale(1.1)">
+						<use xlink:href="#icon-jingxiang"></use>
+					</svg>-->
 					<Icon type="arrow-swap"></Icon>
 				</Tooltip>
 				<Tooltip content="复制" @click.native="copyImg" placement="bottom">
