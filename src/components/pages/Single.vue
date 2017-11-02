@@ -8,15 +8,9 @@
         		<div class="left">
         			<div class="left_con">
 					 	<Carousel v-model="value1"  style="width: 100%;">
-<<<<<<< HEAD
-					        <Carousel-item>
-					            <div class="demo-carousel">
-					            	<img v-show="toson.production.thumb!=null" :src="'http://static.shatuhome.com/thumb/'+toson.production.thumb" alt="" />
-=======
 					        <Carousel-item v-show="toson.production.thumb!=null" :style="'background-image: url(http://static.shatuhome.com/thumb/'+toson.production.thumb+');background-position:center center;background-repeat:no-repeat;background-size:contain;'">
 					            <div class="demo-carousel">
 					            	<!--<img  :src="'http://static.shatuhome.com/thumb/'+toson.production.thumb" alt="" />-->
->>>>>>> 9018678b6e912a40a9bd35aeed937a66fa2a3897
 					            </div>
 					        </Carousel-item>
 					    </Carousel>
