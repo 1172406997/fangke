@@ -105,11 +105,11 @@
 		<footer>
 			<div class="exportList__p-1___2TtAQ">
 				<i v-show="allCheck" @click="allCheckhide(key)" class="exportList__check-box___17Yau exportList__selected___3Uq0r"></i>
-				<i v-show="allCheck" @click="allCheckshow(key)" class="exportList__check-box___17Yau"></i>
+				<i v-show="!allCheck" @click="allCheckshow(key)" class="exportList__check-box___17Yau"></i>
 			</div>
 			<div class="exportList__p-2___X90Su">
 				<p>已选</p>
-				<p class="exportList__number___SLB-t">19</p>
+				<p class="exportList__number___SLB-t">{{allNum}}</p>
 			</div>
 			<div class="exportList__p-3___PI4-E"><!--<i class="exportList__check-box___17Yau"></i>-->
 				<!--<p>导出时隐藏价格</p>-->
@@ -146,6 +146,7 @@ export default {
     	inputNum:[],
     	showCheck:[],
     	allCheck:true,
+    	allNum:'',
     }
   },
   watch:{
@@ -185,6 +186,7 @@ export default {
 										self.inputNum.push(1);
 										self.showCheck.push(true);
 									}
+									self.allNum = self.showCheck.length;
 									console.log(self.showCheck);
 		  					}
 		  		},function(err){
@@ -211,7 +213,8 @@ export default {
 			console.log(self.inputNum);
 		},
 		changeCheckshow(key){
-			var self = this;
+			var self = this,
+			    z = 0;
 			console.log(self.showCheck)
 			if(key){
 				self.showCheck.splice(key,1,!self.showCheck[key]);
@@ -220,6 +223,14 @@ export default {
 					self.showCheck.splice(key,1,true);
 				}
 			}
+			for(let j=0;j<self.showCheck.length;j++){
+				if(self.showCheck[j]){
+					z++
+				}else{
+					self.allCheck = false;
+				}
+			}
+//			self.
 		},
 		changeCheckhide(key){
 			var self = this;
