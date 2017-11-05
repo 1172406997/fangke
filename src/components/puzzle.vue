@@ -31,7 +31,7 @@
 						 	<div id="main" v-if="fileShowHide">
 						 		
 						 		<!--文件夹样式-->
-						 		<!--<div class="box " v-for="item in Folder">
+						 		<div class="box " v-for="item in Folder">
 						 			<div class="boxcon filebox">
 						 			<div class="fileboxcon">
 						 				<img v-if="item.img!=null"  src="../img/1.png" alt="" />
@@ -58,7 +58,7 @@
 						      	</Dropdown>
 						 			</div>
 						 			</div>
-						 		</div>-->
+						 		</div>
 						 		<!--<DropdownItem>查看</DropdownItem>-->
 							  <!--<DropdownItem >修改</DropdownItem>-->
 						 		

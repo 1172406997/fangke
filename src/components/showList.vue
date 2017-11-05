@@ -34,58 +34,56 @@
 		<section>
 			<div>
 				<div class="exportList__list-name___3ohei">
-					<p class="exportList__name___3rS4G">
-						<!-- react-text: 5727 -->拼图
-						<!-- /react-text -->
-						<!-- react-text: 5728 -->名称：
-						<!-- /react-text -->
-					</p>
-					<div class="exportList__input-wrap___2tENT"><input type="text" value="未命名-再创作"><!--<i class="exportList__edit-pen___2d92j"></i>--></div>
+					<!--<p class="exportList__name___3rS4G">
+						拼图名称：
+					</p>-->
+					<!--<div class="exportList__input-wrap___2tENT"><input type="text" value="未命名-再创作"><!--<i class="exportList__edit-pen___2d92j"></i></div>-->
 				</div>
-				<div class="exportList__export-board-list___3GFLW">
-					<div class="exportList__export-item-line___1Gg2h">
-						<div class="exportList__p-1___2TtAQ"><i class="exportList__check-box___17Yau exportList__selected___3Uq0r"></i> <!--exportList__check-box___17Yau--></div>
+				<div class="exportList__export-board-list___3GFLW" v-for="(item,key) in listshow">
+					<div class="exportList__export-item-line___1Gg2h"> 
+						<div class="exportList__p-1___2TtAQ"><i @click="changeCheckhide(key)" v-show="showCheck[key]" class="exportList__check-box___17Yau exportList__selected___3Uq0r"></i>
+							<i v-show="!showCheck[key]" @click="changeCheckshow(key)" class="exportList__check-box___17Yau"></i><!--exportList__check-box___17Yau--></div>
 						<div class="exportList__p-2___X90Su">
 							<div>
-								<div style="background-image: url(&quot;http://m1.cdn.imeijian.cn/2505b4a80308d4fa0a87bf8ed604c6ff.png?x-oss-process=style/150wh_j&quot;);"></div>
+								<div :style="'background-image: url(http://static.shatuhome.com/material/thumbNew/'+item.thumbNew+');'"></div>
 							</div>
 						</div>
 						<div class="exportList__p-3___PI4-E">
 							<div class="exportList__item___r5Oee">
-								<div class="exportList__input-wrap___2tENT"><input type="text" value="维特索 茶几"><!--<i class="exportList__edit-pen___2d92j"></i>--></div>
+								<div class="exportList__input-wrap___2tENT"><input type="text" disabled :value="item.name"><!--<i class="exportList__edit-pen___2d92j"></i>--></div>
 							</div>
 							<div class="exportList__item___r5Oee">
 								<p>系列</p>
-								<div class="exportList__input-wrap___2tENT"><input type="text" value=""><!--<i class="exportList__edit-pen___2d92j"></i>--></div>
+								<div class="exportList__input-wrap___2tENT"><input type="text" disabled :value="item.code"><!--<i class="exportList__edit-pen___2d92j"></i>--></div>
 							</div>
 							<div class="exportList__item___r5Oee">
 								<p>分类</p>
 								<div class="exportList__input-wrap___2tENT">
-									<p class="exportList__input___13mOd">茶几</p><!--<i class="exportList__edit-panel___3p3kS"></i>--></div>
+									<p class="exportList__input___13mOd">{{item.tname}}</p><!--<i class="exportList__edit-panel___3p3kS"></i>--></div>
 							</div>
 						</div>
 						<div class="exportList__p-4___14P-J">
 							<div class="exportList__item___r5Oee">
 								<p>风格</p>
 								<div class="exportList__input-wrap___2tENT">
-									<p class="exportList__input___13mOd">简约</p><!--<i class="exportList__edit-panel___3p3kS"></i>--></div>
+									<p class="exportList__input___13mOd">{{item.style}}</p><!--<i class="exportList__edit-panel___3p3kS"></i>--></div>
 							</div>
 							<div class="exportList__item___r5Oee">
 								<p>颜色</p>
 								<div class="exportList__input-wrap___2tENT">
-									<p class="exportList__input___13mOd">绿色</p><!--<i class="exportList__edit-panel___3p3kS"></i>--></div>
+									<p class="exportList__input___13mOd">{{item.color}}</p><!--<i class="exportList__edit-panel___3p3kS"></i>--></div>
 							</div>
 							<div class="exportList__item___r5Oee">
 								<p>材质</p>
-								<div class="exportList__input-wrap___2tENT"><input type="text" value="钢、钢化玻璃"><!--<i class="exportList__edit-pen___2d92j"></i>--></div>
+								<div class="exportList__input-wrap___2tENT"><input type="text" disabled :value="item.remark"><!--<i class="exportList__edit-pen___2d92j"></i>--></div>
 							</div>
 							<div class="exportList__item___r5Oee">
 								<p>尺寸</p>
-								<div class="exportList__input-wrap___2tENT"><input type="text" value="750*750*450"><!--<i class="exportList__edit-pen___2d92j"></i>--></div>
+								<div class="exportList__input-wrap___2tENT"><input type="text" disabled :value="item.size"><!--<i class="exportList__edit-pen___2d92j"></i>--></div>
 							</div>
 						</div>
 						<div class="exportList__p-5___nUIE0">
-							<div><i class="exportList__reduce___3oCWZ"></i><input type="text" value="1"><i class="exportList__add___285yg"></i></div>
+							<div><i class="exportList__reduce___3oCWZ" @click="changeNum(-1,key)"></i><input type="text" disabled="" :value="inputNum[key]"><i class="exportList__add___285yg"  @click="changeNum(1,key)"></i></div>
 						</div>
 						<!--<div class="exportList__p-6___1RPPv">
 							<div style="position: relative;">
@@ -97,7 +95,7 @@
 						<div class="exportList__p-7___28nS1">
 							<div>
 								<p>¥ </p>
-								<div class="exportList__input-wrap___2tENT"><input type="text" min="0" max="9999999" value="399"><i class="exportList__edit-pen___2d92j"></i></div>
+								<div class="exportList__input-wrap___2tENT"><input type="text" min="0" max="9999999" disabled :value="item.price*inputNum[key]"><!--<i class="exportList__edit-pen___2d92j"></i>--></div>
 							</div>
 						</div>
 					</div>
@@ -105,7 +103,10 @@
 			</div>
 		</section>
 		<footer>
-			<div class="exportList__p-1___2TtAQ"><i class="exportList__check-box___17Yau exportList__selected___3Uq0r"></i></div>
+			<div class="exportList__p-1___2TtAQ">
+				<i v-show="allCheck" @click="allCheckhide(key)" class="exportList__check-box___17Yau exportList__selected___3Uq0r"></i>
+				<i v-show="allCheck" @click="allCheckshow(key)" class="exportList__check-box___17Yau"></i>
+			</div>
 			<div class="exportList__p-2___X90Su">
 				<p>已选</p>
 				<p class="exportList__number___SLB-t">19</p>
@@ -140,7 +141,15 @@ export default {
   name: 'content',
   data () {
     return {
+    	production_id:'',
+    	listshow:'',
+    	inputNum:[],
+    	showCheck:[],
+    	allCheck:true,
     }
+  },
+  watch:{
+  	'inputNum'(val,val1){},
   },
    components: {
 
@@ -149,11 +158,79 @@ export default {
   	
 	},
 	mounted(){
-		console.log(this.$route.params.productId);
+		this.production_id = this.$route.params.productId;
+		this.getShow();
+		console.log(self.showCheck);
+//		console.log(this.$route.params.productId);
 	},
 	methods:{
 		goPuzz(){
 			this.$router.push({path:'puzzle'});
+		},
+		getShow(){
+				var self = this;
+				var str = this.Encrypt();
+				var user_id = localStorage.getItem("user_id");
+		  		var token = localStorage.getItem("token");
+					var params = {
+						params:{
+							'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'production_id':self.production_id
+						}
+					};
+					this.jsonpRequest(this,"Production.GetProMaterialList",params,function(res){
+		  					if(res){
+									console.log(res);
+									self.listshow= res.body.data.list;
+									for(let i=0;i<self.listshow.length;i++){
+										self.inputNum.push(1);
+										self.showCheck.push(true);
+									}
+									console.log(self.showCheck);
+		  					}
+		  		},function(err){
+		  			console.log(err);
+		  		});
+		},
+		changeNum(num,key){
+			var self = this;
+			if(self.inputNum[key]>=0){
+				if(num<0){
+					if(self.inputNum[key]>0){
+						self.inputNum[key]+=num
+						self.inputNum.splice(key,1,self.inputNum[key])
+					}else{
+						self.inputNum.splice(key,1,0)
+					}
+				}else{
+					self.inputNum[key]+=num
+					self.inputNum.splice(key,1,self.inputNum[key])
+				}
+			}else{
+				self.inputNum.splice(key,1,0)
+			}
+			console.log(self.inputNum);
+		},
+		changeCheckshow(key){
+			var self = this;
+			console.log(self.showCheck)
+			if(key){
+				self.showCheck.splice(key,1,!self.showCheck[key]);
+			}else{
+				for(let i=0;i<self.showCheck.length;i++){
+					self.showCheck.splice(key,1,true);
+				}
+			}
+		},
+		changeCheckhide(key){
+			var self = this;
+			console.log(self.showCheck)
+			if(key){
+				self.showCheck.splice(key,1,!self.showCheck[key]);
+			}else{
+				for(let i=0;i<self.showCheck.length;i++){
+						self.showCheck.splice(key,1,false);
+				}
+			}
 		},
 	}
 }

@@ -171,9 +171,9 @@
 					</svg>-->
 					<Icon type="crop"></Icon>
 				</Tooltip>
-				<!--<Tooltip content="变形"@click.native="twistImg" placement="bottom">
-                              <Icon type="android-map"></Icon>
-                          </Tooltip>-->
+				<Tooltip content="变形"@click.native="twistImg" placement="bottom">
+                    <Icon type="android-map"></Icon>
+                </Tooltip>
 				<Tooltip content="锁定" @click.native="lockImg" placement="bottom">
 					<!--<svg class="icon" v-show='imgLock' style="fill:currentcolor;transform:scale(1.1)">
 						<use xlink:href="#icon-suo_faaa_siyou"></use>
@@ -248,6 +248,10 @@
 			<div class="layout-content-main">
 				<div class="parent" >
 					<canvas class="one box" id="parent" ></canvas>
+				</div>
+				<div id="div" >
+					<canvas id="canvas" height="800" width="800"></canvas>
+    				<canvas id="canvas-2d" height="800" width="800"></canvas>
 				</div>
 			</div>
 		</div>
@@ -345,7 +349,15 @@
 							$(this).children(".price").hide();
 				    });
 				});
-    	}
+    		}
+    		//给img.src设置图片的地址,设置完成打开页面即可显示需要显示的内容
+		    var img = new Image();
+		    img.src = "http://www.quanjing.com/image/2017index/lx4.png";
+		    img.onload = imgLoad;
+//		    调用save("图片的名称")方法，浏览器即可自动保存,接受传值，为下载后的图片的名字
+		    setTimeout(function () {
+//		        save("11111111");
+		    },5000)
 		},
 		methods: {
 			onColorChange(){
@@ -1785,4 +1797,14 @@
 	.ivu-menu-item{
 		width: 100%;
 	}*/
+	#div{
+		position: relative;
+		display: none;
+	}
+	canvas {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 </style>

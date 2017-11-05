@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import VueRouter from 'vue-router'
 import iView from 'iview';
+import 'element-ui/lib/theme-chalk/index.css'
+import {  Dialog, } from 'element-ui'
 import $ from 'jquery'
 import 'iview/dist/styles/iview.css';    // 使用 CSS
 import '../src/assets/item-factory.js';
@@ -21,7 +23,7 @@ import "@/assets/font/iconfont.js"
 import "@/assets/font/iconfontInmy.css"
 
 
-
+Vue.use(Dialog)
 Vue.use(VueResource);
 Vue.use(VueRouter);
 Vue.use(iView);
