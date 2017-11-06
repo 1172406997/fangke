@@ -113,11 +113,44 @@ function getWebGLContext(canvas, opt_debug) {
 }
 
 //点击下载事件
-function save(name) {
-    var a = document.createElement("a");
+function save(name, callBack) {
+    /*var a = document.createElement("a");
     a.href = document.querySelector("#canvas").toDataURL();
     a.download = name;
-    a.click();
+    a.click();*/
+    //获取一下图片的位置
+    var v0 = {x:parseInt(document.querySelector("#v0").style.left),y:parseInt(document.querySelector("#v0").style.top)};
+    var v1 = {x:parseInt(document.querySelector("#v1").style.left),y:parseInt(document.querySelector("#v1").style.top)};
+    var v2 = {x:parseInt(document.querySelector("#v2").style.left),y:parseInt(document.querySelector("#v2").style.top)};
+    var v3 = {x:parseInt(document.querySelector("#v3").style.left),y:parseInt(document.querySelector("#v3").style.top)};
+    var minX = getMinArr([v0.x,v1.x,v2.x,v3.x]);
+    var maxX = getMaxArr([v0.x,v1.x,v2.x,v3.x]);
+    var minY = getMinArr([v0.y,v1.y,v2.y,v3.y]);
+    var maxY = getMaxArr([v0.y,v1.y,v2.y,v3.y]);
+    //设置截取图片的canvas
+    var img = new Image();
+    img.src = document.querySelector("#canvas").toDataURL();
+    img.onload = function () {
+        var canvas = document.createElement("canvas");
+        canvas.width = maxX-minX;
+        canvas.height = maxY-minY;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img,minX,minY,canvas.width,canvas.height,0,0,canvas.width,canvas.height);
+        
+
+        //生成图片下载
+//      var a = document.createElement("a");
+//      a.href = canvas.toDataURL();
+//      a.download = name;
+//      a.click();
+
+		if (callBack)
+		{
+			callBack(canvas.toDataURL());
+//			console.log(canvas.toDataURL());
+		}
+//      return canvas.toDataURL();
+    }
 }
 
 /*第一部分顶点着色器接收顶点的纹理坐标，传递给片元着色器*/
@@ -609,13 +642,13 @@ function reload() {
 }
 
 function draw(n) {
-    //绘制
-    gl.clearColor(1.0, 1.0, 1.0, 1.0);
     //开启混合功能
     gl.enable(gl.BLEND);
     //指定混合函数
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    //绘制
+    gl.clearColor(1.0, 1.0, 1.0, 0.0);
 
     gl.drawElements(gl.TRIANGLES, n, gl.UNSIGNED_BYTE, 0);
 
@@ -741,5 +774,20 @@ function getDomById(id) {
 }
 
 //求数组的最小值
+function getMinArr(arr) {
+    var min = arr[0];
+    for(var i=1,len=arr.length; i<len; i++){
+        if(min > arr[i]) min = arr[i];
+    }
+    return min;
+}
 
+//求数组最大值
+function getMaxArr(arr) {
+    var max = arr[0];
+    for(var i=1,len=arr.length; i<len; i++){
+        if(max < arr[i]) max = arr[i];
+    }
+    return max;
+}
 

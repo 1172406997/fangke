@@ -245,6 +245,14 @@
 				</Tooltip>
 
 			</div>
+			<div class="menubox" v-if="menu_1==3" style="padding:0 150px 0 150px;">
+				<Tooltip content="取消" @click.native="imgToBack()" placement="bottom">
+					<Icon type="close-round"></Icon>
+				</Tooltip>
+				<Tooltip content="保存" @click.native="imgToSave()" style="float: right;color: #9ACD32;" placement="bottom">
+					<Icon type="checkmark-round"></Icon>
+				</Tooltip>
+			</div>
 			<div class="layout-content-main">
 				<div class="parent" >
 					<canvas class="one box" id="parent" ></canvas>
@@ -350,14 +358,6 @@
 				    });
 				});
     		}
-    		//给img.src设置图片的地址,设置完成打开页面即可显示需要显示的内容
-		    var img = new Image();
-		    img.src = "http://www.quanjing.com/image/2017index/lx4.png";
-		    img.onload = imgLoad;
-//		    调用save("图片的名称")方法，浏览器即可自动保存,接受传值，为下载后的图片的名字
-		    setTimeout(function () {
-//		        save("11111111");
-		    },5000)
 		},
 		methods: {
 			onColorChange(){
@@ -422,7 +422,6 @@
 						items.push(imgdate[i].imgId)
 					}
 				}
-				console.log(str);
 				var titems = items.join(',');
 				var user_id = localStorage.getItem("user_id");
 				var token = localStorage.getItem("token");
@@ -620,8 +619,46 @@
 			},
 			twistImg: function() {
 				var self = this;
-				console.log(self.selectItem.target.aCoords.bl)
-				self.Canvas.renderAll();
+				if(!self.Canvas.getActiveObject()) {
+					return;
+				};
+//				console.log(self.Canvas.getActiveObject().toDataURL({
+//					format: 'png'
+//				}));
+				$(".parent").hide();
+				$("#div").show();
+				this.menu_1 = 3;
+				//给img.src设置图片的地址,设置完成打开页面即可显示需要显示的内容
+			    var img = new Image();
+//			    img.src = "http://www.quanjing.com/image/2017index/lx4.png";
+			    img.src = self.Canvas.getActiveObject().toDataURL({
+					format: 'png'
+				});
+			    
+			    img.onload = imgLoad;
+	        	self.Canvas.remove(self.Canvas.getActiveObject());
+			    
+	//		    调用save("图片的名称")方法，浏览器即可自动保存,接受传值，为下载后的图片的名字
+			    
+			},
+			imgToSave(){
+				var self = this;
+				save("11111111", function(_img){
+					console.log(_img);
+					fabric.Image.fromURL(_img, function(oImg) {
+						$(".parent").show();
+						$("#div").hide();
+						self.Canvas.add(oImg);
+					});
+				});
+				
+
+				
+			},
+			imgToBack(){
+				this.menu_1 = 1;
+				$(".parent").show();
+				$("#div").hide();
 			},
 			//copy
 			copyImg: function() {
@@ -1019,7 +1056,6 @@
 					oImg.top = 0;
 					oImg.fill = 'rgba(0, 255, 0, 1)';
 					//          oImg.scale(0.5);
-					console.log(oImg);
 					self.Canvas.remove(self.imgActive);
 					clip.add(oImg);
 					var beforeImg = oImg;

@@ -104,7 +104,7 @@
 		</section>
 		<footer>
 			<div class="exportList__p-1___2TtAQ">
-				<i v-show="allCheck" @click="allCheckhide(key)" class="exportList__check-box___17Yau exportList__selected___3Uq0r"></i>
+				<i v-show="allCheck" @click="allCheckshow(key)" class="exportList__check-box___17Yau exportList__selected___3Uq0r"></i>
 				<i v-show="!allCheck" @click="allCheckshow(key)" class="exportList__check-box___17Yau"></i>
 			</div>
 			<div class="exportList__p-2___X90Su">
@@ -119,11 +119,11 @@
 				<p class="exportList__total-price___HSQ_H">
 					<!-- react-text: 5744 -->¥
 					<!-- /react-text -->
-					<!-- react-text: 5745 -->13831.9
+					<!-- react-text: 5745 -->{{priceall}}
 					<!-- /react-text -->
 				</p>
 			</div>
-			<div class="exportList__p-export___1JLXB">
+			<div class="exportList__p-export___1JLXB"  @click="exportList()">
 				<div class="exportList__export-btns___1UYlI">导出清单</div>
 				<div class="exportList__export-btns___1UYlI exportList__no-board___2WiVv">EXCEL格式</div>
 				<!--<div class="exportList__export-btns___1UYlI exportList__with-board___2frRl">不含拼图PDF</div>-->
@@ -147,6 +147,8 @@ export default {
     	showCheck:[],
     	allCheck:true,
     	allNum:'',
+    	pricelist:[],
+    	priceall:'',
     }
   },
   watch:{
@@ -168,6 +170,16 @@ export default {
 		goPuzz(){
 			this.$router.push({path:'puzzle'});
 		},
+		allPriceSum(){
+			var self = this;
+			var sum = 0;
+			self.showCheck.forEach(function(val,idx,arr){
+				if(val){
+					sum += self.inputNum[idx]*self.pricelist[idx]
+				}
+			})
+			self.priceall = sum;
+		},
 		getShow(){
 				var self = this;
 				var str = this.Encrypt();
@@ -185,9 +197,15 @@ export default {
 									for(let i=0;i<self.listshow.length;i++){
 										self.inputNum.push(1);
 										self.showCheck.push(true);
+										self.pricelist.push(res.body.data.list[i].price);
 									}
+									var sum = 0;
+									self.pricelist.forEach(function(val,idx,arr){
+										sum+=val*1
+									})
+									self.priceall = sum;
 									self.allNum = self.showCheck.length;
-									console.log(self.showCheck);
+//									console.log(self.showCheck);
 		  					}
 		  		},function(err){
 		  			console.log(err);
@@ -210,7 +228,7 @@ export default {
 			}else{
 				self.inputNum.splice(key,1,0)
 			}
-			console.log(self.inputNum);
+			this.allPriceSum();
 		},
 		changeCheckshow(key){
 			var self = this,
@@ -230,10 +248,12 @@ export default {
 					self.allCheck = false;
 				}
 			}
-//			self.
+			self.allNum = z;
+			this.allPriceSum();
 		},
 		changeCheckhide(key){
-			var self = this;
+			var self = this,
+			    z = 0;
 			console.log(self.showCheck)
 			if(key){
 				self.showCheck.splice(key,1,!self.showCheck[key]);
@@ -242,6 +262,62 @@ export default {
 						self.showCheck.splice(key,1,false);
 				}
 			}
+			for(let j=0;j<self.showCheck.length;j++){
+				if(self.showCheck[j]){
+					z++
+				}else{
+					self.allCheck = false;
+				}
+			}
+			self.allNum = z;
+			this.allPriceSum();
+		},
+		allCheckshow(){
+			var self = this;
+			this.allCheck = !this.allCheck;
+			if(this.allCheck){
+				for(let i=0;i<self.showCheck.length;i++){
+						self.showCheck.splice(key,1,true);
+				}
+				self.allNum = self.showCheck.length;
+			}else{
+					for(let i=0;i<self.showCheck.length;i++){
+						self.showCheck.splice(key,1,false);
+					}
+					self.allNum = 0;
+			}
+		},
+		exportList(){
+			alert(1);
+			var self = this;
+  		var str = this.Encrypt();
+			var user_id = localStorage.getItem("user_id");
+  		var token = localStorage.getItem("token");
+  		var strlist = '';
+  		self.showCheck.forEach(function(val,idx,arr){
+				if(val){
+					strlist+=self.listshow[idx].id+'-'+self.inputNum[idx]+'@'
+				}
+			})
+  		console.log(strlist);
+  		var params = {
+				params:{
+					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'list':strlist,
+				}
+			};
+			this.jsonpRequest(this,"Excel.GetExcel",params,function(res){
+  					console.log(res);
+  					if(res.body.data.code==0){
+
+  					}else{
+							console.log(res);
+							if(res.body.ret==401){
+								self.toLogin(this,401);
+							}
+						}
+  		},function(err){
+  			console.log(err);
+  		});
 		},
 	}
 }
