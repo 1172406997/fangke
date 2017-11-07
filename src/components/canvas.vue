@@ -318,6 +318,7 @@
 				noticeShowlist:false,
 				filterVisible1:true,
 				color5:'#000',
+				cropItemid:0
 			}
 		},
 		computed: {
@@ -629,26 +630,40 @@
 				$("#div").show();
 				this.menu_1 = 3;
 				//给img.src设置图片的地址,设置完成打开页面即可显示需要显示的内容
-			    var img = new Image();
+			    var _obj = self.Canvas.getActiveObject();
+			    self.cropItemid = _obj.imgId;
 //			    img.src = "http://www.quanjing.com/image/2017index/lx4.png";
-			    img.src = self.Canvas.getActiveObject().toDataURL({
+			    var _objSrc = _obj.toDataURL({
 					format: 'png'
 				});
+				if (_obj.positions)
+				{
+					addImage(_obj.positions.canvas.data,_obj.positions);
+				}else
+				{
+					addImage(_objSrc);	
+				}
+
 			    
-			    img.onload = imgLoad;
-	        	self.Canvas.remove(self.Canvas.getActiveObject());
+//			    img.onload = imgLoad;
+
 			    
 	//		    调用save("图片的名称")方法，浏览器即可自动保存,接受传值，为下载后的图片的名字
 			    
 			},
 			imgToSave(){
 				var self = this;
-				save("11111111", function(_img){
-					console.log(_img);
-					fabric.Image.fromURL(_img, function(oImg) {
+				save(function(_img){
+	        		self.Canvas.remove(self.Canvas.getActiveObject());
+
+					fabric.Image.fromURL(_img.data, function(oImg) {
 						$(".parent").show();
 						$("#div").hide();
 						self.Canvas.add(oImg);
+						oImg.positions = _img.position;
+						oImg.imgId = self.cropItemid;
+						console.log(oImg);
+						
 					});
 				});
 				

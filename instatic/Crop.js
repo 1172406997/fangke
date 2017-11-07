@@ -113,20 +113,20 @@ function getWebGLContext(canvas, opt_debug) {
 }
 
 //点击下载事件
-function save(name, callBack) {
+function save(saveCallback) {
     /*var a = document.createElement("a");
     a.href = document.querySelector("#canvas").toDataURL();
     a.download = name;
     a.click();*/
     //获取一下图片的位置
-    var v0 = {x:parseInt(document.querySelector("#v0").style.left),y:parseInt(document.querySelector("#v0").style.top)};
-    var v1 = {x:parseInt(document.querySelector("#v1").style.left),y:parseInt(document.querySelector("#v1").style.top)};
-    var v2 = {x:parseInt(document.querySelector("#v2").style.left),y:parseInt(document.querySelector("#v2").style.top)};
-    var v3 = {x:parseInt(document.querySelector("#v3").style.left),y:parseInt(document.querySelector("#v3").style.top)};
-    var minX = getMinArr([v0.x,v1.x,v2.x,v3.x]);
-    var maxX = getMaxArr([v0.x,v1.x,v2.x,v3.x]);
-    var minY = getMinArr([v0.y,v1.y,v2.y,v3.y]);
-    var maxY = getMaxArr([v0.y,v1.y,v2.y,v3.y]);
+    var pv0 = {x:parseInt(document.querySelector("#v0").style.left),y:parseInt(document.querySelector("#v0").style.top)};
+    var pv1 = {x:parseInt(document.querySelector("#v1").style.left),y:parseInt(document.querySelector("#v1").style.top)};
+    var pv2 = {x:parseInt(document.querySelector("#v2").style.left),y:parseInt(document.querySelector("#v2").style.top)};
+    var pv3 = {x:parseInt(document.querySelector("#v3").style.left),y:parseInt(document.querySelector("#v3").style.top)};
+    var minX = getMinArr([pv0.x,pv1.x,pv2.x,pv3.x]);
+    var maxX = getMaxArr([pv0.x,pv1.x,pv2.x,pv3.x]);
+    var minY = getMinArr([pv0.y,pv1.y,pv2.y,pv3.y]);
+    var maxY = getMaxArr([pv0.y,pv1.y,pv2.y,pv3.y]);
     //设置截取图片的canvas
     var img = new Image();
     img.src = document.querySelector("#canvas").toDataURL();
@@ -136,22 +136,35 @@ function save(name, callBack) {
         canvas.height = maxY-minY;
         var ctx = canvas.getContext("2d");
         ctx.drawImage(img,minX,minY,canvas.width,canvas.height,0,0,canvas.width,canvas.height);
-        
-
         //生成图片下载
-//      var a = document.createElement("a");
-//      a.href = canvas.toDataURL();
-//      a.download = name;
-//      a.click();
-
-		if (callBack)
+        /*var a = document.createElement("a");
+        a.href = canvas.toDataURL();
+        a.download = name;
+        a.click();*/
+        //生成相关数据
+        var obj = {
+            data:canvas.toDataURL(),
+            position:{
+                canvas:{
+                    width:document.querySelector("#canvas").width,
+                    height:document.querySelector("#canvas").height,
+                    data:window.oldImageData
+                },
+                v0:v0,
+                v1:v1,
+                v2:v2,
+                v3:v3
+            }
+        }
+		if (saveCallback)
 		{
-			callBack(canvas.toDataURL());
-//			console.log(canvas.toDataURL());
+        	saveCallback(obj);	
 		}
-//      return canvas.toDataURL();
+
     }
 }
+
+
 
 /*第一部分顶点着色器接收顶点的纹理坐标，传递给片元着色器*/
 var VSHADER_SOURCE = "" +
@@ -205,76 +218,106 @@ var FSHADER_SOURCE = "" +
 //四个顶点的位置
 var v0, v1, v2, v3, gl, imgSrc;
 
-//声明一个img对象，并在img对象内回调
-function imgLoad() {
-    imgSrc = this.src;
-    //首先处理canvas的大小和图片的绘制大小
-    var canvas = document.querySelector("#canvas");
-    var div = document.querySelector("#div");
-    //首先判断当前图片的大小
-    var image = this;
-    if (image.width / 2 > 800 && image.height / 2 > 800) {
-        //图片的高度和宽度除以二都比800大
-        canvas.width = image.width / 2;
-        canvas.height = image.height / 2;
-        canvas.style.width = image.width / 2 + "px";
-        canvas.style.height = image.height / 2 + "px";
-        //设置四个顶点的位置
-        v0 = {x: -1.0, y: 1.0};
-        v1 = {x: -1.0, y: -1.0};
-        v2 = {x: 1.0, y: 1.0};
-        v3 = {x: 1.0, y: -1.0};
-    }
-    else if (image.width / 2 > 800) {
-        //图片的宽度除以二比800大，高度不大
-        canvas.width = image.width / 2;
-        canvas.height = 800;
-        canvas.style.width = image.width / 2 + "px";
-        canvas.style.height = "800px";
-        //求出y的坐标
-        var y = image.height / 2 / 800;
-        //设置四个顶点的位置
-        v0 = {x: -1.0, y: y};
-        v1 = {x: -1.0, y: -y};
-        v2 = {x: 1.0, y: y};
-        v3 = {x: 1.0, y: -y};
-    }
-    else if (image.height / 2 > 800) {
-        //图片的高度除以二比800大，宽度不大
-        canvas.width = 800;
-        canvas.height = image.height / 2;
-        canvas.style.width = "800px";
-        canvas.style.height = image.height / 2 + "px";
-        //求出x的比例
-        var x = image.width / 2 / 800;
-        //设置四个顶点的位置
-        v0 = {x: -x, y: 1.0};
-        v1 = {x: -x, y: -1.0};
-        v2 = {x: x, y: 1.0};
-        v3 = {x: x, y: -1.0};
-    }
-    else {
-        //图片的高度宽度除以二都没有800大
+function addImage(src,position) {
+    //给img.src设置图片的地址,设置完成打开页面即可显示需要显示的内容
+    var img = new Image();
+    img.src = src;
+    //声明一个img对象，并在img对象内回调
+    img.onload = function () {
+        imgSrc = src;
+        //备份一下源文件
+        (function () {
+            window.oldImageData = null;
+            var canvas = document.createElement("canvas");
+            canvas.height = img.height;
+            canvas.width = img.width;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img,0,0,canvas.width,canvas.height);
+            window.oldImageData = canvas.toDataURL();
+        })();
+        //首先处理canvas的大小和图片的绘制大小
+        var canvas = document.querySelector("#canvas");
+        var div = document.querySelector("#div");
+        //首先判断当前图片的大小
+        var image = img;
+        //首先判断是否有原始值
+        if(position){
+            //设置canvas
+            canvas.width = position.canvas.width;
+            canvas.height = position.canvas.height;
+            canvas.style.width = position.canvas.width + "px";
+            canvas.style.height = position.canvas.height + "px";
+            //设置四个顶点的位置
+            v0 = position.v0;
+            v1 = position.v1;
+            v2 = position.v2;
+            v3 = position.v3;
+        }
+        else{
+            if (image.width > 800 && image.height > 800) {
+                //图片的高度和宽度除以二都比800大
+                canvas.width = image.width;
+                canvas.height = image.height;
+                canvas.style.width = image.width + "px";
+                canvas.style.height = image.height + "px";
+                //设置四个顶点的位置
+                v0 = {x: -1.0, y: 1.0};
+                v1 = {x: -1.0, y: -1.0};
+                v2 = {x: 1.0, y: 1.0};
+                v3 = {x: 1.0, y: -1.0};
+            }
+            else if (image.width > 800) {
+                //图片的宽度除以二比800大，高度不大
+                canvas.width = image.width;
+                canvas.height = 800;
+                canvas.style.width = image.width + "px";
+                canvas.style.height = "800px";
+                //求出y的坐标
+                var y = image.height / 800;
+                //设置四个顶点的位置
+                v0 = {x: -1.0, y: y};
+                v1 = {x: -1.0, y: -y};
+                v2 = {x: 1.0, y: y};
+                v3 = {x: 1.0, y: -y};
+            }
+            else if (image.height > 800) {
+                //图片的高度除以二比800大，宽度不大
+                canvas.width = 800;
+                canvas.height = image.height;
+                canvas.style.width = "800px";
+                canvas.style.height = image.height + "px";
+                //求出x的比例
+                var x = image.width / 800;
+                //设置四个顶点的位置
+                v0 = {x: -x, y: 1.0};
+                v1 = {x: -x, y: -1.0};
+                v2 = {x: x, y: 1.0};
+                v3 = {x: x, y: -1.0};
+            }
+            else {
+                //图片的高度宽度除以二都没有800大
 
-        var x = image.width / 2 / 800;
-        var y = image.height / 2 / 800;
+                var x = image.width / 800;
+                var y = image.height / 800;
 
-        v0 = {x: -x, y: y};
-        v1 = {x: -x, y: -y};
-        v2 = {x: x, y: y};
-        v3 = {x: x, y: -y};
-    }
-    //设置外部盒子的大小
-    div.style.width = canvas.width + "px";
-    div.style.height = canvas.height + "px";
-    //给四个顶点添加是name
-    v0.name = "v0";
-    v1.name = "v1";
-    v2.name = "v2";
-    v3.name = "v3";
+                v0 = {x: -x, y: y};
+                v1 = {x: -x, y: -y};
+                v2 = {x: x, y: y};
+                v3 = {x: x, y: -y};
+            }
+        }
+        //设置外部盒子的大小
+        div.style.width = canvas.width + "px";
+        div.style.height = canvas.height + "px";
+        //给四个顶点添加是name
+        v0.name = "v0";
+        v1.name = "v1";
+        v2.name = "v2";
+        v3.name = "v3";
 
-    main();
-};
+        main();
+    };
+}
 
 /*第二部分 main()方法 初始化着色器，设置顶点信息，调用配置纹理方法*/
 function main() {
@@ -407,6 +450,14 @@ function initMoveBtn() {
     var div = document.querySelector("#div");
     var canvasWidth = canvas.width;
     var canvasHeight = canvas.height;
+
+    //先删除之前的点
+    var arr = ["#v0","#v1","#v2","#v3"];
+    for(var i=0,len=arr.length; i<len; i++){
+        if(document.querySelector(arr[i])){
+            document.querySelector(arr[i]).parentNode.removeChild(document.querySelector(arr[i]));
+        }
+    }
 
     addBtn(v0);
     addBtn(v1);

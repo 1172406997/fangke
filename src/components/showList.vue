@@ -299,25 +299,30 @@ export default {
 					strlist+=self.listshow[idx].id+'-'+self.inputNum[idx]+'@'
 				}
 			})
-  		console.log(strlist);
-  		var params = {
-				params:{
-					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'list':strlist,
-				}
-			};
-			this.jsonpRequest(this,"Excel.GetExcel",params,function(res){
-  					console.log(res);
-  					if(res.body.data.code==0){
-
-  					}else{
-							console.log(res);
-							if(res.body.ret==401){
-								self.toLogin(this,401);
-							}
-						}
-  		},function(err){
-  			console.log(err);
-  		});
+  		var str = 'http://admin.shatuhome.com/exceldownload/'+strlist;
+  		var a = document.createElement("a");
+	    a.href = str;
+//	    a.download = name;
+	    a.click();
+//		console.log(strlist);
+//		var params = {
+//				params:{
+//					'signature': str.sha,'timestamp':str.timestamp,'nonce':str.nonce,'user_id':user_id,'token':token,'list':strlist,
+//				}
+//			};
+//			this.jsonpRequest(this,"Excel.GetExcel",params,function(res){
+//					console.log(res);
+//					if(res.body.data.code==0){
+//
+//					}else{
+//							console.log(res);
+//							if(res.body.ret==401){
+//								self.toLogin(this,401);
+//							}
+//						}
+//		},function(err){
+//			console.log(err);
+//		});
 		},
 	}
 }
