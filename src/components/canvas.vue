@@ -413,7 +413,9 @@
 				var self = this;
 				var svg = this.Canvas.toDataURL();
 				var data = this.Canvas.toJSON();
+
 				data = JSON.stringify(data);
+
 				//      var svg = this.Canvas.toDataURL({format: 'jpeg'});
 				var str = self.Encrypt();
 				var items = [];
@@ -478,14 +480,25 @@
 					}
 				};
 				this.jsonpRequest(this, "Production.GetProductionById", params, function(res) {
-					console.log(res)
+					console.log(res);
 					if(res.body.data.code == 0) {
 						var list = res.body.data.list[0].production.data;
 						self.value = res.body.data.list[0].production.name;
+            console.log(list);
+            list = JSON.parse(list);
+            console.log(list);
+            for (var i = 0; i<list.objects.length; i++) {
+              if (list.objects[i].clipPos){
+                console.log(list.objects[i].clipTo);
+                list.objects[i].clipTo = function(ctx) {
+                  ctx.rect((parseInt(this.clipPos.clipStartPoint.x) - (this.width / 4)) * 2, (parseInt(this.clipPos.clipStartPoint.y) - (this.height / 4)) * 2,
+                    this.clipPos.clipWidth * 2, this.clipPos.clipHeight * 2);
+                };
+                console.log(list.objects[i].clipTo);
+              }
+            }
 						self.Canvas.loadFromJSON(list);
-//						console.log(res.body.data.list[0].production.data);
 					} else {
-						console.log(res);
 						if(res.body.ret == 401) {
 							self.toLogin(this, 401);
 						}
@@ -497,7 +510,12 @@
 			saveCanvas() {
 				var self = this;
 				var svg = this.Canvas.toDataURL();
-				var data = this.Canvas.toJSON();
+				var data = this.Canvas.toJSON(['clipPos']);
+        for (var i = 0; i<data.objects.length; i++) {
+          console.log(data.objects[i].clipTo);
+          data.objects[i].clipTo = null;
+          console.log(data.objects[i].clipTo);
+        }
 				data = JSON.stringify(data);
 				//      var svg = this.Canvas.toDataURL({format: 'jpeg'});
 				var str = this.Encrypt();
@@ -509,7 +527,6 @@
 					}
 				}
 				var titems = items.join(',');
-				console.log(typeof(titems));
 				var user_id = localStorage.getItem("user_id");
 				var token = localStorage.getItem("token");
 				var params = {
@@ -525,7 +542,7 @@
 					'status': self.status,
 				};
 				this.postRequest("Production.StoreProduction", params, function(res) {
-					console.log(res.data.code)
+					console.log(res.data.code);
 					if(res.data.code == 0) {
 						self.$Message.info("保存成功！");
 					} else {
@@ -641,15 +658,15 @@
 					addImage(_obj.positions.canvas.data,_obj.positions);
 				}else
 				{
-					addImage(_objSrc);	
+					addImage(_objSrc);
 				}
 
-			    
+
 //			    img.onload = imgLoad;
 
-			    
+
 	//		    调用save("图片的名称")方法，浏览器即可自动保存,接受传值，为下载后的图片的名字
-			    
+
 			},
 			imgToSave(){
 				var self = this;
@@ -663,12 +680,12 @@
 						oImg.positions = _img.position;
 						oImg.imgId = self.cropItemid;
 						console.log(oImg);
-						
+
 					});
 				});
-				
 
-				
+
+
 			},
 			imgToBack(){
 				this.menu_1 = 1;
@@ -680,9 +697,15 @@
 				var self = this;
 				if(!self.Canvas.getActiveObject()) {
 					return;
-				};
-				self.selectItem.target.clone(
+				}
+				var _active = self.Canvas.getActiveObject();
+        _active.clone(
 					function(oImg) {
+					  console.log(_active);
+					  console.log(oImg);
+					  if (_active.clipPos) {
+              oImg.clipPos = _active.clipPos;
+            }
 						self.Canvas.add(oImg);
 					}
 				)
@@ -695,11 +718,11 @@
 			// 1:1 780*780
 			//16:9 1350*759
 			setCanvasDimension(canvas, width, height) {
-				var list = this.Canvas.toJSON();
+//				var list = this.Canvas.toJSON();
 				this.Canvas.setWidth(width);
 				this.Canvas.setHeight(height);
-				this.Canvas.loadFromJSON(list);
-				canvas.renderAll();
+//				this.Canvas.loadFromJSON(list);
+//				canvas.renderAll();
 			},
 			exportImg() {
 				var self = this;
@@ -1009,7 +1032,7 @@
 				self.ApplyFilterValue(_img, 4, 'color', self.color5, self.Canvas);
 //				self.Canvas.renderAll();
 
-				
+
 			},
 			brightnessFilter: function() {
 				var self = this;
@@ -1046,9 +1069,6 @@
       },
 			Clip() {
 				var self = this;
-				var startPoint = new fabric.Point();
-				var endPoint = new fabric.Point();
-				//        console.log(self.Canvas.getActiveObject());
 				if(!self.Canvas.getActiveObject()) {
 					return;
 				}
@@ -1063,26 +1083,29 @@
 					backgroundColor: 'rgba(255,255,255,0.2)',
 				});
 				self.secCanvas = clip;
+
 				self.imgActive.clone(function(oImg) {
-          			oImg.scale(0.5);
+          oImg.scale(0.5);
 					clip.setWidth(oImg.width / 2);
 					clip.setHeight(oImg.height / 2);
 					oImg.left = 0;
 					oImg.top = 0;
 					oImg.fill = 'rgba(0, 255, 0, 1)';
-					//          oImg.scale(0.5);
 					self.Canvas.remove(self.imgActive);
 					clip.add(oImg);
-					var beforeImg = oImg;
-					beforeImg.evented = false;
-					beforeImg.lockMovementX = true;
-					beforeImg.lockMovementY = true;
-					beforeImg.lockRotation = true;
-					beforeImg.lockScalingX = true;
-					beforeImg.lockScalingY = true;
-					beforeImg.lockUniScaling = true;
-					beforeImg.hasControls = false;
-					beforeImg.hasBorders = false;
+          oImg.evented = false;
+          oImg.lockMovementX = true;
+          oImg.lockMovementY = true;
+          oImg.lockRotation = true;
+          oImg.lockScalingX = true;
+          oImg.lockScalingY = true;
+          oImg.lockUniScaling = true;
+          oImg.hasControls = false;
+          oImg.hasBorders = false;
+          oImg.clipPos = {};
+          oImg.clipPos.clipStartPoint = new fabric.Point();
+          oImg.clipPos.clipEndPoint = new fabric.Point();
+          self.clipitemId = oImg.imgId;
 					clip.defaultCursor = 'crosshair';
 					var rect = new fabric.Rect({
 						width: 0,
@@ -1094,44 +1117,29 @@
 					clip.on('mouse:down', function(options) {
 						var getPoint = clip.getPointer(options.e, true);
 						//            console.log(getPoint);
-						startPoint = getPoint;
-						//            console.log('startPoint' + parseInt(startPoint.x));
-						//            console.log('startPoint' + parseInt(startPoint.y));
-						//            startPoint.x = 0;
-						//            startPoint.y = 10;
+            oImg.clipPos.clipStartPoint = getPoint;
 					});
 					clip.on('mouse:up', function(options) {
 						var getPoint = clip.getPointer(options.e, true);
 						//            console.log(getPoint);
-						endPoint = getPoint;
-						//            console.log('end' + parseInt(endPoint.x));
-						//            console.log('end' + parseInt(endPoint.x));
-						var _width = parseInt(endPoint.x) - parseInt(startPoint.x);
-						var _height = parseInt(endPoint.y) - parseInt(startPoint.y);
+            oImg.clipPos.clipEndPoint = getPoint;
+            oImg.clipPos.clipWidth = parseInt(oImg.clipPos.clipEndPoint.x) - parseInt(oImg.clipPos.clipStartPoint.x);
+            oImg.clipPos.clipHeight = parseInt(oImg.clipPos.clipEndPoint.y) - parseInt(oImg.clipPos.clipStartPoint.y);
 						clip.add(rect);
 						rect.set({
-							width: _width,
-							height: _height,
-							left: parseInt(startPoint.x),
-							top: parseInt(startPoint.y),
+							width: oImg.clipPos.clipWidth,
+							height: oImg.clipPos.clipHeight,
+							left: parseInt(oImg.clipPos.clipStartPoint.x),
+							top: parseInt(oImg.clipPos.clipStartPoint.y),
 							fill: 'rgba(0,0,0,0.1)',
 						});
-						beforeImg.scale(0.5).set({
-							//                      left: 0,
-							//                      top: 0,
-							//width:_width,
-							//height:_height,
+            oImg.scale(0.5).set({
 							//裁剪，原位置在中心，要定位在左上
 							clipTo: function(ctx) {
-								ctx.rect((parseInt(startPoint.x) - (beforeImg.width / 4)) * 2, (parseInt(startPoint.y) - (beforeImg.height / 4)) * 2,
-									_width * 2, _height * 2);
+								ctx.rect((parseInt(this.clipPos.clipStartPoint.x) - (this.width / 4)) * 2, (parseInt(this.clipPos.clipStartPoint.y) - (this.height / 4)) * 2,
+                  this.clipPos.clipWidth * 2, this.clipPos.clipHeight * 2);
 							}
 						});
-						//            beforeImg.relStartPoint = (parseInt(startPoint.x) - (beforeImg.width / 4))*2;
-						//            beforeImg.relEndPoint = (parseInt(startPoint.y) - (beforeImg.height / 4))*2;
-						//            beforeImg.relClipWidth = _width * 2;
-						//            beforeImg.relClipHeight = _height * 2;
-						console.log(beforeImg);
 					})
 				});
 			},
@@ -1184,8 +1192,8 @@
 				this.secCanvas.dispose();
 				this.secCanvas.setWidth(0);
 				this.secCanvas.setHeight(0);
-				this.Canvas.setWidth(800);
-				this.Canvas.setHeight(800);
+				this.Canvas.setWidth(1103);
+				this.Canvas.setHeight(780);
 				this.menu_1 = 1;
 			},
 			menuYes() {
@@ -1203,7 +1211,6 @@
 				getObjImg.hasControls = true;
 				getObjImg.hasBorders = true;
 
-				
 				this.imgActive.evented = true;
 				this.imgActive.lockMovementX = false;
 				this.imgActive.lockMovementY = false;
@@ -1213,21 +1220,16 @@
 				this.imgActive.lockUniScaling = false;
 				this.imgActive.hasControls = true;
 				this.imgActive.hasBorders = true;
-				console.log(getObjImg);
-				//        getObjImg.scale(0.5).set({
-				//          //裁剪，原位置在中心，要定位在左上
-				//          clipTo: function (ctx) {
-				//            ctx.rect(this.relStartPoint, this.relEndPoint,
-				//              this.relClipWidth, this.relClipHeight);
-				//          }
-				//        });
+
 				this.Canvas.add(getObjImg);
 				this.secCanvas.setWidth(0);
 				this.secCanvas.setHeight(0);
 				this.secCanvas.clear();
 				this.secCanvas.dispose();
-        		self.setCanvasDimension(self.Canvas, 1103, 780);
-				
+				self.Canvas.setWidth(1103);
+				self.Canvas.setHeight(780);
+//        self.setCanvasDimension(self.Canvas, 1103, 780);
+
 				this.menu_1 = 1;
 			},
 			backUp() {
