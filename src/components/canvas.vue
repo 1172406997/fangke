@@ -510,7 +510,7 @@
 			saveCanvas() {
 				var self = this;
 				var svg = this.Canvas.toDataURL();
-				var data = this.Canvas.toJSON(['clipPos']);
+				var data = this.Canvas.toJSON(['clipPos','positions']);
         for (var i = 0; i<data.objects.length; i++) {
           console.log(data.objects[i].clipTo);
           data.objects[i].clipTo = null;
@@ -1083,14 +1083,12 @@
 					backgroundColor: 'rgba(255,255,255,0.2)',
 				});
 				self.secCanvas = clip;
-
 				self.imgActive.clone(function(oImg) {
           oImg.scale(0.5);
 					clip.setWidth(oImg.width / 2);
 					clip.setHeight(oImg.height / 2);
 					oImg.left = 0;
 					oImg.top = 0;
-					oImg.fill = 'rgba(0, 255, 0, 1)';
 					self.Canvas.remove(self.imgActive);
 					clip.add(oImg);
           oImg.evented = false;
