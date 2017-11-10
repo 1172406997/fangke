@@ -569,8 +569,6 @@
 				self.Canvas.preserveObjectStacking = true;
 				self.setCanvasDimension(self.Canvas, 1103, 780);
 				self.Canvas.backgroundColor = "#fff";
-				//      self.Canvas.setWidth(800);
-				//      self.Canvas.setHeight(800);
 				self.Canvas.on('object:selected', function(opt) {
 					self.selectItem = opt;
 					self.menu_1 = 1;
@@ -978,11 +976,15 @@
 					//          backgroundColor: 'rgba(255,255,255,0.2)',
 				});
 				self.secCanvas = clip;
-				self.secCanvas.setWidth(800);
-				self.secCanvas.setHeight(800);
+				self.secCanvas.setWidth(1103);
+				self.secCanvas.setHeight(780);
 				self.imgActive.clone(function(oImg) {
-					var _img = oImg;
-					_img.left = 0;
+          if (self.imgActive.clipPos) {
+            oImg.clipPos = self.imgActive.clipPos;
+          }
+          var _img = oImg;
+
+          _img.left = 0;
 					_img.top = 0;
 					self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness({
 						'brightness': parseFloat(self.brightness / 100)
@@ -1007,7 +1009,7 @@
 					_img.hasControls = false;
 					_img.hasBorders = false;
 					self.secCanvas.add(_img);
-		        	self.Canvas.remove(self.imgActive);
+//          self.Canvas.remove(self.imgActive);
 				})
 			},
 		      colorFilter(){
@@ -1076,7 +1078,7 @@
 					var newdom = $("<canvas id='secCanvas' style='z-index: 50'></canvas>");
 					$('.parent').append(newdom);
 				}
-				self.menu_1 = 2;
+        self.menu_1 = 2;
 				self.Canvas.setWidth(0);
 				self.Canvas.setHeight(0);
 				var clip = new fabric.Canvas("secCanvas", {
@@ -1085,11 +1087,12 @@
 				self.secCanvas = clip;
 				self.imgActive.clone(function(oImg) {
           oImg.scale(0.5);
+          oImg.clipTo = null;
+          oImg.clipPos = null;
 					clip.setWidth(oImg.width / 2);
 					clip.setHeight(oImg.height / 2);
 					oImg.left = 0;
 					oImg.top = 0;
-					self.Canvas.remove(self.imgActive);
 					clip.add(oImg);
           oImg.evented = false;
           oImg.lockMovementX = true;
@@ -1114,12 +1117,10 @@
 					});
 					clip.on('mouse:down', function(options) {
 						var getPoint = clip.getPointer(options.e, true);
-						//            console.log(getPoint);
             oImg.clipPos.clipStartPoint = getPoint;
 					});
 					clip.on('mouse:up', function(options) {
 						var getPoint = clip.getPointer(options.e, true);
-						//            console.log(getPoint);
             oImg.clipPos.clipEndPoint = getPoint;
             oImg.clipPos.clipWidth = parseInt(oImg.clipPos.clipEndPoint.x) - parseInt(oImg.clipPos.clipStartPoint.x);
             oImg.clipPos.clipHeight = parseInt(oImg.clipPos.clipEndPoint.y) - parseInt(oImg.clipPos.clipStartPoint.y);
@@ -1209,21 +1210,22 @@
 				getObjImg.hasControls = true;
 				getObjImg.hasBorders = true;
 
-				this.imgActive.evented = true;
-				this.imgActive.lockMovementX = false;
-				this.imgActive.lockMovementY = false;
-				this.imgActive.lockRotation = false;
-				this.imgActive.lockScalingX = false;
-				this.imgActive.lockScalingY = false;
-				this.imgActive.lockUniScaling = false;
-				this.imgActive.hasControls = true;
-				this.imgActive.hasBorders = true;
+        self.imgActive.evented = true;
+        self.imgActive.lockMovementX = false;
+        self.imgActive.lockMovementY = false;
+        self.imgActive.lockRotation = false;
+        self.imgActive.lockScalingX = false;
+        self.imgActive.lockScalingY = false;
+        self.imgActive.lockUniScaling = false;
+        self.imgActive.hasControls = true;
+        self.imgActive.hasBorders = true;
+        self.Canvas.remove(self.imgActive);
 
-				this.Canvas.add(getObjImg);
-				this.secCanvas.setWidth(0);
-				this.secCanvas.setHeight(0);
-				this.secCanvas.clear();
-				this.secCanvas.dispose();
+        self.Canvas.add(getObjImg);
+        self.secCanvas.setWidth(0);
+        self.secCanvas.setHeight(0);
+        self.secCanvas.clear();
+        self.secCanvas.dispose();
 				self.Canvas.setWidth(1103);
 				self.Canvas.setHeight(780);
 //        self.setCanvasDimension(self.Canvas, 1103, 780);

@@ -20,7 +20,7 @@
       <file leaf-file-name="puzzle.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/puzzle.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3585">
+            <state relative-caret-position="15">
               <caret line="239" column="30" lean-forward="false" selection-start-line="239" selection-start-column="30" selection-end-line="239" selection-end-column="30" />
               <folding />
             </state>
@@ -30,8 +30,8 @@
       <file leaf-file-name="canvas.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/canvas.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="1092" column="25" lean-forward="true" selection-start-line="1092" selection-start-column="25" selection-end-line="1092" selection-end-column="25" />
+            <state relative-caret-position="8998">
+              <caret line="1217" column="44" lean-forward="true" selection-start-line="1217" selection-start-column="44" selection-end-line="1217" selection-end-column="44" />
               <folding>
                 <element signature="n#style#0;n#Menu#0;n#i-col#0;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -55,8 +55,8 @@
                 <element signature="n#style#0;n#Slider#3;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#Slider#4;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#Tooltip#1;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <marker date="1510240062000" expanded="true" signature="30530:30541" ph="..." />
-                <marker date="1510240062000" expanded="true" signature="33995:34006" ph="..." />
+                <marker date="1510326004000" expanded="true" signature="30451:30462" ph="..." />
+                <marker date="1510326004000" expanded="true" signature="34032:34043" ph="..." />
               </folding>
             </state>
           </provider>
@@ -66,18 +66,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addImage</find>
-      <find>getCanvas</find>
-      <find>imgActive</find>
-      <find>getObjImg</find>
-      <find>add</find>
-      <find>menuyes</find>
       <find>Canvas</find>
       <find>position</find>
       <find>beforeImg</find>
       <find>endPoint</find>
       <find>_width</find>
-      <find>copyImg</find>
       <find>menuno</find>
       <find>copyimg</find>
       <find>setCanvasDimension</find>
@@ -95,7 +88,14 @@
       <find>savec</find>
       <find>crop</find>
       <find>json.</find>
+      <find>clip</find>
       <find>clip()</find>
+      <find>imgActive</find>
+      <find>setWidth</find>
+      <find>setwidth(800</find>
+      <find>copyImg</find>
+      <find>filter</find>
+      <find>filter()</find>
     </findStrings>
     <replaceStrings>
       <replace>getwidth</replace>
@@ -128,9 +128,10 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="height" value="807" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -193,11 +194,6 @@
               <item name="fangke" type="b2602c69:ProjectViewProjectNode" />
               <item name="fangke" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="fangke" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fangke" type="462c0819:PsiDirectoryNode" />
-              <item name="instatic" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -249,18 +245,19 @@
       <workItem from="1510136351134" duration="2773000" />
       <workItem from="1510154303618" duration="12742000" />
       <workItem from="1510235339995" duration="498000" />
-      <workItem from="1510239480635" duration="749000" />
+      <workItem from="1510239480635" duration="1511000" />
+      <workItem from="1510296097094" duration="198000" />
+      <workItem from="1510323540553" duration="2254000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65120000" />
+    <option name="totallyTimeSpent" value="68334000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="807" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -365,8 +362,8 @@
             <element signature="n#style#0;n#Slider#3;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Slider#4;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Tooltip#1;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1510240062000" expanded="true" signature="30530:30541" ph="..." />
-            <marker date="1510240062000" expanded="true" signature="33995:34006" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="30451:30462" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="34032:34043" ph="..." />
           </folding>
         </state>
       </provider>
@@ -445,8 +442,8 @@
             <element signature="n#style#0;n#Slider#3;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Slider#4;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Tooltip#1;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1510240062000" expanded="true" signature="30530:30541" ph="..." />
-            <marker date="1510240062000" expanded="true" signature="33995:34006" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="30451:30462" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="34032:34043" ph="..." />
           </folding>
         </state>
       </provider>
@@ -525,8 +522,8 @@
             <element signature="n#style#0;n#Slider#3;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Slider#4;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Tooltip#1;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1510240062000" expanded="true" signature="30530:30541" ph="..." />
-            <marker date="1510240062000" expanded="true" signature="33995:34006" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="30451:30462" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="34032:34043" ph="..." />
           </folding>
         </state>
       </provider>
@@ -605,8 +602,8 @@
             <element signature="n#style#0;n#Slider#3;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Slider#4;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Tooltip#1;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1510240062000" expanded="true" signature="30530:30541" ph="..." />
-            <marker date="1510240062000" expanded="true" signature="33995:34006" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="30451:30462" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="34032:34043" ph="..." />
           </folding>
         </state>
       </provider>
@@ -678,8 +675,8 @@
             <element signature="n#style#0;n#Slider#3;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Slider#4;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Tooltip#1;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1510240062000" expanded="true" signature="30530:30541" ph="..." />
-            <marker date="1510240062000" expanded="true" signature="33995:34006" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="30451:30462" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="34032:34043" ph="..." />
           </folding>
         </state>
       </provider>
@@ -744,8 +741,8 @@
             <element signature="n#style#0;n#Slider#3;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Slider#4;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Tooltip#1;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1510240062000" expanded="true" signature="30530:30541" ph="..." />
-            <marker date="1510240062000" expanded="true" signature="33995:34006" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="30451:30462" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="34032:34043" ph="..." />
           </folding>
         </state>
       </provider>
@@ -820,14 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/puzzle.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3585">
-          <caret line="239" column="30" lean-forward="false" selection-start-line="239" selection-start-column="30" selection-end-line="239" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/canvas.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="563">
@@ -836,10 +825,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/puzzle.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="239" column="30" lean-forward="false" selection-start-line="239" selection-start-column="30" selection-end-line="239" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/canvas.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="1092" column="25" lean-forward="true" selection-start-line="1092" selection-start-column="25" selection-end-line="1092" selection-end-column="25" />
+        <state relative-caret-position="8998">
+          <caret line="1217" column="44" lean-forward="true" selection-start-line="1217" selection-start-column="44" selection-end-line="1217" selection-end-column="44" />
           <folding>
             <element signature="n#style#0;n#Menu#0;n#i-col#0;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -863,8 +860,8 @@
             <element signature="n#style#0;n#Slider#3;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Slider#4;n#div#0;n#Poptip#0;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#Tooltip#1;n#div#1;n#div#0;n#div#2;n#i-col#1;n#Row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1510240062000" expanded="true" signature="30530:30541" ph="..." />
-            <marker date="1510240062000" expanded="true" signature="33995:34006" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="30451:30462" ph="..." />
+            <marker date="1510326004000" expanded="true" signature="34032:34043" ph="..." />
           </folding>
         </state>
       </provider>
