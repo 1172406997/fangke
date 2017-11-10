@@ -59,8 +59,8 @@
 							<Dropdown trigger="click">
 								<a href="javascript:;">画布设置</a>
 								<DropdownMenu slot="list">
-									<DropdownItem @click.native="setCanvasDimension(Canvas,1103,780)">A3(横)</DropdownItem>
-									<DropdownItem @click.native="setCanvasDimension(Canvas,546,780)">A3(竖)</DropdownItem>
+									<DropdownItem @click.native="setCanvasSize(Canvas,1103,780)">A3(横)</DropdownItem>
+									<DropdownItem @click.native="setCanvasSize(Canvas,546,780)">A3(竖)</DropdownItem>
 								</DropdownMenu>
 							</Dropdown>
 						</a>
@@ -318,7 +318,9 @@
 				noticeShowlist:false,
 				filterVisible1:true,
 				color5:'#000',
-				cropItemid:0
+				cropItemid:0,
+				winWidth:1103,
+				winHeight:780,
 			}
 		},
 		computed: {
@@ -361,6 +363,17 @@
     		}
 		},
 		methods: {
+			setCanvasSize(canvas,width,height){
+				this.setCanvasDimension(canvas,width,height);
+				this.winWidth = width;
+				this.winHeight = height;
+				this.toDate(canvas);
+			},
+			toDate(canvas){
+				var list = this.Canvas.toJSON();
+				this.Canvas.loadFromJSON(list);
+				canvas.renderAll();
+			},
 			onColorChange(){
 //				alert(this.color);
 				this.colorFilter();
@@ -567,7 +580,7 @@
 				var staticCanvas = new fabric.Canvas('parent');
 				self.Canvas = staticCanvas;
 				self.Canvas.preserveObjectStacking = true;
-				self.setCanvasDimension(self.Canvas, 1103, 780);
+				self.setCanvasDimension(self.Canvas, self.winWidth, self.winHeight);
 				self.Canvas.backgroundColor = "#fff";
 				self.Canvas.on('object:selected', function(opt) {
 					self.selectItem = opt;
@@ -717,8 +730,8 @@
 			//16:9 1350*759
 			setCanvasDimension(canvas, width, height) {
 //				var list = this.Canvas.toJSON();
-				this.Canvas.setWidth(width);
-				this.Canvas.setHeight(height);
+				canvas.setWidth(width);
+				canvas.setHeight(height);
 //				this.Canvas.loadFromJSON(list);
 //				canvas.renderAll();
 			},
@@ -840,9 +853,7 @@
 					this.jsonpRequest(this, "Material.GetMaterialByKeyWord", params, function(res) {
 						if(res.body.data.code == 0) {
 							this.searchi = res.body.data.list;
-							console.log(res);
 						} else {
-							console.log(res);
 							if(res.body.ret == 401) {
 								self.toLogin(this, 401);
 							}
@@ -873,11 +884,7 @@
 					if(res.body.data.code == 0) {
 						this.searchi = res.body.data.list;
 						console.log("search:" + this.searchi);
-						console.log("search" + 1111111111111111111111)
-						console.log(res);
-						console.log("search" + 1111111111111111111111)
 					} else {
-						console.log(res);
 						if(res.body.ret == 401) {
 							self.toLogin(this, 401);
 						}
@@ -955,8 +962,9 @@
 				if(!self.Canvas.getActiveObject()) {
 					return;
 				}
-				self.Canvas.setWidth(0);
-				self.Canvas.setHeight(0);
+//				self.Canvas.setWidth(0);
+//				self.Canvas.setHeight(0);
+				self.setCanvasDimension(self.Canvas, 0, 0);
 				self.filterMenu = true;
 				self.menu_1 = 2;
 				self.Filter();
@@ -976,8 +984,10 @@
 					//          backgroundColor: 'rgba(255,255,255,0.2)',
 				});
 				self.secCanvas = clip;
-				self.secCanvas.setWidth(1103);
-				self.secCanvas.setHeight(780);
+//				self.secCanvas.setWidth(1103);
+//				self.secCanvas.setHeight(780);
+				
+				self.setCanvasDimension(self.secCanvas, self.winWidth, self.winHeight);
 				self.imgActive.clone(function(oImg) {
           if (self.imgActive.clipPos) {
             oImg.clipPos = self.imgActive.clipPos;
@@ -1079,34 +1089,35 @@
 					$('.parent').append(newdom);
 				}
         self.menu_1 = 2;
-				self.Canvas.setWidth(0);
-				self.Canvas.setHeight(0);
+//				self.Canvas.setWidth(0);
+//				self.Canvas.setHeight(0);
+				self.setCanvasDimension(self.Canvas, 0, 0);
 				var clip = new fabric.Canvas("secCanvas", {
 					backgroundColor: 'rgba(255,255,255,0.2)',
 				});
 				self.secCanvas = clip;
 				self.imgActive.clone(function(oImg) {
-          oImg.scale(0.5);
-          oImg.clipTo = null;
-          oImg.clipPos = null;
+          		oImg.scale(0.5);
+         		 oImg.clipTo = null;
+          		oImg.clipPos = null;
 					clip.setWidth(oImg.width / 2);
 					clip.setHeight(oImg.height / 2);
 					oImg.left = 0;
 					oImg.top = 0;
 					clip.add(oImg);
-          oImg.evented = false;
-          oImg.lockMovementX = true;
-          oImg.lockMovementY = true;
-          oImg.lockRotation = true;
-          oImg.lockScalingX = true;
-          oImg.lockScalingY = true;
-          oImg.lockUniScaling = true;
-          oImg.hasControls = false;
-          oImg.hasBorders = false;
-          oImg.clipPos = {};
-          oImg.clipPos.clipStartPoint = new fabric.Point();
-          oImg.clipPos.clipEndPoint = new fabric.Point();
-          self.clipitemId = oImg.imgId;
+			          oImg.evented = false;
+			          oImg.lockMovementX = true;
+			          oImg.lockMovementY = true;
+			          oImg.lockRotation = true;
+			          oImg.lockScalingX = true;
+			          oImg.lockScalingY = true;
+			          oImg.lockUniScaling = true;
+			          oImg.hasControls = false;
+			          oImg.hasBorders = false;
+			          oImg.clipPos = {};
+			          oImg.clipPos.clipStartPoint = new fabric.Point();
+			          oImg.clipPos.clipEndPoint = new fabric.Point();
+			          self.clipitemId = oImg.imgId;
 					clip.defaultCursor = 'crosshair';
 					var rect = new fabric.Rect({
 						width: 0,
@@ -1189,10 +1200,12 @@
 				this.imgActive.hasBorders = true;
 				this.secCanvas.clear();
 				this.secCanvas.dispose();
-				this.secCanvas.setWidth(0);
-				this.secCanvas.setHeight(0);
-				this.Canvas.setWidth(1103);
-				this.Canvas.setHeight(780);
+//				this.secCanvas.setWidth(0);
+//				this.secCanvas.setHeight(0);
+//				this.Canvas.setWidth(1103);
+//				this.Canvas.setHeight(780);
+				self.setCanvasDimension(self.secCanvas, 0, 0);
+				self.setCanvasDimension(self.Canvas, self.winWidth, self.winHeight);
 				this.menu_1 = 1;
 			},
 			menuYes() {
@@ -1222,12 +1235,14 @@
         self.Canvas.remove(self.imgActive);
 
         self.Canvas.add(getObjImg);
-        self.secCanvas.setWidth(0);
-        self.secCanvas.setHeight(0);
+//      self.secCanvas.setWidth(0);
+//      self.secCanvas.setHeight(0);
         self.secCanvas.clear();
         self.secCanvas.dispose();
-				self.Canvas.setWidth(1103);
-				self.Canvas.setHeight(780);
+//				self.Canvas.setWidth(1103);
+//				self.Canvas.setHeight(780);
+			self.setCanvasDimension(self.secCanvas, 0, 0);
+			self.setCanvasDimension(self.Canvas, self.winWidth, self.winHeight);
 //        self.setCanvasDimension(self.Canvas, 1103, 780);
 
 				this.menu_1 = 1;
