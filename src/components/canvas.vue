@@ -232,9 +232,9 @@
 						<Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="-100" :max="100" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						对比度：
 						<Slider class="slid" @on-input="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-						饱和度：
-						<Slider class="slid" @on-input="blurFilter" v-model="blur" :min="0" :max="100" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						清晰度：
+						<Slider class="slid" @on-input="blurFilter" v-model="blur" :min="0" :max="100" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
+						饱和度：
 						<Slider class="slid" @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						透明度：
            				<Slider class="slid" @on-input="lucencyImg" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
@@ -413,7 +413,7 @@
 
 						} else {
 							this.saveCanvas();
-							this.$router.push({name: 'content'});
+//							this.$router.push({name: 'content'});
 						}
 					},
 					onCancel: () => {
