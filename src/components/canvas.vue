@@ -664,6 +664,8 @@
 			    var _objSrc = _obj.toDataURL({
 					format: 'png'
 				});
+				
+				console.log(addImage());
 				if (_obj.positions)
 				{
 					addImage(_obj.positions.canvas.data,_obj.positions);
