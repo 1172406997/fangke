@@ -223,7 +223,7 @@
 					<Icon type="close-round"></Icon>
 				</Tooltip>
 				<Poptip title="" style="float: right;" v-model="filterVisible" v-if="filterMenu" content="" placement="bottom-start">
-					<Tooltip content="滤镜" @click.native="Filter" placement="bottom">
+					<Tooltip content="滤镜" @click.native="filter" placement="bottom">
 						<Icon type="ios-settings-strong"></Icon>
 					</Tooltip>
 					<div slot="content" style="width: 180px;">
@@ -968,41 +968,36 @@
 				}
 				self.setCanvasDimension(self.Canvas, 0, 0);
 				self.filterMenu = true;
-				self.menu_1 = 2;
-				self.Filter();
-			},
-			//滤镜
-			Filter() {
-				var self = this;
-				if(!self.Canvas.getActiveObject()) {
-					return;
-				}
-				self.menu_1 = 2;
-				if($("#secCanvas").length <= 0) {
-					var newdom = $("<canvas id='secCanvas' style='z-index: 50'></canvas>");
-					$('.parent').append(newdom);
-				}
-				var clip = new fabric.Canvas("secCanvas");
-				self.secCanvas = clip;
-
-				self.setCanvasDimension(self.secCanvas, self.winWidth, self.winHeight);
-				self.imgActive.clone(function(oImg) {
+        self.menu_1 = 2;
+        if($("#secCanvas").length <= 0) {
+          var newdom = $("<canvas id='secCanvas' style='z-index: 50'></canvas>");
+          $('.parent').append(newdom);
+        }
+        var clip = new fabric.Canvas("secCanvas");
+        self.secCanvas = clip;
+        self.setCanvasDimension(self.secCanvas, self.winWidth, self.winHeight);
+        self.imgActive.clone(function(oImg) {
           if (self.imgActive.clipPos) {
             oImg.clipPos = self.imgActive.clipPos;
           }
           var _img = oImg;
           _img.left = 0;
-					_img.top = 0;
-					_img.lockMovementX = true;
-					_img.lockMovementY = true;
-					_img.lockRotation = true;
-					_img.lockScalingX = true;
-					_img.lockScalingY = true;
-					_img.lockUniScaling = true;
-					_img.hasControls = false;
-					_img.hasBorders = false;
-					self.secCanvas.add(_img);
-				})
+          _img.top = 0;
+          _img.lockMovementX = true;
+          _img.lockMovementY = true;
+          _img.lockRotation = true;
+          _img.lockScalingX = true;
+          _img.lockScalingY = true;
+          _img.lockUniScaling = true;
+          _img.hasControls = false;
+          _img.hasBorders = false;
+          self.secCanvas.add(_img);
+        });
+			},
+
+			//滤镜
+			filter() {
+        self.menu_1 = 2;
 			},
       colorFilter(){
         var self = this;
