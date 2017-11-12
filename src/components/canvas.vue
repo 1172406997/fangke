@@ -232,9 +232,9 @@
 						<Slider class="slid" @on-input="brightnessFilter" v-model="brightness" :min="-100" :max="100" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						对比度：
 						<Slider class="slid" @on-input="contrastFilter" v-model="contrast" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-						饱和度：
+            清晰度：
 						<Slider class="slid" @on-input="blurFilter" v-model="blur" :min="0" :max="100" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
-						清晰度：
+            饱和度：
 						<Slider class="slid" @on-input="saturationFilter" v-model="saturation" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
 						透明度：
            				<Slider class="slid" @on-input="lucencyImg" v-model="lucency" style="width: 88%;padding-left: 10px;margin-top: 2px;"></Slider>
@@ -291,7 +291,7 @@
 				Canvas: '',
 				selectItem: "",
 				imgLock: true,
-				brightness: -50,
+				brightness: -30,
 				contrast: 50,
 				blur: 50,
 				saturation: 50,
@@ -664,7 +664,7 @@
 			    var _objSrc = _obj.toDataURL({
 					format: 'png'
 				});
-				
+
 				console.log(addImage());
 				if (_obj.positions)
 				{
@@ -950,7 +950,9 @@
 					return;
 				}
 				item.filters[index] = filt;
-			},
+        item.applyFilters();
+
+      },
 			ApplyFilterValue(item, index, name, value, canvas) {
 				if(item && item.filters[index]) {
 					item.filters[index][name] = value;
@@ -964,8 +966,6 @@
 				if(!self.Canvas.getActiveObject()) {
 					return;
 				}
-//				self.Canvas.setWidth(0);
-//				self.Canvas.setHeight(0);
 				self.setCanvasDimension(self.Canvas, 0, 0);
 				self.filterMenu = true;
 				self.menu_1 = 2;
@@ -982,36 +982,17 @@
 					var newdom = $("<canvas id='secCanvas' style='z-index: 50'></canvas>");
 					$('.parent').append(newdom);
 				}
-				var clip = new fabric.Canvas("secCanvas", {
-					//          backgroundColor: 'rgba(255,255,255,0.2)',
-				});
+				var clip = new fabric.Canvas("secCanvas");
 				self.secCanvas = clip;
-//				self.secCanvas.setWidth(1103);
-//				self.secCanvas.setHeight(780);
-				
+
 				self.setCanvasDimension(self.secCanvas, self.winWidth, self.winHeight);
 				self.imgActive.clone(function(oImg) {
           if (self.imgActive.clipPos) {
             oImg.clipPos = self.imgActive.clipPos;
           }
           var _img = oImg;
-
           _img.left = 0;
 					_img.top = 0;
-					self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness({
-						'brightness': parseFloat(self.brightness / 100)
-					}));
-					self.ApplyFilter(_img, 1, new fabric.Image.filters.Contrast());
-					self.ApplyFilter(_img, 2, new fabric.Image.filters.Blur({
-						'blur': 0
-					}));
-					self.ApplyFilter(_img, 3, new fabric.Image.filters.Saturation());
-					self.ApplyFilter(_img, 4, new fabric.Image.filters.BlendColor({
-		            color: '#fff',
-		            mode: 'add',
-		            alpha: 0.5
-		          }));
-					_img.applyFilters();
 					_img.lockMovementX = true;
 					_img.lockMovementY = true;
 					_img.lockRotation = true;
@@ -1021,15 +1002,21 @@
 					_img.hasControls = false;
 					_img.hasBorders = false;
 					self.secCanvas.add(_img);
-//          self.Canvas.remove(self.imgActive);
 				})
 			},
-		      colorFilter(){
-		        var self = this;
-		        var _img = self.secCanvas.getObjects()[0];
-		        console.log(self.color);
-		        self.ApplyFilterValue(_img, 4, 'color', self.color, self.secCanvas);
-		      },
+      colorFilter(){
+        var self = this;
+        var _img = self.secCanvas.getObjects()[0];
+        if (!_img.filters[4]) {
+          self.ApplyFilter(_img, 4, new fabric.Image.filters.BlendColor({
+            color: '#fff',
+            mode: 'add',
+            alpha: 0.5
+          }));
+        }
+
+        self.ApplyFilterValue(_img, 4, 'color', self.color, self.secCanvas);
+      },
 			changeColor(){
 				var self = this;
 				console.log(this.color5);
@@ -1044,20 +1031,25 @@
 		          	}));
 				}
 				self.ApplyFilterValue(_img, 4, 'color', self.color5, self.Canvas);
-//				self.Canvas.renderAll();
-
-
 			},
 			brightnessFilter: function() {
 				var self = this;
 				var _img = self.secCanvas.getObjects()[0];
-				//        self.ApplyFilterValue(_img, 0, 'brightness', parseFloat((self.brightness) / 50 - 1), self.secCanvas);
-//				console.log(self.brightness / 100);
+        if (!_img.filters[0]){
+          self.ApplyFilter(_img, 0, new fabric.Image.filters.Brightness({
+            'brightness': parseFloat(self.brightness / 100)
+          }));
+        }
 				self.ApplyFilterValue(_img, 0, 'brightness', parseFloat(self.brightness / 100), self.secCanvas);
 			},
 			contrastFilter() {
 				var self = this;
 				var _img = self.secCanvas.getObjects()[0];
+        if (!_img.filters[1]) {
+          self.ApplyFilter(_img, 1, new fabric.Image.filters.Contrast());
+
+        }
+
 //				console.log(parseFloat((self.contrast) / 50 - 1));
 
 				self.ApplyFilterValue(_img, 1, 'contrast', parseFloat((self.contrast) / 50 - 1), self.secCanvas);
@@ -1065,13 +1057,20 @@
 			blurFilter() {
 				var self = this;
 				var _img = self.secCanvas.getObjects()[0];
+        if (!_img.filters[2]){
+          self.ApplyFilter(_img, 2, new fabric.Image.filters.Blur({
+            'blur': parseFloat(self.blur / 100, 10)
+          }));
+        }
+
 				self.ApplyFilterValue(_img, 2, 'blur', parseFloat(self.blur / 100, 10), self.secCanvas);
 			},
 			saturationFilter() {
 				var self = this;
 				var _img = self.secCanvas.getObjects()[0];
-//				console.log(parseFloat(self.saturation / 50 - 1));
-
+				if (!_img.filters[3]){
+          self.ApplyFilter(_img, 3, new fabric.Image.filters.Saturation());
+        }
 				self.ApplyFilterValue(_img, 3, 'saturation', parseFloat(self.saturation / 50 - 1), self.secCanvas);
 			},
       lucencyImg(){
