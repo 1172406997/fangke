@@ -215,14 +215,12 @@
 	/*border: 1px solid #000;*/
   }
   .ivu-carousel{
-<<<<<<< HEAD
   	width: 85%;
   	height: 90%;
   }
   .demo-carousel{
   		/*min-width: 400px;*/
         /*height: 330px;*/
-=======
   	width: 100%;
   	height: 80%;
   }
@@ -232,7 +230,6 @@
         height: 100%;
        	min-width: 500px;
        	min-height: 500px;
->>>>>>> 9018678b6e912a40a9bd35aeed937a66fa2a3897
         /*line-height: 330px;*/
         text-align: center;
         color: #fff;

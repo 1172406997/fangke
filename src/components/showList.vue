@@ -288,7 +288,6 @@ export default {
 			}
 		},
 		exportList(){
-			alert(1);
 			var self = this;
   		var str = this.Encrypt();
 			var user_id = localStorage.getItem("user_id");

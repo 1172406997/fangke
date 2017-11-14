@@ -75,7 +75,7 @@
 								      	<img src="" alt="" />
 								      	<div class="modal" @click="modalS(item)" style="display: none;"></div>
 								        <div class="icon">
-								      	<Tooltip content="收藏" placement="bottom">
+								      	<Tooltip content="收藏" style="z-index: 10;" placement="bottom">
 									      	<Icon type="archive" @click.native="StoreLike(item.id)"></Icon>
 								        </Tooltip>
 								      	</div>

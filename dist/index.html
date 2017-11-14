@@ -1,4 +1,60 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=renderer content=webkit><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><title>shatuhome</title><script src=./instatic/sha1.js type=text/javascript charset=utf-8></script><script src=./instatic/fabric.js crossorigin=anonymous type=text/javascript charset=utf-8></script><script src=./instatic/Cropin.js crossorigin=anonymous type=text/javascript charset=utf-8></script><link href=/instatic/css/app.d0dedf36029593b4421e782898cd5c20.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/instatic/js/manifest.100364cc6d66b96bb758.js></script><script type=text/javascript src=/instatic/js/app.48ba7f7a907f23d13c38.js></script></body><style>html{
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=renderer content=webkit><meta http-equiv=X-UA-Compatible content="IE=Edge,chrome=1"><title>shatuhome</title><script src=./instatic/sha1.js type=text/javascript charset=utf-8></script><script src=./instatic/fabric.js crossorigin=anonymous type=text/javascript charset=utf-8></script><script src=./instatic/Cropin.js crossorigin=anonymous type=text/javascript charset=utf-8></script><script>function myBrowser(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+    var isSafari = userAgent.indexOf("Safari") > -1; //判断是否Safari浏览器
+    if (isIE) {
+        var IE5 = IE55 = IE6 = IE7 = IE8 = false;
+        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+        reIE.test(userAgent);
+        var fIEVersion = parseFloat(RegExp["$1"]);
+        IE55 = fIEVersion == 5.5;
+        IE6 = fIEVersion == 6.0;
+        IE7 = fIEVersion == 7.0;
+        IE8 = fIEVersion == 8.0;
+        if (IE55) {
+            return "IE55";
+        }
+        if (IE6) {
+            return "IE6";
+        }
+        if (IE7) {
+            return "IE7";
+        }
+        if (IE8) {
+            return "IE8";
+        }
+	    }//isIE end
+	    if (isFF) {
+	        return "FF";
+	    }
+	    if (isOpera) {
+	        return "Opera";
+	    }
+	}//myBrowser() end
+	//以下是调用上面的函数
+	//if (myBrowser() == "FF") {
+	//  alert("我是 Firefox");
+	//}
+	//if (myBrowser() == "Opera") {
+	//  alert("我是 Opera");
+	//}
+	//if (myBrowser() == "Safari") {
+	//  alert("我是 Safari");
+	//}
+	if (myBrowser() == "IE55") {
+	    alert("您的浏览器版本太低啦，请更新浏览器!");
+	}
+	if (myBrowser() == "IE6") {
+	    alert("您的浏览器版本太低啦，请更新浏览器!");
+	}
+	if (myBrowser() == "IE7") {
+	    alert("您的浏览器版本太低啦，请更新浏览器!");
+	}
+	if (myBrowser() == "IE8") {
+	    alert("您的浏览器版本太低啦，请更新浏览器!");
+	}</script><link href=/instatic/css/app.2d808aecf7df1352a7366ed9589392ef.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/instatic/js/manifest.412e9c24d06cffed02e8.js></script><script type=text/javascript src=/instatic/js/app.a8f6efb540630b6b9245.js></script></body><style>html{
       margin: 0;
       padding: 0;
       font-size: 16px;
