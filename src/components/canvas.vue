@@ -523,11 +523,10 @@
 			saveCanvas() {
 				var self = this;
 				var svg = this.Canvas.toDataURL();
-				var data = this.Canvas.toJSON(['clipPos','positions']);
+				var data = this.Canvas.toJSON(['clipPos','positions',"imgId"]);
         for (var i = 0; i<data.objects.length; i++) {
-          console.log(data.objects[i].clipTo);
+          console.log(data.objects[i]);
           data.objects[i].clipTo = null;
-          console.log(data.objects[i].clipTo);
         }
 				data = JSON.stringify(data);
 				//      var svg = this.Canvas.toDataURL({format: 'jpeg'});
@@ -651,9 +650,6 @@
 				if(!self.Canvas.getActiveObject()) {
 					return;
 				};
-//				console.log(self.Canvas.getActiveObject().toDataURL({
-//					format: 'png'
-//				}));
 				$(".parent").hide();
 				$("#div").show();
 				this.menu_1 = 3;
@@ -665,7 +661,6 @@
 					format: 'png'
 				});
 
-				console.log(addImage());
 				if (_obj.positions)
 				{
 					addImage(_obj.positions.canvas.data,_obj.positions);
@@ -673,12 +668,6 @@
 				{
 					addImage(_objSrc);
 				}
-
-
-//			    img.onload = imgLoad;
-
-
-	//		    调用save("图片的名称")方法，浏览器即可自动保存,接受传值，为下载后的图片的名字
 
 			},
 			imgToSave(){
@@ -1085,22 +1074,21 @@
 					$('.parent').append(newdom);
 				}
         self.menu_1 = 2;
-//				self.Canvas.setWidth(0);
-//				self.Canvas.setHeight(0);
 				self.setCanvasDimension(self.Canvas, 0, 0);
 				var clip = new fabric.Canvas("secCanvas", {
 					backgroundColor: 'rgba(255,255,255,0.2)',
 				});
 				self.secCanvas = clip;
 				self.imgActive.clone(function(oImg) {
-          		oImg.scale(0.5);
-         		 oImg.clipTo = null;
-          		oImg.clipPos = null;
+          oImg.scale(0.5);
+          oImg.clipTo = null;
+          oImg.clipPos = null;
 					clip.setWidth(oImg.width / 2);
 					clip.setHeight(oImg.height / 2);
 					oImg.left = 0;
 					oImg.top = 0;
-					clip.add(oImg);
+					oImg.imgId = self.imgActive.imgId;
+          clip.add(oImg);
 			          oImg.evented = false;
 			          oImg.lockMovementX = true;
 			          oImg.lockMovementY = true;
@@ -1113,7 +1101,6 @@
 			          oImg.clipPos = {};
 			          oImg.clipPos.clipStartPoint = new fabric.Point();
 			          oImg.clipPos.clipEndPoint = new fabric.Point();
-			          self.clipitemId = oImg.imgId;
 					clip.defaultCursor = 'crosshair';
 					var rect = new fabric.Rect({
 						width: 0,
@@ -1218,7 +1205,6 @@
 				getObjImg.lockUniScaling = false;
 				getObjImg.hasControls = true;
 				getObjImg.hasBorders = true;
-
         self.imgActive.evented = true;
         self.imgActive.lockMovementX = false;
         self.imgActive.lockMovementY = false;
@@ -1229,14 +1215,10 @@
         self.imgActive.hasControls = true;
         self.imgActive.hasBorders = true;
         self.Canvas.remove(self.imgActive);
-
+        console.log(getObjImg);
         self.Canvas.add(getObjImg);
-//      self.secCanvas.setWidth(0);
-//      self.secCanvas.setHeight(0);
         self.secCanvas.clear();
         self.secCanvas.dispose();
-//				self.Canvas.setWidth(1103);
-//				self.Canvas.setHeight(780);
 			self.setCanvasDimension(self.secCanvas, 0, 0);
 			self.setCanvasDimension(self.Canvas, self.winWidth, self.winHeight);
 //        self.setCanvasDimension(self.Canvas, 1103, 780);
